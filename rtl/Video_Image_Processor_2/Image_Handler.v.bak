@@ -1,0 +1,72 @@
+module Image_Handler
+#(
+	parameter	[9:0]	IMG_HDISP = 10'd640,	//640*480
+	parameter	[9:0]	IMG_VDISP = 10'd480
+)
+(
+	//global clokc 
+	input 			clk,		//cmos video pixel clock 
+	input			rst_n, 		//global reset
+	
+	//Image data prepared to be processed 
+	input  			per_frame_href, //Prepared Image data href vaild  signal
+	input 	[7:0]	per_img_Gray,	//Processed Image Bit flag outout(1: Value, 0:inValid)
+    //Image data has been processed 
+	output 			post_frame_href,
+	output 	[7:0]	post_img_Gray	
+);
+
+wire			per_img_Bit;
+wire			post_img_Bit; 			
+
+wire			post1_frame_href;
+wire			post1_frame_Bit;
+
+assign			per_img_Bit =  per_img_Gray[0];
+assign          post_img_Gray =  post1_frame_Bit ? 255:0;
+VIP_Bit_Erosion_Detector 
+#(
+	.IMG_HDISP		(IMG_HDISP),
+	.IMG_VDISP		(IMG_VDISP)
+)
+u_VIP_Bit_Dilation_Detector
+(
+	//global clock 
+	.clk 				(clk),
+	.rst_n				(rst_n),
+
+	//Image data prepared to be processed 
+	.per_frame_href	 	(per_frame_href),
+	.per_img_Bit	 	(per_img_Bit),
+	//Image data has been processed
+	.post_frame_href 	(post1_frame_href),
+	.post_img_Bit		(post1_frame_Bit)
+);
+
+wire			post2_frame_href;
+wire			post2_img_Bit;
+
+VIP_Bit_Dilation_Detector  
+#(
+	.IMG_HDISP		(IMG_HDISP),
+	.IMG_VDISP		(IMG_VDISP)
+)
+u_VIP_Bit_Dilation_Detector
+(
+	//global clock 
+	.clk 				(clk),
+	.rst_n				(rst_n),
+
+	//Image data prepared to be processed 
+	.per_frame_href	 	(post1_frame_href),
+	.per_img_Bit	 	(post1_frame_Bit),
+	//Image data has been processed
+	.post_frame_href 	(post2_frame_href),
+	.post_img_Bit		(post2_img_Bit)
+);
+ 		
+assign	post_frame_href = post2_frame_href;
+assign 	post_img_Bit 	= post2_img_Bit;
+
+endmodule  
+assign 	post_img_Bit 	= post2_img_Bit; 

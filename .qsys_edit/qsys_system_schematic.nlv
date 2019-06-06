@@ -1,0 +1,47 @@
+# # File gsaved with Nlview version 6.3.8  2013-12-19 bk=1.2992 VDI=34 GEI=35
+# 
+preplace inst qsys_system.nios2_gen2.clock_bridge -pg 1
+preplace inst qsys_system.max30102_1 -pg 1 -lvl 3 -y 1490
+preplace inst qsys_system.bmp280_adc_t -pg 1 -lvl 3 -y 130
+preplace inst qsys_system.heignt_int -pg 1 -lvl 3 -y 1290
+preplace inst qsys_system.heart_rate -pg 1 -lvl 3 -y 1590
+preplace inst qsys_system.bmp280_p9_p8 -pg 1 -lvl 3 -y 630
+preplace inst qsys_system.bmp280_p7_p6 -pg 1 -lvl 3 -y 530
+preplace inst qsys_system.bmp280_p5_p4 -pg 1 -lvl 3 -y 430
+preplace inst qsys_system.heignt_dec -pg 1 -lvl 3 -y 1190
+preplace inst qsys_system.nios2_gen2.cpu -pg 1
+preplace inst qsys_system.nios2_gen2 -pg 1 -lvl 2 -y 960
+preplace inst qsys_system.jtag_uart -pg 1 -lvl 3 -y 930
+preplace inst qsys_system.bmp280_t2_t1 -pg 1 -lvl 3 -y 730
+preplace inst qsys_system.clk -pg 1 -lvl 1 -y 980
+preplace inst qsys_system.sysid_qsys -pg 1 -lvl 3 -y 1110
+preplace inst qsys_system.bmp280_p1_t3 -pg 1 -lvl 3 -y 230
+preplace inst qsys_system.bmp280_adc_p -pg 1 -lvl 3 -y 30
+preplace inst qsys_system.nios2_gen2.reset_bridge -pg 1
+preplace inst qsys_system.RAM -pg 1 -lvl 3 -y 1030
+preplace inst qsys_system.end_o -pg 1 -lvl 3 -y 830
+preplace inst qsys_system.bmp280_p3_p2 -pg 1 -lvl 3 -y 330
+preplace inst qsys_system.max30102_0 -pg 1 -lvl 3 -y 1390
+preplace inst qsys_system -pg 1 -lvl 1 -y 40 -regy -20
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.bmp280_p7_p6,(SLAVE)bmp280_p7_p6.external_connection) 1 0 3 NJ 560 NJ 560 NJ
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)end_o.external_connection,(SLAVE)qsys_system.end_o) 1 0 3 NJ 860 NJ 860 NJ
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)bmp280_p9_p8.external_connection,(SLAVE)qsys_system.bmp280_p9_p8) 1 0 3 NJ 660 NJ 660 NJ
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.bmp280_p1_t3,(SLAVE)bmp280_p1_t3.external_connection) 1 0 3 NJ 260 NJ 260 NJ
+preplace netloc FAN_OUT<net_container>qsys_system</net_container>(SLAVE)bmp280_p5_p4.clk,(SLAVE)bmp280_t2_t1.clk,(SLAVE)heignt_int.clk,(SLAVE)end_o.clk,(SLAVE)heart_rate.clk,(SLAVE)RAM.clk1,(MASTER)clk.clk,(SLAVE)nios2_gen2.clk,(SLAVE)bmp280_p1_t3.clk,(SLAVE)jtag_uart.clk,(SLAVE)heignt_dec.clk,(SLAVE)sysid_qsys.clk,(SLAVE)bmp280_adc_p.clk,(SLAVE)max30102_1.clk,(SLAVE)bmp280_p7_p6.clk,(SLAVE)bmp280_adc_t.clk,(SLAVE)max30102_0.clk,(SLAVE)bmp280_p3_p2.clk,(SLAVE)bmp280_p9_p8.clk) 1 1 2 300 880 700
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)heart_rate.external_connection,(SLAVE)qsys_system.heart_rate) 1 0 3 NJ 1620 NJ 1620 NJ
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)bmp280_p3_p2.external_connection,(SLAVE)qsys_system.bmp280_p3_p2) 1 0 3 NJ 360 NJ 360 NJ
+preplace netloc INTERCONNECT<net_container>qsys_system</net_container>(MASTER)nios2_gen2.data_master,(SLAVE)nios2_gen2.debug_mem_slave,(SLAVE)end_o.s1,(SLAVE)bmp280_p3_p2.s1,(SLAVE)bmp280_p5_p4.s1,(SLAVE)max30102_0.s1,(MASTER)nios2_gen2.instruction_master,(SLAVE)sysid_qsys.control_slave,(SLAVE)jtag_uart.avalon_jtag_slave,(SLAVE)bmp280_t2_t1.s1,(SLAVE)RAM.s1,(SLAVE)bmp280_p1_t3.s1,(SLAVE)bmp280_p9_p8.s1,(SLAVE)heart_rate.s1,(SLAVE)bmp280_p7_p6.s1,(SLAVE)max30102_1.s1,(SLAVE)heignt_int.s1,(SLAVE)bmp280_adc_t.s1,(SLAVE)heignt_dec.s1,(SLAVE)bmp280_adc_p.s1) 1 1 2 340 920 740
+preplace netloc POINT_TO_POINT<net_container>qsys_system</net_container>(MASTER)nios2_gen2.irq,(SLAVE)jtag_uart.irq) 1 2 1 760
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)max30102_1.external_connection,(SLAVE)qsys_system.max30102_1) 1 0 3 NJ 1520 NJ 1520 NJ
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.heignt_int,(SLAVE)heignt_int.external_connection) 1 0 3 NJ 1320 NJ 1320 NJ
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.bmp280_p5_p4,(SLAVE)bmp280_p5_p4.external_connection) 1 0 3 NJ 460 NJ 460 NJ
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.reset,(SLAVE)clk.clk_in_reset) 1 0 1 NJ
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.heignt_dec,(SLAVE)heignt_dec.external_connection) 1 0 3 NJ 1220 NJ 1220 NJ
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.bmp280_adc_t,(SLAVE)bmp280_adc_t.external_connection) 1 0 3 NJ 160 NJ 160 NJ
+preplace netloc INTERCONNECT<net_container>qsys_system</net_container>(SLAVE)bmp280_p9_p8.reset,(MASTER)clk.clk_reset,(SLAVE)bmp280_p1_t3.reset,(SLAVE)nios2_gen2.reset,(SLAVE)bmp280_p3_p2.reset,(SLAVE)bmp280_adc_t.reset,(SLAVE)max30102_1.reset,(SLAVE)bmp280_t2_t1.reset,(SLAVE)RAM.reset1,(SLAVE)max30102_0.reset,(SLAVE)heignt_int.reset,(MASTER)nios2_gen2.debug_reset_request,(SLAVE)jtag_uart.reset,(SLAVE)end_o.reset,(SLAVE)bmp280_p5_p4.reset,(SLAVE)bmp280_adc_p.reset,(SLAVE)heignt_dec.reset,(SLAVE)heart_rate.reset,(SLAVE)sysid_qsys.reset,(SLAVE)bmp280_p7_p6.reset) 1 1 2 320 900 720
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.max30102_0,(SLAVE)max30102_0.external_connection) 1 0 3 NJ 1420 NJ 1420 NJ
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.bmp280_t2_t1,(SLAVE)bmp280_t2_t1.external_connection) 1 0 3 NJ 760 NJ 760 NJ
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.bmp280_adc_p,(SLAVE)bmp280_adc_p.external_connection) 1 0 3 NJ 60 NJ 60 NJ
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.clk,(SLAVE)clk.clk_in) 1 0 1 NJ
+levelinfo -pg 1 0 90 950
+levelinfo -hier qsys_system 100 130 460 790 940

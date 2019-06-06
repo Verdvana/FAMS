@@ -1,0 +1,3706 @@
+
+Data_Process.elf:     file format elf32-littlenios2
+Data_Process.elf
+architecture: nios2:r1, flags 0x00000112:
+EXEC_P, HAS_SYMS, D_PAGED
+start address 0x00008020
+
+Program Header:
+    LOAD off    0x00001000 vaddr 0x00008000 paddr 0x00008000 align 2**12
+         filesz 0x00000020 memsz 0x00000020 flags r-x
+    LOAD off    0x00001020 vaddr 0x00008020 paddr 0x00008020 align 2**12
+         filesz 0x000028b4 memsz 0x000028b4 flags r-x
+    LOAD off    0x000038d4 vaddr 0x0000a8d4 paddr 0x0000a9c8 align 2**12
+         filesz 0x000000f4 memsz 0x000000f4 flags rw-
+    LOAD off    0x00003abc vaddr 0x0000aabc paddr 0x0000aabc align 2**12
+         filesz 0x00000000 memsz 0x000007e0 flags rw-
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .entry        00000020  00008000  00008000  00001000  2**5
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .exceptions   00000000  00008020  00008020  000039c8  2**0
+                  CONTENTS
+  2 .text         000027a0  00008020  00008020  00001020  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  3 .rodata       00000114  0000a7c0  0000a7c0  000037c0  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  4 .rwdata       000000f4  0000a8d4  0000a9c8  000038d4  2**2
+                  CONTENTS, ALLOC, LOAD, DATA, SMALL_DATA
+  5 .bss          000007e0  0000aabc  0000aabc  00003abc  2**2
+                  ALLOC, SMALL_DATA
+  6 .RAM          00000000  0000b29c  0000b29c  000039c8  2**0
+                  CONTENTS
+  7 .comment      00000023  00000000  00000000  000039c8  2**0
+                  CONTENTS, READONLY
+  8 .debug_aranges 00000308  00000000  00000000  000039f0  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_info   00004324  00000000  00000000  00003cf8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_abbrev 00001605  00000000  00000000  0000801c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_line   00001c6e  00000000  00000000  00009621  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_frame  00000640  00000000  00000000  0000b290  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_str    00001370  00000000  00000000  0000b8d0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 14 .debug_loc    000011dd  00000000  00000000  0000cc40  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 15 .debug_alt_sim_info 00000030  00000000  00000000  0000de20  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 16 .debug_ranges 000001e0  00000000  00000000  0000de50  2**3
+                  CONTENTS, READONLY, DEBUGGING
+ 17 .thread_model 00000003  00000000  00000000  0000f456  2**0
+                  CONTENTS, READONLY
+ 18 .cpu          0000000a  00000000  00000000  0000f459  2**0
+                  CONTENTS, READONLY
+ 19 .qsys         00000001  00000000  00000000  0000f463  2**0
+                  CONTENTS, READONLY
+ 20 .simulation_enabled 00000001  00000000  00000000  0000f464  2**0
+                  CONTENTS, READONLY
+ 21 .sysid_hash   00000004  00000000  00000000  0000f465  2**0
+                  CONTENTS, READONLY
+ 22 .sysid_base   00000004  00000000  00000000  0000f469  2**0
+                  CONTENTS, READONLY
+ 23 .sysid_time   00000004  00000000  00000000  0000f46d  2**0
+                  CONTENTS, READONLY
+ 24 .stderr_dev   00000009  00000000  00000000  0000f471  2**0
+                  CONTENTS, READONLY
+ 25 .stdin_dev    00000009  00000000  00000000  0000f47a  2**0
+                  CONTENTS, READONLY
+ 26 .stdout_dev   00000009  00000000  00000000  0000f483  2**0
+                  CONTENTS, READONLY
+ 27 .sopc_system_name 0000000b  00000000  00000000  0000f48c  2**0
+                  CONTENTS, READONLY
+ 28 .quartus_project_dir 00000028  00000000  00000000  0000f497  2**0
+                  CONTENTS, READONLY
+ 29 .jdi          00004f87  00000000  00000000  0000f4bf  2**0
+                  CONTENTS, READONLY
+ 30 .sopcinfo     000aa3c6  00000000  00000000  00014446  2**0
+                  CONTENTS, READONLY
+SYMBOL TABLE:
+00008000 l    d  .entry	00000000 .entry
+00008020 l    d  .exceptions	00000000 .exceptions
+00008020 l    d  .text	00000000 .text
+0000a7c0 l    d  .rodata	00000000 .rodata
+0000a8d4 l    d  .rwdata	00000000 .rwdata
+0000aabc l    d  .bss	00000000 .bss
+0000b29c l    d  .RAM	00000000 .RAM
+00000000 l    d  .comment	00000000 .comment
+00000000 l    d  .debug_aranges	00000000 .debug_aranges
+00000000 l    d  .debug_info	00000000 .debug_info
+00000000 l    d  .debug_abbrev	00000000 .debug_abbrev
+00000000 l    d  .debug_line	00000000 .debug_line
+00000000 l    d  .debug_frame	00000000 .debug_frame
+00000000 l    d  .debug_str	00000000 .debug_str
+00000000 l    d  .debug_loc	00000000 .debug_loc
+00000000 l    d  .debug_alt_sim_info	00000000 .debug_alt_sim_info
+00000000 l    d  .debug_ranges	00000000 .debug_ranges
+00000000 l    df *ABS*	00000000 ../Data_Process_bsp//obj/HAL/src/crt0.o
+00008068 l       .text	00000000 alt_after_alt_main
+00000000 l    df *ABS*	00000000 hello_world.c
+0000aadc l     O .bss	00000180 an_dx
+0000ac5c l     O .bss	00000190 an_x
+0000adec l     O .bss	00000190 an_y
+00000000 l    df *ABS*	00000000 lib2-divmod.c
+00000000 l    df *ABS*	00000000 printf.c
+00000000 l    df *ABS*	00000000 vfprintf.c
+00009a58 l     F .text	0000006c print_repeat
+00000000 l    df *ABS*	00000000 fvwrite_small_dev.c
+00000000 l    df *ABS*	00000000 impure.c
+0000a8d4 l     O .rwdata	000000e0 impure_data
+00000000 l    df *ABS*	00000000 strlen.c
+00000000 l    df *ABS*	00000000 writer.c
+00000000 l    df *ABS*	00000000 int_errno.c
+00000000 l    df *ABS*	00000000 alt_load.c
+0000a130 l     F .text	00000068 alt_load_section
+00000000 l    df *ABS*	00000000 alt_main.c
+00000000 l    df *ABS*	00000000 alt_write.c
+0000a26c l     F .text	0000003c alt_get_errno
+00000000 l    df *ABS*	00000000 alt_sys_init.c
+00000000 l    df *ABS*	00000000 altera_avalon_jtag_uart_write.c
+00000000 l    df *ABS*	00000000 alt_close.c
+0000a434 l     F .text	0000003c alt_get_errno
+00000000 l    df *ABS*	00000000 alt_dcache_flush_all.c
+00000000 l    df *ABS*	00000000 alt_errno.c
+00000000 l    df *ABS*	00000000 alt_icache_flush_all.c
+00000000 l    df *ABS*	00000000 altera_nios2_gen2_irq.c
+00000000 l    df *ABS*	00000000 alt_icache_flush.c
+00000000 l    df *ABS*	00000000 exit.c
+00000000 l    df *ABS*	00000000 __call_atexit.c
+00000000 l    df *ABS*	00000000 alt_exit.c
+0000a21c g     F .text	00000050 alt_main
+0000a9c8 g       *ABS*	00000000 __flash_rwdata_start
+00009a0c g     F .text	0000004c printf
+0000a9c0 g     O .rwdata	00000004 jtag_uart
+0000a528 g     F .text	00000024 altera_nios2_gen2_irq_init
+00008000 g     F .entry	0000001c __reset
+00008020 g       *ABS*	00000000 __flash_exceptions_start
+0000aacc g     O .bss	00000004 errno
+0000a9b4 g     O .rwdata	00000004 n_ir_buffer_length
+0000aad4 g     O .bss	00000004 alt_argv
+000129b4 g       *ABS*	00000000 _gp
+00009420 g     F .text	00000188 maxim_remove_close_peaks
+000099d0 g     F .text	0000003c _printf_r
+00009914 g     F .text	00000064 .hidden __udivsi3
+0000a54c g     F .text	00000090 alt_icache_flush
+00008298 g     F .text	00000f18 maxim_heart_rate_and_oxygen_saturation
+0000aabc g     O .bss	00000004 n_sp02
+0000af7c g     O .bss	00000190 aun_ir_buffer
+0000a7fe g     O .rodata	000000b8 uch_spo2_table
+0000a9b8 g     O .rwdata	00000004 _global_impure_ptr
+0000b29c g       *ABS*	00000000 __bss_end
+000096c8 g     F .text	00000154 maxim_sort_indices_descend
+00009234 g     F .text	000001ec maxim_peaks_above_min_height
+0000a4ac g     F .text	00000048 alt_dcache_flush_all
+0000a9c8 g       *ABS*	00000000 __ram_rwdata_end
+0000a2a8 g     F .text	0000009c write
+0000a8d4 g       *ABS*	00000000 __ram_rodata_end
+00009978 g     F .text	00000058 .hidden __umodsi3
+0000b29c g       *ABS*	00000000 end
+0000b10c g     O .bss	00000190 aun_red_buffer
+0000d000 g       *ABS*	00000000 __alt_stack_pointer
+0000a3a0 g     F .text	00000094 altera_avalon_jtag_uart_write
+0000aac0 g     O .bss	00000004 n_heart_rate
+00009ac4 g     F .text	00000524 ___vfprintf_internal_r
+0000a5fc g     F .text	00000190 __call_exitprocs
+0000aac4 g     O .bss	00000002 end_o
+00008020 g     F .text	0000004c _start
+0000a37c g     F .text	00000024 alt_sys_init
+000095a8 g     F .text	00000120 maxim_sort_ascend
+0000a8d4 g       *ABS*	00000000 __ram_rwdata_start
+0000a7c0 g       *ABS*	00000000 __ram_rodata_start
+0000b29c g       *ABS*	00000000 __alt_stack_base
+0000a004 g     F .text	000000b8 __sfvwrite_small_dev
+0000aabc g       *ABS*	00000000 __bss_start
+0000806c g     F .text	0000022c main
+00008000 g       *ABS*	00000000 __alt_mem_RAM
+0000aad8 g     O .bss	00000004 alt_envp
+0000aac6 g     O .bss	00000001 ch_spo2_valid
+0000a9c4 g     O .rwdata	00000004 alt_errno
+0000981c g     F .text	00000084 .hidden __divsi3
+000091b0 g     F .text	00000084 maxim_find_peaks
+0000a7c0 g       *ABS*	00000000 __flash_rodata_start
+0000a7c0 g     O .rodata	0000003e auw_hamm
+0000a344 g     F .text	00000038 alt_irq_init
+0000a0d8 g     F .text	00000058 _write_r
+0000a9bc g     O .rwdata	00000004 _impure_ptr
+0000aad0 g     O .bss	00000004 alt_argc
+00008020 g       *ABS*	00000000 __ram_exceptions_start
+0000a9c8 g       *ABS*	00000000 _edata
+0000aac7 g     O .bss	00000001 ch_hr_valid
+0000b29c g       *ABS*	00000000 _end
+00008020 g       *ABS*	00000000 __ram_exceptions_end
+0000a5dc g     F .text	00000020 exit
+000098a0 g     F .text	00000074 .hidden __modsi3
+0000d000 g       *ABS*	00000000 __alt_data_end
+0000aac8 g     O .bss	00000001 uch_dummy
+0000a78c g     F .text	00000034 _exit
+0000a0bc g     F .text	0000001c strlen
+0000a4f4 g     F .text	00000034 alt_icache_flush_all
+00009fe8 g     F .text	0000001c __vfprintf_internal
+0000a470 g     F .text	0000003c close
+0000a198 g     F .text	00000084 alt_load
+
+
+
+Disassembly of section .entry:
+
+00008000 <__reset>:
+#if NIOS2_ICACHE_SIZE > 0 && defined(ALT_ALLOW_CODE_AT_RESET) && (!defined(ALT_SIM_OPTIMIZE) || defined(NIOS2_ECC_PRESENT))
+    /* Assume the instruction cache size is always a power of two. */
+#if NIOS2_ICACHE_SIZE > 0x8000
+    movhi r2, %hi(NIOS2_ICACHE_SIZE)
+#else
+    movui r2, NIOS2_ICACHE_SIZE
+    8000:	00840014 	movui	r2,4096
+#endif
+
+0:
+    initi r2
+    8004:	1001483a 	initi	r2
+    addi r2, r2, -NIOS2_ICACHE_LINE_SIZE
+    8008:	10bff804 	addi	r2,r2,-32
+    bgt r2, zero, 0b
+    800c:	00bffd16 	blt	zero,r2,8004 <_gp+0xffff5650>
+ * Jump to the _start entry point in the .text section if reset code
+ * is allowed or if optimizing for RTL simulation.
+ */
+#if defined(ALT_ALLOW_CODE_AT_RESET) || defined(ALT_SIM_OPTIMIZE)
+    /* Jump to the _start entry point in the .text section. */
+    movhi r1, %hi(_start)
+    8010:	00400034 	movhi	at,0
+    ori r1, r1, %lo(_start)
+    8014:	08600814 	ori	at,at,32800
+    jmp r1
+    8018:	0800683a 	jmp	at
+    801c:	00000000 	call	0 <__alt_mem_RAM-0x8000>
+
+Disassembly of section .text:
+
+00008020 <_start>:
+
+    /* Assume the data cache size is always a power of two. */
+#if NIOS2_DCACHE_SIZE > 0x8000
+    movhi r2, %hi(NIOS2_DCACHE_SIZE)
+#else
+    movui r2, NIOS2_DCACHE_SIZE
+    8020:	00820014 	movui	r2,2048
+#endif
+
+0:
+    initd 0(r2)
+    8024:	10000033 	initd	0(r2)
+#ifdef NIOS2_ECC_PRESENT
+    addi r2, r2, -4
+#else
+    addi r2, r2, -NIOS2_DCACHE_LINE_SIZE
+    8028:	10bff804 	addi	r2,r2,-32
+#endif
+    bgt r2, zero, 0b
+    802c:	00bffd16 	blt	zero,r2,8024 <_gp+0xffff5670>
+
+    /*
+     * Now that the caches are initialized, set up the stack pointer and global pointer.
+     * The values provided by the linker are assumed to be correctly aligned.
+     */
+    movhi sp, %hi(__alt_stack_pointer)
+    8030:	06c00034 	movhi	sp,0
+    ori sp, sp, %lo(__alt_stack_pointer)
+    8034:	def40014 	ori	sp,sp,53248
+    movhi gp, %hi(_gp)
+    8038:	06800074 	movhi	gp,1
+    ori gp, gp, %lo(_gp)
+    803c:	d68a6d14 	ori	gp,gp,10676
+ */
+#ifndef ALT_SIM_OPTIMIZE
+    /* Log that the BSS is about to be cleared. */
+    ALT_LOG_PUTS(alt_log_msg_bss)
+
+    movhi r2, %hi(__bss_start)
+    8040:	00800034 	movhi	r2,0
+    ori r2, r2, %lo(__bss_start)
+    8044:	10aaaf14 	ori	r2,r2,43708
+
+    movhi r3, %hi(__bss_end)
+    8048:	00c00034 	movhi	r3,0
+    ori r3, r3, %lo(__bss_end)
+    804c:	18eca714 	ori	r3,r3,45724
+
+    beq r2, r3, 1f
+    8050:	10c00326 	beq	r2,r3,8060 <_start+0x40>
+
+0:
+    stw zero, (r2)
+    8054:	10000015 	stw	zero,0(r2)
+    addi r2, r2, 4
+    8058:	10800104 	addi	r2,r2,4
+    bltu r2, r3, 0b
+    805c:	10fffd36 	bltu	r2,r3,8054 <_gp+0xffff56a0>
+     * section aren't defined until alt_load() has been called).
+     */
+    mov   et, zero
+#endif
+
+    call alt_load
+    8060:	000a1980 	call	a198 <alt_load>
+
+    /* Log that alt_main is about to be called. */
+    ALT_LOG_PUTS(alt_log_msg_alt_main)
+
+    /* Call the C entry point. It should never return. */
+    call alt_main
+    8064:	000a21c0 	call	a21c <alt_main>
+
+00008068 <alt_after_alt_main>:
+
+    /* Wait in infinite loop in case alt_main does return. */
+alt_after_alt_main:
+    br alt_after_alt_main
+    8068:	003fff06 	br	8068 <_gp+0xffff56b4>
+
+0000806c <main>:
+void maxim_sort_ascend( alt_32 *pn_x, alt_32 n_size );
+void maxim_sort_indices_descend(  alt_32  *pn_x, alt_32 *pn_indx, alt_32 n_size);
+
+
+int main()
+{
+    806c:	defff804 	addi	sp,sp,-32
+    8070:	dfc00715 	stw	ra,28(sp)
+    8074:	df000615 	stw	fp,24(sp)
+    8078:	df000604 	addi	fp,sp,24
+  end_o=0;
+    807c:	d020440d 	sth	zero,-32496(gp)
+  int m=0;
+    8080:	e03ffd15 	stw	zero,-12(fp)
+  alt_32 n_brightness;
+  float f_temp;
+
+  while(1)
+  {
+	  end_o=IORD_ALTERA_AVALON_PIO_DATA(END_O_BASE);
+    8084:	00800074 	movhi	r2,1
+    8088:	10844404 	addi	r2,r2,4368
+    808c:	10800037 	ldwio	r2,0(r2)
+    8090:	d0a0440d 	sth	r2,-32496(gp)
+
+	  if(end_o)
+    8094:	d0a0440b 	ldhu	r2,-32496(gp)
+    8098:	10bfffcc 	andi	r2,r2,65535
+    809c:	103ff926 	beq	r2,zero,8084 <_gp+0xffff56d0>
+
+		  printf("%d\r\n",p);
+*/
+		  //------心率-----
+
+		  for(m=0;m<100;m++)
+    80a0:	e03ffd15 	stw	zero,-12(fp)
+    80a4:	00005d06 	br	821c <main+0x1b0>
+		  {
+
+			  aun_red_buffer[m] = IORD_ALTERA_AVALON_PIO_DATA(MAX30102_0_BASE);
+    80a8:	00800074 	movhi	r2,1
+    80ac:	10844c04 	addi	r2,r2,4400
+    80b0:	10800037 	ldwio	r2,0(r2)
+    80b4:	1009883a 	mov	r4,r2
+    80b8:	00800074 	movhi	r2,1
+    80bc:	10ac4304 	addi	r2,r2,-20212
+    80c0:	e0fffd17 	ldw	r3,-12(fp)
+    80c4:	18c7883a 	add	r3,r3,r3
+    80c8:	18c7883a 	add	r3,r3,r3
+    80cc:	10c5883a 	add	r2,r2,r3
+    80d0:	11000015 	stw	r4,0(r2)
+			  aun_ir_buffer[m]  = IORD_ALTERA_AVALON_PIO_DATA(MAX30102_1_BASE);
+    80d4:	00800074 	movhi	r2,1
+    80d8:	10844804 	addi	r2,r2,4384
+    80dc:	10800037 	ldwio	r2,0(r2)
+    80e0:	1009883a 	mov	r4,r2
+    80e4:	00800074 	movhi	r2,1
+    80e8:	10abdf04 	addi	r2,r2,-20612
+    80ec:	e0fffd17 	ldw	r3,-12(fp)
+    80f0:	18c7883a 	add	r3,r3,r3
+    80f4:	18c7883a 	add	r3,r3,r3
+    80f8:	10c5883a 	add	r2,r2,r3
+    80fc:	11000015 	stw	r4,0(r2)
+
+			  aun_red_buffer[m] = aun_red_buffer[m]&0x03FFFF;
+    8100:	00800074 	movhi	r2,1
+    8104:	10ac4304 	addi	r2,r2,-20212
+    8108:	e0fffd17 	ldw	r3,-12(fp)
+    810c:	18c7883a 	add	r3,r3,r3
+    8110:	18c7883a 	add	r3,r3,r3
+    8114:	10c5883a 	add	r2,r2,r3
+    8118:	10c00017 	ldw	r3,0(r2)
+    811c:	00800134 	movhi	r2,4
+    8120:	10bfffc4 	addi	r2,r2,-1
+    8124:	1888703a 	and	r4,r3,r2
+    8128:	00800074 	movhi	r2,1
+    812c:	10ac4304 	addi	r2,r2,-20212
+    8130:	e0fffd17 	ldw	r3,-12(fp)
+    8134:	18c7883a 	add	r3,r3,r3
+    8138:	18c7883a 	add	r3,r3,r3
+    813c:	10c5883a 	add	r2,r2,r3
+    8140:	11000015 	stw	r4,0(r2)
+			  aun_ir_buffer[m] = aun_ir_buffer[m]&0x03FFFF;
+    8144:	00800074 	movhi	r2,1
+    8148:	10abdf04 	addi	r2,r2,-20612
+    814c:	e0fffd17 	ldw	r3,-12(fp)
+    8150:	18c7883a 	add	r3,r3,r3
+    8154:	18c7883a 	add	r3,r3,r3
+    8158:	10c5883a 	add	r2,r2,r3
+    815c:	10c00017 	ldw	r3,0(r2)
+    8160:	00800134 	movhi	r2,4
+    8164:	10bfffc4 	addi	r2,r2,-1
+    8168:	1888703a 	and	r4,r3,r2
+    816c:	00800074 	movhi	r2,1
+    8170:	10abdf04 	addi	r2,r2,-20612
+    8174:	e0fffd17 	ldw	r3,-12(fp)
+    8178:	18c7883a 	add	r3,r3,r3
+    817c:	18c7883a 	add	r3,r3,r3
+    8180:	10c5883a 	add	r2,r2,r3
+    8184:	11000015 	stw	r4,0(r2)
+
+
+			  //printf("aun_red_buffer=%lx\r\n",aun_red_buffer[m]);
+			  //printf("aun_ir_buffer=%lx\r\n",aun_ir_buffer[m]);
+
+		      if(un_min>aun_red_buffer[m])
+    8188:	00800074 	movhi	r2,1
+    818c:	10ac4304 	addi	r2,r2,-20212
+    8190:	e0fffd17 	ldw	r3,-12(fp)
+    8194:	18c7883a 	add	r3,r3,r3
+    8198:	18c7883a 	add	r3,r3,r3
+    819c:	10c5883a 	add	r2,r2,r3
+    81a0:	10c00017 	ldw	r3,0(r2)
+    81a4:	e0bffe17 	ldw	r2,-8(fp)
+    81a8:	1880082e 	bgeu	r3,r2,81cc <main+0x160>
+		    	  un_min=aun_red_buffer[m];    //update signal min
+    81ac:	00800074 	movhi	r2,1
+    81b0:	10ac4304 	addi	r2,r2,-20212
+    81b4:	e0fffd17 	ldw	r3,-12(fp)
+    81b8:	18c7883a 	add	r3,r3,r3
+    81bc:	18c7883a 	add	r3,r3,r3
+    81c0:	10c5883a 	add	r2,r2,r3
+    81c4:	10800017 	ldw	r2,0(r2)
+    81c8:	e0bffe15 	stw	r2,-8(fp)
+		      if(un_max<aun_red_buffer[m])
+    81cc:	00800074 	movhi	r2,1
+    81d0:	10ac4304 	addi	r2,r2,-20212
+    81d4:	e0fffd17 	ldw	r3,-12(fp)
+    81d8:	18c7883a 	add	r3,r3,r3
+    81dc:	18c7883a 	add	r3,r3,r3
+    81e0:	10c5883a 	add	r2,r2,r3
+    81e4:	10800017 	ldw	r2,0(r2)
+    81e8:	e0ffff17 	ldw	r3,-4(fp)
+    81ec:	1880082e 	bgeu	r3,r2,8210 <main+0x1a4>
+		    	  un_max=aun_red_buffer[m];    //update signal max
+    81f0:	00800074 	movhi	r2,1
+    81f4:	10ac4304 	addi	r2,r2,-20212
+    81f8:	e0fffd17 	ldw	r3,-12(fp)
+    81fc:	18c7883a 	add	r3,r3,r3
+    8200:	18c7883a 	add	r3,r3,r3
+    8204:	10c5883a 	add	r2,r2,r3
+    8208:	10800017 	ldw	r2,0(r2)
+    820c:	e0bfff15 	stw	r2,-4(fp)
+
+		  printf("%d\r\n",p);
+*/
+		  //------心率-----
+
+		  for(m=0;m<100;m++)
+    8210:	e0bffd17 	ldw	r2,-12(fp)
+    8214:	10800044 	addi	r2,r2,1
+    8218:	e0bffd15 	stw	r2,-12(fp)
+    821c:	e0bffd17 	ldw	r2,-12(fp)
+    8220:	10801910 	cmplti	r2,r2,100
+    8224:	103fa01e 	bne	r2,zero,80a8 <_gp+0xffff56f4>
+		    	  un_min=aun_red_buffer[m];    //update signal min
+		      if(un_max<aun_red_buffer[m])
+		    	  un_max=aun_red_buffer[m];    //update signal max
+
+		  }
+			  maxim_heart_rate_and_oxygen_saturation(aun_ir_buffer, n_ir_buffer_length, aun_red_buffer, &n_sp02, &ch_spo2_valid, &n_heart_rate, &ch_hr_valid);
+    8228:	d0e00017 	ldw	r3,-32768(gp)
+    822c:	d0a044c4 	addi	r2,gp,-32493
+    8230:	d8800215 	stw	r2,8(sp)
+    8234:	d0a04304 	addi	r2,gp,-32500
+    8238:	d8800115 	stw	r2,4(sp)
+    823c:	d0a04484 	addi	r2,gp,-32494
+    8240:	d8800015 	stw	r2,0(sp)
+    8244:	d1e04204 	addi	r7,gp,-32504
+    8248:	01800074 	movhi	r6,1
+    824c:	31ac4304 	addi	r6,r6,-20212
+    8250:	180b883a 	mov	r5,r3
+    8254:	01000074 	movhi	r4,1
+    8258:	212bdf04 	addi	r4,r4,-20612
+    825c:	00082980 	call	8298 <maxim_heart_rate_and_oxygen_saturation>
+
+
+			  			  //printf("HR=%d, ", n_heart_rate);
+			  			  //printf("HRvalid=%i, \r\n", ch_hr_valid);
+
+			  			  printf("SpO2=%ld, ", n_sp02);
+    8260:	d0a04217 	ldw	r2,-32504(gp)
+    8264:	100b883a 	mov	r5,r2
+    8268:	01000074 	movhi	r4,1
+    826c:	212a2e04 	addi	r4,r4,-22344
+    8270:	0009a0c0 	call	9a0c <printf>
+			  			  printf("SPO2Valid=%d\r\n", ch_spo2_valid);
+    8274:	d0a04483 	ldbu	r2,-32494(gp)
+    8278:	10803fcc 	andi	r2,r2,255
+    827c:	1080201c 	xori	r2,r2,128
+    8280:	10bfe004 	addi	r2,r2,-128
+    8284:	100b883a 	mov	r5,r2
+    8288:	01000074 	movhi	r4,1
+    828c:	212a3104 	addi	r4,r4,-22332
+    8290:	0009a0c0 	call	9a0c <printf>
+
+
+	  }
+
+
+  }
+    8294:	003f7b06 	br	8084 <_gp+0xffff56d0>
+
+00008298 <maxim_heart_rate_and_oxygen_saturation>:
+  return 0;
+}
+
+void maxim_heart_rate_and_oxygen_saturation(alt_u32 *pun_ir_buffer ,  alt_32 n_ir_buffer_length, alt_u32 *pun_red_buffer ,   alt_32 *pn_spo2, alt_8 *pch_spo2_valid ,  alt_32 *pn_heart_rate , alt_8  *pch_hr_valid)
+
+{
+    8298:	deffad04 	addi	sp,sp,-332
+    829c:	dfc05215 	stw	ra,328(sp)
+    82a0:	df005115 	stw	fp,324(sp)
+    82a4:	dc005015 	stw	r16,320(sp)
+    82a8:	df005104 	addi	fp,sp,324
+    82ac:	e13ffb15 	stw	r4,-20(fp)
+    82b0:	e17ffc15 	stw	r5,-16(fp)
+    82b4:	e1bffd15 	stw	r6,-12(fp)
+    82b8:	e1fffe15 	stw	r7,-8(fp)
+	alt_32  n_y_dc_max, n_x_dc_max;
+	alt_32  n_y_dc_max_idx, n_x_dc_max_idx;
+	alt_32  an_ratio[5],n_ratio_average;
+	alt_32  n_nume,  n_denom ;
+    // remove DC of ir signal
+    un_ir_mean =0;
+    82bc:	e03fb215 	stw	zero,-312(fp)
+    for (k=0 ; k<n_ir_buffer_length ; k++ ) un_ir_mean += pun_ir_buffer[k] ;
+    82c0:	e03fb415 	stw	zero,-304(fp)
+    82c4:	00000d06 	br	82fc <maxim_heart_rate_and_oxygen_saturation+0x64>
+    82c8:	e0bfb417 	ldw	r2,-304(fp)
+    82cc:	1085883a 	add	r2,r2,r2
+    82d0:	1085883a 	add	r2,r2,r2
+    82d4:	1007883a 	mov	r3,r2
+    82d8:	e0bffb17 	ldw	r2,-20(fp)
+    82dc:	10c5883a 	add	r2,r2,r3
+    82e0:	10800017 	ldw	r2,0(r2)
+    82e4:	e0ffb217 	ldw	r3,-312(fp)
+    82e8:	1885883a 	add	r2,r3,r2
+    82ec:	e0bfb215 	stw	r2,-312(fp)
+    82f0:	e0bfb417 	ldw	r2,-304(fp)
+    82f4:	10800044 	addi	r2,r2,1
+    82f8:	e0bfb415 	stw	r2,-304(fp)
+    82fc:	e0ffb417 	ldw	r3,-304(fp)
+    8300:	e0bffc17 	ldw	r2,-16(fp)
+    8304:	18bff016 	blt	r3,r2,82c8 <_gp+0xffff5914>
+    un_ir_mean =un_ir_mean/n_ir_buffer_length ;
+    8308:	e0bffc17 	ldw	r2,-16(fp)
+    830c:	100b883a 	mov	r5,r2
+    8310:	e13fb217 	ldw	r4,-312(fp)
+    8314:	00099140 	call	9914 <__udivsi3>
+    8318:	e0bfb215 	stw	r2,-312(fp)
+    for (k=0 ; k<n_ir_buffer_length ; k++ )  an_x[k] =  pun_ir_buffer[k] - un_ir_mean ;
+    831c:	e03fb415 	stw	zero,-304(fp)
+    8320:	00001406 	br	8374 <maxim_heart_rate_and_oxygen_saturation+0xdc>
+    8324:	e0bfb417 	ldw	r2,-304(fp)
+    8328:	1085883a 	add	r2,r2,r2
+    832c:	1085883a 	add	r2,r2,r2
+    8330:	1007883a 	mov	r3,r2
+    8334:	e0bffb17 	ldw	r2,-20(fp)
+    8338:	10c5883a 	add	r2,r2,r3
+    833c:	10c00017 	ldw	r3,0(r2)
+    8340:	e0bfb217 	ldw	r2,-312(fp)
+    8344:	1885c83a 	sub	r2,r3,r2
+    8348:	1009883a 	mov	r4,r2
+    834c:	00800074 	movhi	r2,1
+    8350:	10ab1704 	addi	r2,r2,-21412
+    8354:	e0ffb417 	ldw	r3,-304(fp)
+    8358:	18c7883a 	add	r3,r3,r3
+    835c:	18c7883a 	add	r3,r3,r3
+    8360:	10c5883a 	add	r2,r2,r3
+    8364:	11000015 	stw	r4,0(r2)
+    8368:	e0bfb417 	ldw	r2,-304(fp)
+    836c:	10800044 	addi	r2,r2,1
+    8370:	e0bfb415 	stw	r2,-304(fp)
+    8374:	e0ffb417 	ldw	r3,-304(fp)
+    8378:	e0bffc17 	ldw	r2,-16(fp)
+    837c:	18bfe916 	blt	r3,r2,8324 <_gp+0xffff5970>
+
+    // 4 pt Moving Average
+    for(k=0; k< BUFFER_SIZE-MA4_SIZE; k++){
+    8380:	e03fb415 	stw	zero,-304(fp)
+    8384:	00003206 	br	8450 <maxim_heart_rate_and_oxygen_saturation+0x1b8>
+        n_denom= ( an_x[k]+an_x[k+1]+ an_x[k+2]+ an_x[k+3]);
+    8388:	00800074 	movhi	r2,1
+    838c:	10ab1704 	addi	r2,r2,-21412
+    8390:	e0ffb417 	ldw	r3,-304(fp)
+    8394:	18c7883a 	add	r3,r3,r3
+    8398:	18c7883a 	add	r3,r3,r3
+    839c:	10c5883a 	add	r2,r2,r3
+    83a0:	11000017 	ldw	r4,0(r2)
+    83a4:	e0bfb417 	ldw	r2,-304(fp)
+    83a8:	10c00044 	addi	r3,r2,1
+    83ac:	00800074 	movhi	r2,1
+    83b0:	10ab1704 	addi	r2,r2,-21412
+    83b4:	18c7883a 	add	r3,r3,r3
+    83b8:	18c7883a 	add	r3,r3,r3
+    83bc:	10c5883a 	add	r2,r2,r3
+    83c0:	10800017 	ldw	r2,0(r2)
+    83c4:	2089883a 	add	r4,r4,r2
+    83c8:	e0bfb417 	ldw	r2,-304(fp)
+    83cc:	10c00084 	addi	r3,r2,2
+    83d0:	00800074 	movhi	r2,1
+    83d4:	10ab1704 	addi	r2,r2,-21412
+    83d8:	18c7883a 	add	r3,r3,r3
+    83dc:	18c7883a 	add	r3,r3,r3
+    83e0:	10c5883a 	add	r2,r2,r3
+    83e4:	10800017 	ldw	r2,0(r2)
+    83e8:	2089883a 	add	r4,r4,r2
+    83ec:	e0bfb417 	ldw	r2,-304(fp)
+    83f0:	10c000c4 	addi	r3,r2,3
+    83f4:	00800074 	movhi	r2,1
+    83f8:	10ab1704 	addi	r2,r2,-21412
+    83fc:	18c7883a 	add	r3,r3,r3
+    8400:	18c7883a 	add	r3,r3,r3
+    8404:	10c5883a 	add	r2,r2,r3
+    8408:	10800017 	ldw	r2,0(r2)
+    840c:	2085883a 	add	r2,r4,r2
+    8410:	e0bfc115 	stw	r2,-252(fp)
+        an_x[k]=  n_denom/(alt_32)4;
+    8414:	e0bfc117 	ldw	r2,-252(fp)
+    8418:	1000010e 	bge	r2,zero,8420 <maxim_heart_rate_and_oxygen_saturation+0x188>
+    841c:	108000c4 	addi	r2,r2,3
+    8420:	1005d0ba 	srai	r2,r2,2
+    8424:	1009883a 	mov	r4,r2
+    8428:	00800074 	movhi	r2,1
+    842c:	10ab1704 	addi	r2,r2,-21412
+    8430:	e0ffb417 	ldw	r3,-304(fp)
+    8434:	18c7883a 	add	r3,r3,r3
+    8438:	18c7883a 	add	r3,r3,r3
+    843c:	10c5883a 	add	r2,r2,r3
+    8440:	11000015 	stw	r4,0(r2)
+    for (k=0 ; k<n_ir_buffer_length ; k++ ) un_ir_mean += pun_ir_buffer[k] ;
+    un_ir_mean =un_ir_mean/n_ir_buffer_length ;
+    for (k=0 ; k<n_ir_buffer_length ; k++ )  an_x[k] =  pun_ir_buffer[k] - un_ir_mean ;
+
+    // 4 pt Moving Average
+    for(k=0; k< BUFFER_SIZE-MA4_SIZE; k++){
+    8444:	e0bfb417 	ldw	r2,-304(fp)
+    8448:	10800044 	addi	r2,r2,1
+    844c:	e0bfb415 	stw	r2,-304(fp)
+    8450:	e0bfb417 	ldw	r2,-304(fp)
+    8454:	10801810 	cmplti	r2,r2,96
+    8458:	103fcb1e 	bne	r2,zero,8388 <_gp+0xffff59d4>
+        an_x[k]=  n_denom/(alt_32)4;
+    }
+
+    // get difference of smoothed IR signal
+
+    for( k=0; k<BUFFER_SIZE-MA4_SIZE-1;  k++)
+    845c:	e03fb415 	stw	zero,-304(fp)
+    8460:	00001a06 	br	84cc <maxim_heart_rate_and_oxygen_saturation+0x234>
+        an_dx[k]= (an_x[k+1]- an_x[k]);
+    8464:	e0bfb417 	ldw	r2,-304(fp)
+    8468:	10c00044 	addi	r3,r2,1
+    846c:	00800074 	movhi	r2,1
+    8470:	10ab1704 	addi	r2,r2,-21412
+    8474:	18c7883a 	add	r3,r3,r3
+    8478:	18c7883a 	add	r3,r3,r3
+    847c:	10c5883a 	add	r2,r2,r3
+    8480:	11000017 	ldw	r4,0(r2)
+    8484:	00800074 	movhi	r2,1
+    8488:	10ab1704 	addi	r2,r2,-21412
+    848c:	e0ffb417 	ldw	r3,-304(fp)
+    8490:	18c7883a 	add	r3,r3,r3
+    8494:	18c7883a 	add	r3,r3,r3
+    8498:	10c5883a 	add	r2,r2,r3
+    849c:	10800017 	ldw	r2,0(r2)
+    84a0:	2089c83a 	sub	r4,r4,r2
+    84a4:	00800074 	movhi	r2,1
+    84a8:	10aab704 	addi	r2,r2,-21796
+    84ac:	e0ffb417 	ldw	r3,-304(fp)
+    84b0:	18c7883a 	add	r3,r3,r3
+    84b4:	18c7883a 	add	r3,r3,r3
+    84b8:	10c5883a 	add	r2,r2,r3
+    84bc:	11000015 	stw	r4,0(r2)
+        an_x[k]=  n_denom/(alt_32)4;
+    }
+
+    // get difference of smoothed IR signal
+
+    for( k=0; k<BUFFER_SIZE-MA4_SIZE-1;  k++)
+    84c0:	e0bfb417 	ldw	r2,-304(fp)
+    84c4:	10800044 	addi	r2,r2,1
+    84c8:	e0bfb415 	stw	r2,-304(fp)
+    84cc:	e0bfb417 	ldw	r2,-304(fp)
+    84d0:	108017d0 	cmplti	r2,r2,95
+    84d4:	103fe31e 	bne	r2,zero,8464 <_gp+0xffff5ab0>
+        an_dx[k]= (an_x[k+1]- an_x[k]);
+
+    // 2-pt Moving Average to an_dx
+    for(k=0; k< BUFFER_SIZE-MA4_SIZE-2; k++){
+    84d8:	e03fb415 	stw	zero,-304(fp)
+    84dc:	00001e06 	br	8558 <maxim_heart_rate_and_oxygen_saturation+0x2c0>
+        an_dx[k] =  ( an_dx[k]+an_dx[k+1])/2 ;
+    84e0:	00800074 	movhi	r2,1
+    84e4:	10aab704 	addi	r2,r2,-21796
+    84e8:	e0ffb417 	ldw	r3,-304(fp)
+    84ec:	18c7883a 	add	r3,r3,r3
+    84f0:	18c7883a 	add	r3,r3,r3
+    84f4:	10c5883a 	add	r2,r2,r3
+    84f8:	11000017 	ldw	r4,0(r2)
+    84fc:	e0bfb417 	ldw	r2,-304(fp)
+    8500:	10c00044 	addi	r3,r2,1
+    8504:	00800074 	movhi	r2,1
+    8508:	10aab704 	addi	r2,r2,-21796
+    850c:	18c7883a 	add	r3,r3,r3
+    8510:	18c7883a 	add	r3,r3,r3
+    8514:	10c5883a 	add	r2,r2,r3
+    8518:	10800017 	ldw	r2,0(r2)
+    851c:	2085883a 	add	r2,r4,r2
+    8520:	1006d7fa 	srli	r3,r2,31
+    8524:	1885883a 	add	r2,r3,r2
+    8528:	1005d07a 	srai	r2,r2,1
+    852c:	1009883a 	mov	r4,r2
+    8530:	00800074 	movhi	r2,1
+    8534:	10aab704 	addi	r2,r2,-21796
+    8538:	e0ffb417 	ldw	r3,-304(fp)
+    853c:	18c7883a 	add	r3,r3,r3
+    8540:	18c7883a 	add	r3,r3,r3
+    8544:	10c5883a 	add	r2,r2,r3
+    8548:	11000015 	stw	r4,0(r2)
+
+    for( k=0; k<BUFFER_SIZE-MA4_SIZE-1;  k++)
+        an_dx[k]= (an_x[k+1]- an_x[k]);
+
+    // 2-pt Moving Average to an_dx
+    for(k=0; k< BUFFER_SIZE-MA4_SIZE-2; k++){
+    854c:	e0bfb417 	ldw	r2,-304(fp)
+    8550:	10800044 	addi	r2,r2,1
+    8554:	e0bfb415 	stw	r2,-304(fp)
+    8558:	e0bfb417 	ldw	r2,-304(fp)
+    855c:	10801790 	cmplti	r2,r2,94
+    8560:	103fdf1e 	bne	r2,zero,84e0 <_gp+0xffff5b2c>
+        an_dx[k] =  ( an_dx[k]+an_dx[k+1])/2 ;
+    }
+
+    // hamming window
+    // flip wave form so that we can detect valley with peak detector
+    for ( i=0 ; i<BUFFER_SIZE-HAMMING_SIZE-MA4_SIZE-2 ;i++){
+    8564:	e03fb615 	stw	zero,-296(fp)
+    8568:	00002e06 	br	8624 <maxim_heart_rate_and_oxygen_saturation+0x38c>
+        s= 0;
+    856c:	e03fb715 	stw	zero,-292(fp)
+        for( k=i; k<i+ HAMMING_SIZE ;k++){
+    8570:	e0bfb617 	ldw	r2,-296(fp)
+    8574:	e0bfb415 	stw	r2,-304(fp)
+    8578:	00001706 	br	85d8 <maxim_heart_rate_and_oxygen_saturation+0x340>
+            s -= an_dx[k] *auw_hamm[k-i] ;
+    857c:	00800074 	movhi	r2,1
+    8580:	10aab704 	addi	r2,r2,-21796
+    8584:	e0ffb417 	ldw	r3,-304(fp)
+    8588:	18c7883a 	add	r3,r3,r3
+    858c:	18c7883a 	add	r3,r3,r3
+    8590:	10c5883a 	add	r2,r2,r3
+    8594:	11000017 	ldw	r4,0(r2)
+    8598:	e0ffb417 	ldw	r3,-304(fp)
+    859c:	e0bfb617 	ldw	r2,-296(fp)
+    85a0:	1887c83a 	sub	r3,r3,r2
+    85a4:	00800074 	movhi	r2,1
+    85a8:	10a9f004 	addi	r2,r2,-22592
+    85ac:	18c7883a 	add	r3,r3,r3
+    85b0:	10c5883a 	add	r2,r2,r3
+    85b4:	1080000b 	ldhu	r2,0(r2)
+    85b8:	10bfffcc 	andi	r2,r2,65535
+    85bc:	2085383a 	mul	r2,r4,r2
+    85c0:	e0ffb717 	ldw	r3,-292(fp)
+    85c4:	1885c83a 	sub	r2,r3,r2
+    85c8:	e0bfb715 	stw	r2,-292(fp)
+
+    // hamming window
+    // flip wave form so that we can detect valley with peak detector
+    for ( i=0 ; i<BUFFER_SIZE-HAMMING_SIZE-MA4_SIZE-2 ;i++){
+        s= 0;
+        for( k=i; k<i+ HAMMING_SIZE ;k++){
+    85cc:	e0bfb417 	ldw	r2,-304(fp)
+    85d0:	10800044 	addi	r2,r2,1
+    85d4:	e0bfb415 	stw	r2,-304(fp)
+    85d8:	e0bfb617 	ldw	r2,-296(fp)
+    85dc:	10800144 	addi	r2,r2,5
+    85e0:	e0ffb417 	ldw	r3,-304(fp)
+    85e4:	18bfe516 	blt	r3,r2,857c <_gp+0xffff5bc8>
+            s -= an_dx[k] *auw_hamm[k-i] ;
+                     }
+        an_dx[i]= s/ (alt_32)1146; // divide by sum of auw_hamm
+    85e8:	e0bfb717 	ldw	r2,-292(fp)
+    85ec:	01411e84 	movi	r5,1146
+    85f0:	1009883a 	mov	r4,r2
+    85f4:	000981c0 	call	981c <__divsi3>
+    85f8:	1009883a 	mov	r4,r2
+    85fc:	00800074 	movhi	r2,1
+    8600:	10aab704 	addi	r2,r2,-21796
+    8604:	e0ffb617 	ldw	r3,-296(fp)
+    8608:	18c7883a 	add	r3,r3,r3
+    860c:	18c7883a 	add	r3,r3,r3
+    8610:	10c5883a 	add	r2,r2,r3
+    8614:	11000015 	stw	r4,0(r2)
+        an_dx[k] =  ( an_dx[k]+an_dx[k+1])/2 ;
+    }
+
+    // hamming window
+    // flip wave form so that we can detect valley with peak detector
+    for ( i=0 ; i<BUFFER_SIZE-HAMMING_SIZE-MA4_SIZE-2 ;i++){
+    8618:	e0bfb617 	ldw	r2,-296(fp)
+    861c:	10800044 	addi	r2,r2,1
+    8620:	e0bfb615 	stw	r2,-296(fp)
+    8624:	e0bfb617 	ldw	r2,-296(fp)
+    8628:	10801650 	cmplti	r2,r2,89
+    862c:	103fcf1e 	bne	r2,zero,856c <_gp+0xffff5bb8>
+                     }
+        an_dx[i]= s/ (alt_32)1146; // divide by sum of auw_hamm
+    }
+
+
+    n_th1=0; // threshold calculation
+    8630:	e03fb915 	stw	zero,-284(fp)
+    for ( k=0 ; k<BUFFER_SIZE-HAMMING_SIZE ;k++){
+    8634:	e03fb415 	stw	zero,-304(fp)
+    8638:	00001006 	br	867c <maxim_heart_rate_and_oxygen_saturation+0x3e4>
+        n_th1 += ((an_dx[k]>0)? an_dx[k] : ((alt_32)0-an_dx[k])) ;
+    863c:	00800074 	movhi	r2,1
+    8640:	10aab704 	addi	r2,r2,-21796
+    8644:	e0ffb417 	ldw	r3,-304(fp)
+    8648:	18c7883a 	add	r3,r3,r3
+    864c:	18c7883a 	add	r3,r3,r3
+    8650:	10c5883a 	add	r2,r2,r3
+    8654:	10800017 	ldw	r2,0(r2)
+    8658:	1000010e 	bge	r2,zero,8660 <maxim_heart_rate_and_oxygen_saturation+0x3c8>
+    865c:	0085c83a 	sub	r2,zero,r2
+    8660:	1007883a 	mov	r3,r2
+    8664:	e0bfb917 	ldw	r2,-284(fp)
+    8668:	10c5883a 	add	r2,r2,r3
+    866c:	e0bfb915 	stw	r2,-284(fp)
+        an_dx[i]= s/ (alt_32)1146; // divide by sum of auw_hamm
+    }
+
+
+    n_th1=0; // threshold calculation
+    for ( k=0 ; k<BUFFER_SIZE-HAMMING_SIZE ;k++){
+    8670:	e0bfb417 	ldw	r2,-304(fp)
+    8674:	10800044 	addi	r2,r2,1
+    8678:	e0bfb415 	stw	r2,-304(fp)
+    867c:	e0bfb417 	ldw	r2,-304(fp)
+    8680:	108017d0 	cmplti	r2,r2,95
+    8684:	103fed1e 	bne	r2,zero,863c <_gp+0xffff5c88>
+        n_th1 += ((an_dx[k]>0)? an_dx[k] : ((alt_32)0-an_dx[k])) ;
+    }
+    n_th1= n_th1/ ( BUFFER_SIZE-HAMMING_SIZE);
+    8688:	e0bfb917 	ldw	r2,-284(fp)
+    868c:	014017c4 	movi	r5,95
+    8690:	1009883a 	mov	r4,r2
+    8694:	000981c0 	call	981c <__divsi3>
+    8698:	e0bfb915 	stw	r2,-284(fp)
+    // peak location is acutally index for sharpest location of raw signal since we flipped the signal
+    maxim_find_peaks( an_dx_peak_locs, &n_npks, an_dx, BUFFER_SIZE-HAMMING_SIZE, n_th1, 8, 5 );//peak_height, peak_distance, max_num_peaks
+    869c:	e13fc804 	addi	r4,fp,-224
+    86a0:	e0ffe704 	addi	r3,fp,-100
+    86a4:	00800144 	movi	r2,5
+    86a8:	d8800215 	stw	r2,8(sp)
+    86ac:	00800204 	movi	r2,8
+    86b0:	d8800115 	stw	r2,4(sp)
+    86b4:	e0bfb917 	ldw	r2,-284(fp)
+    86b8:	d8800015 	stw	r2,0(sp)
+    86bc:	01c017c4 	movi	r7,95
+    86c0:	01800074 	movhi	r6,1
+    86c4:	31aab704 	addi	r6,r6,-21796
+    86c8:	200b883a 	mov	r5,r4
+    86cc:	1809883a 	mov	r4,r3
+    86d0:	00091b00 	call	91b0 <maxim_find_peaks>
+
+    n_peak_interval_sum =0;
+    86d4:	e03fbb15 	stw	zero,-276(fp)
+    if (n_npks>=2){
+    86d8:	e0bfc817 	ldw	r2,-224(fp)
+    86dc:	10800090 	cmplti	r2,r2,2
+    86e0:	10002c1e 	bne	r2,zero,8794 <maxim_heart_rate_and_oxygen_saturation+0x4fc>
+        for (k=1; k<n_npks; k++)
+    86e4:	00800044 	movi	r2,1
+    86e8:	e0bfb415 	stw	r2,-304(fp)
+    86ec:	00001606 	br	8748 <maxim_heart_rate_and_oxygen_saturation+0x4b0>
+            n_peak_interval_sum += (an_dx_peak_locs[k]-an_dx_peak_locs[k -1]);
+    86f0:	e0bfb417 	ldw	r2,-304(fp)
+    86f4:	1085883a 	add	r2,r2,r2
+    86f8:	1085883a 	add	r2,r2,r2
+    86fc:	e0ffb204 	addi	r3,fp,-312
+    8700:	1885883a 	add	r2,r3,r2
+    8704:	10803504 	addi	r2,r2,212
+    8708:	10c00017 	ldw	r3,0(r2)
+    870c:	e0bfb417 	ldw	r2,-304(fp)
+    8710:	10bfffc4 	addi	r2,r2,-1
+    8714:	1085883a 	add	r2,r2,r2
+    8718:	1085883a 	add	r2,r2,r2
+    871c:	e13fb204 	addi	r4,fp,-312
+    8720:	2085883a 	add	r2,r4,r2
+    8724:	10803504 	addi	r2,r2,212
+    8728:	10800017 	ldw	r2,0(r2)
+    872c:	1885c83a 	sub	r2,r3,r2
+    8730:	e0ffbb17 	ldw	r3,-276(fp)
+    8734:	1885883a 	add	r2,r3,r2
+    8738:	e0bfbb15 	stw	r2,-276(fp)
+    // peak location is acutally index for sharpest location of raw signal since we flipped the signal
+    maxim_find_peaks( an_dx_peak_locs, &n_npks, an_dx, BUFFER_SIZE-HAMMING_SIZE, n_th1, 8, 5 );//peak_height, peak_distance, max_num_peaks
+
+    n_peak_interval_sum =0;
+    if (n_npks>=2){
+        for (k=1; k<n_npks; k++)
+    873c:	e0bfb417 	ldw	r2,-304(fp)
+    8740:	10800044 	addi	r2,r2,1
+    8744:	e0bfb415 	stw	r2,-304(fp)
+    8748:	e0bfc817 	ldw	r2,-224(fp)
+    874c:	e0ffb417 	ldw	r3,-304(fp)
+    8750:	18bfe716 	blt	r3,r2,86f0 <_gp+0xffff5d3c>
+            n_peak_interval_sum += (an_dx_peak_locs[k]-an_dx_peak_locs[k -1]);
+        n_peak_interval_sum=n_peak_interval_sum/(n_npks-1);
+    8754:	e0bfc817 	ldw	r2,-224(fp)
+    8758:	10bfffc4 	addi	r2,r2,-1
+    875c:	100b883a 	mov	r5,r2
+    8760:	e13fbb17 	ldw	r4,-276(fp)
+    8764:	000981c0 	call	981c <__divsi3>
+    8768:	e0bfbb15 	stw	r2,-276(fp)
+        *pn_heart_rate=(alt_32)(6000/n_peak_interval_sum);// beats per minutes
+    876c:	e17fbb17 	ldw	r5,-276(fp)
+    8770:	0105dc04 	movi	r4,6000
+    8774:	000981c0 	call	981c <__divsi3>
+    8778:	1007883a 	mov	r3,r2
+    877c:	e0800317 	ldw	r2,12(fp)
+    8780:	10c00015 	stw	r3,0(r2)
+        *pch_hr_valid  = 1;
+    8784:	e0800417 	ldw	r2,16(fp)
+    8788:	00c00044 	movi	r3,1
+    878c:	10c00005 	stb	r3,0(r2)
+    8790:	00000506 	br	87a8 <maxim_heart_rate_and_oxygen_saturation+0x510>
+    }
+    else  {
+        *pn_heart_rate = -999;
+    8794:	e0800317 	ldw	r2,12(fp)
+    8798:	00ff0644 	movi	r3,-999
+    879c:	10c00015 	stw	r3,0(r2)
+        *pch_hr_valid  = 0;
+    87a0:	e0800417 	ldw	r2,16(fp)
+    87a4:	10000005 	stb	zero,0(r2)
+    }
+
+    for ( k=0 ; k<n_npks ;k++)
+    87a8:	e03fb415 	stw	zero,-304(fp)
+    87ac:	00001206 	br	87f8 <maxim_heart_rate_and_oxygen_saturation+0x560>
+        an_ir_valley_locs[k]=an_dx_peak_locs[k]+HAMMING_SIZE/2;
+    87b0:	e0bfb417 	ldw	r2,-304(fp)
+    87b4:	1085883a 	add	r2,r2,r2
+    87b8:	1085883a 	add	r2,r2,r2
+    87bc:	e0ffb204 	addi	r3,fp,-312
+    87c0:	1885883a 	add	r2,r3,r2
+    87c4:	10803504 	addi	r2,r2,212
+    87c8:	10800017 	ldw	r2,0(r2)
+    87cc:	10c00084 	addi	r3,r2,2
+    87d0:	e0bfb417 	ldw	r2,-304(fp)
+    87d4:	1085883a 	add	r2,r2,r2
+    87d8:	1085883a 	add	r2,r2,r2
+    87dc:	e13fb204 	addi	r4,fp,-312
+    87e0:	2085883a 	add	r2,r4,r2
+    87e4:	10801704 	addi	r2,r2,92
+    87e8:	10c00015 	stw	r3,0(r2)
+    else  {
+        *pn_heart_rate = -999;
+        *pch_hr_valid  = 0;
+    }
+
+    for ( k=0 ; k<n_npks ;k++)
+    87ec:	e0bfb417 	ldw	r2,-304(fp)
+    87f0:	10800044 	addi	r2,r2,1
+    87f4:	e0bfb415 	stw	r2,-304(fp)
+    87f8:	e0bfc817 	ldw	r2,-224(fp)
+    87fc:	e0ffb417 	ldw	r3,-304(fp)
+    8800:	18bfeb16 	blt	r3,r2,87b0 <_gp+0xffff5dfc>
+        an_ir_valley_locs[k]=an_dx_peak_locs[k]+HAMMING_SIZE/2;
+
+
+    // raw value : RED(=y) and IR(=X)
+    // we need to assess DC and AC value of ir and red PPG.
+    for (k=0 ; k<n_ir_buffer_length ; k++ )  {
+    8804:	e03fb415 	stw	zero,-304(fp)
+    8808:	00002106 	br	8890 <maxim_heart_rate_and_oxygen_saturation+0x5f8>
+        an_x[k] =  pun_ir_buffer[k] ;
+    880c:	e0bfb417 	ldw	r2,-304(fp)
+    8810:	1085883a 	add	r2,r2,r2
+    8814:	1085883a 	add	r2,r2,r2
+    8818:	1007883a 	mov	r3,r2
+    881c:	e0bffb17 	ldw	r2,-20(fp)
+    8820:	10c5883a 	add	r2,r2,r3
+    8824:	10800017 	ldw	r2,0(r2)
+    8828:	1009883a 	mov	r4,r2
+    882c:	00800074 	movhi	r2,1
+    8830:	10ab1704 	addi	r2,r2,-21412
+    8834:	e0ffb417 	ldw	r3,-304(fp)
+    8838:	18c7883a 	add	r3,r3,r3
+    883c:	18c7883a 	add	r3,r3,r3
+    8840:	10c5883a 	add	r2,r2,r3
+    8844:	11000015 	stw	r4,0(r2)
+        an_y[k] =  pun_red_buffer[k] ;
+    8848:	e0bfb417 	ldw	r2,-304(fp)
+    884c:	1085883a 	add	r2,r2,r2
+    8850:	1085883a 	add	r2,r2,r2
+    8854:	1007883a 	mov	r3,r2
+    8858:	e0bffd17 	ldw	r2,-12(fp)
+    885c:	10c5883a 	add	r2,r2,r3
+    8860:	10800017 	ldw	r2,0(r2)
+    8864:	1009883a 	mov	r4,r2
+    8868:	00800074 	movhi	r2,1
+    886c:	10ab7b04 	addi	r2,r2,-21012
+    8870:	e0ffb417 	ldw	r3,-304(fp)
+    8874:	18c7883a 	add	r3,r3,r3
+    8878:	18c7883a 	add	r3,r3,r3
+    887c:	10c5883a 	add	r2,r2,r3
+    8880:	11000015 	stw	r4,0(r2)
+        an_ir_valley_locs[k]=an_dx_peak_locs[k]+HAMMING_SIZE/2;
+
+
+    // raw value : RED(=y) and IR(=X)
+    // we need to assess DC and AC value of ir and red PPG.
+    for (k=0 ; k<n_ir_buffer_length ; k++ )  {
+    8884:	e0bfb417 	ldw	r2,-304(fp)
+    8888:	10800044 	addi	r2,r2,1
+    888c:	e0bfb415 	stw	r2,-304(fp)
+    8890:	e0ffb417 	ldw	r3,-304(fp)
+    8894:	e0bffc17 	ldw	r2,-16(fp)
+    8898:	18bfdc16 	blt	r3,r2,880c <_gp+0xffff5e58>
+        an_x[k] =  pun_ir_buffer[k] ;
+        an_y[k] =  pun_red_buffer[k] ;
+    }
+
+    // find precise min near an_ir_valley_locs
+    n_exact_ir_valley_locs_count =0;
+    889c:	e03fb815 	stw	zero,-288(fp)
+    for(k=0 ; k<n_npks ;k++){
+    88a0:	e03fb415 	stw	zero,-304(fp)
+    88a4:	00004206 	br	89b0 <maxim_heart_rate_and_oxygen_saturation+0x718>
+        un_only_once =1;
+    88a8:	00800044 	movi	r2,1
+    88ac:	e0bfb315 	stw	r2,-308(fp)
+        m=an_ir_valley_locs[k];
+    88b0:	e0bfb417 	ldw	r2,-304(fp)
+    88b4:	1085883a 	add	r2,r2,r2
+    88b8:	1085883a 	add	r2,r2,r2
+    88bc:	e0ffb204 	addi	r3,fp,-312
+    88c0:	1885883a 	add	r2,r3,r2
+    88c4:	10801704 	addi	r2,r2,92
+    88c8:	10800017 	ldw	r2,0(r2)
+    88cc:	e0bfc215 	stw	r2,-248(fp)
+        n_c_min= 16777216;//2^24;
+    88d0:	00804034 	movhi	r2,256
+    88d4:	e0bfba15 	stw	r2,-280(fp)
+        if (m+5 <  BUFFER_SIZE-HAMMING_SIZE  && m-5 >0){
+    88d8:	e0bfc217 	ldw	r2,-248(fp)
+    88dc:	10800144 	addi	r2,r2,5
+    88e0:	108017c8 	cmpgei	r2,r2,95
+    88e4:	10002f1e 	bne	r2,zero,89a4 <maxim_heart_rate_and_oxygen_saturation+0x70c>
+    88e8:	e0bfc217 	ldw	r2,-248(fp)
+    88ec:	10bffec4 	addi	r2,r2,-5
+    88f0:	00802c0e 	bge	zero,r2,89a4 <maxim_heart_rate_and_oxygen_saturation+0x70c>
+            for(i= m-5;i<m+5; i++)
+    88f4:	e0bfc217 	ldw	r2,-248(fp)
+    88f8:	10bffec4 	addi	r2,r2,-5
+    88fc:	e0bfb615 	stw	r2,-296(fp)
+    8900:	00001f06 	br	8980 <maxim_heart_rate_and_oxygen_saturation+0x6e8>
+                if (an_x[i]<n_c_min){
+    8904:	00800074 	movhi	r2,1
+    8908:	10ab1704 	addi	r2,r2,-21412
+    890c:	e0ffb617 	ldw	r3,-296(fp)
+    8910:	18c7883a 	add	r3,r3,r3
+    8914:	18c7883a 	add	r3,r3,r3
+    8918:	10c5883a 	add	r2,r2,r3
+    891c:	10c00017 	ldw	r3,0(r2)
+    8920:	e0bfba17 	ldw	r2,-280(fp)
+    8924:	1880130e 	bge	r3,r2,8974 <maxim_heart_rate_and_oxygen_saturation+0x6dc>
+                    if (un_only_once >0){
+    8928:	e0bfb317 	ldw	r2,-308(fp)
+    892c:	10000126 	beq	r2,zero,8934 <maxim_heart_rate_and_oxygen_saturation+0x69c>
+                       un_only_once =0;
+    8930:	e03fb315 	stw	zero,-308(fp)
+                   }
+                   n_c_min= an_x[i] ;
+    8934:	00800074 	movhi	r2,1
+    8938:	10ab1704 	addi	r2,r2,-21412
+    893c:	e0ffb617 	ldw	r3,-296(fp)
+    8940:	18c7883a 	add	r3,r3,r3
+    8944:	18c7883a 	add	r3,r3,r3
+    8948:	10c5883a 	add	r2,r2,r3
+    894c:	10800017 	ldw	r2,0(r2)
+    8950:	e0bfba15 	stw	r2,-280(fp)
+                   an_exact_ir_valley_locs[k]=i;
+    8954:	e0bfb417 	ldw	r2,-304(fp)
+    8958:	1085883a 	add	r2,r2,r2
+    895c:	1085883a 	add	r2,r2,r2
+    8960:	e13fb204 	addi	r4,fp,-312
+    8964:	2085883a 	add	r2,r4,r2
+    8968:	10802604 	addi	r2,r2,152
+    896c:	e0ffb617 	ldw	r3,-296(fp)
+    8970:	10c00015 	stw	r3,0(r2)
+    for(k=0 ; k<n_npks ;k++){
+        un_only_once =1;
+        m=an_ir_valley_locs[k];
+        n_c_min= 16777216;//2^24;
+        if (m+5 <  BUFFER_SIZE-HAMMING_SIZE  && m-5 >0){
+            for(i= m-5;i<m+5; i++)
+    8974:	e0bfb617 	ldw	r2,-296(fp)
+    8978:	10800044 	addi	r2,r2,1
+    897c:	e0bfb615 	stw	r2,-296(fp)
+    8980:	e0bfc217 	ldw	r2,-248(fp)
+    8984:	10800144 	addi	r2,r2,5
+    8988:	e0ffb617 	ldw	r3,-296(fp)
+    898c:	18bfdd16 	blt	r3,r2,8904 <_gp+0xffff5f50>
+                       un_only_once =0;
+                   }
+                   n_c_min= an_x[i] ;
+                   an_exact_ir_valley_locs[k]=i;
+                }
+            if (un_only_once ==0)
+    8990:	e0bfb317 	ldw	r2,-308(fp)
+    8994:	1000031e 	bne	r2,zero,89a4 <maxim_heart_rate_and_oxygen_saturation+0x70c>
+                n_exact_ir_valley_locs_count ++ ;
+    8998:	e0bfb817 	ldw	r2,-288(fp)
+    899c:	10800044 	addi	r2,r2,1
+    89a0:	e0bfb815 	stw	r2,-288(fp)
+        an_y[k] =  pun_red_buffer[k] ;
+    }
+
+    // find precise min near an_ir_valley_locs
+    n_exact_ir_valley_locs_count =0;
+    for(k=0 ; k<n_npks ;k++){
+    89a4:	e0bfb417 	ldw	r2,-304(fp)
+    89a8:	10800044 	addi	r2,r2,1
+    89ac:	e0bfb415 	stw	r2,-304(fp)
+    89b0:	e0bfc817 	ldw	r2,-224(fp)
+    89b4:	e0ffb417 	ldw	r3,-304(fp)
+    89b8:	18bfbb16 	blt	r3,r2,88a8 <_gp+0xffff5ef4>
+                }
+            if (un_only_once ==0)
+                n_exact_ir_valley_locs_count ++ ;
+        }
+    }
+    if (n_exact_ir_valley_locs_count <2 ){
+    89bc:	e0bfb817 	ldw	r2,-288(fp)
+    89c0:	10800088 	cmpgei	r2,r2,2
+    89c4:	1000061e 	bne	r2,zero,89e0 <maxim_heart_rate_and_oxygen_saturation+0x748>
+       *pn_spo2 =  -999 ; // do not use SPO2 since signal ratio is out of range
+    89c8:	e0bffe17 	ldw	r2,-8(fp)
+    89cc:	00ff0644 	movi	r3,-999
+    89d0:	10c00015 	stw	r3,0(r2)
+       *pch_spo2_valid  = 0;
+    89d4:	e0800217 	ldw	r2,8(fp)
+    89d8:	10000005 	stb	zero,0(r2)
+       return;
+    89dc:	0001ee06 	br	9198 <maxim_heart_rate_and_oxygen_saturation+0xf00>
+    }
+    // 4 pt MA
+    for(k=0; k< BUFFER_SIZE-MA4_SIZE; k++){
+    89e0:	e03fb415 	stw	zero,-304(fp)
+    89e4:	00005d06 	br	8b5c <maxim_heart_rate_and_oxygen_saturation+0x8c4>
+        an_x[k]=( an_x[k]+an_x[k+1]+ an_x[k+2]+ an_x[k+3])/(alt_32)4;
+    89e8:	00800074 	movhi	r2,1
+    89ec:	10ab1704 	addi	r2,r2,-21412
+    89f0:	e0ffb417 	ldw	r3,-304(fp)
+    89f4:	18c7883a 	add	r3,r3,r3
+    89f8:	18c7883a 	add	r3,r3,r3
+    89fc:	10c5883a 	add	r2,r2,r3
+    8a00:	11000017 	ldw	r4,0(r2)
+    8a04:	e0bfb417 	ldw	r2,-304(fp)
+    8a08:	10c00044 	addi	r3,r2,1
+    8a0c:	00800074 	movhi	r2,1
+    8a10:	10ab1704 	addi	r2,r2,-21412
+    8a14:	18c7883a 	add	r3,r3,r3
+    8a18:	18c7883a 	add	r3,r3,r3
+    8a1c:	10c5883a 	add	r2,r2,r3
+    8a20:	10800017 	ldw	r2,0(r2)
+    8a24:	2089883a 	add	r4,r4,r2
+    8a28:	e0bfb417 	ldw	r2,-304(fp)
+    8a2c:	10c00084 	addi	r3,r2,2
+    8a30:	00800074 	movhi	r2,1
+    8a34:	10ab1704 	addi	r2,r2,-21412
+    8a38:	18c7883a 	add	r3,r3,r3
+    8a3c:	18c7883a 	add	r3,r3,r3
+    8a40:	10c5883a 	add	r2,r2,r3
+    8a44:	10800017 	ldw	r2,0(r2)
+    8a48:	2089883a 	add	r4,r4,r2
+    8a4c:	e0bfb417 	ldw	r2,-304(fp)
+    8a50:	10c000c4 	addi	r3,r2,3
+    8a54:	00800074 	movhi	r2,1
+    8a58:	10ab1704 	addi	r2,r2,-21412
+    8a5c:	18c7883a 	add	r3,r3,r3
+    8a60:	18c7883a 	add	r3,r3,r3
+    8a64:	10c5883a 	add	r2,r2,r3
+    8a68:	10800017 	ldw	r2,0(r2)
+    8a6c:	2085883a 	add	r2,r4,r2
+    8a70:	1000010e 	bge	r2,zero,8a78 <maxim_heart_rate_and_oxygen_saturation+0x7e0>
+    8a74:	108000c4 	addi	r2,r2,3
+    8a78:	1005d0ba 	srai	r2,r2,2
+    8a7c:	1009883a 	mov	r4,r2
+    8a80:	00800074 	movhi	r2,1
+    8a84:	10ab1704 	addi	r2,r2,-21412
+    8a88:	e0ffb417 	ldw	r3,-304(fp)
+    8a8c:	18c7883a 	add	r3,r3,r3
+    8a90:	18c7883a 	add	r3,r3,r3
+    8a94:	10c5883a 	add	r2,r2,r3
+    8a98:	11000015 	stw	r4,0(r2)
+        an_y[k]=( an_y[k]+an_y[k+1]+ an_y[k+2]+ an_y[k+3])/(alt_32)4;
+    8a9c:	00800074 	movhi	r2,1
+    8aa0:	10ab7b04 	addi	r2,r2,-21012
+    8aa4:	e0ffb417 	ldw	r3,-304(fp)
+    8aa8:	18c7883a 	add	r3,r3,r3
+    8aac:	18c7883a 	add	r3,r3,r3
+    8ab0:	10c5883a 	add	r2,r2,r3
+    8ab4:	11000017 	ldw	r4,0(r2)
+    8ab8:	e0bfb417 	ldw	r2,-304(fp)
+    8abc:	10c00044 	addi	r3,r2,1
+    8ac0:	00800074 	movhi	r2,1
+    8ac4:	10ab7b04 	addi	r2,r2,-21012
+    8ac8:	18c7883a 	add	r3,r3,r3
+    8acc:	18c7883a 	add	r3,r3,r3
+    8ad0:	10c5883a 	add	r2,r2,r3
+    8ad4:	10800017 	ldw	r2,0(r2)
+    8ad8:	2089883a 	add	r4,r4,r2
+    8adc:	e0bfb417 	ldw	r2,-304(fp)
+    8ae0:	10c00084 	addi	r3,r2,2
+    8ae4:	00800074 	movhi	r2,1
+    8ae8:	10ab7b04 	addi	r2,r2,-21012
+    8aec:	18c7883a 	add	r3,r3,r3
+    8af0:	18c7883a 	add	r3,r3,r3
+    8af4:	10c5883a 	add	r2,r2,r3
+    8af8:	10800017 	ldw	r2,0(r2)
+    8afc:	2089883a 	add	r4,r4,r2
+    8b00:	e0bfb417 	ldw	r2,-304(fp)
+    8b04:	10c000c4 	addi	r3,r2,3
+    8b08:	00800074 	movhi	r2,1
+    8b0c:	10ab7b04 	addi	r2,r2,-21012
+    8b10:	18c7883a 	add	r3,r3,r3
+    8b14:	18c7883a 	add	r3,r3,r3
+    8b18:	10c5883a 	add	r2,r2,r3
+    8b1c:	10800017 	ldw	r2,0(r2)
+    8b20:	2085883a 	add	r2,r4,r2
+    8b24:	1000010e 	bge	r2,zero,8b2c <maxim_heart_rate_and_oxygen_saturation+0x894>
+    8b28:	108000c4 	addi	r2,r2,3
+    8b2c:	1005d0ba 	srai	r2,r2,2
+    8b30:	1009883a 	mov	r4,r2
+    8b34:	00800074 	movhi	r2,1
+    8b38:	10ab7b04 	addi	r2,r2,-21012
+    8b3c:	e0ffb417 	ldw	r3,-304(fp)
+    8b40:	18c7883a 	add	r3,r3,r3
+    8b44:	18c7883a 	add	r3,r3,r3
+    8b48:	10c5883a 	add	r2,r2,r3
+    8b4c:	11000015 	stw	r4,0(r2)
+       *pn_spo2 =  -999 ; // do not use SPO2 since signal ratio is out of range
+       *pch_spo2_valid  = 0;
+       return;
+    }
+    // 4 pt MA
+    for(k=0; k< BUFFER_SIZE-MA4_SIZE; k++){
+    8b50:	e0bfb417 	ldw	r2,-304(fp)
+    8b54:	10800044 	addi	r2,r2,1
+    8b58:	e0bfb415 	stw	r2,-304(fp)
+    8b5c:	e0bfb417 	ldw	r2,-304(fp)
+    8b60:	10801810 	cmplti	r2,r2,96
+    8b64:	103fa01e 	bne	r2,zero,89e8 <_gp+0xffff6034>
+        an_y[k]=( an_y[k]+an_y[k+1]+ an_y[k+2]+ an_y[k+3])/(alt_32)4;
+    }
+
+    //using an_exact_ir_valley_locs , find ir-red DC andir-red AC for SPO2 calibration ratio
+    //finding AC/DC maximum of raw ir * red between two valley locations
+    n_ratio_average =0;
+    8b68:	e03fc015 	stw	zero,-256(fp)
+    n_i_ratio_count =0;
+    8b6c:	e03fb515 	stw	zero,-300(fp)
+
+    for(k=0; k< 5; k++) an_ratio[k]=0;
+    8b70:	e03fb415 	stw	zero,-304(fp)
+    8b74:	00000a06 	br	8ba0 <maxim_heart_rate_and_oxygen_saturation+0x908>
+    8b78:	e0bfb417 	ldw	r2,-304(fp)
+    8b7c:	1085883a 	add	r2,r2,r2
+    8b80:	1085883a 	add	r2,r2,r2
+    8b84:	e0ffb204 	addi	r3,fp,-312
+    8b88:	1885883a 	add	r2,r3,r2
+    8b8c:	10804404 	addi	r2,r2,272
+    8b90:	10000015 	stw	zero,0(r2)
+    8b94:	e0bfb417 	ldw	r2,-304(fp)
+    8b98:	10800044 	addi	r2,r2,1
+    8b9c:	e0bfb415 	stw	r2,-304(fp)
+    8ba0:	e0bfb417 	ldw	r2,-304(fp)
+    8ba4:	10800150 	cmplti	r2,r2,5
+    8ba8:	103ff31e 	bne	r2,zero,8b78 <_gp+0xffff61c4>
+    for (k=0; k< n_exact_ir_valley_locs_count; k++){
+    8bac:	e03fb415 	stw	zero,-304(fp)
+    8bb0:	00001206 	br	8bfc <maxim_heart_rate_and_oxygen_saturation+0x964>
+        if (an_exact_ir_valley_locs[k] > BUFFER_SIZE ){
+    8bb4:	e0bfb417 	ldw	r2,-304(fp)
+    8bb8:	1085883a 	add	r2,r2,r2
+    8bbc:	1085883a 	add	r2,r2,r2
+    8bc0:	e13fb204 	addi	r4,fp,-312
+    8bc4:	2085883a 	add	r2,r4,r2
+    8bc8:	10802604 	addi	r2,r2,152
+    8bcc:	10800017 	ldw	r2,0(r2)
+    8bd0:	10801950 	cmplti	r2,r2,101
+    8bd4:	1000061e 	bne	r2,zero,8bf0 <maxim_heart_rate_and_oxygen_saturation+0x958>
+            *pn_spo2 =  -999 ; // do not use SPO2 since valley loc is out of range
+    8bd8:	e0bffe17 	ldw	r2,-8(fp)
+    8bdc:	00ff0644 	movi	r3,-999
+    8be0:	10c00015 	stw	r3,0(r2)
+            *pch_spo2_valid  = 0;
+    8be4:	e0800217 	ldw	r2,8(fp)
+    8be8:	10000005 	stb	zero,0(r2)
+            return;
+    8bec:	00016a06 	br	9198 <maxim_heart_rate_and_oxygen_saturation+0xf00>
+    //finding AC/DC maximum of raw ir * red between two valley locations
+    n_ratio_average =0;
+    n_i_ratio_count =0;
+
+    for(k=0; k< 5; k++) an_ratio[k]=0;
+    for (k=0; k< n_exact_ir_valley_locs_count; k++){
+    8bf0:	e0bfb417 	ldw	r2,-304(fp)
+    8bf4:	10800044 	addi	r2,r2,1
+    8bf8:	e0bfb415 	stw	r2,-304(fp)
+    8bfc:	e0ffb417 	ldw	r3,-304(fp)
+    8c00:	e0bfb817 	ldw	r2,-288(fp)
+    8c04:	18bfeb16 	blt	r3,r2,8bb4 <_gp+0xffff6200>
+        }
+    }
+    // find max between two valley locations
+    // and use ratio betwen AC compoent of Ir & Red and DC compoent of Ir & Red for SPO2
+
+    for (k=0; k< n_exact_ir_valley_locs_count-1; k++){
+    8c08:	e03fb415 	stw	zero,-304(fp)
+    8c0c:	00011c06 	br	9080 <maxim_heart_rate_and_oxygen_saturation+0xde8>
+        n_y_dc_max= -16777216 ;
+    8c10:	00bfc034 	movhi	r2,65280
+    8c14:	e0bfbc15 	stw	r2,-272(fp)
+        n_x_dc_max= - 16777216;
+    8c18:	00bfc034 	movhi	r2,65280
+    8c1c:	e0bfbd15 	stw	r2,-268(fp)
+        if (an_exact_ir_valley_locs[k+1]-an_exact_ir_valley_locs[k] >10){
+    8c20:	e0bfb417 	ldw	r2,-304(fp)
+    8c24:	10800044 	addi	r2,r2,1
+    8c28:	1085883a 	add	r2,r2,r2
+    8c2c:	1085883a 	add	r2,r2,r2
+    8c30:	e0ffb204 	addi	r3,fp,-312
+    8c34:	1885883a 	add	r2,r3,r2
+    8c38:	10802604 	addi	r2,r2,152
+    8c3c:	10c00017 	ldw	r3,0(r2)
+    8c40:	e0bfb417 	ldw	r2,-304(fp)
+    8c44:	1085883a 	add	r2,r2,r2
+    8c48:	1085883a 	add	r2,r2,r2
+    8c4c:	e13fb204 	addi	r4,fp,-312
+    8c50:	2085883a 	add	r2,r4,r2
+    8c54:	10802604 	addi	r2,r2,152
+    8c58:	10800017 	ldw	r2,0(r2)
+    8c5c:	1885c83a 	sub	r2,r3,r2
+    8c60:	108002d0 	cmplti	r2,r2,11
+    8c64:	1001031e 	bne	r2,zero,9074 <maxim_heart_rate_and_oxygen_saturation+0xddc>
+            for (i=an_exact_ir_valley_locs[k]; i< an_exact_ir_valley_locs[k+1]; i++){
+    8c68:	e0bfb417 	ldw	r2,-304(fp)
+    8c6c:	1085883a 	add	r2,r2,r2
+    8c70:	1085883a 	add	r2,r2,r2
+    8c74:	e0ffb204 	addi	r3,fp,-312
+    8c78:	1885883a 	add	r2,r3,r2
+    8c7c:	10802604 	addi	r2,r2,152
+    8c80:	10800017 	ldw	r2,0(r2)
+    8c84:	e0bfb615 	stw	r2,-296(fp)
+    8c88:	00002906 	br	8d30 <maxim_heart_rate_and_oxygen_saturation+0xa98>
+                if (an_x[i]> n_x_dc_max) {n_x_dc_max =an_x[i];n_x_dc_max_idx =i; }
+    8c8c:	00800074 	movhi	r2,1
+    8c90:	10ab1704 	addi	r2,r2,-21412
+    8c94:	e0ffb617 	ldw	r3,-296(fp)
+    8c98:	18c7883a 	add	r3,r3,r3
+    8c9c:	18c7883a 	add	r3,r3,r3
+    8ca0:	10c5883a 	add	r2,r2,r3
+    8ca4:	10800017 	ldw	r2,0(r2)
+    8ca8:	e0ffbd17 	ldw	r3,-268(fp)
+    8cac:	18800a0e 	bge	r3,r2,8cd8 <maxim_heart_rate_and_oxygen_saturation+0xa40>
+    8cb0:	00800074 	movhi	r2,1
+    8cb4:	10ab1704 	addi	r2,r2,-21412
+    8cb8:	e0ffb617 	ldw	r3,-296(fp)
+    8cbc:	18c7883a 	add	r3,r3,r3
+    8cc0:	18c7883a 	add	r3,r3,r3
+    8cc4:	10c5883a 	add	r2,r2,r3
+    8cc8:	10800017 	ldw	r2,0(r2)
+    8ccc:	e0bfbd15 	stw	r2,-268(fp)
+    8cd0:	e0bfb617 	ldw	r2,-296(fp)
+    8cd4:	e0bfbf15 	stw	r2,-260(fp)
+                if (an_y[i]> n_y_dc_max) {n_y_dc_max =an_y[i];n_y_dc_max_idx=i;}
+    8cd8:	00800074 	movhi	r2,1
+    8cdc:	10ab7b04 	addi	r2,r2,-21012
+    8ce0:	e0ffb617 	ldw	r3,-296(fp)
+    8ce4:	18c7883a 	add	r3,r3,r3
+    8ce8:	18c7883a 	add	r3,r3,r3
+    8cec:	10c5883a 	add	r2,r2,r3
+    8cf0:	10800017 	ldw	r2,0(r2)
+    8cf4:	e0ffbc17 	ldw	r3,-272(fp)
+    8cf8:	18800a0e 	bge	r3,r2,8d24 <maxim_heart_rate_and_oxygen_saturation+0xa8c>
+    8cfc:	00800074 	movhi	r2,1
+    8d00:	10ab7b04 	addi	r2,r2,-21012
+    8d04:	e0ffb617 	ldw	r3,-296(fp)
+    8d08:	18c7883a 	add	r3,r3,r3
+    8d0c:	18c7883a 	add	r3,r3,r3
+    8d10:	10c5883a 	add	r2,r2,r3
+    8d14:	10800017 	ldw	r2,0(r2)
+    8d18:	e0bfbc15 	stw	r2,-272(fp)
+    8d1c:	e0bfb617 	ldw	r2,-296(fp)
+    8d20:	e0bfbe15 	stw	r2,-264(fp)
+
+    for (k=0; k< n_exact_ir_valley_locs_count-1; k++){
+        n_y_dc_max= -16777216 ;
+        n_x_dc_max= - 16777216;
+        if (an_exact_ir_valley_locs[k+1]-an_exact_ir_valley_locs[k] >10){
+            for (i=an_exact_ir_valley_locs[k]; i< an_exact_ir_valley_locs[k+1]; i++){
+    8d24:	e0bfb617 	ldw	r2,-296(fp)
+    8d28:	10800044 	addi	r2,r2,1
+    8d2c:	e0bfb615 	stw	r2,-296(fp)
+    8d30:	e0bfb417 	ldw	r2,-304(fp)
+    8d34:	10800044 	addi	r2,r2,1
+    8d38:	1085883a 	add	r2,r2,r2
+    8d3c:	1085883a 	add	r2,r2,r2
+    8d40:	e13fb204 	addi	r4,fp,-312
+    8d44:	2085883a 	add	r2,r4,r2
+    8d48:	10802604 	addi	r2,r2,152
+    8d4c:	10800017 	ldw	r2,0(r2)
+    8d50:	e0ffb617 	ldw	r3,-296(fp)
+    8d54:	18bfcd16 	blt	r3,r2,8c8c <_gp+0xffff62d8>
+                if (an_x[i]> n_x_dc_max) {n_x_dc_max =an_x[i];n_x_dc_max_idx =i; }
+                if (an_y[i]> n_y_dc_max) {n_y_dc_max =an_y[i];n_y_dc_max_idx=i;}
+            }
+            n_y_ac= (an_y[an_exact_ir_valley_locs[k+1]] - an_y[an_exact_ir_valley_locs[k] ] )*(n_y_dc_max_idx -an_exact_ir_valley_locs[k]); //red
+    8d58:	e0bfb417 	ldw	r2,-304(fp)
+    8d5c:	10800044 	addi	r2,r2,1
+    8d60:	1085883a 	add	r2,r2,r2
+    8d64:	1085883a 	add	r2,r2,r2
+    8d68:	e0ffb204 	addi	r3,fp,-312
+    8d6c:	1885883a 	add	r2,r3,r2
+    8d70:	10802604 	addi	r2,r2,152
+    8d74:	10c00017 	ldw	r3,0(r2)
+    8d78:	00800074 	movhi	r2,1
+    8d7c:	10ab7b04 	addi	r2,r2,-21012
+    8d80:	18c7883a 	add	r3,r3,r3
+    8d84:	18c7883a 	add	r3,r3,r3
+    8d88:	10c5883a 	add	r2,r2,r3
+    8d8c:	11000017 	ldw	r4,0(r2)
+    8d90:	e0bfb417 	ldw	r2,-304(fp)
+    8d94:	1085883a 	add	r2,r2,r2
+    8d98:	1085883a 	add	r2,r2,r2
+    8d9c:	e0ffb204 	addi	r3,fp,-312
+    8da0:	1885883a 	add	r2,r3,r2
+    8da4:	10802604 	addi	r2,r2,152
+    8da8:	10c00017 	ldw	r3,0(r2)
+    8dac:	00800074 	movhi	r2,1
+    8db0:	10ab7b04 	addi	r2,r2,-21012
+    8db4:	18c7883a 	add	r3,r3,r3
+    8db8:	18c7883a 	add	r3,r3,r3
+    8dbc:	10c5883a 	add	r2,r2,r3
+    8dc0:	10800017 	ldw	r2,0(r2)
+    8dc4:	2087c83a 	sub	r3,r4,r2
+    8dc8:	e0bfb417 	ldw	r2,-304(fp)
+    8dcc:	1085883a 	add	r2,r2,r2
+    8dd0:	1085883a 	add	r2,r2,r2
+    8dd4:	e13fb204 	addi	r4,fp,-312
+    8dd8:	2085883a 	add	r2,r4,r2
+    8ddc:	10802604 	addi	r2,r2,152
+    8de0:	10800017 	ldw	r2,0(r2)
+    8de4:	e13fbe17 	ldw	r4,-264(fp)
+    8de8:	2085c83a 	sub	r2,r4,r2
+    8dec:	1885383a 	mul	r2,r3,r2
+    8df0:	e0bfc315 	stw	r2,-244(fp)
+            n_y_ac=  an_y[an_exact_ir_valley_locs[k]] + n_y_ac/ (an_exact_ir_valley_locs[k+1] - an_exact_ir_valley_locs[k])  ;
+    8df4:	e0bfb417 	ldw	r2,-304(fp)
+    8df8:	1085883a 	add	r2,r2,r2
+    8dfc:	1085883a 	add	r2,r2,r2
+    8e00:	e0ffb204 	addi	r3,fp,-312
+    8e04:	1885883a 	add	r2,r3,r2
+    8e08:	10802604 	addi	r2,r2,152
+    8e0c:	10c00017 	ldw	r3,0(r2)
+    8e10:	00800074 	movhi	r2,1
+    8e14:	10ab7b04 	addi	r2,r2,-21012
+    8e18:	18c7883a 	add	r3,r3,r3
+    8e1c:	18c7883a 	add	r3,r3,r3
+    8e20:	10c5883a 	add	r2,r2,r3
+    8e24:	14000017 	ldw	r16,0(r2)
+    8e28:	e0bfb417 	ldw	r2,-304(fp)
+    8e2c:	10800044 	addi	r2,r2,1
+    8e30:	1085883a 	add	r2,r2,r2
+    8e34:	1085883a 	add	r2,r2,r2
+    8e38:	e13fb204 	addi	r4,fp,-312
+    8e3c:	2085883a 	add	r2,r4,r2
+    8e40:	10802604 	addi	r2,r2,152
+    8e44:	10c00017 	ldw	r3,0(r2)
+    8e48:	e0bfb417 	ldw	r2,-304(fp)
+    8e4c:	1085883a 	add	r2,r2,r2
+    8e50:	1085883a 	add	r2,r2,r2
+    8e54:	e13fb204 	addi	r4,fp,-312
+    8e58:	2085883a 	add	r2,r4,r2
+    8e5c:	10802604 	addi	r2,r2,152
+    8e60:	10800017 	ldw	r2,0(r2)
+    8e64:	1885c83a 	sub	r2,r3,r2
+    8e68:	100b883a 	mov	r5,r2
+    8e6c:	e13fc317 	ldw	r4,-244(fp)
+    8e70:	000981c0 	call	981c <__divsi3>
+    8e74:	8085883a 	add	r2,r16,r2
+    8e78:	e0bfc315 	stw	r2,-244(fp)
+
+
+            n_y_ac=  an_y[n_y_dc_max_idx] - n_y_ac;    // subracting linear DC compoenents from raw
+    8e7c:	00800074 	movhi	r2,1
+    8e80:	10ab7b04 	addi	r2,r2,-21012
+    8e84:	e0ffbe17 	ldw	r3,-264(fp)
+    8e88:	18c7883a 	add	r3,r3,r3
+    8e8c:	18c7883a 	add	r3,r3,r3
+    8e90:	10c5883a 	add	r2,r2,r3
+    8e94:	10c00017 	ldw	r3,0(r2)
+    8e98:	e0bfc317 	ldw	r2,-244(fp)
+    8e9c:	1885c83a 	sub	r2,r3,r2
+    8ea0:	e0bfc315 	stw	r2,-244(fp)
+            n_x_ac= (an_x[an_exact_ir_valley_locs[k+1]] - an_x[an_exact_ir_valley_locs[k] ] )*(n_x_dc_max_idx -an_exact_ir_valley_locs[k]); // ir
+    8ea4:	e0bfb417 	ldw	r2,-304(fp)
+    8ea8:	10800044 	addi	r2,r2,1
+    8eac:	1085883a 	add	r2,r2,r2
+    8eb0:	1085883a 	add	r2,r2,r2
+    8eb4:	e0ffb204 	addi	r3,fp,-312
+    8eb8:	1885883a 	add	r2,r3,r2
+    8ebc:	10802604 	addi	r2,r2,152
+    8ec0:	10c00017 	ldw	r3,0(r2)
+    8ec4:	00800074 	movhi	r2,1
+    8ec8:	10ab1704 	addi	r2,r2,-21412
+    8ecc:	18c7883a 	add	r3,r3,r3
+    8ed0:	18c7883a 	add	r3,r3,r3
+    8ed4:	10c5883a 	add	r2,r2,r3
+    8ed8:	11000017 	ldw	r4,0(r2)
+    8edc:	e0bfb417 	ldw	r2,-304(fp)
+    8ee0:	1085883a 	add	r2,r2,r2
+    8ee4:	1085883a 	add	r2,r2,r2
+    8ee8:	e0ffb204 	addi	r3,fp,-312
+    8eec:	1885883a 	add	r2,r3,r2
+    8ef0:	10802604 	addi	r2,r2,152
+    8ef4:	10c00017 	ldw	r3,0(r2)
+    8ef8:	00800074 	movhi	r2,1
+    8efc:	10ab1704 	addi	r2,r2,-21412
+    8f00:	18c7883a 	add	r3,r3,r3
+    8f04:	18c7883a 	add	r3,r3,r3
+    8f08:	10c5883a 	add	r2,r2,r3
+    8f0c:	10800017 	ldw	r2,0(r2)
+    8f10:	2087c83a 	sub	r3,r4,r2
+    8f14:	e0bfb417 	ldw	r2,-304(fp)
+    8f18:	1085883a 	add	r2,r2,r2
+    8f1c:	1085883a 	add	r2,r2,r2
+    8f20:	e13fb204 	addi	r4,fp,-312
+    8f24:	2085883a 	add	r2,r4,r2
+    8f28:	10802604 	addi	r2,r2,152
+    8f2c:	10800017 	ldw	r2,0(r2)
+    8f30:	e13fbf17 	ldw	r4,-260(fp)
+    8f34:	2085c83a 	sub	r2,r4,r2
+    8f38:	1885383a 	mul	r2,r3,r2
+    8f3c:	e0bfc415 	stw	r2,-240(fp)
+            n_x_ac=  an_x[an_exact_ir_valley_locs[k]] + n_x_ac/ (an_exact_ir_valley_locs[k+1] - an_exact_ir_valley_locs[k]);
+    8f40:	e0bfb417 	ldw	r2,-304(fp)
+    8f44:	1085883a 	add	r2,r2,r2
+    8f48:	1085883a 	add	r2,r2,r2
+    8f4c:	e0ffb204 	addi	r3,fp,-312
+    8f50:	1885883a 	add	r2,r3,r2
+    8f54:	10802604 	addi	r2,r2,152
+    8f58:	10c00017 	ldw	r3,0(r2)
+    8f5c:	00800074 	movhi	r2,1
+    8f60:	10ab1704 	addi	r2,r2,-21412
+    8f64:	18c7883a 	add	r3,r3,r3
+    8f68:	18c7883a 	add	r3,r3,r3
+    8f6c:	10c5883a 	add	r2,r2,r3
+    8f70:	14000017 	ldw	r16,0(r2)
+    8f74:	e0bfb417 	ldw	r2,-304(fp)
+    8f78:	10800044 	addi	r2,r2,1
+    8f7c:	1085883a 	add	r2,r2,r2
+    8f80:	1085883a 	add	r2,r2,r2
+    8f84:	e13fb204 	addi	r4,fp,-312
+    8f88:	2085883a 	add	r2,r4,r2
+    8f8c:	10802604 	addi	r2,r2,152
+    8f90:	10c00017 	ldw	r3,0(r2)
+    8f94:	e0bfb417 	ldw	r2,-304(fp)
+    8f98:	1085883a 	add	r2,r2,r2
+    8f9c:	1085883a 	add	r2,r2,r2
+    8fa0:	e13fb204 	addi	r4,fp,-312
+    8fa4:	2085883a 	add	r2,r4,r2
+    8fa8:	10802604 	addi	r2,r2,152
+    8fac:	10800017 	ldw	r2,0(r2)
+    8fb0:	1885c83a 	sub	r2,r3,r2
+    8fb4:	100b883a 	mov	r5,r2
+    8fb8:	e13fc417 	ldw	r4,-240(fp)
+    8fbc:	000981c0 	call	981c <__divsi3>
+    8fc0:	8085883a 	add	r2,r16,r2
+    8fc4:	e0bfc415 	stw	r2,-240(fp)
+            n_x_ac=  an_x[n_y_dc_max_idx] - n_x_ac;      // subracting linear DC compoenents from raw
+    8fc8:	00800074 	movhi	r2,1
+    8fcc:	10ab1704 	addi	r2,r2,-21412
+    8fd0:	e0ffbe17 	ldw	r3,-264(fp)
+    8fd4:	18c7883a 	add	r3,r3,r3
+    8fd8:	18c7883a 	add	r3,r3,r3
+    8fdc:	10c5883a 	add	r2,r2,r3
+    8fe0:	10c00017 	ldw	r3,0(r2)
+    8fe4:	e0bfc417 	ldw	r2,-240(fp)
+    8fe8:	1885c83a 	sub	r2,r3,r2
+    8fec:	e0bfc415 	stw	r2,-240(fp)
+            n_nume=( n_y_ac *n_x_dc_max)>>7 ; //prepare X100 to preserve floating value
+    8ff0:	e0ffc317 	ldw	r3,-244(fp)
+    8ff4:	e0bfbd17 	ldw	r2,-268(fp)
+    8ff8:	1885383a 	mul	r2,r3,r2
+    8ffc:	1005d1fa 	srai	r2,r2,7
+    9000:	e0bfc515 	stw	r2,-236(fp)
+            n_denom= ( n_x_ac *n_y_dc_max)>>7;
+    9004:	e0ffc417 	ldw	r3,-240(fp)
+    9008:	e0bfbc17 	ldw	r2,-272(fp)
+    900c:	1885383a 	mul	r2,r3,r2
+    9010:	1005d1fa 	srai	r2,r2,7
+    9014:	e0bfc115 	stw	r2,-252(fp)
+            if (n_denom>0  && n_i_ratio_count <5 &&  n_nume != 0)
+    9018:	e0bfc117 	ldw	r2,-252(fp)
+    901c:	0080150e 	bge	zero,r2,9074 <maxim_heart_rate_and_oxygen_saturation+0xddc>
+    9020:	e0bfb517 	ldw	r2,-300(fp)
+    9024:	10800148 	cmpgei	r2,r2,5
+    9028:	1000121e 	bne	r2,zero,9074 <maxim_heart_rate_and_oxygen_saturation+0xddc>
+    902c:	e0bfc517 	ldw	r2,-236(fp)
+    9030:	10001026 	beq	r2,zero,9074 <maxim_heart_rate_and_oxygen_saturation+0xddc>
+            {
+                an_ratio[n_i_ratio_count]= (n_nume*100)/n_denom ; //formular is ( n_y_ac *n_x_dc_max) / ( n_x_ac *n_y_dc_max) ;
+    9034:	e0bfc517 	ldw	r2,-236(fp)
+    9038:	10801924 	muli	r2,r2,100
+    903c:	e17fc117 	ldw	r5,-252(fp)
+    9040:	1009883a 	mov	r4,r2
+    9044:	000981c0 	call	981c <__divsi3>
+    9048:	1007883a 	mov	r3,r2
+    904c:	e0bfb517 	ldw	r2,-300(fp)
+    9050:	1085883a 	add	r2,r2,r2
+    9054:	1085883a 	add	r2,r2,r2
+    9058:	e13fb204 	addi	r4,fp,-312
+    905c:	2085883a 	add	r2,r4,r2
+    9060:	10804404 	addi	r2,r2,272
+    9064:	10c00015 	stw	r3,0(r2)
+                n_i_ratio_count++;
+    9068:	e0bfb517 	ldw	r2,-300(fp)
+    906c:	10800044 	addi	r2,r2,1
+    9070:	e0bfb515 	stw	r2,-300(fp)
+        }
+    }
+    // find max between two valley locations
+    // and use ratio betwen AC compoent of Ir & Red and DC compoent of Ir & Red for SPO2
+
+    for (k=0; k< n_exact_ir_valley_locs_count-1; k++){
+    9074:	e0bfb417 	ldw	r2,-304(fp)
+    9078:	10800044 	addi	r2,r2,1
+    907c:	e0bfb415 	stw	r2,-304(fp)
+    9080:	e0bfb817 	ldw	r2,-288(fp)
+    9084:	10bfffc4 	addi	r2,r2,-1
+    9088:	e0ffb417 	ldw	r3,-304(fp)
+    908c:	18bee016 	blt	r3,r2,8c10 <_gp+0xffff625c>
+                n_i_ratio_count++;
+            }
+        }
+    }
+
+    maxim_sort_ascend(an_ratio, n_i_ratio_count);
+    9090:	e0bff604 	addi	r2,fp,-40
+    9094:	e17fb517 	ldw	r5,-300(fp)
+    9098:	1009883a 	mov	r4,r2
+    909c:	00095a80 	call	95a8 <maxim_sort_ascend>
+    n_middle_idx= n_i_ratio_count/2;
+    90a0:	e0bfb517 	ldw	r2,-300(fp)
+    90a4:	1006d7fa 	srli	r3,r2,31
+    90a8:	1885883a 	add	r2,r3,r2
+    90ac:	1005d07a 	srai	r2,r2,1
+    90b0:	e0bfc615 	stw	r2,-232(fp)
+
+    if (n_middle_idx >1)
+    90b4:	e0bfc617 	ldw	r2,-232(fp)
+    90b8:	10800090 	cmplti	r2,r2,2
+    90bc:	1000151e 	bne	r2,zero,9114 <maxim_heart_rate_and_oxygen_saturation+0xe7c>
+        n_ratio_average =( an_ratio[n_middle_idx-1] +an_ratio[n_middle_idx])/2; // use median
+    90c0:	e0bfc617 	ldw	r2,-232(fp)
+    90c4:	10bfffc4 	addi	r2,r2,-1
+    90c8:	1085883a 	add	r2,r2,r2
+    90cc:	1085883a 	add	r2,r2,r2
+    90d0:	e0ffb204 	addi	r3,fp,-312
+    90d4:	1885883a 	add	r2,r3,r2
+    90d8:	10804404 	addi	r2,r2,272
+    90dc:	10c00017 	ldw	r3,0(r2)
+    90e0:	e0bfc617 	ldw	r2,-232(fp)
+    90e4:	1085883a 	add	r2,r2,r2
+    90e8:	1085883a 	add	r2,r2,r2
+    90ec:	e13fb204 	addi	r4,fp,-312
+    90f0:	2085883a 	add	r2,r4,r2
+    90f4:	10804404 	addi	r2,r2,272
+    90f8:	10800017 	ldw	r2,0(r2)
+    90fc:	1885883a 	add	r2,r3,r2
+    9100:	1006d7fa 	srli	r3,r2,31
+    9104:	1885883a 	add	r2,r3,r2
+    9108:	1005d07a 	srai	r2,r2,1
+    910c:	e0bfc015 	stw	r2,-256(fp)
+    9110:	00000806 	br	9134 <maxim_heart_rate_and_oxygen_saturation+0xe9c>
+    else
+        n_ratio_average = an_ratio[n_middle_idx ];
+    9114:	e0bfc617 	ldw	r2,-232(fp)
+    9118:	1085883a 	add	r2,r2,r2
+    911c:	1085883a 	add	r2,r2,r2
+    9120:	e0ffb204 	addi	r3,fp,-312
+    9124:	1885883a 	add	r2,r3,r2
+    9128:	10804404 	addi	r2,r2,272
+    912c:	10800017 	ldw	r2,0(r2)
+    9130:	e0bfc015 	stw	r2,-256(fp)
+
+    if( n_ratio_average>2 && n_ratio_average <184){
+    9134:	e0bfc017 	ldw	r2,-256(fp)
+    9138:	108000d0 	cmplti	r2,r2,3
+    913c:	1000111e 	bne	r2,zero,9184 <maxim_heart_rate_and_oxygen_saturation+0xeec>
+    9140:	e0bfc017 	ldw	r2,-256(fp)
+    9144:	10802e08 	cmpgei	r2,r2,184
+    9148:	10000e1e 	bne	r2,zero,9184 <maxim_heart_rate_and_oxygen_saturation+0xeec>
+        n_spo2_calc= uch_spo2_table[n_ratio_average] ;
+    914c:	00800074 	movhi	r2,1
+    9150:	10a9ff84 	addi	r2,r2,-22530
+    9154:	e0ffc017 	ldw	r3,-256(fp)
+    9158:	10c5883a 	add	r2,r2,r3
+    915c:	10800003 	ldbu	r2,0(r2)
+    9160:	10803fcc 	andi	r2,r2,255
+    9164:	e0bfc715 	stw	r2,-228(fp)
+        *pn_spo2 = n_spo2_calc ;
+    9168:	e0bffe17 	ldw	r2,-8(fp)
+    916c:	e0ffc717 	ldw	r3,-228(fp)
+    9170:	10c00015 	stw	r3,0(r2)
+        *pch_spo2_valid  = 1;//  float_SPO2 =  -45.060*n_ratio_average* n_ratio_average/10000 + 30.354 *n_ratio_average/100 + 94.845 ;  // for comparison with table
+    9174:	e0800217 	ldw	r2,8(fp)
+    9178:	00c00044 	movi	r3,1
+    917c:	10c00005 	stb	r3,0(r2)
+    9180:	00000506 	br	9198 <maxim_heart_rate_and_oxygen_saturation+0xf00>
+    }
+    else{
+        *pn_spo2 =  -999 ; // do not use SPO2 since signal ratio is out of range
+    9184:	e0bffe17 	ldw	r2,-8(fp)
+    9188:	00ff0644 	movi	r3,-999
+    918c:	10c00015 	stw	r3,0(r2)
+        *pch_spo2_valid  = 0;
+    9190:	e0800217 	ldw	r2,8(fp)
+    9194:	10000005 	stb	zero,0(r2)
+    }
+}
+    9198:	e6ffff04 	addi	sp,fp,-4
+    919c:	dfc00217 	ldw	ra,8(sp)
+    91a0:	df000117 	ldw	fp,4(sp)
+    91a4:	dc000017 	ldw	r16,0(sp)
+    91a8:	dec00304 	addi	sp,sp,12
+    91ac:	f800283a 	ret
+
+000091b0 <maxim_find_peaks>:
+
+
+
+void maxim_find_peaks(alt_32 *pn_locs, alt_32 *pn_npks, alt_32 *pn_x, alt_32 n_size, alt_32 n_min_height, alt_32 n_min_distance, alt_32 n_max_num)
+
+{
+    91b0:	defff904 	addi	sp,sp,-28
+    91b4:	dfc00615 	stw	ra,24(sp)
+    91b8:	df000515 	stw	fp,20(sp)
+    91bc:	df000504 	addi	fp,sp,20
+    91c0:	e13ffc15 	stw	r4,-16(fp)
+    91c4:	e17ffd15 	stw	r5,-12(fp)
+    91c8:	e1bffe15 	stw	r6,-8(fp)
+    91cc:	e1ffff15 	stw	r7,-4(fp)
+    maxim_peaks_above_min_height( pn_locs, pn_npks, pn_x, n_size, n_min_height );
+    91d0:	e0800217 	ldw	r2,8(fp)
+    91d4:	d8800015 	stw	r2,0(sp)
+    91d8:	e1ffff17 	ldw	r7,-4(fp)
+    91dc:	e1bffe17 	ldw	r6,-8(fp)
+    91e0:	e17ffd17 	ldw	r5,-12(fp)
+    91e4:	e13ffc17 	ldw	r4,-16(fp)
+    91e8:	00092340 	call	9234 <maxim_peaks_above_min_height>
+    maxim_remove_close_peaks( pn_locs, pn_npks, pn_x, n_min_distance );
+    91ec:	e1c00317 	ldw	r7,12(fp)
+    91f0:	e1bffe17 	ldw	r6,-8(fp)
+    91f4:	e17ffd17 	ldw	r5,-12(fp)
+    91f8:	e13ffc17 	ldw	r4,-16(fp)
+    91fc:	00094200 	call	9420 <maxim_remove_close_peaks>
+    *pn_npks = min( *pn_npks, n_max_num );
+    9200:	e0bffd17 	ldw	r2,-12(fp)
+    9204:	10800017 	ldw	r2,0(r2)
+    9208:	e0c00417 	ldw	r3,16(fp)
+    920c:	1880010e 	bge	r3,r2,9214 <maxim_find_peaks+0x64>
+    9210:	1805883a 	mov	r2,r3
+    9214:	e0fffd17 	ldw	r3,-12(fp)
+    9218:	18800015 	stw	r2,0(r3)
+}
+    921c:	0001883a 	nop
+    9220:	e037883a 	mov	sp,fp
+    9224:	dfc00117 	ldw	ra,4(sp)
+    9228:	df000017 	ldw	fp,0(sp)
+    922c:	dec00204 	addi	sp,sp,8
+    9230:	f800283a 	ret
+
+00009234 <maxim_peaks_above_min_height>:
+
+void maxim_peaks_above_min_height(alt_32 *pn_locs, alt_32 *pn_npks, alt_32  *pn_x, alt_32 n_size, alt_32 n_min_height)
+
+{
+    9234:	defff904 	addi	sp,sp,-28
+    9238:	df000615 	stw	fp,24(sp)
+    923c:	df000604 	addi	fp,sp,24
+    9240:	e13ffc15 	stw	r4,-16(fp)
+    9244:	e17ffd15 	stw	r5,-12(fp)
+    9248:	e1bffe15 	stw	r6,-8(fp)
+    924c:	e1ffff15 	stw	r7,-4(fp)
+	alt_32 i = 1, n_width;
+    9250:	00800044 	movi	r2,1
+    9254:	e0bffa15 	stw	r2,-24(fp)
+    *pn_npks = 0;
+    9258:	e0bffd17 	ldw	r2,-12(fp)
+    925c:	10000015 	stw	zero,0(r2)
+
+    while (i < n_size-1){
+    9260:	00006606 	br	93fc <maxim_peaks_above_min_height+0x1c8>
+        if (pn_x[i] > n_min_height && pn_x[i] > pn_x[i-1]){            // find left edge of potential peaks
+    9264:	e0bffa17 	ldw	r2,-24(fp)
+    9268:	1085883a 	add	r2,r2,r2
+    926c:	1085883a 	add	r2,r2,r2
+    9270:	1007883a 	mov	r3,r2
+    9274:	e0bffe17 	ldw	r2,-8(fp)
+    9278:	10c5883a 	add	r2,r2,r3
+    927c:	10800017 	ldw	r2,0(r2)
+    9280:	e0c00117 	ldw	r3,4(fp)
+    9284:	18805a0e 	bge	r3,r2,93f0 <maxim_peaks_above_min_height+0x1bc>
+    9288:	e0bffa17 	ldw	r2,-24(fp)
+    928c:	1085883a 	add	r2,r2,r2
+    9290:	1085883a 	add	r2,r2,r2
+    9294:	1007883a 	mov	r3,r2
+    9298:	e0bffe17 	ldw	r2,-8(fp)
+    929c:	10c5883a 	add	r2,r2,r3
+    92a0:	10c00017 	ldw	r3,0(r2)
+    92a4:	e13ffa17 	ldw	r4,-24(fp)
+    92a8:	00900034 	movhi	r2,16384
+    92ac:	10bfffc4 	addi	r2,r2,-1
+    92b0:	2085883a 	add	r2,r4,r2
+    92b4:	1085883a 	add	r2,r2,r2
+    92b8:	1085883a 	add	r2,r2,r2
+    92bc:	1009883a 	mov	r4,r2
+    92c0:	e0bffe17 	ldw	r2,-8(fp)
+    92c4:	1105883a 	add	r2,r2,r4
+    92c8:	10800017 	ldw	r2,0(r2)
+    92cc:	10c0480e 	bge	r2,r3,93f0 <maxim_peaks_above_min_height+0x1bc>
+            n_width = 1;
+    92d0:	00800044 	movi	r2,1
+    92d4:	e0bffb15 	stw	r2,-20(fp)
+            while (i+n_width < n_size && pn_x[i] == pn_x[i+n_width])    // find flat peaks
+    92d8:	00000306 	br	92e8 <maxim_peaks_above_min_height+0xb4>
+                n_width++;
+    92dc:	e0bffb17 	ldw	r2,-20(fp)
+    92e0:	10800044 	addi	r2,r2,1
+    92e4:	e0bffb15 	stw	r2,-20(fp)
+    *pn_npks = 0;
+
+    while (i < n_size-1){
+        if (pn_x[i] > n_min_height && pn_x[i] > pn_x[i-1]){            // find left edge of potential peaks
+            n_width = 1;
+            while (i+n_width < n_size && pn_x[i] == pn_x[i+n_width])    // find flat peaks
+    92e8:	e0fffa17 	ldw	r3,-24(fp)
+    92ec:	e0bffb17 	ldw	r2,-20(fp)
+    92f0:	1887883a 	add	r3,r3,r2
+    92f4:	e0bfff17 	ldw	r2,-4(fp)
+    92f8:	1880110e 	bge	r3,r2,9340 <maxim_peaks_above_min_height+0x10c>
+    92fc:	e0bffa17 	ldw	r2,-24(fp)
+    9300:	1085883a 	add	r2,r2,r2
+    9304:	1085883a 	add	r2,r2,r2
+    9308:	1007883a 	mov	r3,r2
+    930c:	e0bffe17 	ldw	r2,-8(fp)
+    9310:	10c5883a 	add	r2,r2,r3
+    9314:	10c00017 	ldw	r3,0(r2)
+    9318:	e13ffa17 	ldw	r4,-24(fp)
+    931c:	e0bffb17 	ldw	r2,-20(fp)
+    9320:	2085883a 	add	r2,r4,r2
+    9324:	1085883a 	add	r2,r2,r2
+    9328:	1085883a 	add	r2,r2,r2
+    932c:	1009883a 	mov	r4,r2
+    9330:	e0bffe17 	ldw	r2,-8(fp)
+    9334:	1105883a 	add	r2,r2,r4
+    9338:	10800017 	ldw	r2,0(r2)
+    933c:	18bfe726 	beq	r3,r2,92dc <_gp+0xffff6928>
+                n_width++;
+            if (pn_x[i] > pn_x[i+n_width] && (*pn_npks) < 15 ){                            // find right edge of peaks
+    9340:	e0bffa17 	ldw	r2,-24(fp)
+    9344:	1085883a 	add	r2,r2,r2
+    9348:	1085883a 	add	r2,r2,r2
+    934c:	1007883a 	mov	r3,r2
+    9350:	e0bffe17 	ldw	r2,-8(fp)
+    9354:	10c5883a 	add	r2,r2,r3
+    9358:	10c00017 	ldw	r3,0(r2)
+    935c:	e13ffa17 	ldw	r4,-24(fp)
+    9360:	e0bffb17 	ldw	r2,-20(fp)
+    9364:	2085883a 	add	r2,r4,r2
+    9368:	1085883a 	add	r2,r2,r2
+    936c:	1085883a 	add	r2,r2,r2
+    9370:	1009883a 	mov	r4,r2
+    9374:	e0bffe17 	ldw	r2,-8(fp)
+    9378:	1105883a 	add	r2,r2,r4
+    937c:	10800017 	ldw	r2,0(r2)
+    9380:	10c0160e 	bge	r2,r3,93dc <maxim_peaks_above_min_height+0x1a8>
+    9384:	e0bffd17 	ldw	r2,-12(fp)
+    9388:	10800017 	ldw	r2,0(r2)
+    938c:	108003c8 	cmpgei	r2,r2,15
+    9390:	1000121e 	bne	r2,zero,93dc <maxim_peaks_above_min_height+0x1a8>
+                pn_locs[(*pn_npks)++] = i;
+    9394:	e0bffd17 	ldw	r2,-12(fp)
+    9398:	10800017 	ldw	r2,0(r2)
+    939c:	11000044 	addi	r4,r2,1
+    93a0:	e0fffd17 	ldw	r3,-12(fp)
+    93a4:	19000015 	stw	r4,0(r3)
+    93a8:	1085883a 	add	r2,r2,r2
+    93ac:	1085883a 	add	r2,r2,r2
+    93b0:	1007883a 	mov	r3,r2
+    93b4:	e0bffc17 	ldw	r2,-16(fp)
+    93b8:	10c5883a 	add	r2,r2,r3
+    93bc:	e0fffa17 	ldw	r3,-24(fp)
+    93c0:	10c00015 	stw	r3,0(r2)
+                // for flat peaks, peak location is left edge
+                i += n_width+1;
+    93c4:	e0bffb17 	ldw	r2,-20(fp)
+    93c8:	10800044 	addi	r2,r2,1
+    93cc:	e0fffa17 	ldw	r3,-24(fp)
+    93d0:	1885883a 	add	r2,r3,r2
+    93d4:	e0bffa15 	stw	r2,-24(fp)
+    93d8:	00000406 	br	93ec <maxim_peaks_above_min_height+0x1b8>
+            }
+            else
+                i += n_width;
+    93dc:	e0fffa17 	ldw	r3,-24(fp)
+    93e0:	e0bffb17 	ldw	r2,-20(fp)
+    93e4:	1885883a 	add	r2,r3,r2
+    93e8:	e0bffa15 	stw	r2,-24(fp)
+    while (i < n_size-1){
+        if (pn_x[i] > n_min_height && pn_x[i] > pn_x[i-1]){            // find left edge of potential peaks
+            n_width = 1;
+            while (i+n_width < n_size && pn_x[i] == pn_x[i+n_width])    // find flat peaks
+                n_width++;
+            if (pn_x[i] > pn_x[i+n_width] && (*pn_npks) < 15 ){                            // find right edge of peaks
+    93ec:	00000306 	br	93fc <maxim_peaks_above_min_height+0x1c8>
+            }
+            else
+                i += n_width;
+        }
+        else
+            i++;
+    93f0:	e0bffa17 	ldw	r2,-24(fp)
+    93f4:	10800044 	addi	r2,r2,1
+    93f8:	e0bffa15 	stw	r2,-24(fp)
+
+{
+	alt_32 i = 1, n_width;
+    *pn_npks = 0;
+
+    while (i < n_size-1){
+    93fc:	e0bfff17 	ldw	r2,-4(fp)
+    9400:	10bfffc4 	addi	r2,r2,-1
+    9404:	e0fffa17 	ldw	r3,-24(fp)
+    9408:	18bf9616 	blt	r3,r2,9264 <_gp+0xffff68b0>
+                i += n_width;
+        }
+        else
+            i++;
+    }
+}
+    940c:	0001883a 	nop
+    9410:	e037883a 	mov	sp,fp
+    9414:	df000017 	ldw	fp,0(sp)
+    9418:	dec00104 	addi	sp,sp,4
+    941c:	f800283a 	ret
+
+00009420 <maxim_remove_close_peaks>:
+
+void maxim_remove_close_peaks(alt_32 *pn_locs, alt_32 *pn_npks, alt_32 *pn_x, alt_32 n_min_distance)
+{
+    9420:	defff604 	addi	sp,sp,-40
+    9424:	dfc00915 	stw	ra,36(sp)
+    9428:	df000815 	stw	fp,32(sp)
+    942c:	df000804 	addi	fp,sp,32
+    9430:	e13ffc15 	stw	r4,-16(fp)
+    9434:	e17ffd15 	stw	r5,-12(fp)
+    9438:	e1bffe15 	stw	r6,-8(fp)
+    943c:	e1ffff15 	stw	r7,-4(fp)
+    alt_32 i, j, n_old_npks, n_dist;
+
+    /* Order peaks from large to small */
+    maxim_sort_indices_descend( pn_x, pn_locs, *pn_npks );
+    9440:	e0bffd17 	ldw	r2,-12(fp)
+    9444:	10800017 	ldw	r2,0(r2)
+    9448:	100d883a 	mov	r6,r2
+    944c:	e17ffc17 	ldw	r5,-16(fp)
+    9450:	e13ffe17 	ldw	r4,-8(fp)
+    9454:	00096c80 	call	96c8 <maxim_sort_indices_descend>
+
+    for ( i = -1; i < *pn_npks; i++ ){
+    9458:	00bfffc4 	movi	r2,-1
+    945c:	e0bff815 	stw	r2,-32(fp)
+    9460:	00004206 	br	956c <maxim_remove_close_peaks+0x14c>
+        n_old_npks = *pn_npks;
+    9464:	e0bffd17 	ldw	r2,-12(fp)
+    9468:	10800017 	ldw	r2,0(r2)
+    946c:	e0bffa15 	stw	r2,-24(fp)
+        *pn_npks = i+1;
+    9470:	e0bff817 	ldw	r2,-32(fp)
+    9474:	10c00044 	addi	r3,r2,1
+    9478:	e0bffd17 	ldw	r2,-12(fp)
+    947c:	10c00015 	stw	r3,0(r2)
+        for ( j = i+1; j < n_old_npks; j++ ){
+    9480:	e0bff817 	ldw	r2,-32(fp)
+    9484:	10800044 	addi	r2,r2,1
+    9488:	e0bff915 	stw	r2,-28(fp)
+    948c:	00003106 	br	9554 <maxim_remove_close_peaks+0x134>
+            n_dist =  pn_locs[j] - ( i == -1 ? -1 : pn_locs[i] ); // lag-zero peak of autocorr is at index -1
+    9490:	e0bff917 	ldw	r2,-28(fp)
+    9494:	1085883a 	add	r2,r2,r2
+    9498:	1085883a 	add	r2,r2,r2
+    949c:	1007883a 	mov	r3,r2
+    94a0:	e0bffc17 	ldw	r2,-16(fp)
+    94a4:	10c5883a 	add	r2,r2,r3
+    94a8:	10c00017 	ldw	r3,0(r2)
+    94ac:	e0bff817 	ldw	r2,-32(fp)
+    94b0:	10bfffe0 	cmpeqi	r2,r2,-1
+    94b4:	1000081e 	bne	r2,zero,94d8 <maxim_remove_close_peaks+0xb8>
+    94b8:	e0bff817 	ldw	r2,-32(fp)
+    94bc:	1085883a 	add	r2,r2,r2
+    94c0:	1085883a 	add	r2,r2,r2
+    94c4:	1009883a 	mov	r4,r2
+    94c8:	e0bffc17 	ldw	r2,-16(fp)
+    94cc:	1105883a 	add	r2,r2,r4
+    94d0:	10800017 	ldw	r2,0(r2)
+    94d4:	00000106 	br	94dc <maxim_remove_close_peaks+0xbc>
+    94d8:	00bfffc4 	movi	r2,-1
+    94dc:	1885c83a 	sub	r2,r3,r2
+    94e0:	e0bffb15 	stw	r2,-20(fp)
+            if ( n_dist > n_min_distance || n_dist < -n_min_distance )
+    94e4:	e0bffb17 	ldw	r2,-20(fp)
+    94e8:	e0ffff17 	ldw	r3,-4(fp)
+    94ec:	18800416 	blt	r3,r2,9500 <maxim_remove_close_peaks+0xe0>
+    94f0:	e0bfff17 	ldw	r2,-4(fp)
+    94f4:	0085c83a 	sub	r2,zero,r2
+    94f8:	e0fffb17 	ldw	r3,-20(fp)
+    94fc:	1880120e 	bge	r3,r2,9548 <maxim_remove_close_peaks+0x128>
+                pn_locs[(*pn_npks)++] = pn_locs[j];
+    9500:	e0bffd17 	ldw	r2,-12(fp)
+    9504:	10800017 	ldw	r2,0(r2)
+    9508:	11000044 	addi	r4,r2,1
+    950c:	e0fffd17 	ldw	r3,-12(fp)
+    9510:	19000015 	stw	r4,0(r3)
+    9514:	1085883a 	add	r2,r2,r2
+    9518:	1085883a 	add	r2,r2,r2
+    951c:	1007883a 	mov	r3,r2
+    9520:	e0bffc17 	ldw	r2,-16(fp)
+    9524:	10c7883a 	add	r3,r2,r3
+    9528:	e0bff917 	ldw	r2,-28(fp)
+    952c:	1085883a 	add	r2,r2,r2
+    9530:	1085883a 	add	r2,r2,r2
+    9534:	1009883a 	mov	r4,r2
+    9538:	e0bffc17 	ldw	r2,-16(fp)
+    953c:	1105883a 	add	r2,r2,r4
+    9540:	10800017 	ldw	r2,0(r2)
+    9544:	18800015 	stw	r2,0(r3)
+    maxim_sort_indices_descend( pn_x, pn_locs, *pn_npks );
+
+    for ( i = -1; i < *pn_npks; i++ ){
+        n_old_npks = *pn_npks;
+        *pn_npks = i+1;
+        for ( j = i+1; j < n_old_npks; j++ ){
+    9548:	e0bff917 	ldw	r2,-28(fp)
+    954c:	10800044 	addi	r2,r2,1
+    9550:	e0bff915 	stw	r2,-28(fp)
+    9554:	e0fff917 	ldw	r3,-28(fp)
+    9558:	e0bffa17 	ldw	r2,-24(fp)
+    955c:	18bfcc16 	blt	r3,r2,9490 <_gp+0xffff6adc>
+    alt_32 i, j, n_old_npks, n_dist;
+
+    /* Order peaks from large to small */
+    maxim_sort_indices_descend( pn_x, pn_locs, *pn_npks );
+
+    for ( i = -1; i < *pn_npks; i++ ){
+    9560:	e0bff817 	ldw	r2,-32(fp)
+    9564:	10800044 	addi	r2,r2,1
+    9568:	e0bff815 	stw	r2,-32(fp)
+    956c:	e0bffd17 	ldw	r2,-12(fp)
+    9570:	10800017 	ldw	r2,0(r2)
+    9574:	e0fff817 	ldw	r3,-32(fp)
+    9578:	18bfba16 	blt	r3,r2,9464 <_gp+0xffff6ab0>
+                pn_locs[(*pn_npks)++] = pn_locs[j];
+        }
+    }
+
+    // Resort indices longo ascending order
+    maxim_sort_ascend( pn_locs, *pn_npks );
+    957c:	e0bffd17 	ldw	r2,-12(fp)
+    9580:	10800017 	ldw	r2,0(r2)
+    9584:	100b883a 	mov	r5,r2
+    9588:	e13ffc17 	ldw	r4,-16(fp)
+    958c:	00095a80 	call	95a8 <maxim_sort_ascend>
+}
+    9590:	0001883a 	nop
+    9594:	e037883a 	mov	sp,fp
+    9598:	dfc00117 	ldw	ra,4(sp)
+    959c:	df000017 	ldw	fp,0(sp)
+    95a0:	dec00204 	addi	sp,sp,8
+    95a4:	f800283a 	ret
+
+000095a8 <maxim_sort_ascend>:
+
+void maxim_sort_ascend(alt_32 *pn_x,alt_32 n_size)
+
+{
+    95a8:	defffa04 	addi	sp,sp,-24
+    95ac:	df000515 	stw	fp,20(sp)
+    95b0:	df000504 	addi	fp,sp,20
+    95b4:	e13ffe15 	stw	r4,-8(fp)
+    95b8:	e17fff15 	stw	r5,-4(fp)
+	alt_32 i, j, n_temp;
+    for (i = 1; i < n_size; i++) {
+    95bc:	00800044 	movi	r2,1
+    95c0:	e0bffb15 	stw	r2,-20(fp)
+    95c4:	00003806 	br	96a8 <maxim_sort_ascend+0x100>
+        n_temp = pn_x[i];
+    95c8:	e0bffb17 	ldw	r2,-20(fp)
+    95cc:	1085883a 	add	r2,r2,r2
+    95d0:	1085883a 	add	r2,r2,r2
+    95d4:	1007883a 	mov	r3,r2
+    95d8:	e0bffe17 	ldw	r2,-8(fp)
+    95dc:	10c5883a 	add	r2,r2,r3
+    95e0:	10800017 	ldw	r2,0(r2)
+    95e4:	e0bffd15 	stw	r2,-12(fp)
+        for (j = i; j > 0 && n_temp < pn_x[j-1]; j--)
+    95e8:	e0bffb17 	ldw	r2,-20(fp)
+    95ec:	e0bffc15 	stw	r2,-16(fp)
+    95f0:	00001406 	br	9644 <maxim_sort_ascend+0x9c>
+            pn_x[j] = pn_x[j-1];
+    95f4:	e0bffc17 	ldw	r2,-16(fp)
+    95f8:	1085883a 	add	r2,r2,r2
+    95fc:	1085883a 	add	r2,r2,r2
+    9600:	1007883a 	mov	r3,r2
+    9604:	e0bffe17 	ldw	r2,-8(fp)
+    9608:	10c7883a 	add	r3,r2,r3
+    960c:	e13ffc17 	ldw	r4,-16(fp)
+    9610:	00900034 	movhi	r2,16384
+    9614:	10bfffc4 	addi	r2,r2,-1
+    9618:	2085883a 	add	r2,r4,r2
+    961c:	1085883a 	add	r2,r2,r2
+    9620:	1085883a 	add	r2,r2,r2
+    9624:	1009883a 	mov	r4,r2
+    9628:	e0bffe17 	ldw	r2,-8(fp)
+    962c:	1105883a 	add	r2,r2,r4
+    9630:	10800017 	ldw	r2,0(r2)
+    9634:	18800015 	stw	r2,0(r3)
+
+{
+	alt_32 i, j, n_temp;
+    for (i = 1; i < n_size; i++) {
+        n_temp = pn_x[i];
+        for (j = i; j > 0 && n_temp < pn_x[j-1]; j--)
+    9638:	e0bffc17 	ldw	r2,-16(fp)
+    963c:	10bfffc4 	addi	r2,r2,-1
+    9640:	e0bffc15 	stw	r2,-16(fp)
+    9644:	e0bffc17 	ldw	r2,-16(fp)
+    9648:	00800c0e 	bge	zero,r2,967c <maxim_sort_ascend+0xd4>
+    964c:	e0fffc17 	ldw	r3,-16(fp)
+    9650:	00900034 	movhi	r2,16384
+    9654:	10bfffc4 	addi	r2,r2,-1
+    9658:	1885883a 	add	r2,r3,r2
+    965c:	1085883a 	add	r2,r2,r2
+    9660:	1085883a 	add	r2,r2,r2
+    9664:	1007883a 	mov	r3,r2
+    9668:	e0bffe17 	ldw	r2,-8(fp)
+    966c:	10c5883a 	add	r2,r2,r3
+    9670:	10800017 	ldw	r2,0(r2)
+    9674:	e0fffd17 	ldw	r3,-12(fp)
+    9678:	18bfde16 	blt	r3,r2,95f4 <_gp+0xffff6c40>
+            pn_x[j] = pn_x[j-1];
+        pn_x[j] = n_temp;
+    967c:	e0bffc17 	ldw	r2,-16(fp)
+    9680:	1085883a 	add	r2,r2,r2
+    9684:	1085883a 	add	r2,r2,r2
+    9688:	1007883a 	mov	r3,r2
+    968c:	e0bffe17 	ldw	r2,-8(fp)
+    9690:	10c5883a 	add	r2,r2,r3
+    9694:	e0fffd17 	ldw	r3,-12(fp)
+    9698:	10c00015 	stw	r3,0(r2)
+
+void maxim_sort_ascend(alt_32 *pn_x,alt_32 n_size)
+
+{
+	alt_32 i, j, n_temp;
+    for (i = 1; i < n_size; i++) {
+    969c:	e0bffb17 	ldw	r2,-20(fp)
+    96a0:	10800044 	addi	r2,r2,1
+    96a4:	e0bffb15 	stw	r2,-20(fp)
+    96a8:	e0fffb17 	ldw	r3,-20(fp)
+    96ac:	e0bfff17 	ldw	r2,-4(fp)
+    96b0:	18bfc516 	blt	r3,r2,95c8 <_gp+0xffff6c14>
+        n_temp = pn_x[i];
+        for (j = i; j > 0 && n_temp < pn_x[j-1]; j--)
+            pn_x[j] = pn_x[j-1];
+        pn_x[j] = n_temp;
+    }
+}
+    96b4:	0001883a 	nop
+    96b8:	e037883a 	mov	sp,fp
+    96bc:	df000017 	ldw	fp,0(sp)
+    96c0:	dec00104 	addi	sp,sp,4
+    96c4:	f800283a 	ret
+
+000096c8 <maxim_sort_indices_descend>:
+
+void maxim_sort_indices_descend(alt_32 *pn_x, alt_32 *pn_indx, alt_32 n_size)
+
+{
+    96c8:	defff904 	addi	sp,sp,-28
+    96cc:	df000615 	stw	fp,24(sp)
+    96d0:	df000604 	addi	fp,sp,24
+    96d4:	e13ffd15 	stw	r4,-12(fp)
+    96d8:	e17ffe15 	stw	r5,-8(fp)
+    96dc:	e1bfff15 	stw	r6,-4(fp)
+	alt_32 i, j, n_temp;
+    for (i = 1; i < n_size; i++) {
+    96e0:	00800044 	movi	r2,1
+    96e4:	e0bffa15 	stw	r2,-24(fp)
+    96e8:	00004406 	br	97fc <maxim_sort_indices_descend+0x134>
+        n_temp = pn_indx[i];
+    96ec:	e0bffa17 	ldw	r2,-24(fp)
+    96f0:	1085883a 	add	r2,r2,r2
+    96f4:	1085883a 	add	r2,r2,r2
+    96f8:	1007883a 	mov	r3,r2
+    96fc:	e0bffe17 	ldw	r2,-8(fp)
+    9700:	10c5883a 	add	r2,r2,r3
+    9704:	10800017 	ldw	r2,0(r2)
+    9708:	e0bffc15 	stw	r2,-16(fp)
+        for (j = i; j > 0 && pn_x[n_temp] > pn_x[pn_indx[j-1]]; j--)
+    970c:	e0bffa17 	ldw	r2,-24(fp)
+    9710:	e0bffb15 	stw	r2,-20(fp)
+    9714:	00001406 	br	9768 <maxim_sort_indices_descend+0xa0>
+            pn_indx[j] = pn_indx[j-1];
+    9718:	e0bffb17 	ldw	r2,-20(fp)
+    971c:	1085883a 	add	r2,r2,r2
+    9720:	1085883a 	add	r2,r2,r2
+    9724:	1007883a 	mov	r3,r2
+    9728:	e0bffe17 	ldw	r2,-8(fp)
+    972c:	10c7883a 	add	r3,r2,r3
+    9730:	e13ffb17 	ldw	r4,-20(fp)
+    9734:	00900034 	movhi	r2,16384
+    9738:	10bfffc4 	addi	r2,r2,-1
+    973c:	2085883a 	add	r2,r4,r2
+    9740:	1085883a 	add	r2,r2,r2
+    9744:	1085883a 	add	r2,r2,r2
+    9748:	1009883a 	mov	r4,r2
+    974c:	e0bffe17 	ldw	r2,-8(fp)
+    9750:	1105883a 	add	r2,r2,r4
+    9754:	10800017 	ldw	r2,0(r2)
+    9758:	18800015 	stw	r2,0(r3)
+
+{
+	alt_32 i, j, n_temp;
+    for (i = 1; i < n_size; i++) {
+        n_temp = pn_indx[i];
+        for (j = i; j > 0 && pn_x[n_temp] > pn_x[pn_indx[j-1]]; j--)
+    975c:	e0bffb17 	ldw	r2,-20(fp)
+    9760:	10bfffc4 	addi	r2,r2,-1
+    9764:	e0bffb15 	stw	r2,-20(fp)
+    9768:	e0bffb17 	ldw	r2,-20(fp)
+    976c:	0080180e 	bge	zero,r2,97d0 <maxim_sort_indices_descend+0x108>
+    9770:	e0bffc17 	ldw	r2,-16(fp)
+    9774:	1085883a 	add	r2,r2,r2
+    9778:	1085883a 	add	r2,r2,r2
+    977c:	1007883a 	mov	r3,r2
+    9780:	e0bffd17 	ldw	r2,-12(fp)
+    9784:	10c5883a 	add	r2,r2,r3
+    9788:	10c00017 	ldw	r3,0(r2)
+    978c:	e13ffb17 	ldw	r4,-20(fp)
+    9790:	00900034 	movhi	r2,16384
+    9794:	10bfffc4 	addi	r2,r2,-1
+    9798:	2085883a 	add	r2,r4,r2
+    979c:	1085883a 	add	r2,r2,r2
+    97a0:	1085883a 	add	r2,r2,r2
+    97a4:	1009883a 	mov	r4,r2
+    97a8:	e0bffe17 	ldw	r2,-8(fp)
+    97ac:	1105883a 	add	r2,r2,r4
+    97b0:	10800017 	ldw	r2,0(r2)
+    97b4:	1085883a 	add	r2,r2,r2
+    97b8:	1085883a 	add	r2,r2,r2
+    97bc:	1009883a 	mov	r4,r2
+    97c0:	e0bffd17 	ldw	r2,-12(fp)
+    97c4:	1105883a 	add	r2,r2,r4
+    97c8:	10800017 	ldw	r2,0(r2)
+    97cc:	10ffd216 	blt	r2,r3,9718 <_gp+0xffff6d64>
+            pn_indx[j] = pn_indx[j-1];
+        pn_indx[j] = n_temp;
+    97d0:	e0bffb17 	ldw	r2,-20(fp)
+    97d4:	1085883a 	add	r2,r2,r2
+    97d8:	1085883a 	add	r2,r2,r2
+    97dc:	1007883a 	mov	r3,r2
+    97e0:	e0bffe17 	ldw	r2,-8(fp)
+    97e4:	10c5883a 	add	r2,r2,r3
+    97e8:	e0fffc17 	ldw	r3,-16(fp)
+    97ec:	10c00015 	stw	r3,0(r2)
+
+void maxim_sort_indices_descend(alt_32 *pn_x, alt_32 *pn_indx, alt_32 n_size)
+
+{
+	alt_32 i, j, n_temp;
+    for (i = 1; i < n_size; i++) {
+    97f0:	e0bffa17 	ldw	r2,-24(fp)
+    97f4:	10800044 	addi	r2,r2,1
+    97f8:	e0bffa15 	stw	r2,-24(fp)
+    97fc:	e0fffa17 	ldw	r3,-24(fp)
+    9800:	e0bfff17 	ldw	r2,-4(fp)
+    9804:	18bfb916 	blt	r3,r2,96ec <_gp+0xffff6d38>
+        n_temp = pn_indx[i];
+        for (j = i; j > 0 && pn_x[n_temp] > pn_x[pn_indx[j-1]]; j--)
+            pn_indx[j] = pn_indx[j-1];
+        pn_indx[j] = n_temp;
+    }
+}
+    9808:	0001883a 	nop
+    980c:	e037883a 	mov	sp,fp
+    9810:	df000017 	ldw	fp,0(sp)
+    9814:	dec00104 	addi	sp,sp,4
+    9818:	f800283a 	ret
+
+0000981c <__divsi3>:
+    981c:	20001b16 	blt	r4,zero,988c <__divsi3+0x70>
+    9820:	000f883a 	mov	r7,zero
+    9824:	28001616 	blt	r5,zero,9880 <__divsi3+0x64>
+    9828:	200d883a 	mov	r6,r4
+    982c:	29001a2e 	bgeu	r5,r4,9898 <__divsi3+0x7c>
+    9830:	00800804 	movi	r2,32
+    9834:	00c00044 	movi	r3,1
+    9838:	00000106 	br	9840 <__divsi3+0x24>
+    983c:	10000d26 	beq	r2,zero,9874 <__divsi3+0x58>
+    9840:	294b883a 	add	r5,r5,r5
+    9844:	10bfffc4 	addi	r2,r2,-1
+    9848:	18c7883a 	add	r3,r3,r3
+    984c:	293ffb36 	bltu	r5,r4,983c <_gp+0xffff6e88>
+    9850:	0005883a 	mov	r2,zero
+    9854:	18000726 	beq	r3,zero,9874 <__divsi3+0x58>
+    9858:	0005883a 	mov	r2,zero
+    985c:	31400236 	bltu	r6,r5,9868 <__divsi3+0x4c>
+    9860:	314dc83a 	sub	r6,r6,r5
+    9864:	10c4b03a 	or	r2,r2,r3
+    9868:	1806d07a 	srli	r3,r3,1
+    986c:	280ad07a 	srli	r5,r5,1
+    9870:	183ffa1e 	bne	r3,zero,985c <_gp+0xffff6ea8>
+    9874:	38000126 	beq	r7,zero,987c <__divsi3+0x60>
+    9878:	0085c83a 	sub	r2,zero,r2
+    987c:	f800283a 	ret
+    9880:	014bc83a 	sub	r5,zero,r5
+    9884:	39c0005c 	xori	r7,r7,1
+    9888:	003fe706 	br	9828 <_gp+0xffff6e74>
+    988c:	0109c83a 	sub	r4,zero,r4
+    9890:	01c00044 	movi	r7,1
+    9894:	003fe306 	br	9824 <_gp+0xffff6e70>
+    9898:	00c00044 	movi	r3,1
+    989c:	003fee06 	br	9858 <_gp+0xffff6ea4>
+
+000098a0 <__modsi3>:
+    98a0:	20001716 	blt	r4,zero,9900 <__modsi3+0x60>
+    98a4:	000f883a 	mov	r7,zero
+    98a8:	2005883a 	mov	r2,r4
+    98ac:	28001216 	blt	r5,zero,98f8 <__modsi3+0x58>
+    98b0:	2900162e 	bgeu	r5,r4,990c <__modsi3+0x6c>
+    98b4:	01800804 	movi	r6,32
+    98b8:	00c00044 	movi	r3,1
+    98bc:	00000106 	br	98c4 <__modsi3+0x24>
+    98c0:	30000a26 	beq	r6,zero,98ec <__modsi3+0x4c>
+    98c4:	294b883a 	add	r5,r5,r5
+    98c8:	31bfffc4 	addi	r6,r6,-1
+    98cc:	18c7883a 	add	r3,r3,r3
+    98d0:	293ffb36 	bltu	r5,r4,98c0 <_gp+0xffff6f0c>
+    98d4:	18000526 	beq	r3,zero,98ec <__modsi3+0x4c>
+    98d8:	1806d07a 	srli	r3,r3,1
+    98dc:	11400136 	bltu	r2,r5,98e4 <__modsi3+0x44>
+    98e0:	1145c83a 	sub	r2,r2,r5
+    98e4:	280ad07a 	srli	r5,r5,1
+    98e8:	183ffb1e 	bne	r3,zero,98d8 <_gp+0xffff6f24>
+    98ec:	38000126 	beq	r7,zero,98f4 <__modsi3+0x54>
+    98f0:	0085c83a 	sub	r2,zero,r2
+    98f4:	f800283a 	ret
+    98f8:	014bc83a 	sub	r5,zero,r5
+    98fc:	003fec06 	br	98b0 <_gp+0xffff6efc>
+    9900:	0109c83a 	sub	r4,zero,r4
+    9904:	01c00044 	movi	r7,1
+    9908:	003fe706 	br	98a8 <_gp+0xffff6ef4>
+    990c:	00c00044 	movi	r3,1
+    9910:	003ff106 	br	98d8 <_gp+0xffff6f24>
+
+00009914 <__udivsi3>:
+    9914:	200d883a 	mov	r6,r4
+    9918:	2900152e 	bgeu	r5,r4,9970 <__udivsi3+0x5c>
+    991c:	28001416 	blt	r5,zero,9970 <__udivsi3+0x5c>
+    9920:	00800804 	movi	r2,32
+    9924:	00c00044 	movi	r3,1
+    9928:	00000206 	br	9934 <__udivsi3+0x20>
+    992c:	10000e26 	beq	r2,zero,9968 <__udivsi3+0x54>
+    9930:	28000516 	blt	r5,zero,9948 <__udivsi3+0x34>
+    9934:	294b883a 	add	r5,r5,r5
+    9938:	10bfffc4 	addi	r2,r2,-1
+    993c:	18c7883a 	add	r3,r3,r3
+    9940:	293ffa36 	bltu	r5,r4,992c <_gp+0xffff6f78>
+    9944:	18000826 	beq	r3,zero,9968 <__udivsi3+0x54>
+    9948:	0005883a 	mov	r2,zero
+    994c:	31400236 	bltu	r6,r5,9958 <__udivsi3+0x44>
+    9950:	314dc83a 	sub	r6,r6,r5
+    9954:	10c4b03a 	or	r2,r2,r3
+    9958:	1806d07a 	srli	r3,r3,1
+    995c:	280ad07a 	srli	r5,r5,1
+    9960:	183ffa1e 	bne	r3,zero,994c <_gp+0xffff6f98>
+    9964:	f800283a 	ret
+    9968:	0005883a 	mov	r2,zero
+    996c:	f800283a 	ret
+    9970:	00c00044 	movi	r3,1
+    9974:	003ff406 	br	9948 <_gp+0xffff6f94>
+
+00009978 <__umodsi3>:
+    9978:	2005883a 	mov	r2,r4
+    997c:	2900122e 	bgeu	r5,r4,99c8 <__umodsi3+0x50>
+    9980:	28001116 	blt	r5,zero,99c8 <__umodsi3+0x50>
+    9984:	01800804 	movi	r6,32
+    9988:	00c00044 	movi	r3,1
+    998c:	00000206 	br	9998 <__umodsi3+0x20>
+    9990:	30000c26 	beq	r6,zero,99c4 <__umodsi3+0x4c>
+    9994:	28000516 	blt	r5,zero,99ac <__umodsi3+0x34>
+    9998:	294b883a 	add	r5,r5,r5
+    999c:	31bfffc4 	addi	r6,r6,-1
+    99a0:	18c7883a 	add	r3,r3,r3
+    99a4:	293ffa36 	bltu	r5,r4,9990 <_gp+0xffff6fdc>
+    99a8:	18000626 	beq	r3,zero,99c4 <__umodsi3+0x4c>
+    99ac:	1806d07a 	srli	r3,r3,1
+    99b0:	11400136 	bltu	r2,r5,99b8 <__umodsi3+0x40>
+    99b4:	1145c83a 	sub	r2,r2,r5
+    99b8:	280ad07a 	srli	r5,r5,1
+    99bc:	183ffb1e 	bne	r3,zero,99ac <_gp+0xffff6ff8>
+    99c0:	f800283a 	ret
+    99c4:	f800283a 	ret
+    99c8:	00c00044 	movi	r3,1
+    99cc:	003ff706 	br	99ac <_gp+0xffff6ff8>
+
+000099d0 <_printf_r>:
+    99d0:	defffd04 	addi	sp,sp,-12
+    99d4:	dfc00015 	stw	ra,0(sp)
+    99d8:	d9800115 	stw	r6,4(sp)
+    99dc:	d9c00215 	stw	r7,8(sp)
+    99e0:	20c00217 	ldw	r3,8(r4)
+    99e4:	01800074 	movhi	r6,1
+    99e8:	31a80104 	addi	r6,r6,-24572
+    99ec:	19800115 	stw	r6,4(r3)
+    99f0:	280d883a 	mov	r6,r5
+    99f4:	21400217 	ldw	r5,8(r4)
+    99f8:	d9c00104 	addi	r7,sp,4
+    99fc:	0009ac40 	call	9ac4 <___vfprintf_internal_r>
+    9a00:	dfc00017 	ldw	ra,0(sp)
+    9a04:	dec00304 	addi	sp,sp,12
+    9a08:	f800283a 	ret
+
+00009a0c <printf>:
+    9a0c:	defffc04 	addi	sp,sp,-16
+    9a10:	dfc00015 	stw	ra,0(sp)
+    9a14:	d9400115 	stw	r5,4(sp)
+    9a18:	d9800215 	stw	r6,8(sp)
+    9a1c:	d9c00315 	stw	r7,12(sp)
+    9a20:	00800074 	movhi	r2,1
+    9a24:	10aa6f04 	addi	r2,r2,-22084
+    9a28:	10800017 	ldw	r2,0(r2)
+    9a2c:	01400074 	movhi	r5,1
+    9a30:	29680104 	addi	r5,r5,-24572
+    9a34:	10c00217 	ldw	r3,8(r2)
+    9a38:	d9800104 	addi	r6,sp,4
+    9a3c:	19400115 	stw	r5,4(r3)
+    9a40:	200b883a 	mov	r5,r4
+    9a44:	11000217 	ldw	r4,8(r2)
+    9a48:	0009fe80 	call	9fe8 <__vfprintf_internal>
+    9a4c:	dfc00017 	ldw	ra,0(sp)
+    9a50:	dec00404 	addi	sp,sp,16
+    9a54:	f800283a 	ret
+
+00009a58 <print_repeat>:
+    9a58:	defffb04 	addi	sp,sp,-20
+    9a5c:	dc800315 	stw	r18,12(sp)
+    9a60:	dc400215 	stw	r17,8(sp)
+    9a64:	dc000115 	stw	r16,4(sp)
+    9a68:	dfc00415 	stw	ra,16(sp)
+    9a6c:	2025883a 	mov	r18,r4
+    9a70:	2823883a 	mov	r17,r5
+    9a74:	d9800005 	stb	r6,0(sp)
+    9a78:	3821883a 	mov	r16,r7
+    9a7c:	04000a0e 	bge	zero,r16,9aa8 <print_repeat+0x50>
+    9a80:	88800117 	ldw	r2,4(r17)
+    9a84:	01c00044 	movi	r7,1
+    9a88:	d80d883a 	mov	r6,sp
+    9a8c:	880b883a 	mov	r5,r17
+    9a90:	9009883a 	mov	r4,r18
+    9a94:	103ee83a 	callr	r2
+    9a98:	843fffc4 	addi	r16,r16,-1
+    9a9c:	103ff726 	beq	r2,zero,9a7c <_gp+0xffff70c8>
+    9aa0:	00bfffc4 	movi	r2,-1
+    9aa4:	00000106 	br	9aac <print_repeat+0x54>
+    9aa8:	0005883a 	mov	r2,zero
+    9aac:	dfc00417 	ldw	ra,16(sp)
+    9ab0:	dc800317 	ldw	r18,12(sp)
+    9ab4:	dc400217 	ldw	r17,8(sp)
+    9ab8:	dc000117 	ldw	r16,4(sp)
+    9abc:	dec00504 	addi	sp,sp,20
+    9ac0:	f800283a 	ret
+
+00009ac4 <___vfprintf_internal_r>:
+    9ac4:	deffe504 	addi	sp,sp,-108
+    9ac8:	d8c00804 	addi	r3,sp,32
+    9acc:	df001915 	stw	fp,100(sp)
+    9ad0:	ddc01815 	stw	r23,96(sp)
+    9ad4:	dd801715 	stw	r22,92(sp)
+    9ad8:	dd401615 	stw	r21,88(sp)
+    9adc:	dd001515 	stw	r20,84(sp)
+    9ae0:	dcc01415 	stw	r19,80(sp)
+    9ae4:	dc801315 	stw	r18,76(sp)
+    9ae8:	dc401215 	stw	r17,72(sp)
+    9aec:	dc001115 	stw	r16,68(sp)
+    9af0:	dfc01a15 	stw	ra,104(sp)
+    9af4:	2027883a 	mov	r19,r4
+    9af8:	2839883a 	mov	fp,r5
+    9afc:	382d883a 	mov	r22,r7
+    9b00:	d9800f15 	stw	r6,60(sp)
+    9b04:	0021883a 	mov	r16,zero
+    9b08:	d8000e15 	stw	zero,56(sp)
+    9b0c:	002f883a 	mov	r23,zero
+    9b10:	002b883a 	mov	r21,zero
+    9b14:	0025883a 	mov	r18,zero
+    9b18:	0023883a 	mov	r17,zero
+    9b1c:	d8000c15 	stw	zero,48(sp)
+    9b20:	d8000b15 	stw	zero,44(sp)
+    9b24:	0029883a 	mov	r20,zero
+    9b28:	d8c00915 	stw	r3,36(sp)
+    9b2c:	d8c00f17 	ldw	r3,60(sp)
+    9b30:	19000003 	ldbu	r4,0(r3)
+    9b34:	20803fcc 	andi	r2,r4,255
+    9b38:	1080201c 	xori	r2,r2,128
+    9b3c:	10bfe004 	addi	r2,r2,-128
+    9b40:	10011c26 	beq	r2,zero,9fb4 <___vfprintf_internal_r+0x4f0>
+    9b44:	00c00044 	movi	r3,1
+    9b48:	a0c01426 	beq	r20,r3,9b9c <___vfprintf_internal_r+0xd8>
+    9b4c:	1d000216 	blt	r3,r20,9b58 <___vfprintf_internal_r+0x94>
+    9b50:	a0000626 	beq	r20,zero,9b6c <___vfprintf_internal_r+0xa8>
+    9b54:	00011306 	br	9fa4 <___vfprintf_internal_r+0x4e0>
+    9b58:	01400084 	movi	r5,2
+    9b5c:	a1401d26 	beq	r20,r5,9bd4 <___vfprintf_internal_r+0x110>
+    9b60:	014000c4 	movi	r5,3
+    9b64:	a1402926 	beq	r20,r5,9c0c <___vfprintf_internal_r+0x148>
+    9b68:	00010e06 	br	9fa4 <___vfprintf_internal_r+0x4e0>
+    9b6c:	01400944 	movi	r5,37
+    9b70:	1140fb26 	beq	r2,r5,9f60 <___vfprintf_internal_r+0x49c>
+    9b74:	e0800117 	ldw	r2,4(fp)
+    9b78:	d9000005 	stb	r4,0(sp)
+    9b7c:	01c00044 	movi	r7,1
+    9b80:	d80d883a 	mov	r6,sp
+    9b84:	e00b883a 	mov	r5,fp
+    9b88:	9809883a 	mov	r4,r19
+    9b8c:	103ee83a 	callr	r2
+    9b90:	1000d61e 	bne	r2,zero,9eec <___vfprintf_internal_r+0x428>
+    9b94:	84000044 	addi	r16,r16,1
+    9b98:	00010206 	br	9fa4 <___vfprintf_internal_r+0x4e0>
+    9b9c:	01400c04 	movi	r5,48
+    9ba0:	1140f826 	beq	r2,r5,9f84 <___vfprintf_internal_r+0x4c0>
+    9ba4:	01400944 	movi	r5,37
+    9ba8:	11400a1e 	bne	r2,r5,9bd4 <___vfprintf_internal_r+0x110>
+    9bac:	d8800005 	stb	r2,0(sp)
+    9bb0:	e0800117 	ldw	r2,4(fp)
+    9bb4:	a00f883a 	mov	r7,r20
+    9bb8:	d80d883a 	mov	r6,sp
+    9bbc:	e00b883a 	mov	r5,fp
+    9bc0:	9809883a 	mov	r4,r19
+    9bc4:	103ee83a 	callr	r2
+    9bc8:	1000c81e 	bne	r2,zero,9eec <___vfprintf_internal_r+0x428>
+    9bcc:	84000044 	addi	r16,r16,1
+    9bd0:	0000f306 	br	9fa0 <___vfprintf_internal_r+0x4dc>
+    9bd4:	217ff404 	addi	r5,r4,-48
+    9bd8:	29403fcc 	andi	r5,r5,255
+    9bdc:	00c00244 	movi	r3,9
+    9be0:	19400736 	bltu	r3,r5,9c00 <___vfprintf_internal_r+0x13c>
+    9be4:	00bfffc4 	movi	r2,-1
+    9be8:	88800226 	beq	r17,r2,9bf4 <___vfprintf_internal_r+0x130>
+    9bec:	8c4002a4 	muli	r17,r17,10
+    9bf0:	00000106 	br	9bf8 <___vfprintf_internal_r+0x134>
+    9bf4:	0023883a 	mov	r17,zero
+    9bf8:	2c63883a 	add	r17,r5,r17
+    9bfc:	0000e206 	br	9f88 <___vfprintf_internal_r+0x4c4>
+    9c00:	01400b84 	movi	r5,46
+    9c04:	1140e426 	beq	r2,r5,9f98 <___vfprintf_internal_r+0x4d4>
+    9c08:	05000084 	movi	r20,2
+    9c0c:	213ff404 	addi	r4,r4,-48
+    9c10:	21003fcc 	andi	r4,r4,255
+    9c14:	00c00244 	movi	r3,9
+    9c18:	19000736 	bltu	r3,r4,9c38 <___vfprintf_internal_r+0x174>
+    9c1c:	00bfffc4 	movi	r2,-1
+    9c20:	90800226 	beq	r18,r2,9c2c <___vfprintf_internal_r+0x168>
+    9c24:	948002a4 	muli	r18,r18,10
+    9c28:	00000106 	br	9c30 <___vfprintf_internal_r+0x16c>
+    9c2c:	0025883a 	mov	r18,zero
+    9c30:	24a5883a 	add	r18,r4,r18
+    9c34:	0000db06 	br	9fa4 <___vfprintf_internal_r+0x4e0>
+    9c38:	00c01b04 	movi	r3,108
+    9c3c:	10c0d426 	beq	r2,r3,9f90 <___vfprintf_internal_r+0x4cc>
+    9c40:	013fffc4 	movi	r4,-1
+    9c44:	91000226 	beq	r18,r4,9c50 <___vfprintf_internal_r+0x18c>
+    9c48:	d8000b15 	stw	zero,44(sp)
+    9c4c:	00000106 	br	9c54 <___vfprintf_internal_r+0x190>
+    9c50:	04800044 	movi	r18,1
+    9c54:	01001a44 	movi	r4,105
+    9c58:	11001626 	beq	r2,r4,9cb4 <___vfprintf_internal_r+0x1f0>
+    9c5c:	20800916 	blt	r4,r2,9c84 <___vfprintf_internal_r+0x1c0>
+    9c60:	010018c4 	movi	r4,99
+    9c64:	11008a26 	beq	r2,r4,9e90 <___vfprintf_internal_r+0x3cc>
+    9c68:	01001904 	movi	r4,100
+    9c6c:	11001126 	beq	r2,r4,9cb4 <___vfprintf_internal_r+0x1f0>
+    9c70:	01001604 	movi	r4,88
+    9c74:	1100ca1e 	bne	r2,r4,9fa0 <___vfprintf_internal_r+0x4dc>
+    9c78:	00c00044 	movi	r3,1
+    9c7c:	d8c00e15 	stw	r3,56(sp)
+    9c80:	00001406 	br	9cd4 <___vfprintf_internal_r+0x210>
+    9c84:	01001cc4 	movi	r4,115
+    9c88:	11009a26 	beq	r2,r4,9ef4 <___vfprintf_internal_r+0x430>
+    9c8c:	20800416 	blt	r4,r2,9ca0 <___vfprintf_internal_r+0x1dc>
+    9c90:	01001bc4 	movi	r4,111
+    9c94:	1100c21e 	bne	r2,r4,9fa0 <___vfprintf_internal_r+0x4dc>
+    9c98:	05400204 	movi	r21,8
+    9c9c:	00000e06 	br	9cd8 <___vfprintf_internal_r+0x214>
+    9ca0:	01001d44 	movi	r4,117
+    9ca4:	11000c26 	beq	r2,r4,9cd8 <___vfprintf_internal_r+0x214>
+    9ca8:	01001e04 	movi	r4,120
+    9cac:	11000926 	beq	r2,r4,9cd4 <___vfprintf_internal_r+0x210>
+    9cb0:	0000bb06 	br	9fa0 <___vfprintf_internal_r+0x4dc>
+    9cb4:	b5000104 	addi	r20,r22,4
+    9cb8:	b8000726 	beq	r23,zero,9cd8 <___vfprintf_internal_r+0x214>
+    9cbc:	dd000d15 	stw	r20,52(sp)
+    9cc0:	b5800017 	ldw	r22,0(r22)
+    9cc4:	b000080e 	bge	r22,zero,9ce8 <___vfprintf_internal_r+0x224>
+    9cc8:	05adc83a 	sub	r22,zero,r22
+    9ccc:	02800044 	movi	r10,1
+    9cd0:	00000606 	br	9cec <___vfprintf_internal_r+0x228>
+    9cd4:	05400404 	movi	r21,16
+    9cd8:	b0c00104 	addi	r3,r22,4
+    9cdc:	d8c00d15 	stw	r3,52(sp)
+    9ce0:	b5800017 	ldw	r22,0(r22)
+    9ce4:	002f883a 	mov	r23,zero
+    9ce8:	0015883a 	mov	r10,zero
+    9cec:	d829883a 	mov	r20,sp
+    9cf0:	b0001426 	beq	r22,zero,9d44 <___vfprintf_internal_r+0x280>
+    9cf4:	b009883a 	mov	r4,r22
+    9cf8:	a80b883a 	mov	r5,r21
+    9cfc:	da801015 	stw	r10,64(sp)
+    9d00:	00099140 	call	9914 <__udivsi3>
+    9d04:	1549383a 	mul	r4,r2,r21
+    9d08:	00c00244 	movi	r3,9
+    9d0c:	da801017 	ldw	r10,64(sp)
+    9d10:	b12dc83a 	sub	r22,r22,r4
+    9d14:	1d800216 	blt	r3,r22,9d20 <___vfprintf_internal_r+0x25c>
+    9d18:	b5800c04 	addi	r22,r22,48
+    9d1c:	00000506 	br	9d34 <___vfprintf_internal_r+0x270>
+    9d20:	d8c00e17 	ldw	r3,56(sp)
+    9d24:	18000226 	beq	r3,zero,9d30 <___vfprintf_internal_r+0x26c>
+    9d28:	b5800dc4 	addi	r22,r22,55
+    9d2c:	00000106 	br	9d34 <___vfprintf_internal_r+0x270>
+    9d30:	b58015c4 	addi	r22,r22,87
+    9d34:	a5800005 	stb	r22,0(r20)
+    9d38:	a5000044 	addi	r20,r20,1
+    9d3c:	102d883a 	mov	r22,r2
+    9d40:	003feb06 	br	9cf0 <_gp+0xffff733c>
+    9d44:	a6c7c83a 	sub	r3,r20,sp
+    9d48:	d8c00a15 	stw	r3,40(sp)
+    9d4c:	90c5c83a 	sub	r2,r18,r3
+    9d50:	00800a0e 	bge	zero,r2,9d7c <___vfprintf_internal_r+0x2b8>
+    9d54:	a085883a 	add	r2,r20,r2
+    9d58:	01400c04 	movi	r5,48
+    9d5c:	d8c00917 	ldw	r3,36(sp)
+    9d60:	a009883a 	mov	r4,r20
+    9d64:	a0c0032e 	bgeu	r20,r3,9d74 <___vfprintf_internal_r+0x2b0>
+    9d68:	a5000044 	addi	r20,r20,1
+    9d6c:	21400005 	stb	r5,0(r4)
+    9d70:	a0bffa1e 	bne	r20,r2,9d5c <_gp+0xffff73a8>
+    9d74:	a6c7c83a 	sub	r3,r20,sp
+    9d78:	d8c00a15 	stw	r3,40(sp)
+    9d7c:	d8c00a17 	ldw	r3,40(sp)
+    9d80:	50d3883a 	add	r9,r10,r3
+    9d84:	d8c00b17 	ldw	r3,44(sp)
+    9d88:	8a6dc83a 	sub	r22,r17,r9
+    9d8c:	18001726 	beq	r3,zero,9dec <___vfprintf_internal_r+0x328>
+    9d90:	50000a26 	beq	r10,zero,9dbc <___vfprintf_internal_r+0x2f8>
+    9d94:	00800b44 	movi	r2,45
+    9d98:	d8800805 	stb	r2,32(sp)
+    9d9c:	e0800117 	ldw	r2,4(fp)
+    9da0:	01c00044 	movi	r7,1
+    9da4:	d9800804 	addi	r6,sp,32
+    9da8:	e00b883a 	mov	r5,fp
+    9dac:	9809883a 	mov	r4,r19
+    9db0:	103ee83a 	callr	r2
+    9db4:	10004d1e 	bne	r2,zero,9eec <___vfprintf_internal_r+0x428>
+    9db8:	84000044 	addi	r16,r16,1
+    9dbc:	0580070e 	bge	zero,r22,9ddc <___vfprintf_internal_r+0x318>
+    9dc0:	b00f883a 	mov	r7,r22
+    9dc4:	01800c04 	movi	r6,48
+    9dc8:	e00b883a 	mov	r5,fp
+    9dcc:	9809883a 	mov	r4,r19
+    9dd0:	0009a580 	call	9a58 <print_repeat>
+    9dd4:	1000451e 	bne	r2,zero,9eec <___vfprintf_internal_r+0x428>
+    9dd8:	85a1883a 	add	r16,r16,r22
+    9ddc:	d8c00a17 	ldw	r3,40(sp)
+    9de0:	a013883a 	mov	r9,r20
+    9de4:	1d2dc83a 	sub	r22,r3,r20
+    9de8:	00002206 	br	9e74 <___vfprintf_internal_r+0x3b0>
+    9dec:	0580090e 	bge	zero,r22,9e14 <___vfprintf_internal_r+0x350>
+    9df0:	b00f883a 	mov	r7,r22
+    9df4:	01800804 	movi	r6,32
+    9df8:	e00b883a 	mov	r5,fp
+    9dfc:	9809883a 	mov	r4,r19
+    9e00:	da801015 	stw	r10,64(sp)
+    9e04:	0009a580 	call	9a58 <print_repeat>
+    9e08:	da801017 	ldw	r10,64(sp)
+    9e0c:	1000371e 	bne	r2,zero,9eec <___vfprintf_internal_r+0x428>
+    9e10:	85a1883a 	add	r16,r16,r22
+    9e14:	503ff126 	beq	r10,zero,9ddc <_gp+0xffff7428>
+    9e18:	00800b44 	movi	r2,45
+    9e1c:	d8800805 	stb	r2,32(sp)
+    9e20:	e0800117 	ldw	r2,4(fp)
+    9e24:	01c00044 	movi	r7,1
+    9e28:	d9800804 	addi	r6,sp,32
+    9e2c:	e00b883a 	mov	r5,fp
+    9e30:	9809883a 	mov	r4,r19
+    9e34:	103ee83a 	callr	r2
+    9e38:	10002c1e 	bne	r2,zero,9eec <___vfprintf_internal_r+0x428>
+    9e3c:	84000044 	addi	r16,r16,1
+    9e40:	003fe606 	br	9ddc <_gp+0xffff7428>
+    9e44:	4a7fffc4 	addi	r9,r9,-1
+    9e48:	48800003 	ldbu	r2,0(r9)
+    9e4c:	01c00044 	movi	r7,1
+    9e50:	d9800804 	addi	r6,sp,32
+    9e54:	d8800805 	stb	r2,32(sp)
+    9e58:	e0800117 	ldw	r2,4(fp)
+    9e5c:	e00b883a 	mov	r5,fp
+    9e60:	da401015 	stw	r9,64(sp)
+    9e64:	9809883a 	mov	r4,r19
+    9e68:	103ee83a 	callr	r2
+    9e6c:	da401017 	ldw	r9,64(sp)
+    9e70:	10001e1e 	bne	r2,zero,9eec <___vfprintf_internal_r+0x428>
+    9e74:	8245c83a 	sub	r2,r16,r9
+    9e78:	4d89883a 	add	r4,r9,r22
+    9e7c:	a085883a 	add	r2,r20,r2
+    9e80:	013ff016 	blt	zero,r4,9e44 <_gp+0xffff7490>
+    9e84:	1021883a 	mov	r16,r2
+    9e88:	dd800d17 	ldw	r22,52(sp)
+    9e8c:	00004406 	br	9fa0 <___vfprintf_internal_r+0x4dc>
+    9e90:	00800044 	movi	r2,1
+    9e94:	1440080e 	bge	r2,r17,9eb8 <___vfprintf_internal_r+0x3f4>
+    9e98:	8d3fffc4 	addi	r20,r17,-1
+    9e9c:	a00f883a 	mov	r7,r20
+    9ea0:	01800804 	movi	r6,32
+    9ea4:	e00b883a 	mov	r5,fp
+    9ea8:	9809883a 	mov	r4,r19
+    9eac:	0009a580 	call	9a58 <print_repeat>
+    9eb0:	10000e1e 	bne	r2,zero,9eec <___vfprintf_internal_r+0x428>
+    9eb4:	8521883a 	add	r16,r16,r20
+    9eb8:	b0800017 	ldw	r2,0(r22)
+    9ebc:	01c00044 	movi	r7,1
+    9ec0:	d80d883a 	mov	r6,sp
+    9ec4:	d8800005 	stb	r2,0(sp)
+    9ec8:	e0800117 	ldw	r2,4(fp)
+    9ecc:	e00b883a 	mov	r5,fp
+    9ed0:	9809883a 	mov	r4,r19
+    9ed4:	b5000104 	addi	r20,r22,4
+    9ed8:	103ee83a 	callr	r2
+    9edc:	1000031e 	bne	r2,zero,9eec <___vfprintf_internal_r+0x428>
+    9ee0:	84000044 	addi	r16,r16,1
+    9ee4:	a02d883a 	mov	r22,r20
+    9ee8:	00002d06 	br	9fa0 <___vfprintf_internal_r+0x4dc>
+    9eec:	00bfffc4 	movi	r2,-1
+    9ef0:	00003106 	br	9fb8 <___vfprintf_internal_r+0x4f4>
+    9ef4:	b5000017 	ldw	r20,0(r22)
+    9ef8:	b0c00104 	addi	r3,r22,4
+    9efc:	d8c00a15 	stw	r3,40(sp)
+    9f00:	a009883a 	mov	r4,r20
+    9f04:	000a0bc0 	call	a0bc <strlen>
+    9f08:	8893c83a 	sub	r9,r17,r2
+    9f0c:	102d883a 	mov	r22,r2
+    9f10:	0240090e 	bge	zero,r9,9f38 <___vfprintf_internal_r+0x474>
+    9f14:	480f883a 	mov	r7,r9
+    9f18:	01800804 	movi	r6,32
+    9f1c:	e00b883a 	mov	r5,fp
+    9f20:	9809883a 	mov	r4,r19
+    9f24:	da401015 	stw	r9,64(sp)
+    9f28:	0009a580 	call	9a58 <print_repeat>
+    9f2c:	da401017 	ldw	r9,64(sp)
+    9f30:	103fee1e 	bne	r2,zero,9eec <_gp+0xffff7538>
+    9f34:	8261883a 	add	r16,r16,r9
+    9f38:	e0800117 	ldw	r2,4(fp)
+    9f3c:	b00f883a 	mov	r7,r22
+    9f40:	a00d883a 	mov	r6,r20
+    9f44:	e00b883a 	mov	r5,fp
+    9f48:	9809883a 	mov	r4,r19
+    9f4c:	103ee83a 	callr	r2
+    9f50:	103fe61e 	bne	r2,zero,9eec <_gp+0xffff7538>
+    9f54:	85a1883a 	add	r16,r16,r22
+    9f58:	dd800a17 	ldw	r22,40(sp)
+    9f5c:	00001006 	br	9fa0 <___vfprintf_internal_r+0x4dc>
+    9f60:	05c00044 	movi	r23,1
+    9f64:	04bfffc4 	movi	r18,-1
+    9f68:	d8000e15 	stw	zero,56(sp)
+    9f6c:	05400284 	movi	r21,10
+    9f70:	9023883a 	mov	r17,r18
+    9f74:	d8000c15 	stw	zero,48(sp)
+    9f78:	d8000b15 	stw	zero,44(sp)
+    9f7c:	b829883a 	mov	r20,r23
+    9f80:	00000806 	br	9fa4 <___vfprintf_internal_r+0x4e0>
+    9f84:	dd000b15 	stw	r20,44(sp)
+    9f88:	05000084 	movi	r20,2
+    9f8c:	00000506 	br	9fa4 <___vfprintf_internal_r+0x4e0>
+    9f90:	00c00044 	movi	r3,1
+    9f94:	d8c00c15 	stw	r3,48(sp)
+    9f98:	050000c4 	movi	r20,3
+    9f9c:	00000106 	br	9fa4 <___vfprintf_internal_r+0x4e0>
+    9fa0:	0029883a 	mov	r20,zero
+    9fa4:	d8c00f17 	ldw	r3,60(sp)
+    9fa8:	18c00044 	addi	r3,r3,1
+    9fac:	d8c00f15 	stw	r3,60(sp)
+    9fb0:	003ede06 	br	9b2c <_gp+0xffff7178>
+    9fb4:	8005883a 	mov	r2,r16
+    9fb8:	dfc01a17 	ldw	ra,104(sp)
+    9fbc:	df001917 	ldw	fp,100(sp)
+    9fc0:	ddc01817 	ldw	r23,96(sp)
+    9fc4:	dd801717 	ldw	r22,92(sp)
+    9fc8:	dd401617 	ldw	r21,88(sp)
+    9fcc:	dd001517 	ldw	r20,84(sp)
+    9fd0:	dcc01417 	ldw	r19,80(sp)
+    9fd4:	dc801317 	ldw	r18,76(sp)
+    9fd8:	dc401217 	ldw	r17,72(sp)
+    9fdc:	dc001117 	ldw	r16,68(sp)
+    9fe0:	dec01b04 	addi	sp,sp,108
+    9fe4:	f800283a 	ret
+
+00009fe8 <__vfprintf_internal>:
+    9fe8:	00800074 	movhi	r2,1
+    9fec:	10aa6f04 	addi	r2,r2,-22084
+    9ff0:	300f883a 	mov	r7,r6
+    9ff4:	280d883a 	mov	r6,r5
+    9ff8:	200b883a 	mov	r5,r4
+    9ffc:	11000017 	ldw	r4,0(r2)
+    a000:	0009ac41 	jmpi	9ac4 <___vfprintf_internal_r>
+
+0000a004 <__sfvwrite_small_dev>:
+    a004:	2880000b 	ldhu	r2,0(r5)
+    a008:	1080020c 	andi	r2,r2,8
+    a00c:	10002126 	beq	r2,zero,a094 <__sfvwrite_small_dev+0x90>
+    a010:	2880008f 	ldh	r2,2(r5)
+    a014:	defffa04 	addi	sp,sp,-24
+    a018:	dc000015 	stw	r16,0(sp)
+    a01c:	dfc00515 	stw	ra,20(sp)
+    a020:	dd000415 	stw	r20,16(sp)
+    a024:	dcc00315 	stw	r19,12(sp)
+    a028:	dc800215 	stw	r18,8(sp)
+    a02c:	dc400115 	stw	r17,4(sp)
+    a030:	2821883a 	mov	r16,r5
+    a034:	10001216 	blt	r2,zero,a080 <__sfvwrite_small_dev+0x7c>
+    a038:	2027883a 	mov	r19,r4
+    a03c:	3025883a 	mov	r18,r6
+    a040:	3823883a 	mov	r17,r7
+    a044:	05010004 	movi	r20,1024
+    a048:	04400b0e 	bge	zero,r17,a078 <__sfvwrite_small_dev+0x74>
+    a04c:	880f883a 	mov	r7,r17
+    a050:	a440010e 	bge	r20,r17,a058 <__sfvwrite_small_dev+0x54>
+    a054:	01c10004 	movi	r7,1024
+    a058:	8140008f 	ldh	r5,2(r16)
+    a05c:	900d883a 	mov	r6,r18
+    a060:	9809883a 	mov	r4,r19
+    a064:	000a0d80 	call	a0d8 <_write_r>
+    a068:	0080050e 	bge	zero,r2,a080 <__sfvwrite_small_dev+0x7c>
+    a06c:	88a3c83a 	sub	r17,r17,r2
+    a070:	90a5883a 	add	r18,r18,r2
+    a074:	003ff406 	br	a048 <_gp+0xffff7694>
+    a078:	0005883a 	mov	r2,zero
+    a07c:	00000706 	br	a09c <__sfvwrite_small_dev+0x98>
+    a080:	8080000b 	ldhu	r2,0(r16)
+    a084:	10801014 	ori	r2,r2,64
+    a088:	8080000d 	sth	r2,0(r16)
+    a08c:	00bfffc4 	movi	r2,-1
+    a090:	00000206 	br	a09c <__sfvwrite_small_dev+0x98>
+    a094:	00bfffc4 	movi	r2,-1
+    a098:	f800283a 	ret
+    a09c:	dfc00517 	ldw	ra,20(sp)
+    a0a0:	dd000417 	ldw	r20,16(sp)
+    a0a4:	dcc00317 	ldw	r19,12(sp)
+    a0a8:	dc800217 	ldw	r18,8(sp)
+    a0ac:	dc400117 	ldw	r17,4(sp)
+    a0b0:	dc000017 	ldw	r16,0(sp)
+    a0b4:	dec00604 	addi	sp,sp,24
+    a0b8:	f800283a 	ret
+
+0000a0bc <strlen>:
+    a0bc:	2005883a 	mov	r2,r4
+    a0c0:	10c00007 	ldb	r3,0(r2)
+    a0c4:	18000226 	beq	r3,zero,a0d0 <strlen+0x14>
+    a0c8:	10800044 	addi	r2,r2,1
+    a0cc:	003ffc06 	br	a0c0 <_gp+0xffff770c>
+    a0d0:	1105c83a 	sub	r2,r2,r4
+    a0d4:	f800283a 	ret
+
+0000a0d8 <_write_r>:
+    a0d8:	defffd04 	addi	sp,sp,-12
+    a0dc:	dc000015 	stw	r16,0(sp)
+    a0e0:	04000074 	movhi	r16,1
+    a0e4:	dc400115 	stw	r17,4(sp)
+    a0e8:	842ab304 	addi	r16,r16,-21812
+    a0ec:	2023883a 	mov	r17,r4
+    a0f0:	2809883a 	mov	r4,r5
+    a0f4:	300b883a 	mov	r5,r6
+    a0f8:	380d883a 	mov	r6,r7
+    a0fc:	dfc00215 	stw	ra,8(sp)
+    a100:	80000015 	stw	zero,0(r16)
+    a104:	000a2a80 	call	a2a8 <write>
+    a108:	00ffffc4 	movi	r3,-1
+    a10c:	10c0031e 	bne	r2,r3,a11c <_write_r+0x44>
+    a110:	80c00017 	ldw	r3,0(r16)
+    a114:	18000126 	beq	r3,zero,a11c <_write_r+0x44>
+    a118:	88c00015 	stw	r3,0(r17)
+    a11c:	dfc00217 	ldw	ra,8(sp)
+    a120:	dc400117 	ldw	r17,4(sp)
+    a124:	dc000017 	ldw	r16,0(sp)
+    a128:	dec00304 	addi	sp,sp,12
+    a12c:	f800283a 	ret
+
+0000a130 <alt_load_section>:
+ */
+
+static void ALT_INLINE alt_load_section (alt_u32* from, 
+                                         alt_u32* to, 
+                                         alt_u32* end)
+{
+    a130:	defffc04 	addi	sp,sp,-16
+    a134:	df000315 	stw	fp,12(sp)
+    a138:	df000304 	addi	fp,sp,12
+    a13c:	e13ffd15 	stw	r4,-12(fp)
+    a140:	e17ffe15 	stw	r5,-8(fp)
+    a144:	e1bfff15 	stw	r6,-4(fp)
+  if (to != from)
+    a148:	e0fffe17 	ldw	r3,-8(fp)
+    a14c:	e0bffd17 	ldw	r2,-12(fp)
+    a150:	18800c26 	beq	r3,r2,a184 <alt_load_section+0x54>
+  {
+    while( to != end )
+    a154:	00000806 	br	a178 <alt_load_section+0x48>
+    {
+      *to++ = *from++;
+    a158:	e0bffe17 	ldw	r2,-8(fp)
+    a15c:	10c00104 	addi	r3,r2,4
+    a160:	e0fffe15 	stw	r3,-8(fp)
+    a164:	e0fffd17 	ldw	r3,-12(fp)
+    a168:	19000104 	addi	r4,r3,4
+    a16c:	e13ffd15 	stw	r4,-12(fp)
+    a170:	18c00017 	ldw	r3,0(r3)
+    a174:	10c00015 	stw	r3,0(r2)
+                                         alt_u32* to, 
+                                         alt_u32* end)
+{
+  if (to != from)
+  {
+    while( to != end )
+    a178:	e0fffe17 	ldw	r3,-8(fp)
+    a17c:	e0bfff17 	ldw	r2,-4(fp)
+    a180:	18bff51e 	bne	r3,r2,a158 <_gp+0xffff77a4>
+    {
+      *to++ = *from++;
+    }
+  }
+}
+    a184:	0001883a 	nop
+    a188:	e037883a 	mov	sp,fp
+    a18c:	df000017 	ldw	fp,0(sp)
+    a190:	dec00104 	addi	sp,sp,4
+    a194:	f800283a 	ret
+
+0000a198 <alt_load>:
+ * there is no bootloader, so this application is responsible for loading to
+ * RAM any sections that are required.
+ */  
+
+void alt_load (void)
+{
+    a198:	defffe04 	addi	sp,sp,-8
+    a19c:	dfc00115 	stw	ra,4(sp)
+    a1a0:	df000015 	stw	fp,0(sp)
+    a1a4:	d839883a 	mov	fp,sp
+  /* 
+   * Copy the .rwdata section. 
+   */
+
+  alt_load_section (&__flash_rwdata_start, 
+    a1a8:	01800074 	movhi	r6,1
+    a1ac:	31aa7204 	addi	r6,r6,-22072
+    a1b0:	01400074 	movhi	r5,1
+    a1b4:	296a3504 	addi	r5,r5,-22316
+    a1b8:	01000074 	movhi	r4,1
+    a1bc:	212a7204 	addi	r4,r4,-22072
+    a1c0:	000a1300 	call	a130 <alt_load_section>
+
+  /*
+   * Copy the exception handler.
+   */
+
+  alt_load_section (&__flash_exceptions_start, 
+    a1c4:	01800074 	movhi	r6,1
+    a1c8:	31a00804 	addi	r6,r6,-32736
+    a1cc:	01400074 	movhi	r5,1
+    a1d0:	29600804 	addi	r5,r5,-32736
+    a1d4:	01000074 	movhi	r4,1
+    a1d8:	21200804 	addi	r4,r4,-32736
+    a1dc:	000a1300 	call	a130 <alt_load_section>
+
+  /*
+   * Copy the .rodata section.
+   */
+
+  alt_load_section (&__flash_rodata_start, 
+    a1e0:	01800074 	movhi	r6,1
+    a1e4:	31aa3504 	addi	r6,r6,-22316
+    a1e8:	01400074 	movhi	r5,1
+    a1ec:	2969f004 	addi	r5,r5,-22592
+    a1f0:	01000074 	movhi	r4,1
+    a1f4:	2129f004 	addi	r4,r4,-22592
+    a1f8:	000a1300 	call	a130 <alt_load_section>
+  
+  /*
+   * Now ensure that the caches are in synch.
+   */
+  
+  alt_dcache_flush_all();
+    a1fc:	000a4ac0 	call	a4ac <alt_dcache_flush_all>
+  alt_icache_flush_all();
+    a200:	000a4f40 	call	a4f4 <alt_icache_flush_all>
+}
+    a204:	0001883a 	nop
+    a208:	e037883a 	mov	sp,fp
+    a20c:	dfc00117 	ldw	ra,4(sp)
+    a210:	df000017 	ldw	fp,0(sp)
+    a214:	dec00204 	addi	sp,sp,8
+    a218:	f800283a 	ret
+
+0000a21c <alt_main>:
+ * devices/filesystems/components in the system; and call the entry point for
+ * the users application, i.e. main().
+ */
+
+void alt_main (void)
+{
+    a21c:	defffd04 	addi	sp,sp,-12
+    a220:	dfc00215 	stw	ra,8(sp)
+    a224:	df000115 	stw	fp,4(sp)
+    a228:	df000104 	addi	fp,sp,4
+#endif
+
+  /* ALT LOG - please see HAL/sys/alt_log_printf.h for details */
+  ALT_LOG_PRINT_BOOT("[alt_main.c] Entering alt_main, calling alt_irq_init.\r\n");
+  /* Initialize the interrupt controller. */
+  alt_irq_init (NULL);
+    a22c:	0009883a 	mov	r4,zero
+    a230:	000a3440 	call	a344 <alt_irq_init>
+
+  /* Initialize the operating system */
+  ALT_LOG_PRINT_BOOT("[alt_main.c] Done alt_irq_init, calling alt_os_init.\r\n");
+  ALT_OS_INIT();
+    a234:	0001883a 	nop
+  ALT_LOG_PRINT_BOOT("[alt_main.c] Done OS Init, calling alt_sem_create.\r\n");
+  ALT_SEM_CREATE (&alt_fd_list_lock, 1);
+
+  /* Initialize the device drivers/software components. */
+  ALT_LOG_PRINT_BOOT("[alt_main.c] Calling alt_sys_init.\r\n");
+  alt_sys_init();
+    a238:	000a37c0 	call	a37c <alt_sys_init>
+  ALT_LOG_PRINT_BOOT("[alt_main.c] Calling main.\r\n");
+
+#ifdef ALT_NO_EXIT
+  main (alt_argc, alt_argv, alt_envp);
+#else
+  result = main (alt_argc, alt_argv, alt_envp);
+    a23c:	d0a04717 	ldw	r2,-32484(gp)
+    a240:	d0e04817 	ldw	r3,-32480(gp)
+    a244:	d1204917 	ldw	r4,-32476(gp)
+    a248:	200d883a 	mov	r6,r4
+    a24c:	180b883a 	mov	r5,r3
+    a250:	1009883a 	mov	r4,r2
+    a254:	000806c0 	call	806c <main>
+    a258:	e0bfff15 	stw	r2,-4(fp)
+  close(STDOUT_FILENO);
+    a25c:	01000044 	movi	r4,1
+    a260:	000a4700 	call	a470 <close>
+  exit (result);
+    a264:	e13fff17 	ldw	r4,-4(fp)
+    a268:	000a5dc0 	call	a5dc <exit>
+
+0000a26c <alt_get_errno>:
+#undef errno
+
+extern int errno;
+
+static ALT_INLINE int* alt_get_errno(void)
+{
+    a26c:	defffe04 	addi	sp,sp,-8
+    a270:	dfc00115 	stw	ra,4(sp)
+    a274:	df000015 	stw	fp,0(sp)
+    a278:	d839883a 	mov	fp,sp
+  return ((alt_errno) ? alt_errno() : &errno);
+    a27c:	d0a00417 	ldw	r2,-32752(gp)
+    a280:	10000326 	beq	r2,zero,a290 <alt_get_errno+0x24>
+    a284:	d0a00417 	ldw	r2,-32752(gp)
+    a288:	103ee83a 	callr	r2
+    a28c:	00000106 	br	a294 <alt_get_errno+0x28>
+    a290:	d0a04604 	addi	r2,gp,-32488
+}
+    a294:	e037883a 	mov	sp,fp
+    a298:	dfc00117 	ldw	ra,4(sp)
+    a29c:	df000017 	ldw	fp,0(sp)
+    a2a0:	dec00204 	addi	sp,sp,8
+    a2a4:	f800283a 	ret
+
+0000a2a8 <write>:
+ * Provide minimal version that just writes to the stdout/stderr devices
+ * when provided.
+ */
+
+int ALT_WRITE (int file, const void *ptr, size_t len)
+{
+    a2a8:	defffb04 	addi	sp,sp,-20
+    a2ac:	dfc00415 	stw	ra,16(sp)
+    a2b0:	df000315 	stw	fp,12(sp)
+    a2b4:	df000304 	addi	fp,sp,12
+    a2b8:	e13ffd15 	stw	r4,-12(fp)
+    a2bc:	e17ffe15 	stw	r5,-8(fp)
+    a2c0:	e1bfff15 	stw	r6,-4(fp)
+#if !defined(ALT_STDOUT_PRESENT) && !defined(ALT_STDERR_PRESENT)
+    /* Generate a link time warning, should this function ever be called. */
+    ALT_STUB_WARNING(write);
+#endif
+
+    switch (file) {
+    a2c4:	e0bffd17 	ldw	r2,-12(fp)
+    a2c8:	10c00060 	cmpeqi	r3,r2,1
+    a2cc:	1800031e 	bne	r3,zero,a2dc <write+0x34>
+    a2d0:	108000a0 	cmpeqi	r2,r2,2
+    a2d4:	1000091e 	bne	r2,zero,a2fc <write+0x54>
+    a2d8:	00001006 	br	a31c <write+0x74>
+#ifdef ALT_STDOUT_PRESENT
+    case 1: /* stdout file descriptor */
+        return ALT_DRIVER_WRITE(ALT_STDOUT_DEV, ptr, len, 0);
+    a2dc:	e0bfff17 	ldw	r2,-4(fp)
+    a2e0:	000f883a 	mov	r7,zero
+    a2e4:	100d883a 	mov	r6,r2
+    a2e8:	e17ffe17 	ldw	r5,-8(fp)
+    a2ec:	01000074 	movhi	r4,1
+    a2f0:	212a7004 	addi	r4,r4,-22080
+    a2f4:	000a3a00 	call	a3a0 <altera_avalon_jtag_uart_write>
+    a2f8:	00000d06 	br	a330 <write+0x88>
+#endif /* ALT_STDOUT_PRESENT */
+#ifdef ALT_STDERR_PRESENT
+    case 2: /* stderr file descriptor */
+        return ALT_DRIVER_WRITE(ALT_STDERR_DEV, ptr, len, 0);
+    a2fc:	e0bfff17 	ldw	r2,-4(fp)
+    a300:	000f883a 	mov	r7,zero
+    a304:	100d883a 	mov	r6,r2
+    a308:	e17ffe17 	ldw	r5,-8(fp)
+    a30c:	01000074 	movhi	r4,1
+    a310:	212a7004 	addi	r4,r4,-22080
+    a314:	000a3a00 	call	a3a0 <altera_avalon_jtag_uart_write>
+    a318:	00000506 	br	a330 <write+0x88>
+#endif /* ALT_STDERR_PRESENT */
+    default:
+        ALT_ERRNO = EBADFD;
+    a31c:	000a26c0 	call	a26c <alt_get_errno>
+    a320:	1007883a 	mov	r3,r2
+    a324:	00801444 	movi	r2,81
+    a328:	18800015 	stw	r2,0(r3)
+        return -1;
+    a32c:	00bfffc4 	movi	r2,-1
+    }
+}
+    a330:	e037883a 	mov	sp,fp
+    a334:	dfc00117 	ldw	ra,4(sp)
+    a338:	df000017 	ldw	fp,0(sp)
+    a33c:	dec00204 	addi	sp,sp,8
+    a340:	f800283a 	ret
+
+0000a344 <alt_irq_init>:
+ * The "base" parameter is ignored and only
+ * present for backwards-compatibility.
+ */
+
+void alt_irq_init ( const void* base )
+{
+    a344:	defffd04 	addi	sp,sp,-12
+    a348:	dfc00215 	stw	ra,8(sp)
+    a34c:	df000115 	stw	fp,4(sp)
+    a350:	df000104 	addi	fp,sp,4
+    a354:	e13fff15 	stw	r4,-4(fp)
+    ALTERA_NIOS2_GEN2_IRQ_INIT ( NIOS2_GEN2, nios2_gen2);
+    a358:	000a5280 	call	a528 <altera_nios2_gen2_irq_init>
+ * alt_irq_cpu_enable_interrupts() enables the CPU to start taking interrupts.
+ */
+static ALT_INLINE void ALT_ALWAYS_INLINE 
+       alt_irq_cpu_enable_interrupts (void)
+{
+    NIOS2_WRITE_STATUS(NIOS2_STATUS_PIE_MSK
+    a35c:	00800044 	movi	r2,1
+    a360:	1001703a 	wrctl	status,r2
+    alt_irq_cpu_enable_interrupts();
+}
+    a364:	0001883a 	nop
+    a368:	e037883a 	mov	sp,fp
+    a36c:	dfc00117 	ldw	ra,4(sp)
+    a370:	df000017 	ldw	fp,0(sp)
+    a374:	dec00204 	addi	sp,sp,8
+    a378:	f800283a 	ret
+
+0000a37c <alt_sys_init>:
+ * Initialize the non-interrupt controller devices.
+ * Called after alt_irq_init().
+ */
+
+void alt_sys_init( void )
+{
+    a37c:	deffff04 	addi	sp,sp,-4
+    a380:	df000015 	stw	fp,0(sp)
+    a384:	d839883a 	mov	fp,sp
+    ALTERA_AVALON_JTAG_UART_INIT ( JTAG_UART, jtag_uart);
+    ALTERA_AVALON_SYSID_QSYS_INIT ( SYSID_QSYS, sysid_qsys);
+    a388:	0001883a 	nop
+}
+    a38c:	0001883a 	nop
+    a390:	e037883a 	mov	sp,fp
+    a394:	df000017 	ldw	fp,0(sp)
+    a398:	dec00104 	addi	sp,sp,4
+    a39c:	f800283a 	ret
+
+0000a3a0 <altera_avalon_jtag_uart_write>:
+ * one FIFOs worth of data.  But you said you didn't want to use interrupts :-)
+ */
+
+int altera_avalon_jtag_uart_write(altera_avalon_jtag_uart_state* sp, 
+  const char * ptr, int count, int flags)
+{
+    a3a0:	defff904 	addi	sp,sp,-28
+    a3a4:	df000615 	stw	fp,24(sp)
+    a3a8:	df000604 	addi	fp,sp,24
+    a3ac:	e13ffc15 	stw	r4,-16(fp)
+    a3b0:	e17ffd15 	stw	r5,-12(fp)
+    a3b4:	e1bffe15 	stw	r6,-8(fp)
+    a3b8:	e1ffff15 	stw	r7,-4(fp)
+  unsigned int base = sp->base;
+    a3bc:	e0bffc17 	ldw	r2,-16(fp)
+    a3c0:	10800017 	ldw	r2,0(r2)
+    a3c4:	e0bffa15 	stw	r2,-24(fp)
+
+  const char * end = ptr + count;
+    a3c8:	e0bffe17 	ldw	r2,-8(fp)
+    a3cc:	e0fffd17 	ldw	r3,-12(fp)
+    a3d0:	1885883a 	add	r2,r3,r2
+    a3d4:	e0bffb15 	stw	r2,-20(fp)
+
+  while (ptr < end)
+    a3d8:	00000e06 	br	a414 <altera_avalon_jtag_uart_write+0x74>
+    if ((IORD_ALTERA_AVALON_JTAG_UART_CONTROL(base) & ALTERA_AVALON_JTAG_UART_CONTROL_WSPACE_MSK) != 0)
+    a3dc:	e0bffa17 	ldw	r2,-24(fp)
+    a3e0:	10800104 	addi	r2,r2,4
+    a3e4:	10800037 	ldwio	r2,0(r2)
+    a3e8:	10bfffec 	andhi	r2,r2,65535
+    a3ec:	10000926 	beq	r2,zero,a414 <altera_avalon_jtag_uart_write+0x74>
+      IOWR_ALTERA_AVALON_JTAG_UART_DATA(base, *ptr++);
+    a3f0:	e0fffa17 	ldw	r3,-24(fp)
+    a3f4:	e0bffd17 	ldw	r2,-12(fp)
+    a3f8:	11000044 	addi	r4,r2,1
+    a3fc:	e13ffd15 	stw	r4,-12(fp)
+    a400:	10800003 	ldbu	r2,0(r2)
+    a404:	10803fcc 	andi	r2,r2,255
+    a408:	1080201c 	xori	r2,r2,128
+    a40c:	10bfe004 	addi	r2,r2,-128
+    a410:	18800035 	stwio	r2,0(r3)
+{
+  unsigned int base = sp->base;
+
+  const char * end = ptr + count;
+
+  while (ptr < end)
+    a414:	e0fffd17 	ldw	r3,-12(fp)
+    a418:	e0bffb17 	ldw	r2,-20(fp)
+    a41c:	18bfef36 	bltu	r3,r2,a3dc <_gp+0xffff7a28>
+    if ((IORD_ALTERA_AVALON_JTAG_UART_CONTROL(base) & ALTERA_AVALON_JTAG_UART_CONTROL_WSPACE_MSK) != 0)
+      IOWR_ALTERA_AVALON_JTAG_UART_DATA(base, *ptr++);
+
+  return count;
+    a420:	e0bffe17 	ldw	r2,-8(fp)
+}
+    a424:	e037883a 	mov	sp,fp
+    a428:	df000017 	ldw	fp,0(sp)
+    a42c:	dec00104 	addi	sp,sp,4
+    a430:	f800283a 	ret
+
+0000a434 <alt_get_errno>:
+#undef errno
+
+extern int errno;
+
+static ALT_INLINE int* alt_get_errno(void)
+{
+    a434:	defffe04 	addi	sp,sp,-8
+    a438:	dfc00115 	stw	ra,4(sp)
+    a43c:	df000015 	stw	fp,0(sp)
+    a440:	d839883a 	mov	fp,sp
+  return ((alt_errno) ? alt_errno() : &errno);
+    a444:	d0a00417 	ldw	r2,-32752(gp)
+    a448:	10000326 	beq	r2,zero,a458 <alt_get_errno+0x24>
+    a44c:	d0a00417 	ldw	r2,-32752(gp)
+    a450:	103ee83a 	callr	r2
+    a454:	00000106 	br	a45c <alt_get_errno+0x28>
+    a458:	d0a04604 	addi	r2,gp,-32488
+}
+    a45c:	e037883a 	mov	sp,fp
+    a460:	dfc00117 	ldw	ra,4(sp)
+    a464:	df000017 	ldw	fp,0(sp)
+    a468:	dec00204 	addi	sp,sp,8
+    a46c:	f800283a 	ret
+
+0000a470 <close>:
+#include "os/alt_syscall.h"
+
+#ifdef ALT_USE_DIRECT_DRIVERS
+
+int ALT_CLOSE (int fildes)
+{
+    a470:	defffd04 	addi	sp,sp,-12
+    a474:	dfc00215 	stw	ra,8(sp)
+    a478:	df000115 	stw	fp,4(sp)
+    a47c:	df000104 	addi	fp,sp,4
+    a480:	e13fff15 	stw	r4,-4(fp)
+  
+  ALT_STUB_WARNING(close);
+  
+  /* Indicate an error */
+  
+  ALT_ERRNO = ENOSYS;
+    a484:	000a4340 	call	a434 <alt_get_errno>
+    a488:	1007883a 	mov	r3,r2
+    a48c:	00801604 	movi	r2,88
+    a490:	18800015 	stw	r2,0(r3)
+  return -1;
+    a494:	00bfffc4 	movi	r2,-1
+}
+    a498:	e037883a 	mov	sp,fp
+    a49c:	dfc00117 	ldw	ra,4(sp)
+    a4a0:	df000017 	ldw	fp,0(sp)
+    a4a4:	dec00204 	addi	sp,sp,8
+    a4a8:	f800283a 	ret
+
+0000a4ac <alt_dcache_flush_all>:
+/*
+ * alt_dcache_flush_all() is called to flush the entire data cache.
+ */
+
+void alt_dcache_flush_all (void)
+{
+    a4ac:	defffe04 	addi	sp,sp,-8
+    a4b0:	df000115 	stw	fp,4(sp)
+    a4b4:	df000104 	addi	fp,sp,4
+#if NIOS2_DCACHE_SIZE > 0
+  char* i;
+  
+  for (i = (char*) 0; i < (char*) NIOS2_DCACHE_SIZE; i+= NIOS2_DCACHE_LINE_SIZE)
+    a4b8:	e03fff15 	stw	zero,-4(fp)
+    a4bc:	00000506 	br	a4d4 <alt_dcache_flush_all+0x28>
+  { 
+    __asm__ volatile ("flushd (%0)" :: "r" (i));
+    a4c0:	e0bfff17 	ldw	r2,-4(fp)
+    a4c4:	1000003b 	flushd	0(r2)
+void alt_dcache_flush_all (void)
+{
+#if NIOS2_DCACHE_SIZE > 0
+  char* i;
+  
+  for (i = (char*) 0; i < (char*) NIOS2_DCACHE_SIZE; i+= NIOS2_DCACHE_LINE_SIZE)
+    a4c8:	e0bfff17 	ldw	r2,-4(fp)
+    a4cc:	10800804 	addi	r2,r2,32
+    a4d0:	e0bfff15 	stw	r2,-4(fp)
+    a4d4:	e0bfff17 	ldw	r2,-4(fp)
+    a4d8:	10820030 	cmpltui	r2,r2,2048
+    a4dc:	103ff81e 	bne	r2,zero,a4c0 <_gp+0xffff7b0c>
+  { 
+    __asm__ volatile ("flushd (%0)" :: "r" (i));
+  }
+#endif /* NIOS2_DCACHE_SIZE > 0 */
+}
+    a4e0:	0001883a 	nop
+    a4e4:	e037883a 	mov	sp,fp
+    a4e8:	df000017 	ldw	fp,0(sp)
+    a4ec:	dec00104 	addi	sp,sp,4
+    a4f0:	f800283a 	ret
+
+0000a4f4 <alt_icache_flush_all>:
+/*
+ * alt_icache_flush_all() is called to flush the entire instruction cache.
+ */
+
+void alt_icache_flush_all (void)
+{
+    a4f4:	defffe04 	addi	sp,sp,-8
+    a4f8:	dfc00115 	stw	ra,4(sp)
+    a4fc:	df000015 	stw	fp,0(sp)
+    a500:	d839883a 	mov	fp,sp
+#if NIOS2_ICACHE_SIZE > 0
+  alt_icache_flush (0, NIOS2_ICACHE_SIZE);
+    a504:	01440004 	movi	r5,4096
+    a508:	0009883a 	mov	r4,zero
+    a50c:	000a54c0 	call	a54c <alt_icache_flush>
+#endif
+}
+    a510:	0001883a 	nop
+    a514:	e037883a 	mov	sp,fp
+    a518:	dfc00117 	ldw	ra,4(sp)
+    a51c:	df000017 	ldw	fp,0(sp)
+    a520:	dec00204 	addi	sp,sp,8
+    a524:	f800283a 	ret
+
+0000a528 <altera_nios2_gen2_irq_init>:
+/*
+ * To initialize the internal interrupt controller, just clear the IENABLE
+ * register so that all possible IRQs are disabled.
+ */
+void altera_nios2_gen2_irq_init(void) 
+{
+    a528:	deffff04 	addi	sp,sp,-4
+    a52c:	df000015 	stw	fp,0(sp)
+    a530:	d839883a 	mov	fp,sp
+    NIOS2_WRITE_IENABLE(0);
+    a534:	000170fa 	wrctl	ienable,zero
+}
+    a538:	0001883a 	nop
+    a53c:	e037883a 	mov	sp,fp
+    a540:	df000017 	ldw	fp,0(sp)
+    a544:	dec00104 	addi	sp,sp,4
+    a548:	f800283a 	ret
+
+0000a54c <alt_icache_flush>:
+ * alt_icache_flush() is called to flush the instruction cache for a memory
+ * region of length "len" bytes, starting at address "start".
+ */
+
+void alt_icache_flush (void* start, alt_u32 len)
+{
+    a54c:	defffb04 	addi	sp,sp,-20
+    a550:	df000415 	stw	fp,16(sp)
+    a554:	df000404 	addi	fp,sp,16
+    a558:	e13ffe15 	stw	r4,-8(fp)
+    a55c:	e17fff15 	stw	r5,-4(fp)
+
+  /*
+   * This is the most we would ever need to flush.
+   */
+ 
+  if (len > NIOS2_ICACHE_SIZE)
+    a560:	e0bfff17 	ldw	r2,-4(fp)
+    a564:	10840070 	cmpltui	r2,r2,4097
+    a568:	1000021e 	bne	r2,zero,a574 <alt_icache_flush+0x28>
+  {
+    len = NIOS2_ICACHE_SIZE;
+    a56c:	00840004 	movi	r2,4096
+    a570:	e0bfff15 	stw	r2,-4(fp)
+  }
+
+  end = ((char*) start) + len;
+    a574:	e0fffe17 	ldw	r3,-8(fp)
+    a578:	e0bfff17 	ldw	r2,-4(fp)
+    a57c:	1885883a 	add	r2,r3,r2
+    a580:	e0bffd15 	stw	r2,-12(fp)
+
+  for (i = start; i < end; i+= NIOS2_ICACHE_LINE_SIZE)
+    a584:	e0bffe17 	ldw	r2,-8(fp)
+    a588:	e0bffc15 	stw	r2,-16(fp)
+    a58c:	00000506 	br	a5a4 <alt_icache_flush+0x58>
+  { 
+    __asm__ volatile ("flushi %0" :: "r" (i)); 
+    a590:	e0bffc17 	ldw	r2,-16(fp)
+    a594:	1000603a 	flushi	r2
+    len = NIOS2_ICACHE_SIZE;
+  }
+
+  end = ((char*) start) + len;
+
+  for (i = start; i < end; i+= NIOS2_ICACHE_LINE_SIZE)
+    a598:	e0bffc17 	ldw	r2,-16(fp)
+    a59c:	10800804 	addi	r2,r2,32
+    a5a0:	e0bffc15 	stw	r2,-16(fp)
+    a5a4:	e0fffc17 	ldw	r3,-16(fp)
+    a5a8:	e0bffd17 	ldw	r2,-12(fp)
+    a5ac:	18bff836 	bltu	r3,r2,a590 <_gp+0xffff7bdc>
+   * For an unaligned flush request, we've got one more line left.
+   * Note that this is dependent on NIOS2_ICACHE_LINE_SIZE to be a 
+   * multiple of 2 (which it always is).
+   */
+
+  if (((alt_u32) start) & (NIOS2_ICACHE_LINE_SIZE - 1))
+    a5b0:	e0bffe17 	ldw	r2,-8(fp)
+    a5b4:	108007cc 	andi	r2,r2,31
+    a5b8:	10000226 	beq	r2,zero,a5c4 <alt_icache_flush+0x78>
+  {
+    __asm__ volatile ("flushi %0" :: "r" (i));
+    a5bc:	e0bffc17 	ldw	r2,-16(fp)
+    a5c0:	1000603a 	flushi	r2
+  /* 
+   * Having flushed the cache, flush any stale instructions in the 
+   * pipeline 
+   */
+
+  __asm__ volatile ("flushp");
+    a5c4:	0000203a 	flushp
+
+#endif /* NIOS2_ICACHE_SIZE > 0 */
+}
+    a5c8:	0001883a 	nop
+    a5cc:	e037883a 	mov	sp,fp
+    a5d0:	df000017 	ldw	fp,0(sp)
+    a5d4:	dec00104 	addi	sp,sp,4
+    a5d8:	f800283a 	ret
+
+0000a5dc <exit>:
+    a5dc:	defffe04 	addi	sp,sp,-8
+    a5e0:	000b883a 	mov	r5,zero
+    a5e4:	dc000015 	stw	r16,0(sp)
+    a5e8:	dfc00115 	stw	ra,4(sp)
+    a5ec:	2021883a 	mov	r16,r4
+    a5f0:	000a5fc0 	call	a5fc <__call_exitprocs>
+    a5f4:	8009883a 	mov	r4,r16
+    a5f8:	000a78c0 	call	a78c <_exit>
+
+0000a5fc <__call_exitprocs>:
+    a5fc:	defff504 	addi	sp,sp,-44
+    a600:	dd000515 	stw	r20,20(sp)
+    a604:	05000074 	movhi	r20,1
+    a608:	dc800315 	stw	r18,12(sp)
+    a60c:	dfc00a15 	stw	ra,40(sp)
+    a610:	df000915 	stw	fp,36(sp)
+    a614:	ddc00815 	stw	r23,32(sp)
+    a618:	dd800715 	stw	r22,28(sp)
+    a61c:	dd400615 	stw	r21,24(sp)
+    a620:	dcc00415 	stw	r19,16(sp)
+    a624:	dc400215 	stw	r17,8(sp)
+    a628:	dc000115 	stw	r16,4(sp)
+    a62c:	d9000015 	stw	r4,0(sp)
+    a630:	2825883a 	mov	r18,r5
+    a634:	a52a6e04 	addi	r20,r20,-22088
+    a638:	a4400017 	ldw	r17,0(r20)
+    a63c:	8cc00c17 	ldw	r19,48(r17)
+    a640:	8c400c04 	addi	r17,r17,48
+    a644:	98004526 	beq	r19,zero,a75c <__call_exitprocs+0x160>
+    a648:	9c000117 	ldw	r16,4(r19)
+    a64c:	00900034 	movhi	r2,16384
+    a650:	10bfffc4 	addi	r2,r2,-1
+    a654:	9d402217 	ldw	r21,136(r19)
+    a658:	85bfffc4 	addi	r22,r16,-1
+    a65c:	80a1883a 	add	r16,r16,r2
+    a660:	8421883a 	add	r16,r16,r16
+    a664:	8421883a 	add	r16,r16,r16
+    a668:	ac2f883a 	add	r23,r21,r16
+    a66c:	84000204 	addi	r16,r16,8
+    a670:	9c21883a 	add	r16,r19,r16
+    a674:	b0002716 	blt	r22,zero,a714 <__call_exitprocs+0x118>
+    a678:	90000726 	beq	r18,zero,a698 <__call_exitprocs+0x9c>
+    a67c:	a800041e 	bne	r21,zero,a690 <__call_exitprocs+0x94>
+    a680:	b5bfffc4 	addi	r22,r22,-1
+    a684:	bdffff04 	addi	r23,r23,-4
+    a688:	843fff04 	addi	r16,r16,-4
+    a68c:	003ff906 	br	a674 <_gp+0xffff7cc0>
+    a690:	b9002017 	ldw	r4,128(r23)
+    a694:	913ffa1e 	bne	r18,r4,a680 <_gp+0xffff7ccc>
+    a698:	99000117 	ldw	r4,4(r19)
+    a69c:	82000017 	ldw	r8,0(r16)
+    a6a0:	213fffc4 	addi	r4,r4,-1
+    a6a4:	b100021e 	bne	r22,r4,a6b0 <__call_exitprocs+0xb4>
+    a6a8:	9d800115 	stw	r22,4(r19)
+    a6ac:	00000106 	br	a6b4 <__call_exitprocs+0xb8>
+    a6b0:	80000015 	stw	zero,0(r16)
+    a6b4:	403ff226 	beq	r8,zero,a680 <_gp+0xffff7ccc>
+    a6b8:	9f000117 	ldw	fp,4(r19)
+    a6bc:	a8000526 	beq	r21,zero,a6d4 <__call_exitprocs+0xd8>
+    a6c0:	00800044 	movi	r2,1
+    a6c4:	1592983a 	sll	r9,r2,r22
+    a6c8:	a9404017 	ldw	r5,256(r21)
+    a6cc:	494a703a 	and	r5,r9,r5
+    a6d0:	2800021e 	bne	r5,zero,a6dc <__call_exitprocs+0xe0>
+    a6d4:	403ee83a 	callr	r8
+    a6d8:	00000906 	br	a700 <__call_exitprocs+0x104>
+    a6dc:	a9004117 	ldw	r4,260(r21)
+    a6e0:	4908703a 	and	r4,r9,r4
+    a6e4:	2000041e 	bne	r4,zero,a6f8 <__call_exitprocs+0xfc>
+    a6e8:	b9400017 	ldw	r5,0(r23)
+    a6ec:	d9000017 	ldw	r4,0(sp)
+    a6f0:	403ee83a 	callr	r8
+    a6f4:	00000206 	br	a700 <__call_exitprocs+0x104>
+    a6f8:	b9000017 	ldw	r4,0(r23)
+    a6fc:	403ee83a 	callr	r8
+    a700:	99000117 	ldw	r4,4(r19)
+    a704:	e13fcc1e 	bne	fp,r4,a638 <_gp+0xffff7c84>
+    a708:	89000017 	ldw	r4,0(r17)
+    a70c:	993fdc26 	beq	r19,r4,a680 <_gp+0xffff7ccc>
+    a710:	003fc906 	br	a638 <_gp+0xffff7c84>
+    a714:	00800034 	movhi	r2,0
+    a718:	10800004 	addi	r2,r2,0
+    a71c:	10000f26 	beq	r2,zero,a75c <__call_exitprocs+0x160>
+    a720:	99400117 	ldw	r5,4(r19)
+    a724:	99000017 	ldw	r4,0(r19)
+    a728:	2800091e 	bne	r5,zero,a750 <__call_exitprocs+0x154>
+    a72c:	20000826 	beq	r4,zero,a750 <__call_exitprocs+0x154>
+    a730:	89000015 	stw	r4,0(r17)
+    a734:	a8000226 	beq	r21,zero,a740 <__call_exitprocs+0x144>
+    a738:	a809883a 	mov	r4,r21
+    a73c:	00000000 	call	0 <__alt_mem_RAM-0x8000>
+    a740:	9809883a 	mov	r4,r19
+    a744:	00000000 	call	0 <__alt_mem_RAM-0x8000>
+    a748:	8cc00017 	ldw	r19,0(r17)
+    a74c:	003fbd06 	br	a644 <_gp+0xffff7c90>
+    a750:	9823883a 	mov	r17,r19
+    a754:	2027883a 	mov	r19,r4
+    a758:	003fba06 	br	a644 <_gp+0xffff7c90>
+    a75c:	dfc00a17 	ldw	ra,40(sp)
+    a760:	df000917 	ldw	fp,36(sp)
+    a764:	ddc00817 	ldw	r23,32(sp)
+    a768:	dd800717 	ldw	r22,28(sp)
+    a76c:	dd400617 	ldw	r21,24(sp)
+    a770:	dd000517 	ldw	r20,20(sp)
+    a774:	dcc00417 	ldw	r19,16(sp)
+    a778:	dc800317 	ldw	r18,12(sp)
+    a77c:	dc400217 	ldw	r17,8(sp)
+    a780:	dc000117 	ldw	r16,4(sp)
+    a784:	dec00b04 	addi	sp,sp,44
+    a788:	f800283a 	ret
+
+0000a78c <_exit>:
+ *
+ * ALT_EXIT is mapped onto the _exit() system call in alt_syscall.h
+ */
+
+void ALT_EXIT (int exit_code)
+{
+    a78c:	defffd04 	addi	sp,sp,-12
+    a790:	df000215 	stw	fp,8(sp)
+    a794:	df000204 	addi	fp,sp,8
+    a798:	e13fff15 	stw	r4,-4(fp)
+  ALT_LOG_PRINT_BOOT("[alt_exit.c] Entering _exit() function.\r\n");
+  ALT_LOG_PRINT_BOOT("[alt_exit.c] Exit code from main was %d.\r\n",exit_code);
+  /* Stop all other threads */
+
+  ALT_LOG_PRINT_BOOT("[alt_exit.c] Calling ALT_OS_STOP().\r\n");
+  ALT_OS_STOP();
+    a79c:	0001883a 	nop
+    a7a0:	e0bfff17 	ldw	r2,-4(fp)
+    a7a4:	e0bffe15 	stw	r2,-8(fp)
+/*
+ * Routine called on exit.
+ */
+static ALT_INLINE ALT_ALWAYS_INLINE void alt_sim_halt(int exit_code)
+{
+  register int r2 asm ("r2") = exit_code;
+    a7a8:	e0bffe17 	ldw	r2,-8(fp)
+  __asm__ volatile ("\n0:\n\taddi %0,%0, -1\n\tbgt %0,zero,0b" : : "r" (ALT_CPU_FREQ/100) ); /* Delay for >30ms */
+
+  __asm__ volatile ("break 2" : : "r"(r2), "r"(r3) ALT_GMON_DATA );
+
+#else /* !DEBUG_STUB */
+  if (r2) {
+    a7ac:	10000226 	beq	r2,zero,a7b8 <_exit+0x2c>
+    ALT_SIM_FAIL();
+    a7b0:	002af070 	cmpltui	zero,zero,43969
+    a7b4:	00000106 	br	a7bc <_exit+0x30>
+  } else {
+    ALT_SIM_PASS();
+    a7b8:	002af0b0 	cmpltui	zero,zero,43970
+  ALT_SIM_HALT(exit_code);
+
+  /* spin forever, since there's no where to go back to */
+
+  ALT_LOG_PRINT_BOOT("[alt_exit.c] Spinning forever.\r\n");
+  while (1);
+    a7bc:	003fff06 	br	a7bc <_gp+0xffff7e08>

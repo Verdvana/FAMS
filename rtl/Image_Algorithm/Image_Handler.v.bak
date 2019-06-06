@@ -1,0 +1,57 @@
+module Image_Handler
+#(
+	parameter	[7:0]	THRESHHOLD = 8'b10
+)
+(
+	//global clock 50MHz 
+	input 			clk, 		//50MHz
+	input 			rst_n, 		//global reset 
+	
+	//Image input 
+	input	[7:0]	Pre_Gray1,		//预处理图像1灰度	
+	input 	[7:0]	Pre_Gray2,  	//预处理图像2灰度
+	output 			Read_request,	//图像1读取请求
+	
+	//Image output 
+	output 	[7:0]	Post_Gray,		//输出图像灰度
+	output 			Write_request	//写请求，图像存入SDRAM中
+);
+
+//图像灰度处理算法
+reg [7:0] r_Post_Gray
+always@(posedge clk or rst_n)
+begin 
+	if(!rst_n)
+		r_Post_Gray <= 8'b0;
+	else if(Read_request)
+	begin 
+		if(Pre_Gray1 > Pre_Gray2)
+			r_Post_Gray <= Pre_Gray1 - Pre_Gray2;
+		else 
+			r_Post_Gray <= Pre_Gray2 -Pre_Gray1;
+	end 
+	else 
+		r_Post_Gray <= r_Post_Gray;
+end 
+
+assign	Post_Gray = (r_Post_Gray > THRESHHOLD) ?  255:0;
+
+//读请求,写请求
+always@(posedge clk or rst_n)
+begin 
+	if(!rst_n)
+	begin 
+		Read_request  <= 1'b0;
+		Write_request <= 1'b0;
+	end 
+	else if(Write_request)
+	begin 
+		Read_request <=  1'b1;
+		Write_request <= 1'b0;
+	end 
+	else 
+	begin 
+		Read_request <= 1'b0;
+		Write_request <= 1'b1;
+	end 
+end 

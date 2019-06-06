@@ -1,0 +1,393 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "sdram_cke",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_cs_n",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_we_n",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_cas_n",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_ras_n",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_dqm[0]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_dqm[1]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_ba[0]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_ba[1]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_addr[0]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_addr[1]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_addr[2]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_addr[3]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_addr[4]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_addr[5]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_addr[6]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_addr[7]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_addr[8]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_addr[9]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_addr[10]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_addr[11]",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_hsync",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_vsync",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_de",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_red[0]",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_red[1]",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_red[2]",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_red[3]",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_red[4]",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_red[5]",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_red[6]",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_red[7]",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_green[0]",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_green[1]",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_green[2]",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_green[3]",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_green[4]",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_green[5]",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_green[6]",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_green[7]",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_blue[0]",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_blue[1]",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_blue[2]",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_blue[3]",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_blue[4]",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_blue[5]",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_blue[6]",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_blue[7]",
+					"strict" : false
+				},
+				{
+					"name" : "lcd_blank_n",
+					"strict" : false
+				},
+				{
+					"name" : "cmos_sclk",
+					"strict" : false
+				},
+				{
+					"name" : "scl",
+					"strict" : false
+				},
+				{
+					"name" : "adc_din",
+					"strict" : false
+				},
+				{
+					"name" : "adc_sclk",
+					"strict" : false
+				},
+				{
+					"name" : "adc_cs_n",
+					"strict" : false
+				},
+				{
+					"name" : "menb",
+					"strict" : false
+				},
+				{
+					"name" : "o2_scl",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_dq[0]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_dq[1]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_dq[2]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_dq[3]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_dq[4]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_dq[5]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_dq[6]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_dq[7]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_dq[8]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_dq[9]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_dq[10]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_dq[11]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_dq[12]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_dq[13]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_dq[14]",
+					"strict" : false
+				},
+				{
+					"name" : "sdram_dq[15]",
+					"strict" : false
+				},
+				{
+					"name" : "cmos_sdat",
+					"strict" : false
+				},
+				{
+					"name" : "sda",
+					"strict" : false
+				},
+				{
+					"name" : "o2_sda",
+					"strict" : false
+				},
+				{
+					"name" : "dht11",
+					"strict" : false
+				},
+				{
+					"name" : "clk_50m",
+					"strict" : false
+				},
+				{
+					"name" : "rst_n",
+					"strict" : false
+				},
+				{
+					"name" : "int",
+					"strict" : false
+				},
+				{
+					"name" : "cmos_pclk",
+					"strict" : false
+				},
+				{
+					"name" : "key_data[1]",
+					"strict" : false
+				},
+				{
+					"name" : "key_data[0]",
+					"strict" : false
+				},
+				{
+					"name" : "cmos_href",
+					"strict" : false
+				},
+				{
+					"name" : "cmos_vsync",
+					"strict" : false
+				},
+				{
+					"name" : "cmos_data[3]",
+					"strict" : false
+				},
+				{
+					"name" : "cmos_data[2]",
+					"strict" : false
+				},
+				{
+					"name" : "cmos_data[1]",
+					"strict" : false
+				},
+				{
+					"name" : "cmos_data[0]",
+					"strict" : false
+				},
+				{
+					"name" : "cmos_data[4]",
+					"strict" : false
+				},
+				{
+					"name" : "cmos_data[5]",
+					"strict" : false
+				},
+				{
+					"name" : "cmos_data[6]",
+					"strict" : false
+				},
+				{
+					"name" : "cmos_data[7]",
+					"strict" : false
+				},
+				{
+					"name" : "altera_reserved_tms",
+					"strict" : false
+				},
+				{
+					"name" : "altera_reserved_tck",
+					"strict" : false
+				},
+				{
+					"name" : "altera_reserved_tdi",
+					"strict" : false
+				},
+				{
+					"name" : "altera_reserved_tdo",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

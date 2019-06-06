@@ -1,0 +1,38 @@
+
+State Machine - |FAMS|qsys_system:u0|qsys_system_nios2_gen2:nios2_gen2|qsys_system_nios2_gen2_cpu:cpu|qsys_system_nios2_gen2_cpu_nios2_oci:the_qsys_system_nios2_gen2_cpu_nios2_oci|qsys_system_nios2_gen2_cpu_debug_slave_wrapper:the_qsys_system_nios2_gen2_cpu_debug_slave_wrapper|qsys_system_nios2_gen2_cpu_debug_slave_tck:the_qsys_system_nios2_gen2_cpu_debug_slave_tck|DRsize
+Name DRsize.101 DRsize.100 DRsize.011 DRsize.010 DRsize.001 DRsize.000 
+DRsize.000 0 0 0 0 0 0 
+DRsize.001 0 0 0 0 1 1 
+DRsize.010 0 0 0 1 0 1 
+DRsize.011 0 0 1 0 0 1 
+DRsize.100 0 1 0 0 0 1 
+DRsize.101 1 0 0 0 0 1 
+
+State Machine - |FAMS|DHT11:DHT11|state
+Name state.1100 state.1011 state.1010 state.1001 state.1000 state.0111 state.0110 state.0101 state.0100 state.0011 state.0010 state.0001 state.0000 
+state.0000 0 0 0 0 0 0 0 0 0 0 0 0 0 
+state.0001 0 0 0 0 0 0 0 0 0 0 0 1 1 
+state.0010 0 0 0 0 0 0 0 0 0 0 1 0 1 
+state.0011 0 0 0 0 0 0 0 0 0 1 0 0 1 
+state.0100 0 0 0 0 0 0 0 0 1 0 0 0 1 
+state.0101 0 0 0 0 0 0 0 1 0 0 0 0 1 
+state.0110 0 0 0 0 0 0 1 0 0 0 0 0 1 
+state.0111 0 0 0 0 0 1 0 0 0 0 0 0 1 
+state.1000 0 0 0 0 1 0 0 0 0 0 0 0 1 
+state.1001 0 0 0 1 0 0 0 0 0 0 0 0 1 
+state.1010 0 0 1 0 0 0 0 0 0 0 0 0 1 
+state.1011 0 1 0 0 0 0 0 0 0 0 0 0 1 
+state.1100 1 0 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |FAMS|Oxygen:Oxygen|temp
+Name temp.00 temp.10 temp.01 
+temp.00 0 0 0 
+temp.01 1 0 1 
+temp.10 1 1 0 
+
+State Machine - |FAMS|sensor:sensor|temp
+Name temp.11 temp.10 temp.01 temp.00 
+temp.00 0 0 0 0 
+temp.01 0 0 1 1 
+temp.10 0 1 0 1 
+temp.11 1 0 0 1 

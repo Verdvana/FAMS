@@ -1,0 +1,27 @@
+	component qsys_system is
+		port (
+			adc_p_export      : in  std_logic_vector(23 downto 0) := (others => 'X'); -- export
+			adc_t_export      : in  std_logic_vector(23 downto 0) := (others => 'X'); -- export
+			clk_clk           : in  std_logic                     := 'X';             -- clk
+			dig_p1_export     : in  std_logic_vector(15 downto 0) := (others => 'X'); -- export
+			dig_p2_export     : in  std_logic_vector(15 downto 0) := (others => 'X'); -- export
+			dig_p3_export     : in  std_logic_vector(15 downto 0) := (others => 'X'); -- export
+			dig_p4_export     : in  std_logic_vector(15 downto 0) := (others => 'X'); -- export
+			dig_p5_export     : in  std_logic_vector(15 downto 0) := (others => 'X'); -- export
+			dig_p6_export     : in  std_logic_vector(15 downto 0) := (others => 'X'); -- export
+			dig_p7_export     : in  std_logic_vector(15 downto 0) := (others => 'X'); -- export
+			dig_p8_export     : in  std_logic_vector(15 downto 0) := (others => 'X'); -- export
+			dig_p9_export     : in  std_logic_vector(15 downto 0) := (others => 'X'); -- export
+			dig_t1_export     : in  std_logic_vector(15 downto 0) := (others => 'X'); -- export
+			dig_t2_export     : in  std_logic_vector(15 downto 0) := (others => 'X'); -- export
+			dig_t3_export     : in  std_logic_vector(15 downto 0) := (others => 'X'); -- export
+			end_o_export      : in  std_logic                     := 'X';             -- export
+			heart_rate_export : out std_logic_vector(7 downto 0);                     -- export
+			heignt_dec_export : out std_logic_vector(7 downto 0);                     -- export
+			heignt_int_export : out std_logic_vector(7 downto 0);                     -- export
+			max30102_0_export : in  std_logic_vector(23 downto 0) := (others => 'X'); -- export
+			max30102_1_export : in  std_logic_vector(23 downto 0) := (others => 'X'); -- export
+			reset_reset_n     : in  std_logic                     := 'X'              -- reset_n
+		);
+	end component qsys_system;
+

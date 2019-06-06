@@ -1,0 +1,1000 @@
+/*************************************************************
+Title	:	基于I2C通信协议的体温传感器、高度传感器、心率传感器设计
+Time	:	2019/6/5 
+Author:	Eric Ni
+Team	:	Veneno
+*************************************************************/
+module sensor(
+			input								clk,				//外部输入时钟
+			input								rst_n,
+			input								int,
+
+			inout								sda,				//IIC的数据线
+			output	reg					scl,				//IIC的时钟线
+			output							end_o				//结束信号  结束后会产生高电平
+			//output				[303:0]	dout				//输出数据
+);
+
+												
+						reg					sda_buffer;		//写入的数据的中间寄存器
+						reg					flag;				//控制系统是否占有总线控制权
+						reg		[7:0]		count;			//计数器
+						reg					clk_sys;			//系统时钟
+
+						reg 		[7:0]		data_out1;		//输出数据1
+						reg		[7:0]		data_out2;		//输出数据2
+						reg		[7:0]		data_out3;		//输出数据3
+						reg		[7:0]		data_out4;		//输出数据4
+						reg		[7:0]		data_out5;		//输出数据5
+						reg		[7:0]		data_out6;		//输出数据6
+
+						reg		[6:0]		state;			//状态寄存器
+						reg		[9:0]		cnt; 				//发送或接收数据的个数
+						reg		[1:0]		temp;				//读/写使能的中间寄存器
+						reg 		[7:0]		memory;			//发送或接收数据的中间寄存器（控制字）
+						
+						reg		[7:0]		memory_w;		//控制字（写）
+						reg		[7:0]		memory_r;		//控制字（读）
+						reg 		[1:0]		key_data;		//判断读/写
+						reg		[7:0]		slave_high;		//寄存器高8位地址
+						reg		[7:0]		slave_low;		//寄存器低8位地址
+						reg		[7:0]		word_data;		//写入数据
+						reg		[6:0]		num;				//读写次数
+						reg 		[303:0]	dout_r;			//输出数据
+						reg 					end_reg;			//结束信号
+						
+//----------------sda----------------------------
+assign sda 	 = (flag) 	? sda_buffer : 1'bz;	//flag = 1 --系统拥有总线控制权，
+															//发送sda_buffer的数据
+															//flag = 0 --释放总线
+															
+//----------------dout----------------------------															
+//assign dout  = (end_reg)? dout_r : 304'b0;	//输出数据
+
+//----------------end_o---------------------------
+assign end_o = end_reg;								//结束信号
+
+//----------------clk_sys-------------------------
+always @(posedge clk or negedge rst_n)
+	begin
+		if(!rst_n)
+			begin
+				clk_sys <= 1'b0;
+				count	<= 8'd0;
+			end
+		else
+			if (count < 61)	//分频成为近400kHz的时钟
+				count <= count +1; 
+			else
+				begin
+					count <= 8'd0;
+					clk_sys <= ~clk_sys;
+				end
+	end	
+
+//----------------scl----------------------------
+always @(negedge clk_sys or negedge rst_n)
+	begin
+		if(!rst_n)
+			begin
+				scl <= 1'b1;	//复位时，scl为高
+			end
+		else
+			begin
+				if (state > 0)	//当总线忙时，scl为近200kHz的时钟
+					scl <= ~scl;
+				else
+					scl <= 1'b1;//空闲时，scl为高
+			end
+	end	
+	
+//----------------state--------------------------
+always @ (posedge clk_sys or negedge rst_n)
+	begin
+	 	if (!rst_n)
+	 		begin
+	 			data_out1 	<= 8'd0;
+				data_out2 	<= 8'd0;
+				data_out3 	<= 8'd0;
+				data_out4 	<= 8'd0;
+				data_out5 	<= 8'd0;
+				data_out6 	<= 8'd0;
+	 			flag 		 	<= 1'b1;		//复位时，系统获得总线的控制权
+	 			sda_buffer 	<= 1'b1; 	//向IIC的数据线上发送高电平
+	 			state 		<= 7'd0;
+	 			temp 			<= 2'b00;
+	 			num 			<= 7'b0;
+	 			end_reg 		<= 1'b0;
+	 			dout_r 		<= 304'b0;
+	 		end
+	 	else
+	 		case(state)
+	 			0:begin //发送启动信号
+	 				if(num == 7'd50) //心率传感器--等待中断信号
+	 					begin
+	 						if(int == 0)
+	 							num <= num + 1'b1;
+			 				else 
+			 					state <= 0;
+						end
+			 		else if (scl)
+			 			begin
+			 				sda_buffer <= 1'b0;	//发送启动信号
+			 				state <= 1;
+			 				flag <= 1'b1;
+			 				temp <= key_data;		//将读写信号保存
+			 				memory <= memory_w;	//写控制字
+			 				end_reg <= 1'b0;
+			 			end
+			 		else 
+			 			state <= 0;
+	 			end
+	 			1:begin //发送8位写控制字
+	 				if ((scl == 0) && (cnt < 8))
+	 					begin
+	 					 	sda_buffer <= memory[7];
+	 					 	cnt <= cnt + 1;
+	 					 	memory = {memory[6:0],memory[7]};
+	 					 	state <= 1;
+	 					end 
+	 				else 
+	 					begin
+	 						if ((scl == 0) && (cnt == 8))
+	 							begin
+	 								cnt <= 0;
+	 								flag <= 0;	//释放总线控制权
+	 								state <= 2;
+	 							end
+	 						else 
+	 							begin
+	 								state <= 1;
+	 							end
+	 					end
+	 			end	 			
+	 			2:begin //检测应答信号
+	 				if (!sda)
+	 					begin
+	 						state <= 3;
+	 						memory <= slave_high; //寄存器高8位地址
+	 					end
+	 				else
+	 					begin
+	 						state <= 0;
+	 					end
+	 			end
+	 			3:begin //发送寄存器高8位地址
+	 				if((scl == 0) && (cnt < 8)) 
+	 					begin
+	 						flag <= 1;
+	 						sda_buffer <= memory[7];
+	 						cnt <= cnt + 1;
+	 						memory <= {memory[6:0],memory[7]};
+	 						state <= 3;
+	 					end
+	 				else
+	 					begin
+	 					 	if((scl == 0) && (cnt == 8))
+	 					 		begin
+	 					 			cnt <= 0;
+	 					 			flag <= 0;
+	 					 			if (num <= 7'd3)	//体温传感器为2字节寄存器地址
+	 					 				state <= 4;
+	 					 			else
+	 					 				state <= 6;
+	 					 		end
+	 					 	else 
+	 					 		begin
+	 					 			state <= 3;
+	 					 		end
+	 					end 
+	 			end
+	 			4:begin //检测应答信号
+	 				if (!sda)
+	 					begin
+	 						state <= 5;
+	 						memory <= slave_low; 	//寄存器低8位地址
+	 					end
+	 				else
+	 					begin
+	 						state <= 0;
+	 					end
+	 			end
+	 			5:begin //发送寄存器低8位地址
+	 				if((scl == 0) && (cnt < 8)) 	
+	 					begin
+	 						flag <= 1;
+	 						sda_buffer <= memory[7];
+	 						cnt <= cnt + 1;
+	 						memory <= {memory[6:0],memory[7]};
+	 						state <= 5;
+	 					end
+	 				else
+	 					begin
+	 					 	if((scl == 0) && (cnt == 8))
+	 					 		begin
+	 					 			cnt <= 0;
+	 					 			flag <= 0;
+	 					 			state <= 6;
+	 					 		end
+	 					 	else 
+	 					 		begin
+	 					 			state <= 5;
+	 					 		end
+	 					end 
+	 			end
+	 			6:begin //判断读/写信号
+	 				if(!sda)
+	 					begin
+	 						if(temp == 2'b01)				//判断写信号
+	 							begin
+	 								state <= 7;
+	 								memory <= word_data; //写数据
+	 							end
+	 						if(temp == 2'b10)				//判断读信号
+	 							state <= 11;
+	 					end
+	 				else 
+	 					begin
+	 						state <= 0;
+	 					end
+	 			end
+	 			7:begin //写入一字节数据
+	 				if((scl == 0) && (cnt < 8)) //发送数据
+	 					begin
+	 						flag <= 1;
+	 						sda_buffer <= memory[7];
+	 						cnt <= cnt + 1;
+	 						memory <= {memory[6:0],memory[7]};
+	 						state <= 7;
+	 					end
+	 				else
+	 					begin
+	 					 	if((scl == 0) && (cnt == 8))
+	 					 		begin
+	 					 			cnt <= 0;
+	 					 			flag <= 0;
+	 					 			state <= 8;
+	 					 		end
+	 					 	else 
+	 					 		begin
+	 					 			state <= 7;
+	 					 		end
+	 					end 
+	 			end
+	 			8:begin //检测应答信号
+	 				if (!sda)
+	 					begin
+	 						state <= 9;
+	 					end
+	 				else
+	 					begin
+	 						state <= 0;
+	 					end
+	 			end
+	 			9:begin //准备发送停止信号
+	 				if(scl == 0)
+	 					begin
+	 						flag <= 1;
+	 						sda_buffer <= 0; 	//拉低IIC的数据线
+													//为发送停止信号做准备
+	 						state <= 10;
+	 					end
+	 				else 
+	 					state <= 9;
+	 			end
+	 			10:begin //发送停止信号
+	 				if(scl == 1)
+	 					begin
+	 						sda_buffer <= 1; 	//发送停止信号
+	 						state <= 0; 	  	//开始下一次读写
+	 						num <= num + 1;
+	 					end
+	 				else
+	 					state <= 10;
+	 			end
+
+	 			//------------------------------------------------
+
+	 			11: begin //准备发送启动信号
+	 				flag <= 1;
+	 				sda_buffer <= 1; 		//拉高IIC数据线
+												//为发送启动信号做准备
+	 				state <= 12;
+	 			end
+	 			12:begin //发送启动信号
+	 				sda_buffer <= 0; 		//发送启动信号
+	 				state <= 13;
+	 				memory <= memory_r; 	//读控制字
+	 			end
+	 			13:begin //发送8位读控制字
+	 				if ((scl == 0) && (cnt < 8))
+	 					begin
+	 						flag <= 1;
+	 					 	sda_buffer <= memory[7];
+	 					 	cnt <= cnt + 1;
+	 					 	memory = {memory[6:0],memory[7]};
+	 					 	state <= 13;
+	 					end 
+	 				else 
+	 					begin
+	 						if ((scl == 0) && (cnt == 8))
+	 							begin
+	 								cnt <= 0;
+	 								flag <= 0;	//释放总线控制权
+	 								state <= 14;
+	 							end
+	 						else 
+	 							begin
+	 								state <= 13;
+	 							end
+	 					end
+	 			end
+	 			14:begin //检测应答信号
+	 				if(!sda)
+	 					begin
+	 						state <= 15;
+	 					end
+	 				else 
+	 					begin
+	 						state <= 0;
+	 					end
+	 			end
+	 			15:begin //读取第1个字节数据
+	 				if((scl == 1) && (cnt < 8))
+	 					begin
+	 						cnt <= cnt + 1;
+	 						memory <= {memory[6:0],sda};
+	 						state <= 15;
+	 					end
+	 				else 
+	 					begin
+	 						if((scl == 0) && (cnt == 8))
+	 							begin
+	 								cnt <= 0;
+	 								data_out1 <= memory; 					//输出数据1
+	 								if((num == 7'd3) | (num == 7'd53)) 	//体温传感器需要连续读取2字节数据
+	 									begin										//心率传感器需要连续读取6字节数据
+	 										flag <= 1;
+	 										state <= 16;
+	 										sda_buffer <= 0;
+	 									end
+	 								else
+	 									state <= 26;
+	 							end
+	 						else 
+	 							state <= 15;
+	 					end
+	 			end
+	 			16:begin  //发送应答信号
+					if((scl == 1) && (cnt < 1))
+						begin
+							cnt <= 0;
+							state <= 16;
+							flag <= 1;
+						end
+					else if(scl == 0)
+						begin
+							cnt <= 0;
+							state <= 17;
+							flag <= 0;
+						end
+				end
+	 			17:begin //读取第2个字节数据
+	 				if((scl == 1) && (cnt < 8))
+	 					begin
+	 						cnt <= cnt + 1;
+	 						memory <= {memory[6:0],sda};
+	 						state <= 17;
+	 					end
+	 				else 
+	 					begin
+	 						if((scl == 0) && (cnt == 8))
+	 							begin
+	 								cnt <= 0;
+	 								data_out2 <= memory; //输出数据2
+	 								if(num == 7'd53)		//心率传感器需要连续读取6字节
+	 									begin
+											flag <= 1;
+											sda_buffer <= 0;
+	 										state <= 18;	
+	 									end
+	 								else 
+	 									state <= 26;
+	 							end
+	 						else 
+	 							state <= 17;
+	 					end
+	 			end
+	 			18:begin //发送应答信号
+					if((scl == 1) && (cnt < 1))
+						begin
+							cnt <= 0;
+							state <= 18;
+							flag <= 1;
+						end
+					else if(scl == 0)
+						begin
+							cnt <= 0;
+							state <= 19;
+							flag <= 0;
+						end
+				end
+				19:begin //读取第3个字节数据
+	 				if((scl == 1) && (cnt < 8))
+	 					begin
+	 						cnt <= cnt + 1;
+	 						memory <= {memory[6:0],sda};
+	 						state <= 19;
+	 					end
+	 				else 
+	 					begin
+	 						if((scl == 0) && (cnt == 8))
+	 							begin
+	 								cnt <= 0;
+	 								data_out3 <= memory;	//输出数据3
+	 								if(num == 7'd53)		//心率传感器需要连续读取6字节
+	 									begin
+	 										state <= 20;
+											flag <= 1;
+											sda_buffer <= 0;
+	 									end
+	 							end
+	 						else 
+	 							state <= 19;
+	 					end
+	 			end
+	 			20:begin //发送应答信号
+					if((scl == 1) && (cnt < 1))
+						begin
+							cnt <= 0;
+							state <= 20;
+							flag <= 1;
+						end
+					else if(scl == 0)
+						begin
+							cnt <= 0;
+							state <= 21;
+							flag <= 0;
+						end
+				end
+	 			21:begin //读取第4个字节数据
+	 				if((scl == 1) && (cnt < 8))
+	 					begin
+	 						cnt <= cnt + 1;
+	 						memory <= {memory[6:0],sda};
+	 						state <= 21;
+	 					end
+	 				else 
+	 					begin
+	 						if((scl == 0) && (cnt == 8))
+	 							begin
+	 								cnt <= 0;
+	 								data_out4 <= memory;	//输出高8位数据4
+	 								if(num == 7'd53)		//心率传感器需要连续读取6字节
+	 									begin
+	 										state <= 22;
+											flag <= 1;
+											sda_buffer <= 0;
+	 									end
+	 							end
+	 						else 
+	 							state <= 21;
+	 					end
+	 			end
+	 			22:begin //发送应答信号
+					if((scl == 1) && (cnt < 1))
+						begin
+							cnt <= 0;
+							state <= 22;
+							flag <= 1;
+						end
+					else if(scl == 0)
+						begin
+							cnt <= 0;
+							state <= 23;
+							flag <= 0;
+						end
+				end
+	 			23:begin //读取第5个字节数据
+	 				if((scl == 1) && (cnt < 8))
+	 					begin
+	 						cnt <= cnt + 1;
+	 						memory <= {memory[6:0],sda};
+	 						state <= 23;
+	 					end
+	 				else 
+	 					begin
+	 						if((scl == 0) && (cnt == 8))
+	 							begin
+	 								cnt <= 0;
+	 								data_out5 <= memory;	//输出高8位数据5
+	 								if(num == 7'd53)		//心率传感器需要连续读取6字节
+	 									begin
+	 										state <= 24;
+											flag <= 1;
+											sda_buffer <= 0;
+	 									end
+	 							end
+	 						else 
+	 							state <= 23;
+	 					end
+	 			end
+	 			24:begin //发送应答信号
+					if((scl == 1) && (cnt < 1))
+						begin
+							cnt <= 0;
+							state <= 24;
+							flag <= 1;
+						end
+					else if(scl == 0)
+						begin
+							cnt <= 0;
+							state <= 25;
+							flag <= 0;
+						end
+				end
+	 			25:begin //读取第6个字节数据
+	 				if((scl == 1) && (cnt < 8))
+	 					begin
+	 						cnt <= cnt + 1;
+	 						memory <= {memory[6:0],sda};
+	 						state <= 25;
+	 					end
+	 				else 
+	 					begin
+	 						if((scl == 0) && (cnt == 8))
+	 							begin
+	 								cnt <= 0;
+	 								data_out6 <= memory; //输出高8位数据6
+	 								flag <= 1'b1;
+	 								state <= 26;
+	 							end
+	 						else 
+	 							state <= 25;
+	 					end
+	 			end
+	 			26:begin //准备发送停止信号
+	 				if(scl == 0)
+	 					begin
+	 						sda_buffer <= 0;	//拉低IIC，准备停止信号
+	 						state <= 27;
+	 						if (num == 7'd3) 									//体温传感器 1*16位
+	 							dout_r <= {dout_r[287:0] , data_out1 , data_out2};
+	 						else if((num >= 7'd7) && (num <= 7'd36))	//高度传感器 30*8位
+	 							dout_r <= {dout_r[295:0] , data_out1};
+	 						else if (num == 7'd53)							//心率传感器 1*48位
+	 							dout_r <= {dout_r[255:0] , data_out1 , data_out2 , data_out3 , data_out4 , data_out5 , data_out6};
+
+	 					end
+	 				else 
+	 					state <= 26;
+	 			end
+	 			27:begin //发送停止信号
+	 				if(scl == 1)
+	 					begin
+	 						sda_buffer <= 1;
+							state <= 7'd0; 		//返回零状态进行下一次读写
+	 						if(num == 7'd53)
+	 							begin
+	 								num <= 7'd0;	//读写次数清零
+	 								end_reg <= 1;	//发送结束信号
+	 							end
+	 						else
+	 							num <= num + 1;	//读写次数+1
+	 					end
+	 				else 
+	 					state <= 27;
+	 			end
+	 			default : state <= 0;
+	 		endcase
+	 end 
+
+//----------------num----------------------------
+always @(*)
+	begin
+		case(num)
+				//人体温度传感器
+				7'd0:	
+					begin
+						key_data   = 2'b01;	//写
+						memory_w   = 8'h90;
+						memory_r   = 8'h91;	
+						slave_high = 8'h00;	//CONFIGURATION
+						slave_low  = 8'h01;
+						word_data  = 8'h00; 
+					end 
+				7'd1:	
+					begin
+						key_data   = 2'b01;	//写
+						memory_w   = 8'h90;
+						memory_r   = 8'h91;
+						slave_high = 8'h00;	//THYST
+						slave_low  = 8'h02;
+						word_data  = 8'h00;
+					end
+				7'd2:
+					begin
+					 	key_data   = 2'b01;	//写
+					 	memory_w   = 8'h90;
+						memory_r   = 8'h91;
+						slave_high = 8'h00;	//TOS
+						slave_low  = 8'h03;
+						word_data  = 8'h00;
+					 end
+				7'd3:
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'h90;
+						memory_r   = 8'h91;
+						slave_high = 8'h00;	//*TEMPERATURE 16位
+						slave_low  = 8'h00;
+					end
+				//高度传感器
+				7'd4:	
+					begin
+						key_data   = 2'b01;	//写
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'hE0; 	//复位寄存器
+						word_data  = 8'hB6;
+					end
+				7'd5:	
+					begin
+						key_data   = 2'b01;	//写
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'hF4; 	//测量控制寄存器
+						word_data  = 8'hFF;
+					end
+				7'd6:	
+					begin
+						key_data   = 2'b01;	//写
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'hF5; 	//配置寄存器
+						word_data  = 8'h00;
+					end
+				7'd7:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'h89; 	//*dig_T1 8+8位
+					end 
+				7'd8:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'h88;	//*
+					end 
+				7'd9:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'h8B; 	//*dig_T2 8+8位
+					end 
+				7'd10:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'h8A;	//*
+					end 
+				7'd11:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'h8D; 	//*dig_T3 8+8位
+					end 
+				7'd12:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'h8C;	//*
+					end 
+				7'd13:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'h8F; 	//*dig_P1 8+8位
+					end 
+				7'd14:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'h8E;	//*
+					end 
+				7'd15:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'h91; 	//*dig_P2 8+8位
+					end 
+				7'd16:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'h90;	//*
+					end 
+				7'd17:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'h93; 	//*dig_P3 8+8位
+					end
+				7'd18:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'h92;	//*
+					end
+				7'd19:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'h95; 	//*dig_P4 8+8位
+					end 
+				7'd20:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'h94;	//*
+					end 
+				7'd21:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'h97; 	//*dig_P5 8+8位
+					end
+				7'd22:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'h96;	//*
+					end 
+				7'd23:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'h99; 	//*dig_P6 8+8位
+					end 
+				7'd24:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'h98;	//*
+					end 
+				7'd25:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'h9B; 	//*dig_P7 8+8位
+					end 
+				7'd26:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'h9A;	//*
+					end 
+				7'd27:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'h9D; 	//*dig_P8 8+8位
+					end 
+				7'd28:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'h9C;	//*
+					end 
+				7'd29:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'h9F; 	//*dig_P9 8+8位
+					end 
+				7'd30:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'h9E;	//*
+					end 
+				7'd31:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'hFA; 	//*TEMP 8+8+8位
+					end 
+				7'd32:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'hFB;	//*
+					end 
+				7'd33:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'hFC;	//*
+					end 
+				7'd34:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'hF7; 	//*PRESS 8+8+8位
+					end 
+				7'd35:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'hF8;	//*
+					end 
+				7'd36:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hEC;
+						memory_r   = 8'hED;
+						slave_high = 8'hF9;	//*
+					end 	 
+				//心率传感器
+				7'd37:	
+					begin
+						key_data   = 2'b01;	//写
+						memory_w   = 8'hAE;
+						memory_r   = 8'hAF;
+						slave_high = 8'h09;	//mode:temp_en[3]   MODE[2:0]
+						word_data  = 8'h40; 	//reset
+					end
+				7'd38:	
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hAE;
+						memory_r   = 8'hAF;
+						slave_high = 8'h00;	//Read and clear status register
+					end
+				7'd39:
+					begin
+					 	key_data   = 2'b01;	//写
+					 	memory_w   = 8'hAE;
+						memory_r   = 8'hAF;
+						slave_high = 8'h02;	//INTR_ENABLE_1
+						word_data  = 8'hC0;
+					 end
+				7'd40:
+					begin
+						key_data   = 2'b01;	//写
+						memory_w   = 8'hAE;
+						memory_r   = 8'hAF;
+						slave_high = 8'h03;	//INTR_ENABLE_2
+						word_data  = 8'h00;
+					end
+				7'd41:
+					begin
+						key_data   = 2'b01;	//写
+						memory_w   = 8'hAE;
+						memory_r   = 8'hAF;
+						slave_high = 8'h04;	//FIFO_WR_PTR
+						word_data  = 8'h00;  //clear FIFO writer pointer 
+					end
+				7'd42:
+					begin
+						key_data   = 2'b01;	//写
+						memory_w   = 8'hAE;
+						memory_r   = 8'hAF;
+						slave_high = 8'h05;	//OVF_COUNTER
+						word_data  = 8'h00;  //clear over_counter pointer 
+					end
+				7'd43:
+					begin
+						key_data   = 2'b01;	//写
+						memory_w   = 8'hAE;
+						memory_r   = 8'hAF;
+						slave_high = 8'h06;	//FIFO_RD_PTR
+						word_data  = 8'h00;  //clear FIFO read pointer 
+					end
+				7'd44:
+					begin
+						key_data   = 2'b01;	//写
+						memory_w   = 8'hAE;
+						memory_r   = 8'hAF;
+						slave_high = 8'h08;	//FIFO_CONFIG	
+						word_data  = 8'h0F;
+					end
+				7'd45:
+					begin
+						key_data   = 2'b01;	//写
+						memory_w   = 8'hAE;
+						memory_r   = 8'hAF;
+						slave_high = 8'h09;	//MODE_CONFIG	
+						word_data  = 8'h03;
+					end
+				7'd46:
+					begin
+						key_data   = 2'b01;	//写
+						memory_w   = 8'hAE;
+						memory_r   = 8'hAF;
+						slave_high = 8'h0A;	//SPO2_CONFIG	
+						word_data  = 8'h27;  //Multi-LED mode
+					end
+				7'd47:
+					begin
+						key_data   = 2'b01;	//写
+						memory_w   = 8'hAE;
+						memory_r   = 8'hAF;
+						slave_high = 8'h0C;	//LED1_PA	
+						word_data  = 8'h24;
+					end
+				7'd48:
+					begin
+						key_data   = 2'b01;	//写
+						memory_w   = 8'hAE;
+						memory_r   = 8'hAF;
+						slave_high = 8'h0D;	//LED2_PA	
+						word_data  = 8'h24;  //set LED current
+					end
+				7'd49:
+					begin
+						key_data   = 2'b01;	//写
+						memory_w   = 8'hAE;
+						memory_r   = 8'hAF;
+						slave_high = 8'h10;	//PILOT_PA	
+						word_data  = 8'h7F;	
+					end
+				7'd50:
+					begin
+						key_data = 2'b11; 	//wait int
+					end
+				7'd51:
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hAE;
+						memory_r   = 8'hAF;
+						slave_high = 8'h00;	//REG_INTR_STATUS_1
+					end
+				7'd52:
+					begin 
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hAE;
+						memory_r   = 8'hAF;
+						slave_high = 8'h01;	//REG_INTR_STATUS_2
+					end
+				7'd53:
+					begin
+						key_data   = 2'b10;	//读
+						memory_w   = 8'hAE;
+						memory_r   = 8'hAF;
+						slave_high = 8'h07;	//*FIFO_DATA 48位
+					end 
+				default :;
+		endcase
+	end
+
+endmodule

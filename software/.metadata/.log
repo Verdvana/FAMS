@@ -1,0 +1,255 @@
+!SESSION 2019-06-05 21:48:05.988 -----------------------------------------------
+eclipse.buildId=4.5.2.M20160212-1500
+java.version=1.8.0_05
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -product org.eclipse.epp.package.cpp.product -pluginCustomization D:/intelfpga/18.1/nios2eds/bin/eclipse_nios2/plugin_customization.ini
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.cpp.product -pluginCustomization D:/intelfpga/18.1/nios2eds/bin/eclipse_nios2/plugin_customization.ini
+
+!ENTRY org.eclipse.cdt.core 1 0 2019-06-05 21:49:08.237
+!MESSAGE Indexed 'Data_Process_bsp' (80 sources, 62 headers) in 1.03 sec: 1,198 declarations; 2,552 references; 110 unresolved inclusions; 6 syntax errors; 195 unresolved names (4.9%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2019-06-05 21:49:11.559
+!MESSAGE Indexed 'Data_Process' (1 sources, 0 headers) in 0.015 sec: 1 declarations; 1 references; 1 unresolved inclusions; 0 syntax errors; 0 unresolved names (0%)
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-05 21:50:47.073
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-05 21:50:50.189
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-05 21:51:46.806
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-05 21:51:49.747
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-05 21:54:42.326
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-05 21:54:45.394
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY org.eclipse.epp.logging.aeri.ide 2 10 2019-06-05 21:56:31.010
+!MESSAGE Updating the index from remote failed. ; version: 1.100.0.v20160217-0435
+!STACK 0
+java.io.EOFException: Unexpected end of ZLIB input stream
+	at java.util.zip.InflaterInputStream.fill(Unknown Source)
+	at java.util.zip.InflaterInputStream.read(Unknown Source)
+	at java.util.zip.ZipInputStream.read(Unknown Source)
+	at java.io.FilterInputStream.read(Unknown Source)
+	at com.google.common.io.ByteStreams.copy(ByteStreams.java:169)
+	at com.google.common.io.ByteSink.writeFrom(ByteSink.java:134)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.Zips.unzip(Zips.java:82)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.ServerProblemsHistory$UpdateIndexJob.run(ServerProblemsHistory.java:293)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-05 21:58:25.538
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-05 21:58:28.600
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-05 21:59:42.652
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-05 21:59:45.665
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-05 22:01:54.576
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-05 22:01:57.727
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-05 22:05:38.181
+!MESSAGE Terminated Launch with connection: 10USB-Blaster on localhost [USB-0]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-05 22:05:39.381
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-05 22:05:42.441
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-05 22:06:39.945
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-05 22:06:43.005
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+!SESSION 2019-06-06 08:55:51.150 -----------------------------------------------
+eclipse.buildId=4.5.2.M20160212-1500
+java.version=1.8.0_05
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -product org.eclipse.epp.package.cpp.product -pluginCustomization D:/intelfpga/18.1/nios2eds/bin/eclipse_nios2/plugin_customization.ini
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.cpp.product -pluginCustomization D:/intelfpga/18.1/nios2eds/bin/eclipse_nios2/plugin_customization.ini
+
+!ENTRY com.altera.sbtgui.launch 4 0 2019-06-06 14:03:44.561
+!MESSAGE Unable to validate connection settings.
+!STACK 0
+java.lang.Exception
+	at com.altera.embeddedsw.flash.model.internal.SystemConsoleConnectionModel.validateConnectionSettings(SystemConsoleConnectionModel.java:555)
+	at com.altera.sbtgui.launch.hardware.AbstractNios2CLaunchDelegate.launch(AbstractNios2CLaunchDelegate.java:115)
+	at com.altera.sbtgui.launch.hardware.Nios2HardwareLaunchDelegate.launch(Nios2HardwareLaunchDelegate.java:98)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:885)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:739)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1039)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY com.altera.sbtgui.launch 4 0 2019-06-06 14:03:44.610
+!MESSAGE Unable to validate connection settings.
+!STACK 0
+java.lang.Exception
+	at com.altera.embeddedsw.flash.model.internal.SystemConsoleConnectionModel.validateConnectionSettings(SystemConsoleConnectionModel.java:555)
+	at com.altera.sbtgui.launch.hardware.AbstractNios2CLaunchDelegate.launch(AbstractNios2CLaunchDelegate.java:115)
+	at com.altera.sbtgui.launch.hardware.Nios2HardwareLaunchDelegate.launch(Nios2HardwareLaunchDelegate.java:98)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:885)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:739)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1039)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:04:03.841
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:04:07.102
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:05:17.531
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:05:21.069
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:08:51.055
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:08:54.263
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:10:30.500
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:10:33.751
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:16:48.283
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:16:51.353
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:17:30.749
+!MESSAGE Terminated Launch with connection: 10USB-Blaster on localhost [USB-0]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:17:32.052
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:17:35.368
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:27:36.955
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:27:40.269
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:29:16.773
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:29:20.010
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:30:43.543
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:30:47.048
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:33:19.146
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:33:22.457
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:35:21.374
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:35:24.640
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:37:27.983
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:37:31.259
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:39:17.488
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:39:21.210
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:40:24.185
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:40:27.981
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:42:04.472
+!MESSAGE Terminated Launch with connection: 10USB-Blaster on localhost [USB-0]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:42:05.597
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:42:09.397
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:43:03.516
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:43:06.921
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:46:08.107
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:46:11.964
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:48:04.170
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:48:07.702
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:49:29.103
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:49:32.255
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:50:46.801
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:50:50.312
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:57:34.505
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:57:37.918
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:58:31.348
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 14:58:34.471
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 15:06:17.391
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559742144]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 15:06:21.004
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
