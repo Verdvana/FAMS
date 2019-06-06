@@ -375,6 +375,21 @@ begin
 		lcd_data_in <= 24'd0;	
 end
 
+//------------------------------------------------------------------------
+
+
+Body_temp_Process Body_temp_Process(
+	.clk(clk_50m),
+	.rst_n(rst_n),
+	.body_temp_data_in(dout_iic[302:288]),
+					
+	.body_temp_int_one(),
+	.body_temp_int_ten(),
+	.body_temp_dec_one(),
+	.body_temp_dec_ten()
+
+);
+
 
 wire 			uart_done;
 wire [7:0] 	uart_data;
@@ -408,29 +423,56 @@ Process Process(
 );
 
 wire [15:0] q;
-
+wire [23:0] gymcu_data;
 RAM	RAM_inst (
 	.data ( data_out ),
 	.wraddress ( data_cnt ),
 	.wrclock ( clk_out ),
 	.wren ( en_data ),
 	
-	.rdaddress ( rdaddress ),
-	.rdclock ( clk_tft ),
-	.rden ( lcd_de ), 
+	.rdaddress ( rdaddress_2 ),
+	.rdclock ( clk_vga ),
+	.rden ( sys_rd2 ), 
 	.q ( q )
 	);
+
+assign gymcu_data = {q[15:11],3'b000,q[10:5],2'b00,q[4:0],3'b000};
+
+
+
+wire [10:0] hcount_2;
+wire [10:0] vcount_2;
+wire [11:0] rdaddress_2;
+assign rdaddress_2 = hcount_2[10:2] + vcount_2[10:2]*32;
+
+
+reg [23:0] lcd_driver_data_in;
+
+always@(*)
+begin
+	case({sys_rd1,sys_rd2})
+		2'b00:lcd_driver_data_in = 24'b0;
+		2'b01:lcd_driver_data_in = gymcu_data;
+		2'b10:lcd_driver_data_in = lcd_data_in;
+		default:lcd_driver_data_in = 24'b0;
+		
+	endcase
+end
+
 
 
 LCD_Driver LCD_Driver(
 		.clk(clk_vga),    			//33.3M
 		.rst_n(sys_rst_n),
-		.data_in(lcd_data_in),   		//待显示数据
+		.data_in(lcd_driver_data_in),   		//待显示数据
 							
-		.hcount(lcd_xpos),			//x坐标
-		.vcount(lcd_ypos),			//y坐标
-		.lcd_request(sys_rd1),	//数据请求信号
-							
+		.hcount_1(lcd_xpos),			//x坐标
+		.vcount_1(lcd_ypos),			//y坐标
+		.hcount_2(hcount_2),			//x坐标
+		.vcount_2(vcount_2),			//y坐标
+		.lcd_request_1(sys_rd1),	//数据请求信号
+		.lcd_request_2(sys_rd2),	//数据请求信号
+		
 		.lcd_clk(lcd_clk),			//驱动时钟
 		.lcd_de(lcd_de),			//使能
 		.lcd_blank_n(lcd_blank_n),

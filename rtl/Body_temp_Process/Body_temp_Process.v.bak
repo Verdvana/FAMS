@@ -1,0 +1,15 @@
+module Body_temp_Process(
+					input [14:0]	body_temp_data_in,
+					
+					output [7:0]  	body_temp_int,
+					output [7:0]  	body_temp_dec
+
+);
+
+
+
+assign  	body_temp_int= 64*body_temp_data_in[14]+32*body_temp_data_in[13]+16*body_temp_data_in[12]
+								+8*body_temp_data_in[11]+4*body_temp_data_in[10]+2*body_temp_data_in[9]+1*body_temp_data_in[8];
+
+
+endmodule		

@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Jun 5, 2019 10:20:17 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1559744417101</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>2019-6-6 16:25:24</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1559809524975</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>E:\2019GEDC\CODE_Project\Cyclone_IV\FAMS\software\Data_Process_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\qsys_system.sopcinfo</SopcDesignFile>

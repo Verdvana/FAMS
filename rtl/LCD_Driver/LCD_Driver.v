@@ -16,9 +16,12 @@ module LCD_Driver(
 							input 				rst_n,
 							input 	[23:0] 	data_in,   		//待显示数据
 							
-							output 	[10:0] 	hcount,			//x坐标
-							output 	[10:0] 	vcount,			//y坐标
-							output				lcd_request,	//数据请求信号
+							output 	[10:0] 	hcount_1,			//x坐标
+							output 	[10:0] 	vcount_1,			//y坐标
+							output 	[10:0] 	hcount_2,			//x坐标
+							output 	[10:0] 	vcount_2,			//y坐标
+							output				lcd_request_1,	//数据请求信号
+							output				lcd_request_2,	//数据请求信号
 							
 							output 				lcd_clk,			//驱动时钟
 							output				lcd_de,			//使能
@@ -46,10 +49,19 @@ parameter  V_TOTAL  =  11'd524;    //场扫描周期
 
 //需要显示区域
 parameter	X_START	=	12'd0;
-parameter	X_ZOOM	=	12'd640;
+parameter	X_ZOOM	=	12'd800;
 parameter	Y_START	=	12'd0;
 parameter	Y_ZOOM	=	12'd480; 
-
+//红外
+parameter	X_START_1	=	12'd0;
+parameter	X_ZOOM_1	=	12'd640;
+parameter	Y_START_1	=	12'd0;
+parameter	Y_ZOOM_1	=	12'd480; 
+//热成像
+parameter	X_START_2	=	12'd672;
+parameter	X_ZOOM_2	=	12'd128;
+parameter	Y_START_2	=	12'd384;
+parameter	Y_ZOOM_2	=	12'd96; 
 	
 	
 assign lcd_clk=clk;
@@ -102,10 +114,17 @@ assign lcd_blank_n = lcd_de;
 					 
 assign lcd_request = ((hcount_r>= (H_SYNC + H_BACK + X_START)) && (hcount_r< (H_SYNC + H_BACK  + X_START + X_ZOOM )))
 				&&((vcount_r>= (V_SYNC + V_BACK + Y_START )) && (vcount_r< (V_SYNC + V_BACK  + Y_START + Y_ZOOM)));
+				
+assign lcd_request_1 = ((hcount_r>= (H_SYNC + H_BACK + X_START_1)) && (hcount_r< (H_SYNC + H_BACK  + X_START_1 + X_ZOOM_1 )))
+				&&((vcount_r>= (V_SYNC + V_BACK + Y_START_1 )) && (vcount_r< (V_SYNC + V_BACK  + Y_START_1 + Y_ZOOM_1)));
+				
+assign lcd_request_2 = ((hcount_r>= (H_SYNC + H_BACK + X_START_2)) && (hcount_r< (H_SYNC + H_BACK  + X_START_2 + X_ZOOM_2 )))
+				&&((vcount_r>= (V_SYNC + V_BACK + Y_START_2 )) && (vcount_r< (V_SYNC + V_BACK  + Y_START_2 + Y_ZOOM_2)));
 							 
-assign hcount=lcd_request ? (hcount_r - H_SYNC - H_BACK - X_START ):11'd0;  
-assign vcount=lcd_request ? (vcount_r - V_SYNC - V_BACK - Y_START ):11'd0;
+assign hcount_1=lcd_request_1 ? (hcount_r - H_SYNC - H_BACK - X_START_1 ):11'd0;  
+assign vcount_1=lcd_request_1 ? (vcount_r - V_SYNC - V_BACK - Y_START_1 ):11'd0;
 							
-	
+assign hcount_2=lcd_request_2 ? (hcount_r - H_SYNC - H_BACK - X_START_2 ):11'd0;  
+assign vcount_2=lcd_request_2 ? (vcount_r - V_SYNC - V_BACK - Y_START_2 ):11'd0;	
 	
 endmodule

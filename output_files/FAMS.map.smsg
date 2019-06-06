@@ -1,3 +1,4 @@
+Warning (10268): Verilog HDL information at bintobcd.v(34): always construct contains both blocking and non-blocking assignments File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/rtl/bintobcd/bintobcd.v Line: 34
 Warning (10268): Verilog HDL information at AD7928.v(139): always construct contains both blocking and non-blocking assignments File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/rtl/ADC/AD7928.v Line: 139
 Warning (10268): Verilog HDL information at Oxygen.v(63): always construct contains both blocking and non-blocking assignments File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/rtl/Oxygen/Oxygen.v Line: 63
 Warning (10268): Verilog HDL information at sensor.v(93): always construct contains both blocking and non-blocking assignments File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/rtl/sensor/sensor.v Line: 93
@@ -10,15 +11,14 @@ Info (10281): Verilog HDL Declaration information at qsys_system_mm_interconnect
 Info (10281): Verilog HDL Declaration information at qsys_system_mm_interconnect_0_router_002.sv(49): object "DEFAULT_RD_CHANNEL" differs only in case from object "default_rd_channel" in the same scope File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/db/ip/qsys_system/submodules/qsys_system_mm_interconnect_0_router_002.sv Line: 49
 Info (10281): Verilog HDL Declaration information at qsys_system_mm_interconnect_0_router_004.sv(48): object "DEFAULT_WR_CHANNEL" differs only in case from object "default_wr_channel" in the same scope File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/db/ip/qsys_system/submodules/qsys_system_mm_interconnect_0_router_004.sv Line: 48
 Info (10281): Verilog HDL Declaration information at qsys_system_mm_interconnect_0_router_004.sv(49): object "DEFAULT_RD_CHANNEL" differs only in case from object "default_rd_channel" in the same scope File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/db/ip/qsys_system/submodules/qsys_system_mm_interconnect_0_router_004.sv Line: 49
+Warning (10236): Verilog HDL Implicit Net warning at LCD_Driver.v(115): created implicit net for "lcd_request" File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/rtl/LCD_Driver/LCD_Driver.v Line: 115
 Warning (10236): Verilog HDL Implicit Net warning at VIP_Matrix_Generate_3X3_1Bit.v(111): created implicit net for "matrix_frame_vsync" File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/rtl/Video_Image_Processor_2/VIP_Matrix_Generate_3X3_1Bit.v Line: 111
 Warning (10236): Verilog HDL Implicit Net warning at VIP_Bit_Dilation_Detector.v(143): created implicit net for "post_frame_vsync" File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/rtl/Video_Image_Processor_2/VIP_Bit_Dilation_Detector.v Line: 143
-Warning (10236): Verilog HDL Implicit Net warning at FAMS.v(418): created implicit net for "rdaddress" File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/FAMS.v Line: 418
-Warning (10236): Verilog HDL Implicit Net warning at FAMS.v(419): created implicit net for "clk_tft" File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/FAMS.v Line: 419
-Warning (10236): Verilog HDL Implicit Net warning at FAMS.v(462): created implicit net for "dout_0" File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/FAMS.v Line: 462
-Warning (10236): Verilog HDL Implicit Net warning at FAMS.v(463): created implicit net for "dout_1" File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/FAMS.v Line: 463
-Warning (10236): Verilog HDL Implicit Net warning at FAMS.v(464): created implicit net for "dout_2" File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/FAMS.v Line: 464
-Warning (10236): Verilog HDL Implicit Net warning at FAMS.v(465): created implicit net for "dout_3" File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/FAMS.v Line: 465
-Warning (10236): Verilog HDL Implicit Net warning at FAMS.v(466): created implicit net for "dout_4" File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/FAMS.v Line: 466
-Warning (10236): Verilog HDL Implicit Net warning at FAMS.v(467): created implicit net for "dout_5" File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/FAMS.v Line: 467
-Warning (10236): Verilog HDL Implicit Net warning at FAMS.v(468): created implicit net for "dout_6" File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/FAMS.v Line: 468
-Warning (10236): Verilog HDL Implicit Net warning at FAMS.v(469): created implicit net for "dout_7" File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/FAMS.v Line: 469
+Warning (10236): Verilog HDL Implicit Net warning at FAMS.v(504): created implicit net for "dout_0" File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/FAMS.v Line: 504
+Warning (10236): Verilog HDL Implicit Net warning at FAMS.v(505): created implicit net for "dout_1" File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/FAMS.v Line: 505
+Warning (10236): Verilog HDL Implicit Net warning at FAMS.v(506): created implicit net for "dout_2" File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/FAMS.v Line: 506
+Warning (10236): Verilog HDL Implicit Net warning at FAMS.v(507): created implicit net for "dout_3" File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/FAMS.v Line: 507
+Warning (10236): Verilog HDL Implicit Net warning at FAMS.v(508): created implicit net for "dout_4" File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/FAMS.v Line: 508
+Warning (10236): Verilog HDL Implicit Net warning at FAMS.v(509): created implicit net for "dout_5" File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/FAMS.v Line: 509
+Warning (10236): Verilog HDL Implicit Net warning at FAMS.v(510): created implicit net for "dout_6" File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/FAMS.v Line: 510
+Warning (10236): Verilog HDL Implicit Net warning at FAMS.v(511): created implicit net for "dout_7" File: E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/FAMS.v Line: 511

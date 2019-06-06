@@ -1,5 +1,5 @@
 Flow report for FAMS
-Thu Jun 06 15:55:16 2019
+Thu Jun 06 19:49:03 2019
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
 
 
@@ -40,20 +40,20 @@ refer to the applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Flow Summary                                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Flow Status                        ; Successful - Thu Jun 06 15:55:09 2019           ;
+; Flow Status                        ; Successful - Thu Jun 06 19:48:56 2019           ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Standard Edition ;
 ; Revision Name                      ; FAMS                                            ;
 ; Top-level Entity Name              ; FAMS                                            ;
 ; Family                             ; Cyclone IV E                                    ;
 ; Device                             ; EP4CE10F17C8                                    ;
 ; Timing Models                      ; Final                                           ;
-; Total logic elements               ; 7,124 / 10,320 ( 69 % )                         ;
-;     Total combinational functions  ; 6,307 / 10,320 ( 61 % )                         ;
-;     Dedicated logic registers      ; 4,075 / 10,320 ( 39 % )                         ;
-; Total registers                    ; 4075                                            ;
+; Total logic elements               ; 7,288 / 10,320 ( 71 % )                         ;
+;     Total combinational functions  ; 6,500 / 10,320 ( 63 % )                         ;
+;     Dedicated logic registers      ; 4,163 / 10,320 ( 40 % )                         ;
+; Total registers                    ; 4163                                            ;
 ; Total pins                         ; 105 / 180 ( 58 % )                              ;
 ; Total virtual pins                 ; 0                                               ;
-; Total memory bits                  ; 259,164 / 423,936 ( 61 % )                      ;
+; Total memory bits                  ; 271,452 / 423,936 ( 64 % )                      ;
 ; Embedded Multiplier 9-bit elements ; 6 / 46 ( 13 % )                                 ;
 ; Total PLLs                         ; 1 / 2 ( 50 % )                                  ;
 +------------------------------------+-------------------------------------------------+
@@ -64,7 +64,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 06/06/2019 15:52:13 ;
+; Start date & time ; 06/06/2019 19:46:05 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; FAMS                ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------+----------------------------------------------------+---------------+-------------+------------+
 ; Assignment Name                     ; Value                                              ; Default Value ; Entity Name ; Section Id ;
 +-------------------------------------+----------------------------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID               ; 163580559478556.155980753303172                    ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID               ; 163580559478556.155982156505868                    ; --            ; --          ; --         ;
 ; ENABLE_SIGNALTAP                    ; Off                                                ; --            ; --          ; --         ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                                 ; --            ; --          ; --         ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                                  ; --            ; --          ; --         ;
@@ -105,11 +105,11 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:02:19     ; 1.0                     ; 5085 MB             ; 00:03:04                           ;
-; Fitter               ; 00:00:26     ; 1.1                     ; 5665 MB             ; 00:00:38                           ;
-; Assembler            ; 00:00:02     ; 1.0                     ; 4725 MB             ; 00:00:02                           ;
-; Timing Analyzer      ; 00:00:06     ; 1.2                     ; 4865 MB             ; 00:00:06                           ;
-; Total                ; 00:02:53     ; --                      ; --                  ; 00:03:50                           ;
+; Analysis & Synthesis ; 00:02:12     ; 1.0                     ; 5100 MB             ; 00:03:00                           ;
+; Fitter               ; 00:00:27     ; 1.1                     ; 5666 MB             ; 00:00:39                           ;
+; Assembler            ; 00:00:02     ; 1.0                     ; 4728 MB             ; 00:00:02                           ;
+; Timing Analyzer      ; 00:00:06     ; 1.3                     ; 4865 MB             ; 00:00:06                           ;
+; Total                ; 00:02:47     ; --                      ; --                  ; 00:03:47                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

@@ -253,3 +253,9 @@ java.lang.Exception
 
 !ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 15:06:21.004
 !MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559742144 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 16:26:41.044
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x11140 --id=0x0 --timestamp=1559808822]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2019-06-06 16:26:44.124
+!MESSAGE Executing: [D:/intelfpga/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x11140 --id=0x0 --timestamp=1559808822 /cygdrive/e/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/Data_Process.elf]

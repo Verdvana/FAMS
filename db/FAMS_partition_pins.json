@@ -324,6 +324,10 @@
 					"strict" : false
 				},
 				{
+					"name" : "gy_mcu90640_txd",
+					"strict" : false
+				},
+				{
 					"name" : "key_data[1]",
 					"strict" : false
 				},

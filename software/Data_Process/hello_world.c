@@ -161,8 +161,8 @@ int main()
 
 
 
-			  			  //printf("HR=%d, ", n_heart_rate);
-			  			  //printf("HRvalid=%i, \r\n", ch_hr_valid);
+			  			  printf("HR=%d, ", n_heart_rate);
+			  			  printf("HRvalid=%i, \r\n", ch_hr_valid);
 
 			  			  printf("SpO2=%ld, ", n_sp02);
 			  			  printf("SPO2Valid=%d\r\n", ch_spo2_valid);
