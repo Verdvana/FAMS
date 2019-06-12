@@ -200,6 +200,14 @@
 					"strict" : false
 				},
 				{
+					"name" : "led_p",
+					"strict" : false
+				},
+				{
+					"name" : "sensor_en",
+					"strict" : false
+				},
+				{
 					"name" : "cmos_sclk",
 					"strict" : false
 				},
@@ -225,6 +233,10 @@
 				},
 				{
 					"name" : "o2_scl",
+					"strict" : false
+				},
+				{
+					"name" : "hc06_rxd",
 					"strict" : false
 				},
 				{
@@ -316,6 +328,14 @@
 					"strict" : false
 				},
 				{
+					"name" : "key_led",
+					"strict" : false
+				},
+				{
+					"name" : "key_sensor",
+					"strict" : false
+				},
+				{
 					"name" : "int",
 					"strict" : false
 				},
@@ -325,6 +345,10 @@
 				},
 				{
 					"name" : "gy_mcu90640_txd",
+					"strict" : false
+				},
+				{
+					"name" : "adc_dout",
 					"strict" : false
 				},
 				{

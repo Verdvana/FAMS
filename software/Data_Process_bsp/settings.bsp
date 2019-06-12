@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>2019-6-6 16:25:24</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1559809524975</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>2019-6-12 9:00:30</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1560301230592</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>E:\2019GEDC\CODE_Project\Cyclone_IV\FAMS\software\Data_Process_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\qsys_system.sopcinfo</SopcDesignFile>
@@ -386,7 +386,7 @@
                 <SettingName>hal.make.bsp_cflags_optimization</SettingName>
                 <Identifier>BSP_CFLAGS_OPTIMIZATION</Identifier>
                 <Type>UnquotedString</Type>
-                <Value>-O0</Value>
+                <Value>-O2</Value>
                 <DefaultValue>-O0</DefaultValue>
                 <DestinationFile>makefile_variable</DestinationFile>
                 <Description>C/C++ compiler optimization level. "-O0" = no optimization,"-O2" = "normal" optimization, etc. "-O0" is recommended for code that you want to debug since compiler optimization can remove variables and produce non-sequential execution of code while debugging. This setting defines the value of BSP_CFLAGS_OPTIMIZATION in Makefile.</Description>
@@ -905,134 +905,146 @@
                 <attributes>memory</attributes>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>adc_p</slaveDescriptor>
-                <addressRange>0x00011000 - 0x0001100F</addressRange>
+                <slaveDescriptor>ROM</slaveDescriptor>
+                <addressRange>0x00012000 - 0x00013FFF</addressRange>
+                <addressSpan>8192</addressSpan>
+                <attributes>memory, non-volatile</attributes>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>oxy_one</slaveDescriptor>
+                <addressRange>0x00015000 - 0x0001500F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>adc_t</slaveDescriptor>
-                <addressRange>0x00011010 - 0x0001101F</addressRange>
+                <slaveDescriptor>oxy_ten</slaveDescriptor>
+                <addressRange>0x00015010 - 0x0001501F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>dig_p9</slaveDescriptor>
-                <addressRange>0x00011020 - 0x0001102F</addressRange>
+                <slaveDescriptor>harmful_one</slaveDescriptor>
+                <addressRange>0x00015020 - 0x0001502F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>dig_p8</slaveDescriptor>
-                <addressRange>0x00011030 - 0x0001103F</addressRange>
+                <slaveDescriptor>harmful_ten</slaveDescriptor>
+                <addressRange>0x00015030 - 0x0001503F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>dig_p7</slaveDescriptor>
-                <addressRange>0x00011040 - 0x0001104F</addressRange>
+                <slaveDescriptor>natural_one</slaveDescriptor>
+                <addressRange>0x00015040 - 0x0001504F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>dig_p5</slaveDescriptor>
-                <addressRange>0x00011050 - 0x0001105F</addressRange>
+                <slaveDescriptor>natural_ten</slaveDescriptor>
+                <addressRange>0x00015050 - 0x0001505F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>dig_p6</slaveDescriptor>
-                <addressRange>0x00011060 - 0x0001106F</addressRange>
+                <slaveDescriptor>liquefied_one</slaveDescriptor>
+                <addressRange>0x00015060 - 0x0001506F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>dig_p4</slaveDescriptor>
-                <addressRange>0x00011070 - 0x0001107F</addressRange>
+                <slaveDescriptor>liquefied_ten</slaveDescriptor>
+                <addressRange>0x00015070 - 0x0001507F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>dig_p3</slaveDescriptor>
-                <addressRange>0x00011080 - 0x0001108F</addressRange>
+                <slaveDescriptor>h2_one</slaveDescriptor>
+                <addressRange>0x00015080 - 0x0001508F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>dig_p2</slaveDescriptor>
-                <addressRange>0x00011090 - 0x0001109F</addressRange>
+                <slaveDescriptor>h2_ten</slaveDescriptor>
+                <addressRange>0x00015090 - 0x0001509F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>dig_p1</slaveDescriptor>
-                <addressRange>0x000110A0 - 0x000110AF</addressRange>
+                <slaveDescriptor>ain_ch0</slaveDescriptor>
+                <addressRange>0x000150A0 - 0x000150AF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>dig_t3</slaveDescriptor>
-                <addressRange>0x000110B0 - 0x000110BF</addressRange>
+                <slaveDescriptor>ain_ch1</slaveDescriptor>
+                <addressRange>0x000150B0 - 0x000150BF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>dig_t2</slaveDescriptor>
-                <addressRange>0x000110C0 - 0x000110CF</addressRange>
+                <slaveDescriptor>ain_ch2</slaveDescriptor>
+                <addressRange>0x000150C0 - 0x000150CF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>dig_t1</slaveDescriptor>
-                <addressRange>0x000110D0 - 0x000110DF</addressRange>
+                <slaveDescriptor>ain_ch3</slaveDescriptor>
+                <addressRange>0x000150D0 - 0x000150DF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>heart_rate</slaveDescriptor>
-                <addressRange>0x000110E0 - 0x000110EF</addressRange>
+                <slaveDescriptor>ain_ch4</slaveDescriptor>
+                <addressRange>0x000150E0 - 0x000150EF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>heignt_dec</slaveDescriptor>
-                <addressRange>0x000110F0 - 0x000110FF</addressRange>
+                <slaveDescriptor>heart_rate_ten</slaveDescriptor>
+                <addressRange>0x000150F0 - 0x000150FF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>heignt_int</slaveDescriptor>
-                <addressRange>0x00011100 - 0x0001110F</addressRange>
+                <slaveDescriptor>heart_rate_one</slaveDescriptor>
+                <addressRange>0x00015100 - 0x0001510F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>heart_rate_hun</slaveDescriptor>
+                <addressRange>0x00015110 - 0x0001511F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>end_o</slaveDescriptor>
-                <addressRange>0x00011110 - 0x0001111F</addressRange>
+                <addressRange>0x00015120 - 0x0001512F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>max30102_1</slaveDescriptor>
-                <addressRange>0x00011120 - 0x0001112F</addressRange>
+                <addressRange>0x00015130 - 0x0001513F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>max30102_0</slaveDescriptor>
-                <addressRange>0x00011130 - 0x0001113F</addressRange>
+                <addressRange>0x00015140 - 0x0001514F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>sysid_qsys</slaveDescriptor>
-                <addressRange>0x00011140 - 0x00011147</addressRange>
+                <addressRange>0x00015150 - 0x00015157</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>jtag_uart</slaveDescriptor>
-                <addressRange>0x00011148 - 0x0001114F</addressRange>
+                <addressRange>0x00015158 - 0x0001515F</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes>printable</attributes>
         </MemoryMap>

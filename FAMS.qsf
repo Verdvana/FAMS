@@ -49,7 +49,7 @@ set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
 set_global_assignment -name NOMINAL_CORE_SUPPLY_VOLTAGE 1.2V
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_NETLIST_TYPE POST_FIT -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_location_assignment PIN_E1 -to clk_50m
@@ -164,7 +164,6 @@ set_location_assignment PIN_N1 -to led_p
 set_location_assignment PIN_D5 -to gy_mcu90640_txd
 set_location_assignment PIN_D6 -to gy_mcu90640_rxd
 set_location_assignment PIN_L8 -to key_led
-set_location_assignment PIN_M8 -to key_a
 set_location_assignment PIN_P8 -to key_b
 set_global_assignment -name ENABLE_OCT_DONE OFF
 set_global_assignment -name USE_CONFIGURATION_DEVICE OFF
@@ -174,15 +173,22 @@ set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -rise
 set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -fall
 set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -rise
 set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -fall
-set_location_assignment PIN_R11 -to int
+set_location_assignment PIN_R10 -to int
 set_global_assignment -name ENABLE_SIGNALTAP OFF
 set_global_assignment -name USE_SIGNALTAP_FILE stp1.stp
+set_location_assignment PIN_N2 -to lcd_red[3]
+set_global_assignment -name VERILOG_FILE rtl/uart_tx/uart_transfer.v
+set_global_assignment -name VERILOG_FILE rtl/uart_tx/uart_test.v
+set_global_assignment -name VERILOG_FILE rtl/uart_tx/precise_divider.v
+set_global_assignment -name VERILOG_FILE rtl/DHT11/DHT11_top.v
+set_global_assignment -name VERILOG_FILE rtl/DHT11/DHT11_opera.v
+set_global_assignment -name VERILOG_FILE rtl/DHT11/DHT11_cmd.v
+set_global_assignment -name VERILOG_FILE rtl/DHT11/async_send.v
 set_global_assignment -name VERILOG_FILE rtl/bintobcd/bintobcd.v
 set_global_assignment -name QIP_FILE rtl/GY_MCU90640/RAM.qip
 set_global_assignment -name VERILOG_FILE rtl/GY_MCU90640/uart_rx.v
 set_global_assignment -name VERILOG_FILE rtl/GY_MCU90640/Process.v
 set_global_assignment -name QSYS_FILE qsys_system.qsys
-set_global_assignment -name VERILOG_FILE rtl/DHT11/DHT11.v
 set_global_assignment -name VERILOG_FILE rtl/ADC/AD7928.v
 set_global_assignment -name VERILOG_FILE rtl/Oxygen/Oxygen.v
 set_global_assignment -name VERILOG_FILE rtl/sensor/sensor.v
@@ -218,4 +224,25 @@ set_global_assignment -name VERILOG_FILE FAMS.v
 set_global_assignment -name QIP_FILE rtl/system_index/pll.qip
 set_global_assignment -name SIGNALTAP_FILE stp1.stp
 set_global_assignment -name VERILOG_FILE rtl/Body_temp_Process/Body_temp_Process.v
+set_global_assignment -name QIP_FILE ROM/ROM_temp_unit.qip
+set_global_assignment -name VERILOG_FILE ROM/ROM_0.v
+set_global_assignment -name VERILOG_FILE ROM/ROM_1.v
+set_global_assignment -name VERILOG_FILE ROM/ROM_2.v
+set_global_assignment -name VERILOG_FILE ROM/ROM_3.v
+set_global_assignment -name VERILOG_FILE ROM/ROM_4.v
+set_global_assignment -name VERILOG_FILE ROM/ROM_5.v
+set_global_assignment -name VERILOG_FILE ROM/ROM_6.v
+set_global_assignment -name VERILOG_FILE ROM/ROM_7.v
+set_global_assignment -name VERILOG_FILE ROM/ROM_8.v
+set_global_assignment -name VERILOG_FILE ROM/ROM_9.v
+set_global_assignment -name VERILOG_FILE ROM/ROM_dp.v
+set_global_assignment -name MIF_FILE mif/zhongwen.mif
+set_global_assignment -name QIP_FILE ROM/ROM_chinese.qip
+set_global_assignment -name MIF_FILE mif/ppm_1.mif
+set_global_assignment -name MIF_FILE "C:/Users/Verdvana/Desktop/ppm.mif"
+set_global_assignment -name QIP_FILE ROM/ROM_ppm.qip
+set_global_assignment -name QIP_FILE ROM/ROM_rh.qip
+set_global_assignment -name VERILOG_FILE rtl/key_control/key_control.v
+set_location_assignment PIN_M8 -to key_sensor
+set_location_assignment PIN_P2 -to hc06_rxd
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

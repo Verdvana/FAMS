@@ -4,7 +4,7 @@
  * Machine generated for CPU 'nios2_gen2' in SOPC Builder design 'qsys_system'
  * SOPC Builder design path: ../../qsys_system.sopcinfo
  *
- * Generated: Wed Jun 05 21:49:06 CST 2019
+ * Generated: Sun Jun 09 10:10:56 CST 2019
  */
 
 /*
@@ -65,10 +65,14 @@
  *
  */
 
+#define RAM_BEFORE_EXCEPTION_REGION_BASE 0x8000
+#define RAM_BEFORE_EXCEPTION_REGION_SPAN 32
 #define RAM_REGION_BASE 0x8020
 #define RAM_REGION_SPAN 20448
-#define RESET_REGION_BASE 0x8000
+#define RESET_REGION_BASE 0x12000
 #define RESET_REGION_SPAN 32
+#define ROM_REGION_BASE 0x12020
+#define ROM_REGION_SPAN 8160
 
 
 /*
@@ -77,7 +81,7 @@
  */
 
 #define ALT_EXCEPTIONS_DEVICE RAM
-#define ALT_RESET_DEVICE RAM
+#define ALT_RESET_DEVICE ROM
 #define ALT_RODATA_DEVICE RAM
 #define ALT_RWDATA_DEVICE RAM
 #define ALT_TEXT_DEVICE RAM

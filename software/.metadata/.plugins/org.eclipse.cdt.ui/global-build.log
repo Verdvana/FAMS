@@ -1,37 +1,21 @@
-16:26:24 **** Build of configuration Nios II for project Data_Process ****
-make all 
+09:44:47 **** Build of configuration Nios II for project Data_Process ****
+make mem_init_generate 
 Info: Building ../Data_Process_bsp/
 D:/intelFPGA/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../Data_Process_bsp/
 [BSP build complete]
-Info: Compiling hello_world.c to obj/default/hello_world.o
-nios2-elf-gcc -xc -MP -MMD -c -I../Data_Process_bsp//HAL/inc -I../Data_Process_bsp/ -I../Data_Process_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_C_PLUS_PLUS -DALT_USE_DIRECT_DRIVERS -DALT_NO_INSTRUCTION_EMULATION -DALT_USE_SMALL_DRIVERS -DSMALL_C_LIB -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/hello_world.o hello_world.c
-hello_world.c: In function 'main':
-hello_world.c:164:18: warning: format '%d' expects argument of type 'int', but argument 2 has type 'alt_32 {aka long int}' [-Wformat=]
-           printf("HR=%d, ", n_heart_rate);
-                  ^
-hello_world.c:164:18: warning: format '%d' expects argument of type 'int', but argument 2 has type 'alt_32 {aka long int}' [-Wformat=]
-hello_world.c:90:9: warning: unused variable 'f_temp' [-Wunused-variable]
-   float f_temp;
-         ^
-hello_world.c:89:10: warning: unused variable 'n_brightness' [-Wunused-variable]
-   alt_32 n_brightness;
-          ^
-hello_world.c:88:27: warning: unused variable 'un_prev_data' [-Wunused-variable]
-   alt_u32 un_min, un_max, un_prev_data;
-                           ^
-Info: Linking Data_Process.elf
-nios2-elf-g++  -T'../Data_Process_bsp//linker.x' -msys-crt0='../Data_Process_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../Data_Process_bsp/  -msmallc  -Wl,-Map=Data_Process.map   -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o Data_Process.elf obj/default/hello_world.o -lm -msys-lib=m
-../Data_Process_bsp/\libhal_bsp.a(alt_main.o): In function `alt_main':
-E:\2019GEDC\CODE_Project\Cyclone_IV\FAMS\software\Data_Process_bsp/HAL/src/alt_main.c:155: warning: warning: close is not implemented and will always fail
-nios2-elf-insert Data_Process.elf --thread_model hal --cpu_name nios2_gen2 --qsys true --simulation_enabled false --id 0 --sidp 0x11140 --timestamp 1559808822 --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name qsys_system --quartus_project_dir "E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS" --jdi ../..//output_files/FAMS.jdi --sopcinfo E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process_bsp/../../qsys_system.sopcinfo
-Info: (Data_Process.elf) 12 KBytes program size (code + initialized data).
-Info:                    7448 Bytes free for stack + heap.
-Info: Creating Data_Process.objdump
-nios2-elf-objdump --disassemble --syms --all-header --source Data_Process.elf >Data_Process.objdump
-[Data_Process build complete]
-16:26:37 **** Incremental Build of configuration Nios II for project Data_Process ****
-make all 
-Info: Building ../Data_Process_bsp/
-D:/intelFPGA/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../Data_Process_bsp/
-[BSP build complete]
-[Data_Process build complete]
+Post-processing to create mem_init/qsys_system_RAM.hex...
+elf2hex Data_Process.elf 0x00008000 0x0000cfff --width=32 --little-endian-mem --create-lanes=0 mem_init/qsys_system_RAM.hex
+Post-processing to create mem_init/qsys_system_ROM.hex...
+elf2hex Data_Process.elf 0x00012000 0x00013fff --width=32 --little-endian-mem --create-lanes=0 mem_init/qsys_system_ROM.hex
+Post-processing to create mem_init/hdl_sim/qsys_system_RAM.dat...
+elf2dat --infile=Data_Process.elf --outfile=mem_init/hdl_sim/qsys_system_RAM.dat \
+		--base=0x00008000 --end=0x0000cfff --width=32 \
+		--little-endian-mem --create-lanes=0 
+Post-processing to create mem_init/hdl_sim/qsys_system_ROM.dat...
+elf2dat --infile=Data_Process.elf --outfile=mem_init/hdl_sim/qsys_system_ROM.dat \
+		--base=0x00012000 --end=0x00013fff --width=32 \
+		--little-endian-mem --create-lanes=0 
+Post-processing to create mem_init/hdl_sim/qsys_system_RAM.sym...
+nios2-elf-nm -n Data_Process.elf > mem_init/hdl_sim/qsys_system_RAM.sym
+Post-processing to create mem_init/hdl_sim/qsys_system_ROM.sym...
+nios2-elf-nm -n Data_Process.elf > mem_init/hdl_sim/qsys_system_ROM.sym

@@ -4,7 +4,7 @@
  * Machine generated for CPU 'nios2_gen2' in SOPC Builder design 'qsys_system'
  * SOPC Builder design path: ../../qsys_system.sopcinfo
  *
- * Generated: Wed Jun 05 21:49:06 CST 2019
+ * Generated: Sun Jun 09 10:10:56 CST 2019
  */
 
 /*
@@ -50,12 +50,15 @@
 
 MEMORY
 {
-    reset : ORIGIN = 0x8000, LENGTH = 32
+    RAM_BEFORE_EXCEPTION : ORIGIN = 0x8000, LENGTH = 32
     RAM : ORIGIN = 0x8020, LENGTH = 20448
+    reset : ORIGIN = 0x12000, LENGTH = 32
+    ROM : ORIGIN = 0x12020, LENGTH = 8160
 }
 
 /* Define symbols for each memory base-address */
 __alt_mem_RAM = 0x8000;
+__alt_mem_ROM = 0x12000;
 
 OUTPUT_FORMAT( "elf32-littlenios2",
                "elf32-littlenios2",
@@ -319,6 +322,23 @@ SECTIONS
     } > RAM
 
     PROVIDE (_alt_partition_RAM_load_addr = LOADADDR(.RAM));
+
+    /*
+     *
+     * This section's LMA is set to the .text region.
+     * crt0 will copy to this section's specified mapped region virtual memory address (VMA)
+     *
+     */
+
+    .ROM : AT ( LOADADDR (.RAM) + SIZEOF (.RAM) )
+    {
+        PROVIDE (_alt_partition_ROM_start = ABSOLUTE(.));
+        *(.ROM .ROM. ROM.*)
+        . = ALIGN(4);
+        PROVIDE (_alt_partition_ROM_end = ABSOLUTE(.));
+    } > ROM
+
+    PROVIDE (_alt_partition_ROM_load_addr = LOADADDR(.ROM));
 
     /*
      * Stabs debugging sections.

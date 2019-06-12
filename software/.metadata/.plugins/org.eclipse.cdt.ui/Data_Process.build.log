@@ -1,9 +1,24 @@
-16:26:37 **** Incremental Build of configuration Nios II for project Data_Process ****
-make all 
+09:44:47 **** Build of configuration Nios II for project Data_Process ****
+make mem_init_generate 
 Info: Building ../Data_Process_bsp/
 D:/intelFPGA/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../Data_Process_bsp/
 [BSP build complete]
-[Data_Process build complete]
+Post-processing to create mem_init/qsys_system_RAM.hex...
+elf2hex Data_Process.elf 0x00008000 0x0000cfff --width=32 --little-endian-mem --create-lanes=0 mem_init/qsys_system_RAM.hex
+Post-processing to create mem_init/qsys_system_ROM.hex...
+elf2hex Data_Process.elf 0x00012000 0x00013fff --width=32 --little-endian-mem --create-lanes=0 mem_init/qsys_system_ROM.hex
+Post-processing to create mem_init/hdl_sim/qsys_system_RAM.dat...
+elf2dat --infile=Data_Process.elf --outfile=mem_init/hdl_sim/qsys_system_RAM.dat \
+		--base=0x00008000 --end=0x0000cfff --width=32 \
+		--little-endian-mem --create-lanes=0 
+Post-processing to create mem_init/hdl_sim/qsys_system_ROM.dat...
+elf2dat --infile=Data_Process.elf --outfile=mem_init/hdl_sim/qsys_system_ROM.dat \
+		--base=0x00012000 --end=0x00013fff --width=32 \
+		--little-endian-mem --create-lanes=0 
+Post-processing to create mem_init/hdl_sim/qsys_system_RAM.sym...
+nios2-elf-nm -n Data_Process.elf > mem_init/hdl_sim/qsys_system_RAM.sym
+Post-processing to create mem_init/hdl_sim/qsys_system_ROM.sym...
+nios2-elf-nm -n Data_Process.elf > mem_init/hdl_sim/qsys_system_ROM.sym
 
-16:26:39 Build Finished (took 1s.589ms)
+09:44:50 Build Finished (took 3s.591ms)
 

@@ -1,16 +1,16 @@
-Fitter Status : Successful - Thu Jun 06 19:48:50 2019
+Fitter Status : Successful - Wed Jun 12 09:49:23 2019
 Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Standard Edition
 Revision Name : FAMS
 Top-level Entity Name : FAMS
 Family : Cyclone IV E
 Device : EP4CE10F17C8
 Timing Models : Final
-Total logic elements : 7,288 / 10,320 ( 71 % )
-    Total combinational functions : 6,500 / 10,320 ( 63 % )
-    Dedicated logic registers : 4,163 / 10,320 ( 40 % )
-Total registers : 4163
-Total pins : 105 / 180 ( 58 % )
+Total logic elements : 8,909 / 10,320 ( 86 % )
+    Total combinational functions : 8,368 / 10,320 ( 81 % )
+    Dedicated logic registers : 3,351 / 10,320 ( 32 % )
+Total registers : 3351
+Total pins : 109 / 180 ( 61 % )
 Total virtual pins : 0
-Total memory bits : 271,452 / 423,936 ( 64 % )
-Embedded Multiplier 9-bit elements : 6 / 46 ( 13 % )
+Total memory bits : 300,700 / 423,936 ( 71 % )
+Embedded Multiplier 9-bit elements : 0 / 46 ( 0 % )
 Total PLLs : 1 / 2 ( 50 % )

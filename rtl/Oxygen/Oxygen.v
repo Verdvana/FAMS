@@ -341,7 +341,7 @@ always @(*)
 					begin
 						key_data   = 2'b01;	//写
 						slave_addr = 8'h10;	//TIACN--TIA Control Register
-						word_data  = 8'h1F; 
+						word_data  = 8'h03; 
 					end
 				4'd4:
 					begin

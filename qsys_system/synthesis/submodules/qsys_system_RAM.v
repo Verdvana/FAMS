@@ -36,7 +36,7 @@ module qsys_system_RAM (
                        )
 ;
 
-  parameter INIT_FILE = "qsys_system_RAM.hex";
+  parameter INIT_FILE = "E:/2019GEDC/CODE_Project/Cyclone_IV/FAMS/software/Data_Process/mem_init/qsys_system_RAM.hex";
 
 
   output  [ 31: 0] readdata;

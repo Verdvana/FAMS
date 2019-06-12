@@ -8,8 +8,8 @@
   </columns>
  </systemtable>
  <library
-   expandedCategories="Library/Interface Protocols/PCI Express,Library/Processors and Peripherals/Peripherals,Library/Interface Protocols,Library/Processors and Peripherals,Library/Interface Protocols/PCI Express/QSYS Example Designs,Project,Library" />
- <window width="1616" height="876" x="2552" y="224" />
+   expandedCategories="Library/University Program/Generic IO,Library/University Program,Library/DSP,Library/University Program/Audio &amp; Video/Video,Library/University Program/Audio &amp; Video,Project,Library/DSP/Video and Image Processing,Library/Basic Functions,Library,Library/Basic Functions/On Chip Memory" />
+ <window width="2560" height="1400" x="0" y="0" />
  <generation path="_PROJECT_NAME_" />
  <hdlexample language="VERILOG" />
 </preferences>
