@@ -123,9 +123,13 @@ int main()
 		  		    c[i]=ch[i]-10*b[i];
 
 		  		   }
-		  ch[4]=31-(ch[4]*5/4096*19);  //电压值转换为浓度值
-		  b[4]=ch[4]/10;
-		  c[4]=ch[4]-10*b[4];
+
+		  ch[4]=41-(ch[4]*5/4096*25);  //电压值转换为浓度值
+		  b[4]=(int)(ch[4]/10);
+		  c[4]=(int)(ch[4]-10*b[4]);
+
+
+		  //printf("%d.%d\r\n",b[4],c[4]);
 
 		 IOWR_ALTERA_AVALON_PIO_DATA(H2_TEN_BASE,b[0]);
 		 IOWR_ALTERA_AVALON_PIO_DATA(H2_ONE_BASE,c[0]);

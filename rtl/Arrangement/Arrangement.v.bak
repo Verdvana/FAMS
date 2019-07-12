@@ -1,0 +1,35 @@
+module Arrangement(
+		input		[3:0]	heart_rate_hun,
+		input		[3:0] heart_rate_ten,
+		input		[3:0] heart_rate_one,
+		input		[3:0] h2_ten,
+		input		[3:0] h2_one,
+		input		[3:0] liquefied_ten,
+		input		[3:0] liquefied_one,
+		input		[3:0] natural_ten,
+		input		[3:0] natural_one,
+		input		[3:0] harmful_ten,
+		input		[3:0] harmful_one,
+		input		[3:0] oxy_ten,
+		input		[3:0] oxy_one,
+		input		[3:0] temp_ten,
+		input		[3:0] temp_one,
+		input		[3:0] hum_ten,
+		input		[3:0] hum_one,
+		
+		output	[7:0] heart_rate_a,
+		output	[7:0] h2_a,
+		output	[7:0] liquefied_a,
+		output	[7:0] natural_a,
+		output	[7:0] harmful_a,
+		output	[7:0] oxy_a,
+		output	[7:0] temp_a,
+		output	[7:0] hum_a 
+
+		
+		
+);
+endmodule
+
+
+

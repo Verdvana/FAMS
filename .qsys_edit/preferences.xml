@@ -3,13 +3,12 @@
  <debug showDebugMenu="0" />
  <systemtable filter="All Interfaces">
   <columns>
-   <connections preferredWidth="143" />
+   <connections preferredWidth="127" />
    <irq preferredWidth="34" />
   </columns>
  </systemtable>
- <library
-   expandedCategories="Library/University Program/Generic IO,Library/University Program,Library/DSP,Library/University Program/Audio &amp; Video/Video,Library/University Program/Audio &amp; Video,Project,Library/DSP/Video and Image Processing,Library/Basic Functions,Library,Library/Basic Functions/On Chip Memory" />
- <window width="2560" height="1400" x="0" y="0" />
+ <library expandedCategories="Library,Project" />
+ <window width="2576" height="1416" x="-8" y="-8" />
  <generation path="_PROJECT_NAME_" />
  <hdlexample language="VERILOG" />
 </preferences>

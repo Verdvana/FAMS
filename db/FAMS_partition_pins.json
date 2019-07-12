@@ -204,6 +204,10 @@
 					"strict" : false
 				},
 				{
+					"name" : "bz",
+					"strict" : false
+				},
+				{
 					"name" : "sensor_en",
 					"strict" : false
 				},
@@ -233,6 +237,10 @@
 				},
 				{
 					"name" : "o2_scl",
+					"strict" : false
+				},
+				{
+					"name" : "eeprom_scl",
 					"strict" : false
 				},
 				{
@@ -316,6 +324,10 @@
 					"strict" : false
 				},
 				{
+					"name" : "eeprom_sda",
+					"strict" : false
+				},
+				{
 					"name" : "dht11",
 					"strict" : false
 				},
@@ -344,19 +356,15 @@
 					"strict" : false
 				},
 				{
+					"name" : "key_eeprom",
+					"strict" : false
+				},
+				{
 					"name" : "gy_mcu90640_txd",
 					"strict" : false
 				},
 				{
 					"name" : "adc_dout",
-					"strict" : false
-				},
-				{
-					"name" : "key_data[1]",
-					"strict" : false
-				},
-				{
-					"name" : "key_data[0]",
 					"strict" : false
 				},
 				{

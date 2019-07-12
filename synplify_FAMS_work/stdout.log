@@ -1,0 +1,37 @@
+
+Starting:    D:\Synopsys\fpga_J-2015.03\bin64\mbin\synbatch.exe
+Install:     D:\Synopsys\fpga_J-2015.03
+Hostname:    DESKTOP-VERDVAN
+Date:        Fri Jun 14 14:00:11 2019
+Version:     J-2015.03
+
+Arguments:   -product synplify -licensetype synplify_f:synplify_alteraanalyst -batch FAMS_alt.tcl
+ProductType: synplify
+
+License checkout unsuccessful: synplify_f
+Checkout failed - synplify_f No such feature exists.
+Feature:       synplify_f
+License path:  D:\Synopsys\synopsys.dat;
+FLEXnet Licensing error:-5,234
+For further information, refer to the FLEXnet Licensing documentation,
+available at "www.flexerasoftware.com".
+
+
+
+License checkout unsuccessful: synplify_alteraanalyst
+Checkout failed - synplify_alteraanalyst No such feature exists.
+Feature:       synplify_alteraanalyst
+License path:  D:\Synopsys\synopsys.dat;
+FLEXnet Licensing error:-5,234
+For further information, refer to the FLEXnet Licensing documentation,
+available at "www.flexerasoftware.com".
+
+
+
+
+Node-locked Host ID:  94C69123CF1C
+Please contact support at https://solvnet.synopsys.com/ManageCase?ccf=1
+
+
+
+

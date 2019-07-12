@@ -33,6 +33,7 @@ module FAMS
 
 	input					key_led,
 	input					key_sensor,
+	input					key_eeprom,
 	output				led_p,
 	output				bz,
 	output				sensor_en,
@@ -64,6 +65,10 @@ module FAMS
 					
 					output					o2_scl,
 					inout						o2_sda,
+					
+					output					eeprom_scl,
+					inout			   		eeprom_sda,
+					
 					
 					inout						dht11,
 					
@@ -242,6 +247,7 @@ Sdram_Control_2Port Sdram_Control_2Port(
 		.DQM(sdram_dqm)		//SDRAM 数据总线高低字节屏蔽信号
 	);
 	
+/*	
 wire			key_flag;
 wire	[1:0]	key_value;
 key_counter_scan
@@ -261,6 +267,9 @@ u_key_counter_scan
 	.key_flag			(key_flag),
 	.key_value			(key_value)	
 );
+*/
+
+/*
 wire [7:0]	Threshold;  
 Threshold_Adj u_Threshold_Adj
 (
@@ -272,15 +281,17 @@ Threshold_Adj u_Threshold_Adj
 	
 	.Threshold			(Threshold)
 );
+*/
+
 //-------------------------------------
 //LCD driver timing
-wire	[11:0]	lcd_xpos;		//lcd horizontal coordinate
-wire	[11:0]	lcd_ypos;		//lcd vertical coordinate
-reg	[23:0]	lcd_data_in;	//lcd data input
+wire	[10:0]	lcd_xpos;		//lcd horizontal coordinate
+wire	[9:0]	lcd_ypos;		//lcd vertical coordinate
+wire	[23:0]	lcd_data_in;	//lcd data input
 wire  [7:0]		sys_data_out;
 wire 	[7:0]		abs_sys_out;
 assign abs_sys_out = sys_data_out1 > sys_data_out2 ? sys_data_out1 - sys_data_out2 : sys_data_out2 - sys_data_out1;
-assign sys_data_out = abs_sys_out > Threshold ? 255 : 0 ;
+assign sys_data_out = abs_sys_out > 20 ? 255 : 0 ;
 
 wire	lcd_clken;
 wire	[7:0]	lcd_data;
@@ -303,82 +314,18 @@ u_Image_Handler
 	.post_img_Gray		(lcd_data)
 );
 
+mark mark_inst(
+	.clk(clk_vga),
+	.rst_n(sys_rst_n),
+	.lcd_xpos(lcd_xpos),
+	.lcd_ypos(lcd_ypos),
+	.sys_data_out1(sys_data_out1),
+	.sys_data_out2(),
+	.lcd_data(lcd_data),
+	.lcd_clken(lcd_clken),
 
-reg [7:0]	frame_cnt;
-always@(posedge clk_vga or negedge sys_rst_n)
-begin 
-	if(!sys_rst_n)
-		frame_cnt <= 8'b0;
-	else if(lcd_xpos ==1'b1 && lcd_ypos == 1'b1)
-			frame_cnt <= frame_cnt + 1'b1;
-	else if(frame_cnt == 8'd10)
-		frame_cnt <= 8'b0;
-	else 
-		frame_cnt <= frame_cnt;
-end 
-
-reg [11:0]	xpos_max;
-reg [11:0]	xpos_min;
-reg [11:0]	ypos_max;
-reg [11:0]	ypos_min;
-reg [11:0]	r_xpos_max;
-reg [11:0]	r_xpos_min;
-reg [11:0]	r_ypos_max;
-reg [11:0]	r_ypos_min;
-always@(posedge clk_vga or negedge sys_rst_n)
-begin 	
-	if(!sys_rst_n)
-		begin 
-		xpos_max <= 11'd0;
-		xpos_min <= 11'd640;
-		ypos_max <= 11'd0;
-		ypos_min <= 11'd480;
-		end 
-	else if(frame_cnt == 8'd10)
-		begin 
-		xpos_max <= 11'd0;
-		xpos_min <= 11'd640;
-		ypos_max <= 11'd0;
-		ypos_min <= 11'd480;
-		
-		r_xpos_max <= xpos_max;
-		r_xpos_min <= xpos_min;
-		r_ypos_max <= ypos_max;
-		r_ypos_min <= ypos_min;
-		end
-	else 
-		begin 
-		if(lcd_data)
-			begin 
-			if(xpos_max < lcd_xpos)
-				xpos_max <= lcd_xpos;
-			if(xpos_min >lcd_xpos)
-				xpos_min <= lcd_xpos;
-			if(ypos_max < lcd_ypos)
-				ypos_max <= lcd_ypos;
-			if(ypos_min >lcd_ypos)
-				ypos_min <= lcd_ypos;
-			end 
-		end 
-end 
-
-always@(posedge clk_vga or negedge sys_rst_n)		
-begin
-	if(!sys_rst_n)
-		lcd_data_in <= 0;
-	else if(lcd_clken == 1'b1)
-		begin 
-		if((lcd_xpos == xpos_min && lcd_ypos > ypos_min && lcd_ypos < ypos_max)  || 
-			(lcd_xpos == xpos_max && lcd_ypos > ypos_min && lcd_ypos < ypos_max)  || 
-			(lcd_ypos == ypos_min && lcd_xpos > xpos_min && lcd_xpos < xpos_max)  || 
-			(lcd_ypos == ypos_max && lcd_xpos > xpos_min && lcd_xpos < xpos_max) )
-			lcd_data_in <= {8'd255,8'b0,8'b0};
-		else 
-			lcd_data_in <= {sys_data_out1,sys_data_out1,sys_data_out1};
-		end 
-	else
-		lcd_data_in <= 24'd0;	
-end
+	.lcd_data_in(lcd_data_in)
+);
 
 //------------------------------------------------------------------------
 
@@ -387,6 +334,7 @@ wire [3:0] body_temp_int_ten;
 wire [3:0] body_temp_dec_one;
 wire [3:0] body_temp_dec_ten;
 wire [7:0] body_temp_int;
+wire [7:0] body_temp_dec;
 Body_temp_Process Body_temp_Process(
 	.body_temp_data_in(dout_iic[302:288]),
 					
@@ -446,633 +394,131 @@ RAM	RAM_inst (
 	);
 
 assign gymcu_data = {q[15:11],3'b000,q[10:5],2'b00,q[4:0],3'b000};
-wire [10:0] hcount_2;
-wire [10:0] vcount_2;
+wire [7:0] hcount_2;
+wire [6:0] vcount_2;
 wire [11:0] rdaddress_2;
-assign rdaddress_2 = hcount_2[10:2] + vcount_2[10:2]*32;
+assign rdaddress_2 = (32-hcount_2[7:2]) + vcount_2[6:2]*32;
 
 //---------------------------------------------------------------------------
 
-reg [13:0] rdaddress_chinese;
-wire data_chinese;
-ROM_chinese  ROM_chinese_inst (
-	.address ( rdaddress_chinese ),
-	.clock ( clk_vga ),
-	.q ( data_chinese )
-	);
-	
-	
-wire lcd_request_theme;
+
+
+
 wire [10:0] hcount_theme;
 wire [10:0] vcount_theme;
-wire [13:0] rdaddress_theme;
-//wire        data_theme;
-assign rdaddress_theme = hcount_theme[10:0] + vcount_theme[10:0]*144;
-
-
-
-
-wire lcd_request_veneno;	
 wire [10:0] hcount_veneno;
 wire [10:0] vcount_veneno;
-wire [13:0] rdaddress_veneno;
-//wire        data_veneno;
-assign rdaddress_veneno = hcount_veneno[10:0] + vcount_veneno[10:0]*48 + 2304;
-
-
-
-wire lcd_request_body_temp;	
 wire [10:0] hcount_body_temp;
 wire [10:0] vcount_body_temp;
-wire [13:0] rdaddress_body_temp;
-//wire        data_body_temp;
-assign rdaddress_body_temp = hcount_body_temp[10:0] + vcount_body_temp[10:0]*48 + 3072;
-
-	
-
-	
-wire lcd_request_heart_rate;	
 wire [10:0] hcount_heart_rate;
 wire [10:0] vcount_heart_rate;
-wire [13:0] rdaddress_heart_rate;
-assign rdaddress_heart_rate = hcount_heart_rate[10:0] + vcount_heart_rate[10:0]*48 + 3840;
-
-wire lcd_request_h2;	
 wire [10:0] hcount_h2;
 wire [10:0] vcount_h2;
-wire [13:0] rdaddress_h2;
-assign rdaddress_h2 = hcount_h2[10:0] + vcount_h2[10:0]*48 + 4608;
-
-wire lcd_request_liquefied;	
 wire [10:0] hcount_liquefied;
 wire [10:0] vcount_liquefied;
-wire [13:0] rdaddress_liquefied;
-assign rdaddress_liquefied = hcount_liquefied[10:0] + vcount_liquefied[10:0]*64 + 5376;
-
-wire lcd_request_natural;	
 wire [10:0] hcount_natural;
 wire [10:0] vcount_natural;
-wire [13:0] rdaddress_natural;
-assign rdaddress_natural = hcount_natural[10:0] + vcount_natural[10:0]*64 + 6400;
-
-wire lcd_request_harmful;	
 wire [10:0] hcount_harmful;
 wire [10:0] vcount_harmful;
-wire [13:0] rdaddress_harmful;
-assign rdaddress_harmful = hcount_harmful[10:0] + vcount_harmful[10:0]*80 + 7424;
-
-wire lcd_request_oxy;	
 wire [10:0] hcount_oxy;
 wire [10:0] vcount_oxy;
-wire [13:0] rdaddress_oxy;
-assign rdaddress_oxy = hcount_oxy[10:0] + vcount_oxy[10:0]*48 + 8704;
-
-wire lcd_request_temp;	
 wire [10:0] hcount_temp;
 wire [10:0] vcount_temp;
-wire [13:0] rdaddress_temp;
-assign rdaddress_temp = hcount_temp[10:0] + vcount_temp[10:0]*48 + 9472;
-
-wire lcd_request_hum;	
 wire [10:0] hcount_hum;
 wire [10:0] vcount_hum;
-wire [13:0] rdaddress_hum;
-assign rdaddress_hum = hcount_hum[10:0] + vcount_hum[10:0]*48 + 10240;
-
-	
-always@(*)
-begin
-	case({lcd_request_theme,lcd_request_veneno,lcd_request_body_temp,lcd_request_heart_rate,lcd_request_h2,lcd_request_liquefied,lcd_request_natural,lcd_request_harmful,lcd_request_oxy,lcd_request_temp,lcd_request_hum})
-		11'b10000000000: rdaddress_chinese = rdaddress_theme;
-		11'b01000000000: rdaddress_chinese = rdaddress_veneno;
-		11'b00100000000: rdaddress_chinese = rdaddress_body_temp;
-		11'b00010000000: rdaddress_chinese = rdaddress_heart_rate;
-      11'b00001000000: rdaddress_chinese = rdaddress_h2;
-		11'b00000100000: rdaddress_chinese = rdaddress_liquefied;
-		11'b00000010000: rdaddress_chinese = rdaddress_natural;
-		11'b00000001000: rdaddress_chinese = rdaddress_harmful;
-		11'b00000000100: rdaddress_chinese = rdaddress_oxy;
-		11'b00000000010: rdaddress_chinese = rdaddress_temp;
-		11'b00000000001: rdaddress_chinese = rdaddress_hum;
-	endcase
-end	
-	
-//-------------------------------------------------------------------------------------------------
-	
-wire        lcd_request_body_temp_dp;	
 wire [10:0] hcount_body_temp_dp;
 wire [10:0] vcount_body_temp_dp;
-wire [11:0] rdaddress_body_temp_dp;
-wire        data_body_temp_dp;
-assign rdaddress_body_temp_dp = hcount_body_temp_dp[10:0] + vcount_body_temp_dp[10:0]*8;
-ROM_dp 	ROM_dp_inst (
-	.address ( rdaddress_body_temp_dp ),
-	.clock ( clk_vga ),
-	.q ( data_body_temp_dp )
-	);	
-
-wire lcd_request_body_temp_unit;	
 wire [10:0] hcount_body_temp_unit;
 wire [10:0] vcount_body_temp_unit;
-wire [11:0] rdaddress_body_temp_unit;
-wire        data_body_temp_unit;
-assign rdaddress_body_temp_unit = hcount_body_temp_unit[10:0] + vcount_body_temp_unit[10:0]*16;
-ROM_temp_unit 	ROM_unit (
-	.address ( rdaddress_body_temp_unit ),
-	.clock ( clk_vga ),
-	.q ( data_body_temp_unit )
-	);	
-	
-wire lcd_request_ppm;	
 wire [10:0] hcount_ppm;
 wire [10:0] vcount_ppm;
-wire [11:0] rdaddress_ppm;
-wire        data_ppm;
-assign rdaddress_ppm = hcount_ppm[10:0] + vcount_ppm[10:0]*24;
-ROM_ppm 	ROM_ppm_inst (
-	.address ( rdaddress_ppm ),
-	.clock ( clk_vga ),
-	.q ( data_ppm )
-	);	
-	
-wire lcd_request_rh;	
 wire [10:0] hcount_rh;
 wire [10:0] vcount_rh;
-wire [11:0] rdaddress_rh;
-wire        data_rh;
-assign rdaddress_rh = hcount_rh[10:0] + vcount_rh[10:0]*16;
-ROM_rh 	ROM_rh_inst (
-	.address ( rdaddress_rh ),
-	.clock ( clk_vga ),
-	.q ( data_rh )
-	);
-	
-wire lcd_request_temp_unit;	
 wire [10:0] hcount_temp_unit;
 wire [10:0] vcount_temp_unit;
-wire [11:0] rdaddress_temp_unit;
-wire        data_temp_unit;
-assign rdaddress_temp_unit = hcount_temp_unit[10:0] + vcount_temp_unit[10:0]*16;
-ROM_temp_unit 	ROM_temp_unit (
-	.address ( rdaddress_temp_unit ),
-	.clock ( clk_vga ),
-	.q ( data_temp_unit )
-	);	
-
-//-----------------------------------------------------------------------------------------------
-wire        lcd_request_body_temp_int_ten;
 wire [10:0] hcount_body_temp_int_ten;
 wire [10:0] vcount_body_temp_int_ten;
-wire [11:0] rdaddress_body_temp_int_ten;
-reg        data_body_temp_int_ten;
-assign rdaddress_body_temp_int_ten = hcount_body_temp_int_ten[10:0] + vcount_body_temp_int_ten[10:0]*8;
-
-wire        lcd_request_body_temp_int_one;
 wire [10:0] hcount_body_temp_int_one;
 wire [10:0] vcount_body_temp_int_one;
-wire [11:0] rdaddress_body_temp_int_one;
-reg        data_body_temp_int_one;
-assign rdaddress_body_temp_int_one = hcount_body_temp_int_one[10:0] + vcount_body_temp_int_one[10:0]*8;
-
-wire        lcd_request_body_temp_dec_ten;
 wire [10:0] hcount_body_temp_dec_ten;
 wire [10:0] vcount_body_temp_dec_ten;
-wire [11:0] rdaddress_body_temp_dec_ten;
-reg        data_body_temp_dec_ten;
-assign rdaddress_body_temp_dec_ten = hcount_body_temp_dec_ten[10:0] + vcount_body_temp_dec_ten[10:0]*8;
-
-wire        lcd_request_heart_rate_hun;
 wire [10:0] hcount_heart_rate_hun;
 wire [10:0] vcount_heart_rate_hun;
-wire [11:0] rdaddress_heart_rate_hun;
-reg        data_heart_rate_hun;
-assign rdaddress_heart_rate_hun = hcount_heart_rate_hun[10:0] + vcount_heart_rate_hun[10:0]*8;
-
-wire        lcd_request_heart_rate_ten;
 wire [10:0] hcount_heart_rate_ten;
 wire [10:0] vcount_heart_rate_ten;
-wire [11:0] rdaddress_heart_rate_ten;
-reg        data_heart_rate_ten;
-assign rdaddress_heart_rate_ten = hcount_heart_rate_ten[10:0] + vcount_heart_rate_ten[10:0]*8;
-
-wire        lcd_request_heart_rate_one;
 wire [10:0] hcount_heart_rate_one;
 wire [10:0] vcount_heart_rate_one;
-wire [11:0] rdaddress_heart_rate_one;
-reg        data_heart_rate_one;
-assign rdaddress_heart_rate_one = hcount_heart_rate_one[10:0] + vcount_heart_rate_one[10:0]*8;
-
-wire        lcd_request_h2_ten;
 wire [10:0] hcount_h2_ten;
 wire [10:0] vcount_h2_ten;
-wire [11:0] rdaddress_h2_ten;
-reg        data_h2_ten;
-assign rdaddress_h2_ten = hcount_h2_ten[10:0] + vcount_h2_ten[10:0]*8;
-
-wire        lcd_request_h2_one;
 wire [10:0] hcount_h2_one;
 wire [10:0] vcount_h2_one;
-wire [11:0] rdaddress_h2_one;
-reg        data_h2_one;
-assign rdaddress_h2_one = hcount_h2_one[10:0] + vcount_h2_one[10:0]*8;
-
-wire        lcd_request_liquefied_ten;
 wire [10:0] hcount_liquefied_ten;
 wire [10:0] vcount_liquefied_ten;
-wire [11:0] rdaddress_liquefied_ten;
-reg        data_liquefied_ten;
-assign rdaddress_liquefied_ten = hcount_liquefied_ten[10:0] + vcount_liquefied_ten[10:0]*8;
-
-wire        lcd_request_liquefied_one;
 wire [10:0] hcount_liquefied_one;
 wire [10:0] vcount_liquefied_one;
-wire [11:0] rdaddress_liquefied_one;
-reg        data_liquefied_one;
-assign rdaddress_liquefied_one = hcount_liquefied_one[10:0] + vcount_liquefied_one[10:0]*8;
-
-wire        lcd_request_natural_ten;
 wire [10:0] hcount_natural_ten;
 wire [10:0] vcount_natural_ten;
-wire [11:0] rdaddress_natural_ten;
-reg        data_natural_ten;
-assign rdaddress_natural_ten = hcount_natural_ten[10:0] + vcount_natural_ten[10:0]*8;
-
-wire        lcd_request_natural_one;
 wire [10:0] hcount_natural_one;
 wire [10:0] vcount_natural_one;
-wire [11:0] rdaddress_natural_one;
-reg        data_natural_one;
-assign rdaddress_natural_one = hcount_natural_one[10:0] + vcount_natural_one[10:0]*8;
-
-wire        lcd_request_harmful_ten;
 wire [10:0] hcount_harmful_ten;
 wire [10:0] vcount_harmful_ten;
-wire [11:0] rdaddress_harmful_ten;
-reg        data_harmful_ten;
-assign rdaddress_harmful_ten = hcount_harmful_ten[10:0] + vcount_harmful_ten[10:0]*8;
-
-wire        lcd_request_harmful_one;
 wire [10:0] hcount_harmful_one;
 wire [10:0] vcount_harmful_one;
-wire [11:0] rdaddress_harmful_one;
-reg        data_harmful_one;
-assign rdaddress_harmful_one = hcount_harmful_one[10:0] + vcount_harmful_one[10:0]*8;
-
-wire        lcd_request_oxy_ten;
 wire [10:0] hcount_oxy_ten;
 wire [10:0] vcount_oxy_ten;
-wire [11:0] rdaddress_oxy_ten;
-reg        data_oxy_ten;
-assign rdaddress_oxy_ten = hcount_oxy_ten[10:0] + vcount_oxy_ten[10:0]*8;
-
-wire        lcd_request_oxy_one;
 wire [10:0] hcount_oxy_one;
 wire [10:0] vcount_oxy_one;
-wire [11:0] rdaddress_oxy_one;
-reg        data_oxy_one;
-assign rdaddress_oxy_one = hcount_oxy_one[10:0] + vcount_oxy_one[10:0]*8;
-
-wire        lcd_request_temp_ten;
 wire [10:0] hcount_temp_ten;
 wire [10:0] vcount_temp_ten;
-wire [11:0] rdaddress_temp_ten;
-reg        data_temp_ten;
-assign rdaddress_temp_ten = hcount_temp_ten[10:0] + vcount_temp_ten[10:0]*8;
-
-wire        lcd_request_temp_one;
 wire [10:0] hcount_temp_one;
 wire [10:0] vcount_temp_one;
-wire [11:0] rdaddress_temp_one;
-reg        data_temp_one;
-assign rdaddress_temp_one = hcount_temp_one[10:0] + vcount_temp_one[10:0]*8;
-
-wire        lcd_request_hum_ten;
 wire [10:0] hcount_hum_ten;
 wire [10:0] vcount_hum_ten;
-wire [11:0] rdaddress_hum_ten;
-reg        data_hum_ten;
-assign rdaddress_hum_ten = hcount_hum_ten[10:0] + vcount_hum_ten[10:0]*8;
-
-wire        lcd_request_hum_one;
 wire [10:0] hcount_hum_one;
 wire [10:0] vcount_hum_one;
-wire [11:0] rdaddress_hum_one;
-reg        data_hum_one;
-assign rdaddress_hum_one = hcount_hum_one[10:0] + vcount_hum_one[10:0]*8;
-
-
-always@(*)
-begin
-	case(body_temp_int_ten)
-		4'd0: data_body_temp_int_ten =  data_0_body_temp_int_ten;
-		4'd1: data_body_temp_int_ten =  data_1_body_temp_int_ten;
-		4'd2: data_body_temp_int_ten =  data_2_body_temp_int_ten;
-		4'd3: data_body_temp_int_ten =  data_3_body_temp_int_ten;
-		4'd4: data_body_temp_int_ten =  data_4_body_temp_int_ten;
-		4'd5: data_body_temp_int_ten =  data_5_body_temp_int_ten;
-		4'd6: data_body_temp_int_ten =  data_6_body_temp_int_ten;
-		4'd7: data_body_temp_int_ten =  data_7_body_temp_int_ten;
-		4'd8: data_body_temp_int_ten =  data_8_body_temp_int_ten;
-		4'd9: data_body_temp_int_ten =  data_9_body_temp_int_ten;	
-	endcase
-	
-		case(body_temp_int_one)
-		4'd0: data_body_temp_int_one =  data_0_body_temp_int_one;
-		4'd1: data_body_temp_int_one =  data_1_body_temp_int_one;
-		4'd2: data_body_temp_int_one =  data_2_body_temp_int_one;
-		4'd3: data_body_temp_int_one =  data_3_body_temp_int_one;
-		4'd4: data_body_temp_int_one =  data_4_body_temp_int_one;
-		4'd5: data_body_temp_int_one =  data_5_body_temp_int_one;
-		4'd6: data_body_temp_int_one =  data_6_body_temp_int_one;
-		4'd7: data_body_temp_int_one =  data_7_body_temp_int_one;
-		4'd8: data_body_temp_int_one =  data_8_body_temp_int_one;
-		4'd9: data_body_temp_int_one =  data_9_body_temp_int_one;
-	endcase
-
-	case(body_temp_dec_ten)
-		4'd0: data_body_temp_dec_ten =  data_0_body_temp_dec_ten;
-		4'd1: data_body_temp_dec_ten =  data_1_body_temp_dec_ten;
-		4'd2: data_body_temp_dec_ten =  data_2_body_temp_dec_ten;
-		4'd3: data_body_temp_dec_ten =  data_3_body_temp_dec_ten;
-		4'd4: data_body_temp_dec_ten =  data_4_body_temp_dec_ten;
-		4'd5: data_body_temp_dec_ten =  data_5_body_temp_dec_ten;
-		4'd6: data_body_temp_dec_ten =  data_6_body_temp_dec_ten;
-		4'd7: data_body_temp_dec_ten =  data_7_body_temp_dec_ten;
-		4'd8: data_body_temp_dec_ten =  data_8_body_temp_dec_ten;
-		4'd9: data_body_temp_dec_ten =  data_9_body_temp_dec_ten;
-	endcase
-
-	case(heart_rate_hun)
-		4'd0: data_heart_rate_hun =  data_0_heart_rate_hun;
-		4'd1: data_heart_rate_hun =  data_1_heart_rate_hun;
-		4'd2: data_heart_rate_hun =  data_2_heart_rate_hun;
-		4'd3: data_heart_rate_hun =  data_3_heart_rate_hun;
-		4'd4: data_heart_rate_hun =  data_4_heart_rate_hun;
-		4'd5: data_heart_rate_hun =  data_5_heart_rate_hun;
-		4'd6: data_heart_rate_hun =  data_6_heart_rate_hun;
-		4'd7: data_heart_rate_hun =  data_7_heart_rate_hun;
-		4'd8: data_heart_rate_hun =  data_8_heart_rate_hun;
-		4'd9: data_heart_rate_hun =  data_9_heart_rate_hun;
-	endcase
-
-	case(heart_rate_ten)
-		4'd0: data_heart_rate_ten =  data_0_heart_rate_ten;
-		4'd1: data_heart_rate_ten =  data_1_heart_rate_ten;
-		4'd2: data_heart_rate_ten =  data_2_heart_rate_ten;
-		4'd3: data_heart_rate_ten =  data_3_heart_rate_ten;
-		4'd4: data_heart_rate_ten =  data_4_heart_rate_ten;
-		4'd5: data_heart_rate_ten =  data_5_heart_rate_ten;
-		4'd6: data_heart_rate_ten =  data_6_heart_rate_ten;
-		4'd7: data_heart_rate_ten =  data_7_heart_rate_ten;
-		4'd8: data_heart_rate_ten =  data_8_heart_rate_ten;
-		4'd9: data_heart_rate_ten =  data_9_heart_rate_ten;
-	endcase
-
-	case(heart_rate_one)
-		4'd0: data_heart_rate_one =  data_0_heart_rate_one;
-		4'd1: data_heart_rate_one =  data_1_heart_rate_one;
-		4'd2: data_heart_rate_one =  data_2_heart_rate_one;
-		4'd3: data_heart_rate_one =  data_3_heart_rate_one;
-		4'd4: data_heart_rate_one =  data_4_heart_rate_one;
-		4'd5: data_heart_rate_one =  data_5_heart_rate_one;
-		4'd6: data_heart_rate_one =  data_6_heart_rate_one;
-		4'd7: data_heart_rate_one =  data_7_heart_rate_one;
-		4'd8: data_heart_rate_one =  data_8_heart_rate_one;
-		4'd9: data_heart_rate_one =  data_9_heart_rate_one;
-	endcase
-	
-	case(h2_ten)
-		4'd0: data_h2_ten =  data_0_h2_ten;
-		4'd1: data_h2_ten =  data_1_h2_ten;
-		4'd2: data_h2_ten =  data_2_h2_ten;
-		4'd3: data_h2_ten =  data_3_h2_ten;
-		4'd4: data_h2_ten =  data_4_h2_ten;
-		4'd5: data_h2_ten =  data_5_h2_ten;
-		4'd6: data_h2_ten =  data_6_h2_ten;
-		4'd7: data_h2_ten =  data_7_h2_ten;
-		4'd8: data_h2_ten =  data_8_h2_ten;
-		4'd9: data_h2_ten =  data_9_h2_ten;
-	endcase
-	
-	case(h2_one)
-		4'd0: data_h2_one =  data_0_h2_one;
-		4'd1: data_h2_one =  data_1_h2_one;
-		4'd2: data_h2_one =  data_2_h2_one;
-		4'd3: data_h2_one =  data_3_h2_one;
-		4'd4: data_h2_one =  data_4_h2_one;
-		4'd5: data_h2_one =  data_5_h2_one;
-		4'd6: data_h2_one =  data_6_h2_one;
-		4'd7: data_h2_one =  data_7_h2_one;
-		4'd8: data_h2_one =  data_8_h2_one;
-		4'd9: data_h2_one =  data_9_h2_one;
-	endcase
-	
-	case(liquefied_ten)
-		4'd0: data_liquefied_ten =  data_0_liquefied_ten;
-		4'd1: data_liquefied_ten =  data_1_liquefied_ten;
-		4'd2: data_liquefied_ten =  data_2_liquefied_ten;
-		4'd3: data_liquefied_ten =  data_3_liquefied_ten;
-		4'd4: data_liquefied_ten =  data_4_liquefied_ten;
-		4'd5: data_liquefied_ten =  data_5_liquefied_ten;
-		4'd6: data_liquefied_ten =  data_6_liquefied_ten;
-		4'd7: data_liquefied_ten =  data_7_liquefied_ten;
-		4'd8: data_liquefied_ten =  data_8_liquefied_ten;
-		4'd9: data_liquefied_ten =  data_9_liquefied_ten;
-	endcase
-	
-	case(liquefied_one)
-		4'd0: data_liquefied_one =  data_0_liquefied_one;
-		4'd1: data_liquefied_one =  data_1_liquefied_one;
-		4'd2: data_liquefied_one =  data_2_liquefied_one;
-		4'd3: data_liquefied_one =  data_3_liquefied_one;
-		4'd4: data_liquefied_one =  data_4_liquefied_one;
-		4'd5: data_liquefied_one =  data_5_liquefied_one;
-		4'd6: data_liquefied_one =  data_6_liquefied_one;
-		4'd7: data_liquefied_one =  data_7_liquefied_one;
-		4'd8: data_liquefied_one =  data_8_liquefied_one;
-		4'd9: data_liquefied_one =  data_9_liquefied_one;
-	endcase
-	
-	case(natural_ten)
-		4'd0: data_natural_ten =  data_0_natural_ten;
-		4'd1: data_natural_ten =  data_1_natural_ten;
-		4'd2: data_natural_ten =  data_2_natural_ten;
-		4'd3: data_natural_ten =  data_3_natural_ten;
-		4'd4: data_natural_ten =  data_4_natural_ten;
-		4'd5: data_natural_ten =  data_5_natural_ten;
-		4'd6: data_natural_ten =  data_6_natural_ten;
-		4'd7: data_natural_ten =  data_7_natural_ten;
-		4'd8: data_natural_ten =  data_8_natural_ten;
-		4'd9: data_natural_ten =  data_9_natural_ten;
-	endcase
-	
-	case(natural_one)
-		4'd0: data_natural_one =  data_0_natural_one;
-		4'd1: data_natural_one =  data_1_natural_one;
-		4'd2: data_natural_one =  data_2_natural_one;
-		4'd3: data_natural_one =  data_3_natural_one;
-		4'd4: data_natural_one =  data_4_natural_one;
-		4'd5: data_natural_one =  data_5_natural_one;
-		4'd6: data_natural_one =  data_6_natural_one;
-		4'd7: data_natural_one =  data_7_natural_one;
-		4'd8: data_natural_one =  data_8_natural_one;
-		4'd9: data_natural_one =  data_9_natural_one;
-	endcase
-	case(harmful_ten)
-		4'd0: data_harmful_ten =  data_0_harmful_ten;
-		4'd1: data_harmful_ten =  data_1_harmful_ten;
-		4'd2: data_harmful_ten =  data_2_harmful_ten;
-		4'd3: data_harmful_ten =  data_3_harmful_ten;
-		4'd4: data_harmful_ten =  data_4_harmful_ten;
-		4'd5: data_harmful_ten =  data_5_harmful_ten;
-		4'd6: data_harmful_ten =  data_6_harmful_ten;
-		4'd7: data_harmful_ten =  data_7_harmful_ten;
-		4'd8: data_harmful_ten =  data_8_harmful_ten;
-		4'd9: data_harmful_ten =  data_9_harmful_ten;
-	endcase
-	
-	case(harmful_one)
-		4'd0: data_harmful_one =  data_0_harmful_one;
-		4'd1: data_harmful_one =  data_1_harmful_one;
-		4'd2: data_harmful_one =  data_2_harmful_one;
-		4'd3: data_harmful_one =  data_3_harmful_one;
-		4'd4: data_harmful_one =  data_4_harmful_one;
-		4'd5: data_harmful_one =  data_5_harmful_one;
-		4'd6: data_harmful_one =  data_6_harmful_one;
-		4'd7: data_harmful_one =  data_7_harmful_one;
-		4'd8: data_harmful_one =  data_8_harmful_one;
-		4'd9: data_harmful_one =  data_9_harmful_one;
-	endcase
-	case(oxy_ten)
-		4'd0: data_oxy_ten =  data_0_oxy_ten;
-		4'd1: data_oxy_ten =  data_1_oxy_ten;
-		4'd2: data_oxy_ten =  data_2_oxy_ten;
-		4'd3: data_oxy_ten =  data_3_oxy_ten;
-		4'd4: data_oxy_ten =  data_4_oxy_ten;
-		4'd5: data_oxy_ten =  data_5_oxy_ten;
-		4'd6: data_oxy_ten =  data_6_oxy_ten;
-		4'd7: data_oxy_ten =  data_7_oxy_ten;
-		4'd8: data_oxy_ten =  data_8_oxy_ten;
-		4'd9: data_oxy_ten =  data_9_oxy_ten;
-	endcase
-	
-	case(oxy_one)
-		4'd0: data_oxy_one =  data_0_oxy_one;
-		4'd1: data_oxy_one =  data_1_oxy_one;
-		4'd2: data_oxy_one =  data_2_oxy_one;
-		4'd3: data_oxy_one =  data_3_oxy_one;
-		4'd4: data_oxy_one =  data_4_oxy_one;
-		4'd5: data_oxy_one =  data_5_oxy_one;
-		4'd6: data_oxy_one =  data_6_oxy_one;
-		4'd7: data_oxy_one =  data_7_oxy_one;
-		4'd8: data_oxy_one =  data_8_oxy_one;
-		4'd9: data_oxy_one =  data_9_oxy_one;
-	endcase
-	case(temp_ten)
-		4'd0: data_temp_ten =  data_0_temp_ten;
-		4'd1: data_temp_ten =  data_1_temp_ten;
-		4'd2: data_temp_ten =  data_2_temp_ten;
-		4'd3: data_temp_ten =  data_3_temp_ten;
-		4'd4: data_temp_ten =  data_4_temp_ten;
-		4'd5: data_temp_ten =  data_5_temp_ten;
-		4'd6: data_temp_ten =  data_6_temp_ten;
-		4'd7: data_temp_ten =  data_7_temp_ten;
-		4'd8: data_temp_ten =  data_8_temp_ten;
-		4'd9: data_temp_ten =  data_9_temp_ten;
-	endcase
-	
-	case(temp_one)
-		4'd0: data_temp_one =  data_0_temp_one;
-		4'd1: data_temp_one =  data_1_temp_one;
-		4'd2: data_temp_one =  data_2_temp_one;
-		4'd3: data_temp_one =  data_3_temp_one;
-		4'd4: data_temp_one =  data_4_temp_one;
-		4'd5: data_temp_one =  data_5_temp_one;
-		4'd6: data_temp_one =  data_6_temp_one;
-		4'd7: data_temp_one =  data_7_temp_one;
-		4'd8: data_temp_one =  data_8_temp_one;
-		4'd9: data_temp_one =  data_9_temp_one;
-	endcase
-	case(hum_ten)
-		4'd0: data_hum_ten =  data_0_hum_ten;
-		4'd1: data_hum_ten =  data_1_hum_ten;
-		4'd2: data_hum_ten =  data_2_hum_ten;
-		4'd3: data_hum_ten =  data_3_hum_ten;
-		4'd4: data_hum_ten =  data_4_hum_ten;
-		4'd5: data_hum_ten =  data_5_hum_ten;
-		4'd6: data_hum_ten =  data_6_hum_ten;
-		4'd7: data_hum_ten =  data_7_hum_ten;
-		4'd8: data_hum_ten =  data_8_hum_ten;
-		4'd9: data_hum_ten =  data_9_hum_ten;
-	endcase
-	
-	case(hum_one)
-		4'd0: data_hum_one =  data_0_hum_one;
-		4'd1: data_hum_one =  data_1_hum_one;
-		4'd2: data_hum_one =  data_2_hum_one;
-		4'd3: data_hum_one =  data_3_hum_one;
-		4'd4: data_hum_one =  data_4_hum_one;
-		4'd5: data_hum_one =  data_5_hum_one;
-		4'd6: data_hum_one =  data_6_hum_one;
-		4'd7: data_hum_one =  data_7_hum_one;
-		4'd8: data_hum_one =  data_8_hum_one;
-		4'd9: data_hum_one =  data_9_hum_one;
-	endcase
-
-end
-
-reg [23:0] lcd_driver_data_in;
-always@(*)
-begin
-	case({sys_rd1,sys_rd2,lcd_request_theme,lcd_request_veneno,lcd_request_body_temp,lcd_request_body_temp_int_ten,lcd_request_body_temp_int_one,lcd_request_body_temp_dp,lcd_request_body_temp_dec_ten,lcd_request_body_temp_unit,lcd_request_heart_rate,lcd_request_heart_rate_hun,lcd_request_heart_rate_ten,lcd_request_heart_rate_one,lcd_request_h2,lcd_request_h2_ten,lcd_request_h2_one,lcd_request_liquefied,lcd_request_liquefied_ten,lcd_request_liquefied_one,lcd_request_natural,lcd_request_harmful,lcd_request_oxy,lcd_request_temp,lcd_request_hum,lcd_request_natural_ten,lcd_request_natural_one,lcd_request_harmful_ten,lcd_request_harmful_one,lcd_request_oxy_ten,lcd_request_oxy_one,lcd_request_temp_ten,lcd_request_temp_one,lcd_request_hum_ten,lcd_request_hum_one,lcd_request_ppm,lcd_request_rh,lcd_request_temp_unit})
-		38'b00000000000000000000000000000000000000:lcd_driver_data_in = 24'b0;
-		38'b10000000000000000000000000000000000000:lcd_driver_data_in = lcd_data_in;
-		38'b01000000000000000000000000000000000000:lcd_driver_data_in = gymcu_data;
-		38'b00100000000000000000000000000000000000:lcd_driver_data_in = {8'b0,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,8'b0};
-		38'b00010000000000000000000000000000000000:lcd_driver_data_in = {8'b0,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,8'b0};
-		38'b00001000000000000000000000000000000000:lcd_driver_data_in = {data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,8'b0};
-		38'b00000100000000000000000000000000000000:lcd_driver_data_in = {data_body_temp_int_ten,data_body_temp_int_ten,data_body_temp_int_ten,data_body_temp_int_ten,data_body_temp_int_ten,data_body_temp_int_ten,data_body_temp_int_ten,data_body_temp_int_ten,data_body_temp_int_ten,data_body_temp_int_ten,data_body_temp_int_ten,data_body_temp_int_ten,data_body_temp_int_ten,data_body_temp_int_ten,data_body_temp_int_ten,data_body_temp_int_ten,data_body_temp_int_ten,data_body_temp_int_ten,data_body_temp_int_ten,data_body_temp_int_ten,data_body_temp_int_ten,data_body_temp_int_ten,data_body_temp_int_ten,data_body_temp_int_ten};
-		38'b00000010000000000000000000000000000000:lcd_driver_data_in = {data_body_temp_int_one,data_body_temp_int_one,data_body_temp_int_one,data_body_temp_int_one,data_body_temp_int_one,data_body_temp_int_one,data_body_temp_int_one,data_body_temp_int_one,data_body_temp_int_one,data_body_temp_int_one,data_body_temp_int_one,data_body_temp_int_one,data_body_temp_int_one,data_body_temp_int_one,data_body_temp_int_one,data_body_temp_int_one,data_body_temp_int_one,data_body_temp_int_one,data_body_temp_int_one,data_body_temp_int_one,data_body_temp_int_one,data_body_temp_int_one,data_body_temp_int_one,data_body_temp_int_one};
-		38'b00000001000000000000000000000000000000:lcd_driver_data_in = {data_body_temp_dp,data_body_temp_dp,data_body_temp_dp,data_body_temp_dp,data_body_temp_dp,data_body_temp_dp,data_body_temp_dp,data_body_temp_dp,data_body_temp_dp,data_body_temp_dp,data_body_temp_dp,data_body_temp_dp,data_body_temp_dp,data_body_temp_dp,data_body_temp_dp,data_body_temp_dp,data_body_temp_dp,data_body_temp_dp,data_body_temp_dp,data_body_temp_dp,data_body_temp_dp,data_body_temp_dp,data_body_temp_dp,data_body_temp_dp};
-		38'b00000000100000000000000000000000000000:lcd_driver_data_in = {data_body_temp_dec_ten,data_body_temp_dec_ten,data_body_temp_dec_ten,data_body_temp_dec_ten,data_body_temp_dec_ten,data_body_temp_dec_ten,data_body_temp_dec_ten,data_body_temp_dec_ten,data_body_temp_dec_ten,data_body_temp_dec_ten,data_body_temp_dec_ten,data_body_temp_dec_ten,data_body_temp_dec_ten,data_body_temp_dec_ten,data_body_temp_dec_ten,data_body_temp_dec_ten,data_body_temp_dec_ten,data_body_temp_dec_ten,data_body_temp_dec_ten,data_body_temp_dec_ten,data_body_temp_dec_ten,data_body_temp_dec_ten,data_body_temp_dec_ten,data_body_temp_dec_ten};
-		38'b00000000010000000000000000000000000000:lcd_driver_data_in = {data_body_temp_unit,data_body_temp_unit,data_body_temp_unit,data_body_temp_unit,data_body_temp_unit,data_body_temp_unit,data_body_temp_unit,data_body_temp_unit,data_body_temp_unit,data_body_temp_unit,data_body_temp_unit,data_body_temp_unit,data_body_temp_unit,data_body_temp_unit,data_body_temp_unit,data_body_temp_unit,data_body_temp_unit,data_body_temp_unit,data_body_temp_unit,data_body_temp_unit,data_body_temp_unit,data_body_temp_unit,data_body_temp_unit,data_body_temp_unit};
-		38'b00000000001000000000000000000000000000:lcd_driver_data_in = {data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,8'b0};
-		38'b00000000000100000000000000000000000000:lcd_driver_data_in = {data_heart_rate_hun,data_heart_rate_hun,data_heart_rate_hun,data_heart_rate_hun,data_heart_rate_hun,data_heart_rate_hun,data_heart_rate_hun,data_heart_rate_hun,data_heart_rate_hun,data_heart_rate_hun,data_heart_rate_hun,data_heart_rate_hun,data_heart_rate_hun,data_heart_rate_hun,data_heart_rate_hun,data_heart_rate_hun,data_heart_rate_hun,data_heart_rate_hun,data_heart_rate_hun,data_heart_rate_hun,data_heart_rate_hun,data_heart_rate_hun,data_heart_rate_hun,data_heart_rate_hun};
-		38'b00000000000010000000000000000000000000:lcd_driver_data_in = {data_heart_rate_ten,data_heart_rate_ten,data_heart_rate_ten,data_heart_rate_ten,data_heart_rate_ten,data_heart_rate_ten,data_heart_rate_ten,data_heart_rate_ten,data_heart_rate_ten,data_heart_rate_ten,data_heart_rate_ten,data_heart_rate_ten,data_heart_rate_ten,data_heart_rate_ten,data_heart_rate_ten,data_heart_rate_ten,data_heart_rate_ten,data_heart_rate_ten,data_heart_rate_ten,data_heart_rate_ten,data_heart_rate_ten,data_heart_rate_ten,data_heart_rate_ten,data_heart_rate_ten};
-		38'b00000000000001000000000000000000000000:lcd_driver_data_in = {data_heart_rate_one,data_heart_rate_one,data_heart_rate_one,data_heart_rate_one,data_heart_rate_one,data_heart_rate_one,data_heart_rate_one,data_heart_rate_one,data_heart_rate_one,data_heart_rate_one,data_heart_rate_one,data_heart_rate_one,data_heart_rate_one,data_heart_rate_one,data_heart_rate_one,data_heart_rate_one,data_heart_rate_one,data_heart_rate_one,data_heart_rate_one,data_heart_rate_one,data_heart_rate_one,data_heart_rate_one,data_heart_rate_one,data_heart_rate_one};
-		38'b00000000000000100000000000000000000000:lcd_driver_data_in = {data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,8'b0};
-		38'b00000000000000010000000000000000000000:lcd_driver_data_in = {data_h2_ten,data_h2_ten,data_h2_ten,data_h2_ten,data_h2_ten,data_h2_ten,data_h2_ten,data_h2_ten,data_h2_ten,data_h2_ten,data_h2_ten,data_h2_ten,data_h2_ten,data_h2_ten,data_h2_ten,data_h2_ten,data_h2_ten,data_h2_ten,data_h2_ten,data_h2_ten,data_h2_ten,data_h2_ten,data_h2_ten,data_h2_ten};
-		38'b00000000000000001000000000000000000000:lcd_driver_data_in = {data_h2_one,data_h2_one,data_h2_one,data_h2_one,data_h2_one,data_h2_one,data_h2_one,data_h2_one,data_h2_one,data_h2_one,data_h2_one,data_h2_one,data_h2_one,data_h2_one,data_h2_one,data_h2_one,data_h2_one,data_h2_one,data_h2_one,data_h2_one,data_h2_one,data_h2_one,data_h2_one,data_h2_one};
-		38'b00000000000000000100000000000000000000:lcd_driver_data_in = {data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,8'b0};
-		38'b00000000000000000010000000000000000000:lcd_driver_data_in = {data_liquefied_ten,data_liquefied_ten,data_liquefied_ten,data_liquefied_ten,data_liquefied_ten,data_liquefied_ten,data_liquefied_ten,data_liquefied_ten,data_liquefied_ten,data_liquefied_ten,data_liquefied_ten,data_liquefied_ten,data_liquefied_ten,data_liquefied_ten,data_liquefied_ten,data_liquefied_ten,data_liquefied_ten,data_liquefied_ten,data_liquefied_ten,data_liquefied_ten,data_liquefied_ten,data_liquefied_ten,data_liquefied_ten,data_liquefied_ten};
-		38'b00000000000000000001000000000000000000:lcd_driver_data_in = {data_liquefied_one,data_liquefied_one,data_liquefied_one,data_liquefied_one,data_liquefied_one,data_liquefied_one,data_liquefied_one,data_liquefied_one,data_liquefied_one,data_liquefied_one,data_liquefied_one,data_liquefied_one,data_liquefied_one,data_liquefied_one,data_liquefied_one,data_liquefied_one,data_liquefied_one,data_liquefied_one,data_liquefied_one,data_liquefied_one,data_liquefied_one,data_liquefied_one,data_liquefied_one,data_liquefied_one};
-		38'b00000000000000000000100000000000000000:lcd_driver_data_in = {data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,8'b0};
-		38'b00000000000000000000010000000000000000:lcd_driver_data_in = {data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,8'b0};
-		38'b00000000000000000000001000000000000000:lcd_driver_data_in = {data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,8'b0};
-		38'b00000000000000000000000100000000000000:lcd_driver_data_in = {data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,8'b0};
-		38'b00000000000000000000000010000000000000:lcd_driver_data_in = {data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,data_chinese,8'b0};
-		38'b00000000000000000000000001000000000000:lcd_driver_data_in = {data_natural_ten,data_natural_ten,data_natural_ten,data_natural_ten,data_natural_ten,data_natural_ten,data_natural_ten,data_natural_ten,data_natural_ten,data_natural_ten,data_natural_ten,data_natural_ten,data_natural_ten,data_natural_ten,data_natural_ten,data_natural_ten,data_natural_ten,data_natural_ten,data_natural_ten,data_natural_ten,data_natural_ten,data_natural_ten,data_natural_ten,data_natural_ten};
-		38'b00000000000000000000000000100000000000:lcd_driver_data_in = {data_natural_one,data_natural_one,data_natural_one,data_natural_one,data_natural_one,data_natural_one,data_natural_one,data_natural_one,data_natural_one,data_natural_one,data_natural_one,data_natural_one,data_natural_one,data_natural_one,data_natural_one,data_natural_one,data_natural_one,data_natural_one,data_natural_one,data_natural_one,data_natural_one,data_natural_one,data_natural_one,data_natural_one};
-		38'b00000000000000000000000000010000000000:lcd_driver_data_in = {data_harmful_ten,data_harmful_ten,data_harmful_ten,data_harmful_ten,data_harmful_ten,data_harmful_ten,data_harmful_ten,data_harmful_ten,data_harmful_ten,data_harmful_ten,data_harmful_ten,data_harmful_ten,data_harmful_ten,data_harmful_ten,data_harmful_ten,data_harmful_ten,data_harmful_ten,data_harmful_ten,data_harmful_ten,data_harmful_ten,data_harmful_ten,data_harmful_ten,data_harmful_ten,data_harmful_ten};
-		38'b00000000000000000000000000001000000000:lcd_driver_data_in = {data_harmful_one,data_harmful_one,data_harmful_one,data_harmful_one,data_harmful_one,data_harmful_one,data_harmful_one,data_harmful_one,data_harmful_one,data_harmful_one,data_harmful_one,data_harmful_one,data_harmful_one,data_harmful_one,data_harmful_one,data_harmful_one,data_harmful_one,data_harmful_one,data_harmful_one,data_harmful_one,data_harmful_one,data_harmful_one,data_harmful_one,data_harmful_one};
-		38'b00000000000000000000000000000100000000:lcd_driver_data_in = {data_oxy_ten,data_oxy_ten,data_oxy_ten,data_oxy_ten,data_oxy_ten,data_oxy_ten,data_oxy_ten,data_oxy_ten,data_oxy_ten,data_oxy_ten,data_oxy_ten,data_oxy_ten,data_oxy_ten,data_oxy_ten,data_oxy_ten,data_oxy_ten,data_oxy_ten,data_oxy_ten,data_oxy_ten,data_oxy_ten,data_oxy_ten,data_oxy_ten,data_oxy_ten,data_oxy_ten};
-		38'b00000000000000000000000000000010000000:lcd_driver_data_in = {data_oxy_one,data_oxy_one,data_oxy_one,data_oxy_one,data_oxy_one,data_oxy_one,data_oxy_one,data_oxy_one,data_oxy_one,data_oxy_one,data_oxy_one,data_oxy_one,data_oxy_one,data_oxy_one,data_oxy_one,data_oxy_one,data_oxy_one,data_oxy_one,data_oxy_one,data_oxy_one,data_oxy_one,data_oxy_one,data_oxy_one,data_oxy_one};
-		38'b00000000000000000000000000000001000000:lcd_driver_data_in = {data_temp_ten,data_temp_ten,data_temp_ten,data_temp_ten,data_temp_ten,data_temp_ten,data_temp_ten,data_temp_ten,data_temp_ten,data_temp_ten,data_temp_ten,data_temp_ten,data_temp_ten,data_temp_ten,data_temp_ten,data_temp_ten,data_temp_ten,data_temp_ten,data_temp_ten,data_temp_ten,data_temp_ten,data_temp_ten,data_temp_ten,data_temp_ten};
-		38'b00000000000000000000000000000000100000:lcd_driver_data_in = {data_temp_one,data_temp_one,data_temp_one,data_temp_one,data_temp_one,data_temp_one,data_temp_one,data_temp_one,data_temp_one,data_temp_one,data_temp_one,data_temp_one,data_temp_one,data_temp_one,data_temp_one,data_temp_one,data_temp_one,data_temp_one,data_temp_one,data_temp_one,data_temp_one,data_temp_one,data_temp_one,data_temp_one};
-		38'b00000000000000000000000000000000010000:lcd_driver_data_in = {data_hum_ten,data_hum_ten,data_hum_ten,data_hum_ten,data_hum_ten,data_hum_ten,data_hum_ten,data_hum_ten,data_hum_ten,data_hum_ten,data_hum_ten,data_hum_ten,data_hum_ten,data_hum_ten,data_hum_ten,data_hum_ten,data_hum_ten,data_hum_ten,data_hum_ten,data_hum_ten,data_hum_ten,data_hum_ten,data_hum_ten,data_hum_ten};
-		38'b00000000000000000000000000000000001000:lcd_driver_data_in = {data_hum_one,data_hum_one,data_hum_one,data_hum_one,data_hum_one,data_hum_one,data_hum_one,data_hum_one,data_hum_one,data_hum_one,data_hum_one,data_hum_one,data_hum_one,data_hum_one,data_hum_one,data_hum_one,data_hum_one,data_hum_one,data_hum_one,data_hum_one,data_hum_one,data_hum_one,data_hum_one,data_hum_one};
-		38'b00000000000000000000000000000000000100:lcd_driver_data_in = {data_ppm,data_ppm,data_ppm,data_ppm,data_ppm,data_ppm,data_ppm,data_ppm,data_ppm,data_ppm,data_ppm,data_ppm,data_ppm,data_ppm,data_ppm,data_ppm,data_ppm,data_ppm,data_ppm,data_ppm,data_ppm,data_ppm,data_ppm,data_ppm};
-		38'b00000000000000000000000000000000000010:lcd_driver_data_in = {data_rh,data_rh,data_rh,data_rh,data_rh,data_rh,data_rh,data_rh,data_rh,data_rh,data_rh,data_rh,data_rh,data_rh,data_rh,data_rh,data_rh,data_rh,data_rh,data_rh,data_rh,data_rh,data_rh,data_rh};
-		38'b00000000000000000000000000000000000001:lcd_driver_data_in = {data_temp_unit,data_temp_unit,data_temp_unit,data_temp_unit,data_temp_unit,data_temp_unit,data_temp_unit,data_temp_unit,data_temp_unit,data_temp_unit,data_temp_unit,data_temp_unit,data_temp_unit,data_temp_unit,data_temp_unit,data_temp_unit,data_temp_unit,data_temp_unit,data_temp_unit,data_temp_unit,data_temp_unit,data_temp_unit,data_temp_unit,data_temp_unit};
-		
-		default:lcd_driver_data_in = 24'b0;
-		
-	endcase
-end
 
 
 
 
+wire lcd_request_theme;
+wire lcd_request_veneno;
+
+wire lcd_request_body_temp;
+wire lcd_request_heart_rate;
+wire lcd_request_h2;
+wire lcd_request_liquefied;	
+wire lcd_request_natural;
+wire lcd_request_harmful;	
+wire lcd_request_oxy;	
+wire lcd_request_temp;	
+wire lcd_request_hum;	
+
+wire lcd_request_body_temp_dp;
+wire lcd_request_body_temp_unit;
+wire lcd_request_ppm;	
+wire lcd_request_rh;
+wire lcd_request_temp_unit;	
+
+wire lcd_request_body_temp_int_ten;
+wire lcd_request_body_temp_int_one;
+wire lcd_request_body_temp_dec_ten;
+wire lcd_request_heart_rate_hun;
+wire lcd_request_heart_rate_ten;
+wire lcd_request_heart_rate_one;
+wire lcd_request_h2_ten;
+wire lcd_request_h2_one;
+wire lcd_request_liquefied_ten;
+wire lcd_request_liquefied_one;
+wire lcd_request_natural_ten;
+wire lcd_request_natural_one;
+wire lcd_request_harmful_ten;
+wire lcd_request_harmful_one;
+wire lcd_request_oxy_ten;
+wire lcd_request_oxy_one;
+wire lcd_request_temp_ten;
+wire lcd_request_temp_one;
+wire lcd_request_hum_ten;
+wire lcd_request_hum_one;
 
 LCD_Driver LCD_Driver(
 		.clk(clk_vga),    			//33.3M
@@ -1209,6 +655,160 @@ LCD_Driver LCD_Driver(
 );
 
 
+wire [23:0]	lcd_driver_data_in;
+
+LCD_Display LCD_Display_inst(
+	.clk_vga(clk_vga),
+	.rst_n(rst_n),
+	
+
+		.hcount_theme(hcount_theme),			//x坐标
+		.vcount_theme(vcount_theme),			//y坐标
+		.hcount_veneno(hcount_veneno),			//x坐标
+		.vcount_veneno(vcount_veneno),			//y坐标
+		.hcount_body_temp(hcount_body_temp),			//x坐标
+		.vcount_body_temp(vcount_body_temp),			//y坐标
+		.hcount_body_temp_int_ten(hcount_body_temp_int_ten),			//x坐标
+		.vcount_body_temp_int_ten(vcount_body_temp_int_ten),			//y坐标
+		.hcount_body_temp_int_one(hcount_body_temp_int_one),			//x坐标
+		.vcount_body_temp_int_one(vcount_body_temp_int_one),			//y坐标
+		.hcount_body_temp_dp(hcount_body_temp_dp),			//x坐标
+		.vcount_body_temp_dp(vcount_body_temp_dp),			//y坐标
+		.hcount_body_temp_dec_ten(hcount_body_temp_dec_ten),			//x坐标
+		.vcount_body_temp_dec_ten(vcount_body_temp_dec_ten),			//y坐标
+		.hcount_body_temp_unit(hcount_body_temp_unit),			//x坐标
+		.vcount_body_temp_unit(vcount_body_temp_unit),			//y坐标
+		.hcount_heart_rate(hcount_heart_rate),			//x坐标
+		.vcount_heart_rate(vcount_heart_rate),			//y坐标
+		.hcount_heart_rate_hun(hcount_heart_rate_hun),			//x坐标
+		.vcount_heart_rate_hun(vcount_heart_rate_hun),			//y坐标
+		.hcount_heart_rate_ten(hcount_heart_rate_ten),			//x坐标
+		.vcount_heart_rate_ten(vcount_heart_rate_ten),			//y坐标
+		.hcount_heart_rate_one(hcount_heart_rate_one),			//x坐标
+		.vcount_heart_rate_one(vcount_heart_rate_one),			//y坐标
+		.hcount_h2(hcount_h2),			//x坐标
+		.vcount_h2(vcount_h2),			//y坐标
+		.hcount_h2_ten(hcount_h2_ten),			//x坐标
+		.vcount_h2_ten(vcount_h2_ten),			//y坐标
+		.hcount_h2_one(hcount_h2_one),			//x坐标
+		.vcount_h2_one(vcount_h2_one),			//y坐标
+		.hcount_liquefied(hcount_liquefied),			//x坐标
+		.vcount_liquefied(vcount_liquefied),			//y坐标
+		.hcount_liquefied_ten(hcount_liquefied_ten),			//x坐标
+		.vcount_liquefied_ten(vcount_liquefied_ten),			//y坐标
+		.hcount_liquefied_one(hcount_liquefied_one),			//x坐标
+		.vcount_liquefied_one(vcount_liquefied_one),			//y坐标
+		.hcount_natural(hcount_natural),			//x坐标
+		.vcount_natural(vcount_natural),			//y坐标
+		.hcount_harmful(hcount_harmful),			//x坐标
+		.vcount_harmful(vcount_harmful),			//y坐标
+		.hcount_oxy(hcount_oxy),			//x坐标
+		.vcount_oxy(vcount_oxy),			//y坐标
+		.hcount_temp(hcount_temp),			//x坐标
+		.vcount_temp(vcount_temp),			//y坐标
+		.hcount_hum(hcount_hum),			//x坐标
+		.vcount_hum(vcount_hum),			//y坐标
+		.hcount_natural_ten(hcount_natural_ten	),	
+		.vcount_natural_ten(vcount_natural_ten	),	
+		.hcount_natural_one(hcount_natural_one	),	
+		.vcount_natural_one(vcount_natural_one	),	
+		.hcount_harmful_ten(hcount_harmful_ten	),	
+		.vcount_harmful_ten(vcount_harmful_ten	),	
+		.hcount_harmful_one(hcount_harmful_one	),	
+		.vcount_harmful_one(vcount_harmful_one	),	
+		.hcount_oxy_ten    (hcount_oxy_ten		),		
+		.vcount_oxy_ten    (vcount_oxy_ten		),		
+		.hcount_oxy_one    (hcount_oxy_one		),		
+		.vcount_oxy_one    (vcount_oxy_one		),		
+		.hcount_temp_ten   (hcount_temp_ten		),		
+		.vcount_temp_ten   (vcount_temp_ten		),		
+		.hcount_temp_one   (hcount_temp_one		),		
+		.vcount_temp_one   (vcount_temp_one		),		
+		.hcount_hum_ten    (hcount_hum_ten 		),		
+		.vcount_hum_ten    (vcount_hum_ten 		),		
+		.hcount_hum_one    (hcount_hum_one 		),		
+		.vcount_hum_one    (vcount_hum_one 		),
+		.hcount_ppm    (hcount_ppm 		),		
+		.vcount_ppm    (vcount_ppm 		),		
+		.hcount_rh    (hcount_rh 		),		
+		.vcount_rh    (vcount_rh 		),
+		.hcount_temp_unit    (hcount_temp_unit 		),		
+		.vcount_temp_unit    (vcount_temp_unit 		),
+		
+		
+		
+		.sys_rd1(sys_rd1),	//数据请求信号
+		.sys_rd2(sys_rd2),	//数据请求信号
+		.lcd_request_theme(lcd_request_theme),	//数据请求信号
+		.lcd_request_veneno(lcd_request_veneno),	//数据请求信号
+		.lcd_request_body_temp(lcd_request_body_temp),	//数据请求信号	
+		.lcd_request_body_temp_int_ten(lcd_request_body_temp_int_ten),	//数据请求信号	
+		.lcd_request_body_temp_int_one(lcd_request_body_temp_int_one),	//数据请求信号	
+		.lcd_request_body_temp_dp(lcd_request_body_temp_dp),	//数据请求信号	
+		.lcd_request_body_temp_dec_ten(lcd_request_body_temp_dec_ten),	//数据请求信号	
+		.lcd_request_body_temp_unit(lcd_request_body_temp_unit),	//数据请求信号	
+		.lcd_request_heart_rate(lcd_request_heart_rate),	//数据请求信号	
+		.lcd_request_heart_rate_hun(lcd_request_heart_rate_hun),	//数据请求信号	
+		.lcd_request_heart_rate_ten(lcd_request_heart_rate_ten),	//数据请求信号	
+		.lcd_request_heart_rate_one(lcd_request_heart_rate_one),	//数据请求信号	
+		.lcd_request_h2(lcd_request_h2),	//数据请求信号	
+		.lcd_request_h2_ten(lcd_request_h2_ten),	//数据请求信号	
+		.lcd_request_h2_one(lcd_request_h2_one),	//数据请求信号	
+		.lcd_request_liquefied(lcd_request_liquefied),	//数据请求信号
+		.lcd_request_liquefied_ten(lcd_request_liquefied_ten),	//数据请求信号	
+		.lcd_request_liquefied_one(lcd_request_liquefied_one),	//数据请求信号	
+		.lcd_request_natural(lcd_request_natural),	//数据请求信号
+		.lcd_request_harmful(lcd_request_harmful),	//数据请求信号
+		.lcd_request_oxy(lcd_request_oxy),	//数据请求信号
+		.lcd_request_temp(lcd_request_temp),	//数据请求信号
+		.lcd_request_hum(lcd_request_hum),	//数据请求信号
+		.lcd_request_natural_ten(lcd_request_natural_ten),	//数据请
+		.lcd_request_natural_one(lcd_request_natural_one),	//数据请
+		.lcd_request_harmful_ten(lcd_request_harmful_ten),	//数据请
+		.lcd_request_harmful_one(lcd_request_harmful_one),	//数据请
+		.lcd_request_oxy_ten    (lcd_request_oxy_ten    ),	//数据请求信号	
+		.lcd_request_oxy_one    (lcd_request_oxy_one    ),	//数据请求信号	
+		.lcd_request_temp_ten   (lcd_request_temp_ten   ),	//数据请求
+		.lcd_request_temp_one   (lcd_request_temp_one   ),	//数据请求
+		.lcd_request_hum_ten    (lcd_request_hum_ten    ),	//数据请求信号	
+		.lcd_request_hum_one    (lcd_request_hum_one    ),	//数据请求信号
+	   .lcd_request_ppm    (lcd_request_ppm    ),	//数据请求信号
+      .lcd_request_rh    (lcd_request_rh    ),	//数据请求信号		
+	   .lcd_request_temp_unit    (lcd_request_temp_unit    ),	//数据请求信号		
+		
+	   .body_temp_int_one(body_temp_int_one),
+		.body_temp_int_ten(body_temp_int_ten),
+		.body_temp_dec_one(body_temp_dec_one),
+		.body_temp_dec_ten(body_temp_dec_ten),
+		
+		.heart_rate_hun(heart_rate_hun),
+		.heart_rate_ten(heart_rate_ten),
+		.heart_rate_one(heart_rate_one),
+		
+		.h2_one(h2_one),       
+		.h2_ten(h2_ten),      
+		.liquefied_one(liquefied_one),
+		.liquefied_ten(liquefied_ten),
+		.natural_one(natural_one)  ,
+		.natural_ten(natural_ten) , 
+		.harmful_one(harmful_one)  ,
+		.harmful_ten(harmful_ten)  ,
+		.oxy_one(oxy_one)    ,   
+		.oxy_ten(oxy_ten)   ,   
+		.temp_one(temp_one)   ,   
+		.temp_ten(temp_ten)  ,     
+		.hum_one(hum_one)   ,     
+		.hum_ten(hum_ten)   ,    
+	
+		.lcd_data_in(lcd_data_in),
+		.gymcu_data(gymcu_data),	
+ 
+		.lcd_driver_data_in(lcd_driver_data_in)			
+		
+
+);
+
+
 wire    end_o;
 wire [303:0] dout_iic;
 sensor sensor(
@@ -1288,9 +888,9 @@ wire [3:0] harmful_ten  ;
 wire [3:0] oxy_one    ;   
 wire [3:0] oxy_ten   ;   
 wire [3:0] temp_one   ;   
-wire [3:0] temp_ten  ;
-wire [3:0] hum_one   ;   
-wire [3:0] hum_ten   ;
+wire [3:0] temp_ten  ;     
+wire [3:0] hum_one   ;       
+wire [3:0] hum_ten   ;     
 
 
     qsys_system u0 (
@@ -1326,18 +926,78 @@ wire [3:0] hum_ten   ;
        
     );
 
-//assign bz = ((dout_1>12'b001001100110)|(dout_0>12'b001001100110)|(dout_5>12'b001001100110)|(dout_4>12'b001001100110)|(dout_6<12'b001001100110)) ?0:1;
-assign bz =1;
+assign bz = ((h2_a>8'd20)|(liquefied_a>8'd20)|(natural_a>8'd20)|(harmful_a>8'd20)|(oxy_a<8'd20)) ?0:1;
+//assign bz = 1;
 
 
-wire [159:0] 	data_final;
-assign		 data_final={8'b0100_0001,8'b0100_0001,8'b0100_0001,8'b0100_0001,8'b0100_0001,8'b0100_0001,8'b0100_0001,8'b0100_0001,8'b0100_0001,8'b0100_0001,8'b0100_0001,8'b0100_0001,8'b0100_0001,8'b0100_0001,8'b0100_0001,8'b0100_0001,8'b0100_0001,8'b0100_0001,8'b0100_0001,8'b00001010};
+wire [7:0] heart_rate_a;
+wire [7:0] h2_a;        
+wire [7:0] liquefied_a; 
+wire [7:0] natural_a;   
+wire [7:0] harmful_a;   
+wire [7:0] oxy_a;       
+wire [7:0] temp_a;      
+wire [7:0] hum_a;       
+
+
+Arrangement Arrangement_inst(
+	.heart_rate_hun(heart_rate_hun),
+	.heart_rate_ten(heart_rate_ten),
+	.heart_rate_one(heart_rate_one),
+	.h2_ten(h2_ten),
+	.h2_one(h2_one),
+	.liquefied_ten(liquefied_ten),
+	.liquefied_one(liquefied_one),
+	.natural_ten(natural_ten),
+	.natural_one(natural_one),
+	.harmful_ten(harmful_ten),
+	.harmful_one(harmful_one),
+	.oxy_ten(oxy_ten),
+	.oxy_one(oxy_one),
+	.temp_ten(temp_ten),
+	.temp_one(temp_one),
+	.hum_ten(hum_ten),
+	.hum_one(hum_one),
+	
+	.heart_rate_a(heart_rate_a),
+	.h2_a(h2_a),
+	.liquefied_a(liquefied_a),
+	.natural_a(natural_a),
+	.harmful_a(harmful_a),
+	.oxy_a(oxy_a),
+	.temp_a(temp_a),
+	.hum_a(hum_a) 		
+);
+
+wire  [79:0]   data_final_1;
+wire [159:0] 	data_final_2;
+assign		 data_final_2={data_eeprom,80'b0};
+assign       data_final_1={body_temp_int,body_temp_dec,heart_rate_a,h2_a,liquefied_a,natural_a,harmful_a,oxy_a,temp_a,hum_a};
+
+wire txd_start;
+wire [79:0]  data_eeprom;
+EEPROM EEPROM_inst(
+	.clk(clk_50m),				//外部输入时钟
+	.rst_n(rst_n),
+	.key(key_eeprom),				//按键
+	.data_in(data_final_1),			//输入数据
+	.sda(eeprom_sda),				//IIC的数据线
+	.scl(eeprom_scl),				//IIC的时钟线
+	.data_out(data_eeprom),		//数据输出
+	.end_o(txd_start) 			//结束信号
+
+);
+
+
+
 PC2FPGA_UART_Test bt_inst(
 	//global clock 50MHz
 	.clk_50m(clk_50m),			//50MHz
 	.rst_n(rst_n),
+
 	//user interfaces 
-	.input_data(data_final),
+	.txd_start(txd_start),
+	.input_data(data_final_2),
 	.fpga_txd(hc06_rxd),		//fpga 2 pc uart transfer
 	.divide_clk()	//precise clock output
 );	
@@ -1353,1409 +1013,4 @@ key_control key_control_inst(
 	.sensor_en(sensor_en),
 	.led_p(led_p)		
 ); 
-	 
-	 
-	 //----------------------------------------------------------	 
-	wire     		 	 data_0_body_temp_int_ten;
-	wire     		 	 data_1_body_temp_int_ten;
-	wire     		 	 data_2_body_temp_int_ten;
-	wire     		 	 data_3_body_temp_int_ten;
-	wire     		 	 data_4_body_temp_int_ten;
-	wire     		 	 data_5_body_temp_int_ten;
-	wire     		 	 data_6_body_temp_int_ten;
-	wire     		 	 data_7_body_temp_int_ten;
-	wire     		 	 data_8_body_temp_int_ten;
-	wire     		 	 data_9_body_temp_int_ten; 	
-ROM_0  ROM_0_body_temp_int_ten (
-.address ( rdaddress_body_temp_int_ten ),
-.clock ( clk_vga ),
-.q ( data_0_body_temp_int_ten )
-);
-
-ROM_1  ROM_1_body_temp_int_ten (
-.address ( rdaddress_body_temp_int_ten ),
-.clock ( clk_vga ),
-.q ( data_1_body_temp_int_ten )
-);
-
-ROM_2  ROM_2_body_temp_int_ten (
-.address ( rdaddress_body_temp_int_ten ),
-.clock ( clk_vga ),
-.q ( data_2_body_temp_int_ten )
-);
-
-ROM_3  ROM_3_body_temp_int_ten (
-.address ( rdaddress_body_temp_int_ten ),
-.clock ( clk_vga ),
-.q ( data_3_body_temp_int_ten )
-);
-
-ROM_4  ROM_4_body_temp_int_ten (
-.address ( rdaddress_body_temp_int_ten ),
-.clock ( clk_vga ),
-.q ( data_4_body_temp_int_ten )
-);
-
-ROM_5  ROM_5_body_temp_int_ten (
-.address ( rdaddress_body_temp_int_ten ),
-.clock ( clk_vga ),
-.q ( data_5_body_temp_int_ten )
-);
-
-ROM_6  ROM_6_body_temp_int_ten (
-.address ( rdaddress_body_temp_int_ten ),
-.clock ( clk_vga ),
-.q ( data_6_body_temp_int_ten )
-);
-
-ROM_7  ROM_7_body_temp_int_ten (
-.address ( rdaddress_body_temp_int_ten ),
-.clock ( clk_vga ),
-.q ( data_7_body_temp_int_ten )
-);
-
-ROM_8  ROM_8_body_temp_int_ten (
-.address ( rdaddress_body_temp_int_ten ),
-.clock ( clk_vga ),
-.q ( data_8_body_temp_int_ten )
-);
-
-ROM_9  ROM_9_body_temp_int_ten (
-.address ( rdaddress_body_temp_int_ten ),
-.clock ( clk_vga ),
-.q ( data_9_body_temp_int_ten )
-);
-
-
-	wire     		 	 data_0_body_temp_int_one;
-	wire     		 	 data_1_body_temp_int_one;
-	wire     		 	 data_2_body_temp_int_one;
-	wire     		 	 data_3_body_temp_int_one;
-	wire     		 	 data_4_body_temp_int_one;
-	wire     		 	 data_5_body_temp_int_one;
-	wire     		 	 data_6_body_temp_int_one;
-	wire     		 	 data_7_body_temp_int_one;
-	wire     		 	 data_8_body_temp_int_one;
-	wire     		 	 data_9_body_temp_int_one; 	
-ROM_0  ROM_0_body_temp_int_one (
-.address ( rdaddress_body_temp_int_one ),
-.clock ( clk_vga ),
-.q ( data_0_body_temp_int_one )
-);
-
-ROM_1  ROM_1_body_temp_int_one (
-.address ( rdaddress_body_temp_int_one ),
-.clock ( clk_vga ),
-.q ( data_1_body_temp_int_one )
-);
-
-ROM_2  ROM_2_body_temp_int_one (
-.address ( rdaddress_body_temp_int_one ),
-.clock ( clk_vga ),
-.q ( data_2_body_temp_int_one )
-);
-
-ROM_3  ROM_3_body_temp_int_one (
-.address ( rdaddress_body_temp_int_one ),
-.clock ( clk_vga ),
-.q ( data_3_body_temp_int_one )
-);
-
-ROM_4  ROM_4_body_temp_int_one (
-.address ( rdaddress_body_temp_int_one ),
-.clock ( clk_vga ),
-.q ( data_4_body_temp_int_one )
-);
-
-ROM_5  ROM_5_body_temp_int_one (
-.address ( rdaddress_body_temp_int_one ),
-.clock ( clk_vga ),
-.q ( data_5_body_temp_int_one )
-);
-
-ROM_6  ROM_6_body_temp_int_one (
-.address ( rdaddress_body_temp_int_one ),
-.clock ( clk_vga ),
-.q ( data_6_body_temp_int_one )
-);
-
-ROM_7  ROM_7_body_temp_int_one (
-.address ( rdaddress_body_temp_int_one ),
-.clock ( clk_vga ),
-.q ( data_7_body_temp_int_one )
-);
-
-ROM_8  ROM_8_body_temp_int_one (
-.address ( rdaddress_body_temp_int_one ),
-.clock ( clk_vga ),
-.q ( data_8_body_temp_int_one )
-);
-
-ROM_9  ROM_9_body_temp_int_one (
-.address ( rdaddress_body_temp_int_one ),
-.clock ( clk_vga ),
-.q ( data_9_body_temp_int_one )
-);
-
-	wire     		 	 data_0_body_temp_dec_ten;
-	wire     		 	 data_1_body_temp_dec_ten;
-	wire     		 	 data_2_body_temp_dec_ten;
-	wire     		 	 data_3_body_temp_dec_ten;
-	wire     		 	 data_4_body_temp_dec_ten;
-	wire     		 	 data_5_body_temp_dec_ten;
-	wire     		 	 data_6_body_temp_dec_ten;
-	wire     		 	 data_7_body_temp_dec_ten;
-	wire     		 	 data_8_body_temp_dec_ten;
-	wire     		 	 data_9_body_temp_dec_ten; 	
-ROM_0  ROM_0_body_temp_dec_ten (
-.address ( rdaddress_body_temp_dec_ten ),
-.clock ( clk_vga ),
-.q ( data_0_body_temp_dec_ten )
-);
-
-ROM_1  ROM_1_body_temp_dec_ten (
-.address ( rdaddress_body_temp_dec_ten ),
-.clock ( clk_vga ),
-.q ( data_1_body_temp_dec_ten )
-);
-
-ROM_2  ROM_2_body_temp_dec_ten (
-.address ( rdaddress_body_temp_dec_ten ),
-.clock ( clk_vga ),
-.q ( data_2_body_temp_dec_ten )
-);
-
-ROM_3  ROM_3_body_temp_dec_ten (
-.address ( rdaddress_body_temp_dec_ten ),
-.clock ( clk_vga ),
-.q ( data_3_body_temp_dec_ten )
-);
-
-ROM_4  ROM_4_body_temp_dec_ten (
-.address ( rdaddress_body_temp_dec_ten ),
-.clock ( clk_vga ),
-.q ( data_4_body_temp_dec_ten )
-);
-
-ROM_5  ROM_5_body_temp_dec_ten (
-.address ( rdaddress_body_temp_dec_ten ),
-.clock ( clk_vga ),
-.q ( data_5_body_temp_dec_ten )
-);
-
-ROM_6  ROM_6_body_temp_dec_ten (
-.address ( rdaddress_body_temp_dec_ten ),
-.clock ( clk_vga ),
-.q ( data_6_body_temp_dec_ten )
-);
-
-ROM_7  ROM_7_body_temp_dec_ten (
-.address ( rdaddress_body_temp_dec_ten ),
-.clock ( clk_vga ),
-.q ( data_7_body_temp_dec_ten )
-);
-
-ROM_8  ROM_8_body_temp_dec_ten (
-.address ( rdaddress_body_temp_dec_ten ),
-.clock ( clk_vga ),
-.q ( data_8_body_temp_dec_ten )
-);
-
-ROM_9  ROM_9_body_temp_dec_ten (
-.address ( rdaddress_body_temp_dec_ten ),
-.clock ( clk_vga ),
-.q ( data_9_body_temp_dec_ten )
-);
-
-	wire     		 	 data_0_heart_rate_hun;
-	wire     		 	 data_1_heart_rate_hun;
-	wire     		 	 data_2_heart_rate_hun;
-	wire     		 	 data_3_heart_rate_hun;
-	wire     		 	 data_4_heart_rate_hun;
-	wire     		 	 data_5_heart_rate_hun;
-	wire     		 	 data_6_heart_rate_hun;
-	wire     		 	 data_7_heart_rate_hun;
-	wire     		 	 data_8_heart_rate_hun;
-	wire     		 	 data_9_heart_rate_hun; 	
-ROM_0  ROM_0_heart_rate_hun (
-.address ( rdaddress_heart_rate_hun ),
-.clock ( clk_vga ),
-.q ( data_0_heart_rate_hun )
-);
-
-ROM_1  ROM_1_heart_rate_hun (
-.address ( rdaddress_heart_rate_hun ),
-.clock ( clk_vga ),
-.q ( data_1_heart_rate_hun )
-);
-
-ROM_2  ROM_2_heart_rate_hun (
-.address ( rdaddress_heart_rate_hun ),
-.clock ( clk_vga ),
-.q ( data_2_heart_rate_hun )
-);
-
-ROM_3  ROM_3_heart_rate_hun (
-.address ( rdaddress_heart_rate_hun ),
-.clock ( clk_vga ),
-.q ( data_3_heart_rate_hun )
-);
-
-ROM_4  ROM_4_heart_rate_hun (
-.address ( rdaddress_heart_rate_hun ),
-.clock ( clk_vga ),
-.q ( data_4_heart_rate_hun )
-);
-
-ROM_5  ROM_5_heart_rate_hun (
-.address ( rdaddress_heart_rate_hun ),
-.clock ( clk_vga ),
-.q ( data_5_heart_rate_hun )
-);
-
-ROM_6  ROM_6_heart_rate_hun (
-.address ( rdaddress_heart_rate_hun ),
-.clock ( clk_vga ),
-.q ( data_6_heart_rate_hun )
-);
-
-ROM_7  ROM_7_heart_rate_hun (
-.address ( rdaddress_heart_rate_hun ),
-.clock ( clk_vga ),
-.q ( data_7_heart_rate_hun )
-);
-
-ROM_8  ROM_8_heart_rate_hun (
-.address ( rdaddress_heart_rate_hun ),
-.clock ( clk_vga ),
-.q ( data_8_heart_rate_hun )
-);
-
-ROM_9  ROM_9_heart_rate_hun (
-.address ( rdaddress_heart_rate_hun ),
-.clock ( clk_vga ),
-.q ( data_9_heart_rate_hun )
-);
-
-	wire     		 	 data_0_heart_rate_ten;
-	wire     		 	 data_1_heart_rate_ten;
-	wire     		 	 data_2_heart_rate_ten;
-	wire     		 	 data_3_heart_rate_ten;
-	wire     		 	 data_4_heart_rate_ten;
-	wire     		 	 data_5_heart_rate_ten;
-	wire     		 	 data_6_heart_rate_ten;
-	wire     		 	 data_7_heart_rate_ten;
-	wire     		 	 data_8_heart_rate_ten;
-	wire     		 	 data_9_heart_rate_ten; 	
-ROM_0  ROM_0_heart_rate_ten (
-.address ( rdaddress_heart_rate_ten ),
-.clock ( clk_vga ),
-.q ( data_0_heart_rate_ten )
-);
-
-ROM_1  ROM_1_heart_rate_ten (
-.address ( rdaddress_heart_rate_ten ),
-.clock ( clk_vga ),
-.q ( data_1_heart_rate_ten )
-);
-
-ROM_2  ROM_2_heart_rate_ten (
-.address ( rdaddress_heart_rate_ten ),
-.clock ( clk_vga ),
-.q ( data_2_heart_rate_ten )
-);
-
-ROM_3  ROM_3_heart_rate_ten (
-.address ( rdaddress_heart_rate_ten ),
-.clock ( clk_vga ),
-.q ( data_3_heart_rate_ten )
-);
-
-ROM_4  ROM_4_heart_rate_ten (
-.address ( rdaddress_heart_rate_ten ),
-.clock ( clk_vga ),
-.q ( data_4_heart_rate_ten )
-);
-
-ROM_5  ROM_5_heart_rate_ten (
-.address ( rdaddress_heart_rate_ten ),
-.clock ( clk_vga ),
-.q ( data_5_heart_rate_ten )
-);
-
-ROM_6  ROM_6_heart_rate_ten (
-.address ( rdaddress_heart_rate_ten ),
-.clock ( clk_vga ),
-.q ( data_6_heart_rate_ten )
-);
-
-ROM_7  ROM_7_heart_rate_ten (
-.address ( rdaddress_heart_rate_ten ),
-.clock ( clk_vga ),
-.q ( data_7_heart_rate_ten )
-);
-
-ROM_8  ROM_8_heart_rate_ten (
-.address ( rdaddress_heart_rate_ten ),
-.clock ( clk_vga ),
-.q ( data_8_heart_rate_ten )
-);
-
-ROM_9  ROM_9_heart_rate_ten (
-.address ( rdaddress_heart_rate_ten ),
-.clock ( clk_vga ),
-.q ( data_9_heart_rate_ten )
-);
-
-
-	wire     		 	 data_0_heart_rate_one;
-	wire     		 	 data_1_heart_rate_one;
-	wire     		 	 data_2_heart_rate_one;
-	wire     		 	 data_3_heart_rate_one;
-	wire     		 	 data_4_heart_rate_one;
-	wire     		 	 data_5_heart_rate_one;
-	wire     		 	 data_6_heart_rate_one;
-	wire     		 	 data_7_heart_rate_one;
-	wire     		 	 data_8_heart_rate_one;
-	wire     		 	 data_9_heart_rate_one; 	
-ROM_0  ROM_0_heart_rate_one (
-.address ( rdaddress_heart_rate_one ),
-.clock ( clk_vga ),
-.q ( data_0_heart_rate_one )
-);
-
-ROM_1  ROM_1_heart_rate_one (
-.address ( rdaddress_heart_rate_one ),
-.clock ( clk_vga ),
-.q ( data_1_heart_rate_one )
-);
-
-ROM_2  ROM_2_heart_rate_one (
-.address ( rdaddress_heart_rate_one ),
-.clock ( clk_vga ),
-.q ( data_2_heart_rate_one )
-);
-
-ROM_3  ROM_3_heart_rate_one (
-.address ( rdaddress_heart_rate_one ),
-.clock ( clk_vga ),
-.q ( data_3_heart_rate_one )
-);
-
-ROM_4  ROM_4_heart_rate_one (
-.address ( rdaddress_heart_rate_one ),
-.clock ( clk_vga ),
-.q ( data_4_heart_rate_one )
-);
-
-ROM_5  ROM_5_heart_rate_one (
-.address ( rdaddress_heart_rate_one ),
-.clock ( clk_vga ),
-.q ( data_5_heart_rate_one )
-);
-
-ROM_6  ROM_6_heart_rate_one (
-.address ( rdaddress_heart_rate_one ),
-.clock ( clk_vga ),
-.q ( data_6_heart_rate_one )
-);
-
-ROM_7  ROM_7_heart_rate_one (
-.address ( rdaddress_heart_rate_one ),
-.clock ( clk_vga ),
-.q ( data_7_heart_rate_one )
-);
-
-ROM_8  ROM_8_heart_rate_one (
-.address ( rdaddress_heart_rate_one ),
-.clock ( clk_vga ),
-.q ( data_8_heart_rate_one )
-);
-
-ROM_9  ROM_9_heart_rate_one (
-.address ( rdaddress_heart_rate_one ),
-.clock ( clk_vga ),
-.q ( data_9_heart_rate_one )
-);
-
-	wire     		 	 data_0_h2_ten;
-	wire     		 	 data_1_h2_ten;
-	wire     		 	 data_2_h2_ten;
-	wire     		 	 data_3_h2_ten;
-	wire     		 	 data_4_h2_ten;
-	wire     		 	 data_5_h2_ten;
-	wire     		 	 data_6_h2_ten;
-	wire     		 	 data_7_h2_ten;
-	wire     		 	 data_8_h2_ten;
-	wire     		 	 data_9_h2_ten; 	
-ROM_0  ROM_0_h2_ten (
-.address ( rdaddress_h2_ten ),
-.clock ( clk_vga ),
-.q ( data_0_h2_ten )
-);
-
-ROM_1  ROM_1_h2_ten (
-.address ( rdaddress_h2_ten ),
-.clock ( clk_vga ),
-.q ( data_1_h2_ten )
-);
-
-ROM_2  ROM_2_h2_ten (
-.address ( rdaddress_h2_ten ),
-.clock ( clk_vga ),
-.q ( data_2_h2_ten )
-);
-
-ROM_3  ROM_3_h2_ten (
-.address ( rdaddress_h2_ten ),
-.clock ( clk_vga ),
-.q ( data_3_h2_ten )
-);
-
-ROM_4  ROM_4_h2_ten (
-.address ( rdaddress_h2_ten ),
-.clock ( clk_vga ),
-.q ( data_4_h2_ten )
-);
-
-ROM_5  ROM_5_h2_ten (
-.address ( rdaddress_h2_ten ),
-.clock ( clk_vga ),
-.q ( data_5_h2_ten )
-);
-
-ROM_6  ROM_6_h2_ten (
-.address ( rdaddress_h2_ten ),
-.clock ( clk_vga ),
-.q ( data_6_h2_ten )
-);
-
-ROM_7  ROM_7_h2_ten (
-.address ( rdaddress_h2_ten ),
-.clock ( clk_vga ),
-.q ( data_7_h2_ten )
-);
-
-ROM_8  ROM_8_h2_ten (
-.address ( rdaddress_h2_ten ),
-.clock ( clk_vga ),
-.q ( data_8_h2_ten )
-);
-
-ROM_9  ROM_9_h2_ten (
-.address ( rdaddress_h2_ten ),
-.clock ( clk_vga ),
-.q ( data_9_h2_ten )
-);
-
-	wire     		 	 data_0_h2_one;
-	wire     		 	 data_1_h2_one;
-	wire     		 	 data_2_h2_one;
-	wire     		 	 data_3_h2_one;
-	wire     		 	 data_4_h2_one;
-	wire     		 	 data_5_h2_one;
-	wire     		 	 data_6_h2_one;
-	wire     		 	 data_7_h2_one;
-	wire     		 	 data_8_h2_one;
-	wire     		 	 data_9_h2_one; 	
-ROM_0  ROM_0_h2_one (
-.address ( rdaddress_h2_one ),
-.clock ( clk_vga ),
-.q ( data_0_h2_one )
-);
-
-ROM_1  ROM_1_h2_one (
-.address ( rdaddress_h2_one ),
-.clock ( clk_vga ),
-.q ( data_1_h2_one )
-);
-
-ROM_2  ROM_2_h2_one (
-.address ( rdaddress_h2_one ),
-.clock ( clk_vga ),
-.q ( data_2_h2_one )
-);
-
-ROM_3  ROM_3_h2_one (
-.address ( rdaddress_h2_one ),
-.clock ( clk_vga ),
-.q ( data_3_h2_one )
-);
-
-ROM_4  ROM_4_h2_one (
-.address ( rdaddress_h2_one ),
-.clock ( clk_vga ),
-.q ( data_4_h2_one )
-);
-
-ROM_5  ROM_5_h2_one (
-.address ( rdaddress_h2_one ),
-.clock ( clk_vga ),
-.q ( data_5_h2_one )
-);
-
-ROM_6  ROM_6_h2_one (
-.address ( rdaddress_h2_one ),
-.clock ( clk_vga ),
-.q ( data_6_h2_one )
-);
-
-ROM_7  ROM_7_h2_one (
-.address ( rdaddress_h2_one ),
-.clock ( clk_vga ),
-.q ( data_7_h2_one )
-);
-
-ROM_8  ROM_8_h2_one (
-.address ( rdaddress_h2_one ),
-.clock ( clk_vga ),
-.q ( data_8_h2_one )
-);
-
-ROM_9  ROM_9_h2_one (
-.address ( rdaddress_h2_one ),
-.clock ( clk_vga ),
-.q ( data_9_h2_one )
-);
-
-	wire     		 	 data_0_liquefied_ten;
-	wire     		 	 data_1_liquefied_ten;
-	wire     		 	 data_2_liquefied_ten;
-	wire     		 	 data_3_liquefied_ten;
-	wire     		 	 data_4_liquefied_ten;
-	wire     		 	 data_5_liquefied_ten;
-	wire     		 	 data_6_liquefied_ten;
-	wire     		 	 data_7_liquefied_ten;
-	wire     		 	 data_8_liquefied_ten;
-	wire     		 	 data_9_liquefied_ten; 	
-ROM_0  ROM_0_liquefied_ten (
-.address ( rdaddress_liquefied_ten ),
-.clock ( clk_vga ),
-.q ( data_0_liquefied_ten )
-);
-
-ROM_1  ROM_1_liquefied_ten (
-.address ( rdaddress_liquefied_ten ),
-.clock ( clk_vga ),
-.q ( data_1_liquefied_ten )
-);
-
-ROM_2  ROM_2_liquefied_ten (
-.address ( rdaddress_liquefied_ten ),
-.clock ( clk_vga ),
-.q ( data_2_liquefied_ten )
-);
-
-ROM_3  ROM_3_liquefied_ten (
-.address ( rdaddress_liquefied_ten ),
-.clock ( clk_vga ),
-.q ( data_3_liquefied_ten )
-);
-
-ROM_4  ROM_4_liquefied_ten (
-.address ( rdaddress_liquefied_ten ),
-.clock ( clk_vga ),
-.q ( data_4_liquefied_ten )
-);
-
-ROM_5  ROM_5_liquefied_ten (
-.address ( rdaddress_liquefied_ten ),
-.clock ( clk_vga ),
-.q ( data_5_liquefied_ten )
-);
-
-ROM_6  ROM_6_liquefied_ten (
-.address ( rdaddress_liquefied_ten ),
-.clock ( clk_vga ),
-.q ( data_6_liquefied_ten )
-);
-
-ROM_7  ROM_7_liquefied_ten (
-.address ( rdaddress_liquefied_ten ),
-.clock ( clk_vga ),
-.q ( data_7_liquefied_ten )
-);
-
-ROM_8  ROM_8_liquefied_ten (
-.address ( rdaddress_liquefied_ten ),
-.clock ( clk_vga ),
-.q ( data_8_liquefied_ten )
-);
-
-ROM_9  ROM_9_liquefied_ten (
-.address ( rdaddress_liquefied_ten ),
-.clock ( clk_vga ),
-.q ( data_9_liquefied_ten )
-);
-
-	wire     		 	 data_0_liquefied_one;
-	wire     		 	 data_1_liquefied_one;
-	wire     		 	 data_2_liquefied_one;
-	wire     		 	 data_3_liquefied_one;
-	wire     		 	 data_4_liquefied_one;
-	wire     		 	 data_5_liquefied_one;
-	wire     		 	 data_6_liquefied_one;
-	wire     		 	 data_7_liquefied_one;
-	wire     		 	 data_8_liquefied_one;
-	wire     		 	 data_9_liquefied_one; 	
-ROM_0  ROM_0_liquefied_one (
-.address ( rdaddress_liquefied_one ),
-.clock ( clk_vga ),
-.q ( data_0_liquefied_one )
-);
-
-ROM_1  ROM_1_liquefied_one (
-.address ( rdaddress_liquefied_one ),
-.clock ( clk_vga ),
-.q ( data_1_liquefied_one )
-);
-
-ROM_2  ROM_2_liquefied_one (
-.address ( rdaddress_liquefied_one ),
-.clock ( clk_vga ),
-.q ( data_2_liquefied_one )
-);
-
-ROM_3  ROM_3_liquefied_one (
-.address ( rdaddress_liquefied_one ),
-.clock ( clk_vga ),
-.q ( data_3_liquefied_one )
-);
-
-ROM_4  ROM_4_liquefied_one (
-.address ( rdaddress_liquefied_one ),
-.clock ( clk_vga ),
-.q ( data_4_liquefied_one )
-);
-
-ROM_5  ROM_5_liquefied_one (
-.address ( rdaddress_liquefied_one ),
-.clock ( clk_vga ),
-.q ( data_5_liquefied_one )
-);
-
-ROM_6  ROM_6_liquefied_one (
-.address ( rdaddress_liquefied_one ),
-.clock ( clk_vga ),
-.q ( data_6_liquefied_one )
-);
-
-ROM_7  ROM_7_liquefied_one (
-.address ( rdaddress_liquefied_one ),
-.clock ( clk_vga ),
-.q ( data_7_liquefied_one )
-);
-
-ROM_8  ROM_8_liquefied_one (
-.address ( rdaddress_liquefied_one ),
-.clock ( clk_vga ),
-.q ( data_8_liquefied_one )
-);
-
-ROM_9  ROM_9_liquefied_one (
-.address ( rdaddress_liquefied_one ),
-.clock ( clk_vga ),
-.q ( data_9_liquefied_one )
-);
-
-	wire     		 	 data_0_natural_ten;
-	wire     		 	 data_1_natural_ten;
-	wire     		 	 data_2_natural_ten;
-	wire     		 	 data_3_natural_ten;
-	wire     		 	 data_4_natural_ten;
-	wire     		 	 data_5_natural_ten;
-	wire     		 	 data_6_natural_ten;
-	wire     		 	 data_7_natural_ten;
-	wire     		 	 data_8_natural_ten;
-	wire     		 	 data_9_natural_ten; 	
-ROM_0  ROM_0_natural_ten (
-.address ( rdaddress_natural_ten ),
-.clock ( clk_vga ),
-.q ( data_0_natural_ten )
-);
-
-ROM_1  ROM_1_natural_ten (
-.address ( rdaddress_natural_ten ),
-.clock ( clk_vga ),
-.q ( data_1_natural_ten )
-);
-
-ROM_2  ROM_2_natural_ten (
-.address ( rdaddress_natural_ten ),
-.clock ( clk_vga ),
-.q ( data_2_natural_ten )
-);
-
-ROM_3  ROM_3_natural_ten (
-.address ( rdaddress_natural_ten ),
-.clock ( clk_vga ),
-.q ( data_3_natural_ten )
-);
-
-ROM_4  ROM_4_natural_ten (
-.address ( rdaddress_natural_ten ),
-.clock ( clk_vga ),
-.q ( data_4_natural_ten )
-);
-
-ROM_5  ROM_5_natural_ten (
-.address ( rdaddress_natural_ten ),
-.clock ( clk_vga ),
-.q ( data_5_natural_ten )
-);
-
-ROM_6  ROM_6_natural_ten (
-.address ( rdaddress_natural_ten ),
-.clock ( clk_vga ),
-.q ( data_6_natural_ten )
-);
-
-ROM_7  ROM_7_natural_ten (
-.address ( rdaddress_natural_ten ),
-.clock ( clk_vga ),
-.q ( data_7_natural_ten )
-);
-
-ROM_8  ROM_8_natural_ten (
-.address ( rdaddress_natural_ten ),
-.clock ( clk_vga ),
-.q ( data_8_natural_ten )
-);
-
-ROM_9  ROM_9_natural_ten (
-.address ( rdaddress_natural_ten ),
-.clock ( clk_vga ),
-.q ( data_9_natural_ten )
-);
-
-	wire     		 	 data_0_natural_one;
-	wire     		 	 data_1_natural_one;
-	wire     		 	 data_2_natural_one;
-	wire     		 	 data_3_natural_one;
-	wire     		 	 data_4_natural_one;
-	wire     		 	 data_5_natural_one;
-	wire     		 	 data_6_natural_one;
-	wire     		 	 data_7_natural_one;
-	wire     		 	 data_8_natural_one;
-	wire     		 	 data_9_natural_one; 	
-ROM_0  ROM_0_natural_one (
-.address ( rdaddress_natural_one ),
-.clock ( clk_vga ),
-.q ( data_0_natural_one )
-);
-
-ROM_1  ROM_1_natural_one (
-.address ( rdaddress_natural_one ),
-.clock ( clk_vga ),
-.q ( data_1_natural_one )
-);
-
-ROM_2  ROM_2_natural_one (
-.address ( rdaddress_natural_one ),
-.clock ( clk_vga ),
-.q ( data_2_natural_one )
-);
-
-ROM_3  ROM_3_natural_one (
-.address ( rdaddress_natural_one ),
-.clock ( clk_vga ),
-.q ( data_3_natural_one )
-);
-
-ROM_4  ROM_4_natural_one (
-.address ( rdaddress_natural_one ),
-.clock ( clk_vga ),
-.q ( data_4_natural_one )
-);
-
-ROM_5  ROM_5_natural_one (
-.address ( rdaddress_natural_one ),
-.clock ( clk_vga ),
-.q ( data_5_natural_one )
-);
-
-ROM_6  ROM_6_natural_one (
-.address ( rdaddress_natural_one ),
-.clock ( clk_vga ),
-.q ( data_6_natural_one )
-);
-
-ROM_7  ROM_7_natural_one (
-.address ( rdaddress_natural_one ),
-.clock ( clk_vga ),
-.q ( data_7_natural_one )
-);
-
-ROM_8  ROM_8_natural_one (
-.address ( rdaddress_natural_one ),
-.clock ( clk_vga ),
-.q ( data_8_natural_one )
-);
-
-ROM_9  ROM_9_natural_one (
-.address ( rdaddress_natural_one ),
-.clock ( clk_vga ),
-.q ( data_9_natural_one )
-);
-
-	wire     		 	 data_0_harmful_ten;
-	wire     		 	 data_1_harmful_ten;
-	wire     		 	 data_2_harmful_ten;
-	wire     		 	 data_3_harmful_ten;
-	wire     		 	 data_4_harmful_ten;
-	wire     		 	 data_5_harmful_ten;
-	wire     		 	 data_6_harmful_ten;
-	wire     		 	 data_7_harmful_ten;
-	wire     		 	 data_8_harmful_ten;
-	wire     		 	 data_9_harmful_ten; 	
-ROM_0  ROM_0_harmful_ten (
-.address ( rdaddress_harmful_ten ),
-.clock ( clk_vga ),
-.q ( data_0_harmful_ten )
-);
-
-ROM_1  ROM_1_harmful_ten (
-.address ( rdaddress_harmful_ten ),
-.clock ( clk_vga ),
-.q ( data_1_harmful_ten )
-);
-
-ROM_2  ROM_2_harmful_ten (
-.address ( rdaddress_harmful_ten ),
-.clock ( clk_vga ),
-.q ( data_2_harmful_ten )
-);
-
-ROM_3  ROM_3_harmful_ten (
-.address ( rdaddress_harmful_ten ),
-.clock ( clk_vga ),
-.q ( data_3_harmful_ten )
-);
-
-ROM_4  ROM_4_harmful_ten (
-.address ( rdaddress_harmful_ten ),
-.clock ( clk_vga ),
-.q ( data_4_harmful_ten )
-);
-
-ROM_5  ROM_5_harmful_ten (
-.address ( rdaddress_harmful_ten ),
-.clock ( clk_vga ),
-.q ( data_5_harmful_ten )
-);
-
-ROM_6  ROM_6_harmful_ten (
-.address ( rdaddress_harmful_ten ),
-.clock ( clk_vga ),
-.q ( data_6_harmful_ten )
-);
-
-ROM_7  ROM_7_harmful_ten (
-.address ( rdaddress_harmful_ten ),
-.clock ( clk_vga ),
-.q ( data_7_harmful_ten )
-);
-
-ROM_8  ROM_8_harmful_ten (
-.address ( rdaddress_harmful_ten ),
-.clock ( clk_vga ),
-.q ( data_8_harmful_ten )
-);
-
-ROM_9  ROM_9_harmful_ten (
-.address ( rdaddress_harmful_ten ),
-.clock ( clk_vga ),
-.q ( data_9_harmful_ten )
-);
-
-	wire     		 	 data_0_harmful_one;
-	wire     		 	 data_1_harmful_one;
-	wire     		 	 data_2_harmful_one;
-	wire     		 	 data_3_harmful_one;
-	wire     		 	 data_4_harmful_one;
-	wire     		 	 data_5_harmful_one;
-	wire     		 	 data_6_harmful_one;
-	wire     		 	 data_7_harmful_one;
-	wire     		 	 data_8_harmful_one;
-	wire     		 	 data_9_harmful_one; 	
-ROM_0  ROM_0_harmful_one (
-.address ( rdaddress_harmful_one ),
-.clock ( clk_vga ),
-.q ( data_0_harmful_one )
-);
-
-ROM_1  ROM_1_harmful_one (
-.address ( rdaddress_harmful_one ),
-.clock ( clk_vga ),
-.q ( data_1_harmful_one )
-);
-
-ROM_2  ROM_2_harmful_one (
-.address ( rdaddress_harmful_one ),
-.clock ( clk_vga ),
-.q ( data_2_harmful_one )
-);
-
-ROM_3  ROM_3_harmful_one (
-.address ( rdaddress_harmful_one ),
-.clock ( clk_vga ),
-.q ( data_3_harmful_one )
-);
-
-ROM_4  ROM_4_harmful_one (
-.address ( rdaddress_harmful_one ),
-.clock ( clk_vga ),
-.q ( data_4_harmful_one )
-);
-
-ROM_5  ROM_5_harmful_one (
-.address ( rdaddress_harmful_one ),
-.clock ( clk_vga ),
-.q ( data_5_harmful_one )
-);
-
-ROM_6  ROM_6_harmful_one (
-.address ( rdaddress_harmful_one ),
-.clock ( clk_vga ),
-.q ( data_6_harmful_one )
-);
-
-ROM_7  ROM_7_harmful_one (
-.address ( rdaddress_harmful_one ),
-.clock ( clk_vga ),
-.q ( data_7_harmful_one )
-);
-
-ROM_8  ROM_8_harmful_one (
-.address ( rdaddress_harmful_one ),
-.clock ( clk_vga ),
-.q ( data_8_harmful_one )
-);
-
-ROM_9  ROM_9_harmful_one (
-.address ( rdaddress_harmful_one ),
-.clock ( clk_vga ),
-.q ( data_9_harmful_one )
-);
-
-	wire     		 	 data_0_oxy_ten;
-	wire     		 	 data_1_oxy_ten;
-	wire     		 	 data_2_oxy_ten;
-	wire     		 	 data_3_oxy_ten;
-	wire     		 	 data_4_oxy_ten;
-	wire     		 	 data_5_oxy_ten;
-	wire     		 	 data_6_oxy_ten;
-	wire     		 	 data_7_oxy_ten;
-	wire     		 	 data_8_oxy_ten;
-	wire     		 	 data_9_oxy_ten; 	
-ROM_0  ROM_0_oxy_ten (
-.address ( rdaddress_oxy_ten ),
-.clock ( clk_vga ),
-.q ( data_0_oxy_ten )
-);
-
-ROM_1  ROM_1_oxy_ten (
-.address ( rdaddress_oxy_ten ),
-.clock ( clk_vga ),
-.q ( data_1_oxy_ten )
-);
-
-ROM_2  ROM_2_oxy_ten (
-.address ( rdaddress_oxy_ten ),
-.clock ( clk_vga ),
-.q ( data_2_oxy_ten )
-);
-
-ROM_3  ROM_3_oxy_ten (
-.address ( rdaddress_oxy_ten ),
-.clock ( clk_vga ),
-.q ( data_3_oxy_ten )
-);
-
-ROM_4  ROM_4_oxy_ten (
-.address ( rdaddress_oxy_ten ),
-.clock ( clk_vga ),
-.q ( data_4_oxy_ten )
-);
-
-ROM_5  ROM_5_oxy_ten (
-.address ( rdaddress_oxy_ten ),
-.clock ( clk_vga ),
-.q ( data_5_oxy_ten )
-);
-
-ROM_6  ROM_6_oxy_ten (
-.address ( rdaddress_oxy_ten ),
-.clock ( clk_vga ),
-.q ( data_6_oxy_ten )
-);
-
-ROM_7  ROM_7_oxy_ten (
-.address ( rdaddress_oxy_ten ),
-.clock ( clk_vga ),
-.q ( data_7_oxy_ten )
-);
-
-ROM_8  ROM_8_oxy_ten (
-.address ( rdaddress_oxy_ten ),
-.clock ( clk_vga ),
-.q ( data_8_oxy_ten )
-);
-
-ROM_9  ROM_9_oxy_ten (
-.address ( rdaddress_oxy_ten ),
-.clock ( clk_vga ),
-.q ( data_9_oxy_ten )
-);
-
-	wire     		 	 data_0_oxy_one;
-	wire     		 	 data_1_oxy_one;
-	wire     		 	 data_2_oxy_one;
-	wire     		 	 data_3_oxy_one;
-	wire     		 	 data_4_oxy_one;
-	wire     		 	 data_5_oxy_one;
-	wire     		 	 data_6_oxy_one;
-	wire     		 	 data_7_oxy_one;
-	wire     		 	 data_8_oxy_one;
-	wire     		 	 data_9_oxy_one; 	
-ROM_0  ROM_0_oxy_one (
-.address ( rdaddress_oxy_one ),
-.clock ( clk_vga ),
-.q ( data_0_oxy_one )
-);
-
-ROM_1  ROM_1_oxy_one (
-.address ( rdaddress_oxy_one ),
-.clock ( clk_vga ),
-.q ( data_1_oxy_one )
-);
-
-ROM_2  ROM_2_oxy_one (
-.address ( rdaddress_oxy_one ),
-.clock ( clk_vga ),
-.q ( data_2_oxy_one )
-);
-
-ROM_3  ROM_3_oxy_one (
-.address ( rdaddress_oxy_one ),
-.clock ( clk_vga ),
-.q ( data_3_oxy_one )
-);
-
-ROM_4  ROM_4_oxy_one (
-.address ( rdaddress_oxy_one ),
-.clock ( clk_vga ),
-.q ( data_4_oxy_one )
-);
-
-ROM_5  ROM_5_oxy_one (
-.address ( rdaddress_oxy_one ),
-.clock ( clk_vga ),
-.q ( data_5_oxy_one )
-);
-
-ROM_6  ROM_6_oxy_one (
-.address ( rdaddress_oxy_one ),
-.clock ( clk_vga ),
-.q ( data_6_oxy_one )
-);
-
-ROM_7  ROM_7_oxy_one (
-.address ( rdaddress_oxy_one ),
-.clock ( clk_vga ),
-.q ( data_7_oxy_one )
-);
-
-ROM_8  ROM_8_oxy_one (
-.address ( rdaddress_oxy_one ),
-.clock ( clk_vga ),
-.q ( data_8_oxy_one )
-);
-
-ROM_9  ROM_9_oxy_one (
-.address ( rdaddress_oxy_one ),
-.clock ( clk_vga ),
-.q ( data_9_oxy_one )
-);
-
-	wire     		 	 data_0_temp_ten;
-	wire     		 	 data_1_temp_ten;
-	wire     		 	 data_2_temp_ten;
-	wire     		 	 data_3_temp_ten;
-	wire     		 	 data_4_temp_ten;
-	wire     		 	 data_5_temp_ten;
-	wire     		 	 data_6_temp_ten;
-	wire     		 	 data_7_temp_ten;
-	wire     		 	 data_8_temp_ten;
-	wire     		 	 data_9_temp_ten; 	
-ROM_0  ROM_0_temp_ten (
-.address ( rdaddress_temp_ten ),
-.clock ( clk_vga ),
-.q ( data_0_temp_ten )
-);
-
-ROM_1  ROM_1_temp_ten (
-.address ( rdaddress_temp_ten ),
-.clock ( clk_vga ),
-.q ( data_1_temp_ten )
-);
-
-ROM_2  ROM_2_temp_ten (
-.address ( rdaddress_temp_ten ),
-.clock ( clk_vga ),
-.q ( data_2_temp_ten )
-);
-
-ROM_3  ROM_3_temp_ten (
-.address ( rdaddress_temp_ten ),
-.clock ( clk_vga ),
-.q ( data_3_temp_ten )
-);
-
-ROM_4  ROM_4_temp_ten (
-.address ( rdaddress_temp_ten ),
-.clock ( clk_vga ),
-.q ( data_4_temp_ten )
-);
-
-ROM_5  ROM_5_temp_ten (
-.address ( rdaddress_temp_ten ),
-.clock ( clk_vga ),
-.q ( data_5_temp_ten )
-);
-
-ROM_6  ROM_6_temp_ten (
-.address ( rdaddress_temp_ten ),
-.clock ( clk_vga ),
-.q ( data_6_temp_ten )
-);
-
-ROM_7  ROM_7_temp_ten (
-.address ( rdaddress_temp_ten ),
-.clock ( clk_vga ),
-.q ( data_7_temp_ten )
-);
-
-ROM_8  ROM_8_temp_ten (
-.address ( rdaddress_temp_ten ),
-.clock ( clk_vga ),
-.q ( data_8_temp_ten )
-);
-
-ROM_9  ROM_9_temp_ten (
-.address ( rdaddress_temp_ten ),
-.clock ( clk_vga ),
-.q ( data_9_temp_ten )
-);
-
-	wire     		 	 data_0_temp_one;
-	wire     		 	 data_1_temp_one;
-	wire     		 	 data_2_temp_one;
-	wire     		 	 data_3_temp_one;
-	wire     		 	 data_4_temp_one;
-	wire     		 	 data_5_temp_one;
-	wire     		 	 data_6_temp_one;
-	wire     		 	 data_7_temp_one;
-	wire     		 	 data_8_temp_one;
-	wire     		 	 data_9_temp_one; 	
-ROM_0  ROM_0_temp_one (
-.address ( rdaddress_temp_one ),
-.clock ( clk_vga ),
-.q ( data_0_temp_one )
-);
-
-ROM_1  ROM_1_temp_one (
-.address ( rdaddress_temp_one ),
-.clock ( clk_vga ),
-.q ( data_1_temp_one )
-);
-
-ROM_2  ROM_2_temp_one (
-.address ( rdaddress_temp_one ),
-.clock ( clk_vga ),
-.q ( data_2_temp_one )
-);
-
-ROM_3  ROM_3_temp_one (
-.address ( rdaddress_temp_one ),
-.clock ( clk_vga ),
-.q ( data_3_temp_one )
-);
-
-ROM_4  ROM_4_temp_one (
-.address ( rdaddress_temp_one ),
-.clock ( clk_vga ),
-.q ( data_4_temp_one )
-);
-
-ROM_5  ROM_5_temp_one (
-.address ( rdaddress_temp_one ),
-.clock ( clk_vga ),
-.q ( data_5_temp_one )
-);
-
-ROM_6  ROM_6_temp_one (
-.address ( rdaddress_temp_one ),
-.clock ( clk_vga ),
-.q ( data_6_temp_one )
-);
-
-ROM_7  ROM_7_temp_one (
-.address ( rdaddress_temp_one ),
-.clock ( clk_vga ),
-.q ( data_7_temp_one )
-);
-
-ROM_8  ROM_8_temp_one (
-.address ( rdaddress_temp_one ),
-.clock ( clk_vga ),
-.q ( data_8_temp_one )
-);
-
-ROM_9  ROM_9_temp_one (
-.address ( rdaddress_temp_one ),
-.clock ( clk_vga ),
-.q ( data_9_temp_one )
-);
-
-	wire     		 	 data_0_hum_ten;
-	wire     		 	 data_1_hum_ten;
-	wire     		 	 data_2_hum_ten;
-	wire     		 	 data_3_hum_ten;
-	wire     		 	 data_4_hum_ten;
-	wire     		 	 data_5_hum_ten;
-	wire     		 	 data_6_hum_ten;
-	wire     		 	 data_7_hum_ten;
-	wire     		 	 data_8_hum_ten;
-	wire     		 	 data_9_hum_ten; 	
-ROM_0  ROM_0_hum_ten (
-.address ( rdaddress_hum_ten ),
-.clock ( clk_vga ),
-.q ( data_0_hum_ten )
-);
-
-ROM_1  ROM_1_hum_ten (
-.address ( rdaddress_hum_ten ),
-.clock ( clk_vga ),
-.q ( data_1_hum_ten )
-);
-
-ROM_2  ROM_2_hum_ten (
-.address ( rdaddress_hum_ten ),
-.clock ( clk_vga ),
-.q ( data_2_hum_ten )
-);
-
-ROM_3  ROM_3_hum_ten (
-.address ( rdaddress_hum_ten ),
-.clock ( clk_vga ),
-.q ( data_3_hum_ten )
-);
-
-ROM_4  ROM_4_hum_ten (
-.address ( rdaddress_hum_ten ),
-.clock ( clk_vga ),
-.q ( data_4_hum_ten )
-);
-
-ROM_5  ROM_5_hum_ten (
-.address ( rdaddress_hum_ten ),
-.clock ( clk_vga ),
-.q ( data_5_hum_ten )
-);
-
-ROM_6  ROM_6_hum_ten (
-.address ( rdaddress_hum_ten ),
-.clock ( clk_vga ),
-.q ( data_6_hum_ten )
-);
-
-ROM_7  ROM_7_hum_ten (
-.address ( rdaddress_hum_ten ),
-.clock ( clk_vga ),
-.q ( data_7_hum_ten )
-);
-
-ROM_8  ROM_8_hum_ten (
-.address ( rdaddress_hum_ten ),
-.clock ( clk_vga ),
-.q ( data_8_hum_ten )
-);
-
-ROM_9  ROM_9_hum_ten (
-.address ( rdaddress_hum_ten ),
-.clock ( clk_vga ),
-.q ( data_9_hum_ten )
-);
-
-	wire     		 	 data_0_hum_one;
-	wire     		 	 data_1_hum_one;
-	wire     		 	 data_2_hum_one;
-	wire     		 	 data_3_hum_one;
-	wire     		 	 data_4_hum_one;
-	wire     		 	 data_5_hum_one;
-	wire     		 	 data_6_hum_one;
-	wire     		 	 data_7_hum_one;
-	wire     		 	 data_8_hum_one;
-	wire     		 	 data_9_hum_one; 	
-ROM_0  ROM_0_hum_one (
-.address ( rdaddress_hum_one ),
-.clock ( clk_vga ),
-.q ( data_0_hum_one )
-);
-
-ROM_1  ROM_1_hum_one (
-.address ( rdaddress_hum_one ),
-.clock ( clk_vga ),
-.q ( data_1_hum_one )
-);
-
-ROM_2  ROM_2_hum_one (
-.address ( rdaddress_hum_one ),
-.clock ( clk_vga ),
-.q ( data_2_hum_one )
-);
-
-ROM_3  ROM_3_hum_one (
-.address ( rdaddress_hum_one ),
-.clock ( clk_vga ),
-.q ( data_3_hum_one )
-);
-
-ROM_4  ROM_4_hum_one (
-.address ( rdaddress_hum_one ),
-.clock ( clk_vga ),
-.q ( data_4_hum_one )
-);
-
-ROM_5  ROM_5_hum_one (
-.address ( rdaddress_hum_one ),
-.clock ( clk_vga ),
-.q ( data_5_hum_one )
-);
-
-ROM_6  ROM_6_hum_one (
-.address ( rdaddress_hum_one ),
-.clock ( clk_vga ),
-.q ( data_6_hum_one )
-);
-
-ROM_7  ROM_7_hum_one (
-.address ( rdaddress_hum_one ),
-.clock ( clk_vga ),
-.q ( data_7_hum_one )
-);
-
-ROM_8  ROM_8_hum_one (
-.address ( rdaddress_hum_one ),
-.clock ( clk_vga ),
-.q ( data_8_hum_one )
-);
-
-ROM_9  ROM_9_hum_one (
-.address ( rdaddress_hum_one ),
-.clock ( clk_vga ),
-.q ( data_9_hum_one )
-);
-
 endmodule

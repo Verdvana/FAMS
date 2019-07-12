@@ -1,4 +1,4 @@
-09:44:47 **** Build of configuration Nios II for project Data_Process ****
+10:31:07 **** Build of configuration Nios II for project Data_Process ****
 make mem_init_generate 
 Info: Building ../Data_Process_bsp/
 D:/intelFPGA/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../Data_Process_bsp/
@@ -20,5 +20,5 @@ nios2-elf-nm -n Data_Process.elf > mem_init/hdl_sim/qsys_system_RAM.sym
 Post-processing to create mem_init/hdl_sim/qsys_system_ROM.sym...
 nios2-elf-nm -n Data_Process.elf > mem_init/hdl_sim/qsys_system_ROM.sym
 
-09:44:50 Build Finished (took 3s.591ms)
+10:31:11 Build Finished (took 3s.553ms)
 

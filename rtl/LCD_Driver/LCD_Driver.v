@@ -17,9 +17,9 @@ module LCD_Driver(
 							input 	[23:0] 	data_in,   		//待显示数据
 							
 							output 	[10:0] 	hcount_1,			//x坐标
-							output 	[10:0] 	vcount_1,			//y坐标
-							output 	[10:0] 	hcount_2,			//x坐标
-							output 	[10:0] 	vcount_2,			//y坐标
+							output 	[9:0] 	vcount_1,			//y坐标
+							output 	[7:0] 	hcount_2,			//x坐标
+							output 	[6:0] 	vcount_2,			//y坐标
 							output 	[10:0] 	hcount_theme,			//x坐标
 							output 	[10:0] 	vcount_theme,			//y坐标
 							output 	[10:0] 	hcount_veneno,			//x坐标
@@ -160,209 +160,209 @@ parameter  V_TOTAL  =  11'd524;    //场扫描周期
 
 
 //需要显示区域
-parameter	X_START	=	12'd0;
-parameter	X_ZOOM	=	12'd800;
-parameter	Y_START	=	12'd0;
-parameter	Y_ZOOM	=	12'd480; 
+parameter	X_START	=	11'd0;
+parameter	X_ZOOM	=	11'd800;
+parameter	Y_START	=	11'd0;
+parameter	Y_ZOOM	=	11'd480; 
 //红外
-parameter	X_START_1	=	12'd0;
-parameter	X_ZOOM_1	=	12'd640;
-parameter	Y_START_1	=	12'd0;
-parameter	Y_ZOOM_1	=	12'd480; 
+parameter	X_START_1	=	11'd0;
+parameter	X_ZOOM_1	=	11'd640;
+parameter	Y_START_1	=	11'd0;
+parameter	Y_ZOOM_1	=	11'd480; 
 //热成像
-parameter	X_START_2	=	12'd672;
-parameter	X_ZOOM_2	=	12'd128;
-parameter	Y_START_2	=	12'd384;
-parameter	Y_ZOOM_2	=	12'd96; 
+parameter	X_START_2	=	11'd672;
+parameter	X_ZOOM_2	=	11'd128;
+parameter	Y_START_2	=	11'd384;
+parameter	Y_ZOOM_2	=	11'd96; 
 //题目
-parameter	X_START_theme	=	12'd648;
-parameter	X_ZOOM_theme	=	12'd144;
-parameter	Y_START_theme	=	12'd0;
-parameter	Y_ZOOM_theme	=	12'd16; 
+parameter	X_START_theme	=	11'd648;
+parameter	X_ZOOM_theme	=	11'd144;
+parameter	Y_START_theme	=	11'd0;
+parameter	Y_ZOOM_theme	=	11'd16; 
 //veneno
-parameter	X_START_veneno	=	12'd740;
-parameter	X_ZOOM_veneno	=	12'd48;
-parameter	Y_START_veneno	=	12'd30;
-parameter	Y_ZOOM_veneno	=	12'd16; 	
+parameter	X_START_veneno	=	11'd740;
+parameter	X_ZOOM_veneno	=	11'd48;
+parameter	Y_START_veneno	=	11'd30;
+parameter	Y_ZOOM_veneno	=	11'd16; 	
 //体温
-parameter	X_START_body_temp	=	12'd648;
-parameter	X_ZOOM_body_temp	=	12'd48;
-parameter	Y_START_body_temp	=	12'd60;
-parameter	Y_ZOOM_body_temp	=	12'd16; 	
+parameter	X_START_body_temp	=	11'd648;
+parameter	X_ZOOM_body_temp	=	11'd48;
+parameter	Y_START_body_temp	=	11'd60;
+parameter	Y_ZOOM_body_temp	=	11'd16; 	
 //体温整数十位
-parameter	X_START_body_temp_int_ten	=	12'd730;
-parameter	X_ZOOM_body_temp_int_ten	=	12'd8;
-parameter	Y_START_body_temp_int_ten	=	12'd60;
-parameter	Y_ZOOM_body_temp_int_ten	=	12'd16; 
+parameter	X_START_body_temp_int_ten	=	11'd730;
+parameter	X_ZOOM_body_temp_int_ten	=	11'd8;
+parameter	Y_START_body_temp_int_ten	=	11'd60;
+parameter	Y_ZOOM_body_temp_int_ten	=	11'd16; 
 //体温整数个位
-parameter	X_START_body_temp_int_one	=	12'd738;
-parameter	X_ZOOM_body_temp_int_one	=	12'd8;
-parameter	Y_START_body_temp_int_one	=	12'd60;
-parameter	Y_ZOOM_body_temp_int_one	=	12'd16; 
+parameter	X_START_body_temp_int_one	=	11'd738;
+parameter	X_ZOOM_body_temp_int_one	=	11'd8;
+parameter	Y_START_body_temp_int_one	=	11'd60;
+parameter	Y_ZOOM_body_temp_int_one	=	11'd16; 
 //体温小数点
-parameter	X_START_body_temp_dp	=	12'd746;
-parameter	X_ZOOM_body_temp_dp	=	12'd8;
-parameter	Y_START_body_temp_dp	=	12'd60;
-parameter	Y_ZOOM_body_temp_dp	=	12'd16; 
+parameter	X_START_body_temp_dp	=	11'd746;
+parameter	X_ZOOM_body_temp_dp	=	11'd8;
+parameter	Y_START_body_temp_dp	=	11'd60;
+parameter	Y_ZOOM_body_temp_dp	=	11'd16; 
 //体温小数十位
-parameter	X_START_body_temp_dec_ten	=	12'd754;
-parameter	X_ZOOM_body_temp_dec_ten	=	12'd8;
-parameter	Y_START_body_temp_dec_ten	=	12'd60;
-parameter	Y_ZOOM_body_temp_dec_ten	=	12'd16; 
+parameter	X_START_body_temp_dec_ten	=	11'd754;
+parameter	X_ZOOM_body_temp_dec_ten	=	11'd8;
+parameter	Y_START_body_temp_dec_ten	=	11'd60;
+parameter	Y_ZOOM_body_temp_dec_ten	=	11'd16; 
 
 //体温单位
-parameter	X_START_body_temp_unit	=	12'd762;
-parameter	X_ZOOM_body_temp_unit	=	12'd16;
-parameter	Y_START_body_temp_unit	=	12'd60;
-parameter	Y_ZOOM_body_temp_unit	=	12'd16; 
+parameter	X_START_body_temp_unit	=	11'd762;
+parameter	X_ZOOM_body_temp_unit	=	11'd16;
+parameter	Y_START_body_temp_unit	=	11'd60;
+parameter	Y_ZOOM_body_temp_unit	=	11'd16; 
 
 //心率
-parameter	X_START_heart_rate	=	12'd648;
-parameter	X_ZOOM_heart_rate	=	12'd48;
-parameter	Y_START_heart_rate	=	12'd90;
-parameter	Y_ZOOM_heart_rate	=	12'd16; 
+parameter	X_START_heart_rate	=	11'd648;
+parameter	X_ZOOM_heart_rate	=	11'd48;
+parameter	Y_START_heart_rate	=	11'd90;
+parameter	Y_ZOOM_heart_rate	=	11'd16; 
 //心率百位
-parameter	X_START_heart_rate_hun	=	12'd730;
-parameter	X_ZOOM_heart_rate_hun	=	12'd8;
-parameter	Y_START_heart_rate_hun	=	12'd90;
-parameter	Y_ZOOM_heart_rate_hun	=	12'd16; 
+parameter	X_START_heart_rate_hun	=	11'd730;
+parameter	X_ZOOM_heart_rate_hun	=	11'd8;
+parameter	Y_START_heart_rate_hun	=	11'd90;
+parameter	Y_ZOOM_heart_rate_hun	=	11'd16; 
 //心率十位
-parameter	X_START_heart_rate_ten	=	12'd738;
-parameter	X_ZOOM_heart_rate_ten	=	12'd8;
-parameter	Y_START_heart_rate_ten	=	12'd90;
-parameter	Y_ZOOM_heart_rate_ten	=	12'd16; 
+parameter	X_START_heart_rate_ten	=	11'd738;
+parameter	X_ZOOM_heart_rate_ten	=	11'd8;
+parameter	Y_START_heart_rate_ten	=	11'd90;
+parameter	Y_ZOOM_heart_rate_ten	=	11'd16; 
 //心率个位
-parameter	X_START_heart_rate_one	=	12'd746;
-parameter	X_ZOOM_heart_rate_one	=	12'd8;
-parameter	Y_START_heart_rate_one	=	12'd90;
-parameter	Y_ZOOM_heart_rate_one	=	12'd16; 
+parameter	X_START_heart_rate_one	=	11'd746;
+parameter	X_ZOOM_heart_rate_one	=	11'd8;
+parameter	Y_START_heart_rate_one	=	11'd90;
+parameter	Y_ZOOM_heart_rate_one	=	11'd16; 
 //H2
-parameter	X_START_h2	=	12'd648;
-parameter	X_ZOOM_h2	=	12'd48;
-parameter	Y_START_h2	=	12'd120;
-parameter	Y_ZOOM_h2	=	12'd16; 
+parameter	X_START_h2	=	11'd648;
+parameter	X_ZOOM_h2	=	11'd48;
+parameter	Y_START_h2	=	11'd120;
+parameter	Y_ZOOM_h2	=	11'd16; 
 //H2十位
-parameter	X_START_h2_ten	=	12'd730;
-parameter	X_ZOOM_h2_ten	=	12'd8;
-parameter	Y_START_h2_ten	=	12'd120;
-parameter	Y_ZOOM_h2_ten	=	12'd16;
+parameter	X_START_h2_ten	=	11'd730;
+parameter	X_ZOOM_h2_ten	=	11'd8;
+parameter	Y_START_h2_ten	=	11'd120;
+parameter	Y_ZOOM_h2_ten	=	11'd16;
 //H2个位
-parameter	X_START_h2_one	=	12'd738;
-parameter	X_ZOOM_h2_one	=	12'd8;
-parameter	Y_START_h2_one	=	12'd120;
-parameter	Y_ZOOM_h2_one	=	12'd16;
+parameter	X_START_h2_one	=	11'd738;
+parameter	X_ZOOM_h2_one	=	11'd8;
+parameter	Y_START_h2_one	=	11'd120;
+parameter	Y_ZOOM_h2_one	=	11'd16;
 //液化气
-parameter	X_START_liquefied	=	12'd648;
-parameter	X_ZOOM_liquefied	=	12'd64;
-parameter	Y_START_liquefied	=	12'd150;
-parameter	Y_ZOOM_liquefied	=	12'd16;
+parameter	X_START_liquefied	=	11'd648;
+parameter	X_ZOOM_liquefied	=	11'd64;
+parameter	Y_START_liquefied	=	11'd150;
+parameter	Y_ZOOM_liquefied	=	11'd16;
 //液化气十位
-parameter	X_START_liquefied_ten	=	12'd730;
-parameter	X_ZOOM_liquefied_ten	=	12'd8;
-parameter	Y_START_liquefied_ten	=	12'd150;
-parameter	Y_ZOOM_liquefied_ten	=	12'd16;
+parameter	X_START_liquefied_ten	=	11'd730;
+parameter	X_ZOOM_liquefied_ten	=	11'd8;
+parameter	Y_START_liquefied_ten	=	11'd150;
+parameter	Y_ZOOM_liquefied_ten	=	11'd16;
 //液化气个位
-parameter	X_START_liquefied_one	=	12'd738;
-parameter	X_ZOOM_liquefied_one	=	12'd8;
-parameter	Y_START_liquefied_one	=	12'd150;
-parameter	Y_ZOOM_liquefied_one	=	12'd16;
+parameter	X_START_liquefied_one	=	11'd738;
+parameter	X_ZOOM_liquefied_one	=	11'd8;
+parameter	Y_START_liquefied_one	=	11'd150;
+parameter	Y_ZOOM_liquefied_one	=	11'd16;
 //天然气
-parameter	X_START_natural	=	12'd648;
-parameter	X_ZOOM_natural	=	12'd64;
-parameter	Y_START_natural	=	12'd180;
-parameter	Y_ZOOM_natural	=	12'd16;
+parameter	X_START_natural	=	11'd648;
+parameter	X_ZOOM_natural	=	11'd64;
+parameter	Y_START_natural	=	11'd180;
+parameter	Y_ZOOM_natural	=	11'd16;
 //有害气
-parameter	X_START_harmful	=	12'd648;
-parameter	X_ZOOM_harmful	=	12'd80;
-parameter	Y_START_harmful	=	12'd210;
-parameter	Y_ZOOM_harmful	=	12'd16;
+parameter	X_START_harmful	=	11'd648;
+parameter	X_ZOOM_harmful	=	11'd80;
+parameter	Y_START_harmful	=	11'd210;
+parameter	Y_ZOOM_harmful	=	11'd16;
 //氧气
-parameter	X_START_oxy	=	12'd648;
-parameter	X_ZOOM_oxy	=	12'd48;
-parameter	Y_START_oxy	=	12'd240;
-parameter	Y_ZOOM_oxy	=	12'd16;
+parameter	X_START_oxy	=	11'd648;
+parameter	X_ZOOM_oxy	=	11'd48;
+parameter	Y_START_oxy	=	11'd240;
+parameter	Y_ZOOM_oxy	=	11'd16;
 //温度
-parameter	X_START_temp	=	12'd648;
-parameter	X_ZOOM_temp	=	12'd48;
-parameter	Y_START_temp	=	12'd270;
-parameter	Y_ZOOM_temp =	12'd16;
+parameter	X_START_temp	=	11'd648;
+parameter	X_ZOOM_temp	=	11'd48;
+parameter	Y_START_temp	=	11'd270;
+parameter	Y_ZOOM_temp =	11'd16;
 //湿度
-parameter	X_START_hum	=	12'd648;
-parameter	X_ZOOM_hum	=	12'd48;
-parameter	Y_START_hum	=	12'd300;
-parameter	Y_ZOOM_hum	=	12'd16;
+parameter	X_START_hum	=	11'd648;
+parameter	X_ZOOM_hum	=	11'd48;
+parameter	Y_START_hum	=	11'd300;
+parameter	Y_ZOOM_hum	=	11'd16;
 //天然气十位
-parameter	X_START_natural_ten	=	12'd730;
-parameter	X_ZOOM_natural_ten	=	12'd8;
-parameter	Y_START_natural_ten	=	12'd180;
-parameter	Y_ZOOM_natural_ten	=	12'd16;
+parameter	X_START_natural_ten	=	11'd730;
+parameter	X_ZOOM_natural_ten	=	11'd8;
+parameter	Y_START_natural_ten	=	11'd180;
+parameter	Y_ZOOM_natural_ten	=	11'd16;
 //天然气个位
-parameter	X_START_natural_one	=	12'd738;
-parameter	X_ZOOM_natural_one	=	12'd8;
-parameter	Y_START_natural_one	=	12'd180;
-parameter	Y_ZOOM_natural_one	=	12'd16;
+parameter	X_START_natural_one	=	11'd738;
+parameter	X_ZOOM_natural_one	=	11'd8;
+parameter	Y_START_natural_one	=	11'd180;
+parameter	Y_ZOOM_natural_one	=	11'd16;
 //有害气十位
-parameter	X_START_harmful_ten	=	12'd730;
-parameter	X_ZOOM_harmful_ten	=	12'd8;
-parameter	Y_START_harmful_ten	=	12'd210;
-parameter	Y_ZOOM_harmful_ten	=	12'd16;
+parameter	X_START_harmful_ten	=	11'd730;
+parameter	X_ZOOM_harmful_ten	=	11'd8;
+parameter	Y_START_harmful_ten	=	11'd210;
+parameter	Y_ZOOM_harmful_ten	=	11'd16;
 //有害气个位
-parameter	X_START_harmful_one	=	12'd738;
-parameter	X_ZOOM_harmful_one	=	12'd8;
-parameter	Y_START_harmful_one	=	12'd210;
-parameter	Y_ZOOM_harmful_one	=	12'd16;
+parameter	X_START_harmful_one	=	11'd738;
+parameter	X_ZOOM_harmful_one	=	11'd8;
+parameter	Y_START_harmful_one	=	11'd210;
+parameter	Y_ZOOM_harmful_one	=	11'd16;
 //氧气十位
-parameter	X_START_oxy_ten	=	12'd730;
-parameter	X_ZOOM_oxy_ten	=	12'd8;
-parameter	Y_START_oxy_ten	=	12'd240;
-parameter	Y_ZOOM_oxy_ten	=	12'd16;
+parameter	X_START_oxy_ten	=	11'd730;
+parameter	X_ZOOM_oxy_ten	=	11'd8;
+parameter	Y_START_oxy_ten	=	11'd240;
+parameter	Y_ZOOM_oxy_ten	=	11'd16;
 //氧气个位
-parameter	X_START_oxy_one	=	12'd738;
-parameter	X_ZOOM_oxy_one	=	12'd8;
-parameter	Y_START_oxy_one	=	12'd240;
-parameter	Y_ZOOM_oxy_one	=	12'd16;
+parameter	X_START_oxy_one	=	11'd738;
+parameter	X_ZOOM_oxy_one	=	11'd8;
+parameter	Y_START_oxy_one	=	11'd240;
+parameter	Y_ZOOM_oxy_one	=	11'd16;
 //温度十位
-parameter	X_START_temp_ten	=	12'd730;
-parameter	X_ZOOM_temp_ten	=	12'd8;
-parameter	Y_START_temp_ten	=	12'd270;
-parameter	Y_ZOOM_temp_ten	=	12'd16;
+parameter	X_START_temp_ten	=	11'd730;
+parameter	X_ZOOM_temp_ten	=	11'd8;
+parameter	Y_START_temp_ten	=	11'd270;
+parameter	Y_ZOOM_temp_ten	=	11'd16;
 //温度个位
-parameter	X_START_temp_one	=	12'd738;
-parameter	X_ZOOM_temp_one	=	12'd8;
-parameter	Y_START_temp_one	=	12'd270;
-parameter	Y_ZOOM_temp_one	=	12'd16;
+parameter	X_START_temp_one	=	11'd738;
+parameter	X_ZOOM_temp_one	=	11'd8;
+parameter	Y_START_temp_one	=	11'd270;
+parameter	Y_ZOOM_temp_one	=	11'd16;
 //湿度十位
-parameter	X_START_hum_ten	=	12'd730;
-parameter	X_ZOOM_hum_ten	=	12'd8;
-parameter	Y_START_hum_ten	=	12'd300;
-parameter	Y_ZOOM_hum_ten	=	12'd16;
+parameter	X_START_hum_ten	=	11'd730;
+parameter	X_ZOOM_hum_ten	=	11'd8;
+parameter	Y_START_hum_ten	=	11'd300;
+parameter	Y_ZOOM_hum_ten	=	11'd16;
 //湿度个位
-parameter	X_START_hum_one	=	12'd738;
-parameter	X_ZOOM_hum_one	=	12'd8;
-parameter	Y_START_hum_one	=	12'd300;
-parameter	Y_ZOOM_hum_one	=	12'd16;
+parameter	X_START_hum_one	=	11'd738;
+parameter	X_ZOOM_hum_one	=	11'd8;
+parameter	Y_START_hum_one	=	11'd300;
+parameter	Y_ZOOM_hum_one	=	11'd16;
 //ppm
-parameter	X_START_ppm	=	12'd762;
-parameter	X_ZOOM_ppm	=	12'd24;
-parameter	Y_START_ppm	=	12'd120;
-parameter	Y_ZOOM_ppm	=	12'd136;
+parameter	X_START_ppm	=	11'd762;
+parameter	X_ZOOM_ppm	=	11'd24;
+parameter	Y_START_ppm	=	11'd120;
+parameter	Y_ZOOM_ppm	=	11'd136;
 //rh
-parameter	X_START_rh	=	12'd762;
-parameter	X_ZOOM_rh	=	12'd16;
-parameter	Y_START_rh	=	12'd300;
-parameter	Y_ZOOM_rh	=	12'd16;
+parameter	X_START_rh	=	11'd762;
+parameter	X_ZOOM_rh	=	11'd16;
+parameter	Y_START_rh	=	11'd300;
+parameter	Y_ZOOM_rh	=	11'd16;
 //温度单位
-parameter	X_START_temp_unit	=	12'd762;
-parameter	X_ZOOM_temp_unit	=	12'd16;
-parameter	Y_START_temp_unit	=	12'd270;
-parameter	Y_ZOOM_temp_unit	=	12'd16;
+parameter	X_START_temp_unit	=	11'd762;
+parameter	X_ZOOM_temp_unit	=	11'd16;
+parameter	Y_START_temp_unit	=	11'd270;
+parameter	Y_ZOOM_temp_unit	=	11'd16;
 	
 assign lcd_clk=clk;
 assign lcd_pwm=rst_n;
 	
 //TFT驱动部分
 reg [10:0] hcount_r;   //TFT行扫描计数器
-reg [10:0] vcount_r;		//TFT场扫描计数器
+reg [9:0] vcount_r;		//TFT场扫描计数器
 //行扫扫描
 always@(posedge clk or negedge rst_n)
 begin

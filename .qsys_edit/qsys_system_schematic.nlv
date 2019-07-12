@@ -9,53 +9,54 @@ preplace inst qsys_system.ain_ch3 -pg 1 -lvl 3 -y 330
 preplace inst qsys_system.natural_one -pg 1 -lvl 3 -y 1430
 preplace inst qsys_system.liquefied_ten -pg 1 -lvl 3 -y 1330
 preplace inst qsys_system.ain_ch4 -pg 1 -lvl 3 -y 430
-preplace inst qsys_system.oxy_one -pg 1 -lvl 3 -y 1760
+preplace inst qsys_system.ROM -pg 1 -lvl 3 -y 1730
+preplace inst qsys_system.oxy_one -pg 1 -lvl 3 -y 1810
 preplace inst qsys_system.harmful_one -pg 1 -lvl 3 -y 530
 preplace inst qsys_system.nios2_gen2.cpu -pg 1
 preplace inst qsys_system.nios2_gen2 -pg 1 -lvl 2 -y 1850
-preplace inst qsys_system.jtag_uart -pg 1 -lvl 3 -y 1960
+preplace inst qsys_system.jtag_uart -pg 1 -lvl 3 -y 2010
 preplace inst qsys_system.heart_rate_one -pg 1 -lvl 3 -y 830
 preplace inst qsys_system.harmful_ten -pg 1 -lvl 3 -y 630
-preplace inst qsys_system.oxy_ten -pg 1 -lvl 3 -y 1860
+preplace inst qsys_system.oxy_ten -pg 1 -lvl 3 -y 1910
 preplace inst qsys_system.clk -pg 1 -lvl 1 -y 1870
-preplace inst qsys_system.sysid_qsys -pg 1 -lvl 3 -y 2140
+preplace inst qsys_system.sysid_qsys -pg 1 -lvl 3 -y 2190
 preplace inst qsys_system.natural_ten -pg 1 -lvl 3 -y 1530
 preplace inst qsys_system.heart_rate_hun -pg 1 -lvl 3 -y 730
 preplace inst qsys_system.h2_ten -pg 1 -lvl 3 -y 1130
 preplace inst qsys_system.nios2_gen2.reset_bridge -pg 1
 preplace inst qsys_system.h2_one -pg 1 -lvl 3 -y 1030
-preplace inst qsys_system.RAM -pg 1 -lvl 3 -y 2060
+preplace inst qsys_system.RAM -pg 1 -lvl 3 -y 2110
 preplace inst qsys_system.liquefied_one -pg 1 -lvl 3 -y 1230
-preplace inst qsys_system.end_o -pg 1 -lvl 3 -y 1660
+preplace inst qsys_system.end_o -pg 1 -lvl 3 -y 1630
 preplace inst qsys_system.max30102_0 -pg 1 -lvl 3 -y 2280
 preplace inst qsys_system.ain_ch0 -pg 1 -lvl 3 -y 30
 preplace inst qsys_system -pg 1 -lvl 1 -y 40 -regy -20
 preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.oxy_ten,(SLAVE)oxy_ten.external_connection) 1 0 3 NJ 1750 NJ 1750 NJ
-preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.ain_ch0,(SLAVE)ain_ch0.external_connection) 1 0 3 NJ 60 NJ 60 NJ
-preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)end_o.external_connection,(SLAVE)qsys_system.end_o) 1 0 3 NJ 1690 NJ 1690 NJ
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.harmful_ten,(SLAVE)harmful_ten.external_connection) 1 0 3 NJ 660 NJ 660 NJ
 preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.max30102_1,(SLAVE)max30102_1.external_connection) 1 0 3 NJ 2410 NJ 2410 NJ
-preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)liquefied_ten.external_connection,(SLAVE)qsys_system.liquefied_ten) 1 0 3 NJ 1360 NJ 1360 NJ
-preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)harmful_ten.external_connection,(SLAVE)qsys_system.harmful_ten) 1 0 3 NJ 660 NJ 660 NJ
-preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.oxy_one,(SLAVE)oxy_one.external_connection) 1 0 3 NJ 1730 NJ 1730 NJ
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.ain_ch1,(SLAVE)ain_ch1.external_connection) 1 0 3 NJ 160 NJ 160 NJ
+preplace netloc INTERCONNECT<net_container>qsys_system</net_container>(SLAVE)heart_rate_ten.s1,(SLAVE)ROM.s1,(SLAVE)natural_one.s1,(MASTER)nios2_gen2.instruction_master,(SLAVE)nios2_gen2.debug_mem_slave,(MASTER)nios2_gen2.data_master,(SLAVE)harmful_ten.s1,(SLAVE)h2_ten.s1,(SLAVE)ain_ch1.s1,(SLAVE)natural_ten.s1,(SLAVE)max30102_1.s1,(SLAVE)harmful_one.s1,(SLAVE)end_o.s1,(SLAVE)heart_rate_one.s1,(SLAVE)jtag_uart.avalon_jtag_slave,(SLAVE)max30102_0.s1,(SLAVE)ain_ch2.s1,(SLAVE)sysid_qsys.control_slave,(SLAVE)oxy_one.s1,(SLAVE)h2_one.s1,(SLAVE)liquefied_ten.s1,(SLAVE)heart_rate_hun.s1,(SLAVE)ain_ch0.s1,(SLAVE)liquefied_one.s1,(SLAVE)RAM.s1,(SLAVE)ain_ch3.s1,(SLAVE)oxy_ten.s1,(SLAVE)ain_ch4.s1) 1 1 2 350 1790 790
 preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.natural_one,(SLAVE)natural_one.external_connection) 1 0 3 NJ 1460 NJ 1460 NJ
-preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.h2_ten,(SLAVE)h2_ten.external_connection) 1 0 3 NJ 1160 NJ 1160 NJ
-preplace netloc INTERCONNECT<net_container>qsys_system</net_container>(SLAVE)liquefied_ten.reset,(SLAVE)natural_ten.reset,(SLAVE)h2_one.reset,(MASTER)clk.clk_reset,(SLAVE)max30102_1.reset,(SLAVE)heart_rate_hun.reset,(SLAVE)RAM.reset1,(SLAVE)ain_ch0.reset,(SLAVE)liquefied_one.reset,(SLAVE)oxy_ten.reset,(SLAVE)ain_ch1.reset,(SLAVE)oxy_one.reset,(SLAVE)sysid_qsys.reset,(SLAVE)ain_ch2.reset,(SLAVE)ain_ch4.reset,(SLAVE)natural_one.reset,(MASTER)nios2_gen2.debug_reset_request,(SLAVE)nios2_gen2.reset,(SLAVE)end_o.reset,(SLAVE)harmful_one.reset,(SLAVE)heart_rate_ten.reset,(SLAVE)heart_rate_one.reset,(SLAVE)harmful_ten.reset,(SLAVE)jtag_uart.reset,(SLAVE)ain_ch3.reset,(SLAVE)h2_ten.reset,(SLAVE)max30102_0.reset) 1 1 2 330 1790 710
-preplace netloc INTERCONNECT<net_container>qsys_system</net_container>(SLAVE)ain_ch3.s1,(SLAVE)nios2_gen2.debug_mem_slave,(MASTER)nios2_gen2.instruction_master,(SLAVE)ain_ch4.s1,(SLAVE)heart_rate_ten.s1,(SLAVE)max30102_0.s1,(SLAVE)liquefied_one.s1,(SLAVE)sysid_qsys.control_slave,(SLAVE)ain_ch0.s1,(SLAVE)liquefied_ten.s1,(SLAVE)natural_one.s1,(SLAVE)oxy_ten.s1,(SLAVE)RAM.s1,(SLAVE)ain_ch1.s1,(SLAVE)oxy_one.s1,(SLAVE)jtag_uart.avalon_jtag_slave,(SLAVE)natural_ten.s1,(SLAVE)harmful_one.s1,(MASTER)nios2_gen2.data_master,(SLAVE)heart_rate_one.s1,(SLAVE)max30102_1.s1,(SLAVE)harmful_ten.s1,(SLAVE)end_o.s1,(SLAVE)h2_ten.s1,(SLAVE)ain_ch2.s1,(SLAVE)h2_one.s1,(SLAVE)heart_rate_hun.s1) 1 1 2 350 1810 750
-preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)heart_rate_one.external_connection,(SLAVE)qsys_system.heart_rate_one) 1 0 3 NJ 860 NJ 860 NJ
-preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)ain_ch2.external_connection,(SLAVE)qsys_system.ain_ch2) 1 0 3 NJ 260 NJ 260 NJ
-preplace netloc POINT_TO_POINT<net_container>qsys_system</net_container>(MASTER)nios2_gen2.irq,(SLAVE)jtag_uart.irq) 1 2 1 730
-preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)ain_ch4.external_connection,(SLAVE)qsys_system.ain_ch4) 1 0 3 NJ 460 NJ 460 NJ
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)h2_ten.external_connection,(SLAVE)qsys_system.h2_ten) 1 0 3 NJ 1160 NJ 1160 NJ
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.ain_ch4,(SLAVE)ain_ch4.external_connection) 1 0 3 NJ 460 NJ 460 NJ
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)liquefied_one.external_connection,(SLAVE)qsys_system.liquefied_one) 1 0 3 NJ 1260 NJ 1260 NJ
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.ain_ch2,(SLAVE)ain_ch2.external_connection) 1 0 3 NJ 260 NJ 260 NJ
+preplace netloc POINT_TO_POINT<net_container>qsys_system</net_container>(MASTER)nios2_gen2.irq,(SLAVE)jtag_uart.irq) 1 2 1 710
 preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.ain_ch3,(SLAVE)ain_ch3.external_connection) 1 0 3 NJ 360 NJ 360 NJ
+preplace netloc INTERCONNECT<net_container>qsys_system</net_container>(SLAVE)oxy_one.reset,(SLAVE)ain_ch3.reset,(MASTER)nios2_gen2.debug_reset_request,(SLAVE)ain_ch2.reset,(SLAVE)harmful_ten.reset,(SLAVE)max30102_0.reset,(SLAVE)heart_rate_ten.reset,(SLAVE)liquefied_ten.reset,(MASTER)clk.clk_reset,(SLAVE)h2_ten.reset,(SLAVE)heart_rate_hun.reset,(SLAVE)end_o.reset,(SLAVE)heart_rate_one.reset,(SLAVE)harmful_one.reset,(SLAVE)nios2_gen2.reset,(SLAVE)sysid_qsys.reset,(SLAVE)max30102_1.reset,(SLAVE)ain_ch0.reset,(SLAVE)ain_ch1.reset,(SLAVE)jtag_uart.reset,(SLAVE)oxy_ten.reset,(SLAVE)RAM.reset1,(SLAVE)natural_ten.reset,(SLAVE)natural_one.reset,(SLAVE)liquefied_one.reset,(SLAVE)ROM.reset1,(SLAVE)ain_ch4.reset,(SLAVE)h2_one.reset) 1 1 2 330 1810 770
 preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.harmful_one,(SLAVE)harmful_one.external_connection) 1 0 3 NJ 560 NJ 560 NJ
-preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.h2_one,(SLAVE)h2_one.external_connection) 1 0 3 NJ 1060 NJ 1060 NJ
-preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)ain_ch1.external_connection,(SLAVE)qsys_system.ain_ch1) 1 0 3 NJ 160 NJ 160 NJ
 preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)heart_rate_hun.external_connection,(SLAVE)qsys_system.heart_rate_hun) 1 0 3 NJ 760 NJ 760 NJ
 preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.reset,(SLAVE)clk.clk_in_reset) 1 0 1 NJ
-preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.liquefied_one,(SLAVE)liquefied_one.external_connection) 1 0 3 NJ 1260 NJ 1260 NJ
-preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)heart_rate_ten.external_connection,(SLAVE)qsys_system.heart_rate_ten) 1 0 3 NJ 960 NJ 960 NJ
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.liquefied_ten,(SLAVE)liquefied_ten.external_connection) 1 0 3 NJ 1360 NJ 1360 NJ
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.heart_rate_ten,(SLAVE)heart_rate_ten.external_connection) 1 0 3 NJ 960 NJ 960 NJ
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.heart_rate_one,(SLAVE)heart_rate_one.external_connection) 1 0 3 NJ 860 NJ 860 NJ
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)ain_ch0.external_connection,(SLAVE)qsys_system.ain_ch0) 1 0 3 NJ 60 NJ 60 NJ
 preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.max30102_0,(SLAVE)max30102_0.external_connection) 1 0 3 NJ 2310 NJ 2310 NJ
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)h2_one.external_connection,(SLAVE)qsys_system.h2_one) 1 0 3 NJ 1060 NJ 1060 NJ
+preplace netloc FAN_OUT<net_container>qsys_system</net_container>(SLAVE)max30102_0.clk,(SLAVE)h2_one.clk,(SLAVE)nios2_gen2.clk,(SLAVE)max30102_1.clk,(MASTER)clk.clk,(SLAVE)ain_ch3.clk,(SLAVE)heart_rate_ten.clk,(SLAVE)jtag_uart.clk,(SLAVE)oxy_one.clk,(SLAVE)natural_ten.clk,(SLAVE)oxy_ten.clk,(SLAVE)harmful_ten.clk,(SLAVE)RAM.clk1,(SLAVE)natural_one.clk,(SLAVE)liquefied_one.clk,(SLAVE)ain_ch1.clk,(SLAVE)ain_ch0.clk,(SLAVE)end_o.clk,(SLAVE)ROM.clk1,(SLAVE)heart_rate_one.clk,(SLAVE)ain_ch2.clk,(SLAVE)heart_rate_hun.clk,(SLAVE)ain_ch4.clk,(SLAVE)harmful_one.clk,(SLAVE)h2_ten.clk,(SLAVE)liquefied_ten.clk,(SLAVE)sysid_qsys.clk) 1 1 2 310 1770 750
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)oxy_one.external_connection,(SLAVE)qsys_system.oxy_one) 1 0 3 NJ 1730 NJ 1730 NJ
 preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)natural_ten.external_connection,(SLAVE)qsys_system.natural_ten) 1 0 3 NJ 1560 NJ 1560 NJ
+preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.end_o,(SLAVE)end_o.external_connection) 1 0 3 NJ 1660 NJ 1660 NJ
 preplace netloc EXPORT<net_container>qsys_system</net_container>(SLAVE)qsys_system.clk,(SLAVE)clk.clk_in) 1 0 1 NJ
-preplace netloc FAN_OUT<net_container>qsys_system</net_container>(SLAVE)oxy_ten.clk,(SLAVE)h2_ten.clk,(SLAVE)heart_rate_hun.clk,(SLAVE)natural_one.clk,(MASTER)clk.clk,(SLAVE)ain_ch0.clk,(SLAVE)heart_rate_ten.clk,(SLAVE)oxy_one.clk,(SLAVE)ain_ch1.clk,(SLAVE)liquefied_one.clk,(SLAVE)nios2_gen2.clk,(SLAVE)harmful_ten.clk,(SLAVE)natural_ten.clk,(SLAVE)heart_rate_one.clk,(SLAVE)ain_ch2.clk,(SLAVE)ain_ch3.clk,(SLAVE)jtag_uart.clk,(SLAVE)end_o.clk,(SLAVE)max30102_1.clk,(SLAVE)liquefied_ten.clk,(SLAVE)max30102_0.clk,(SLAVE)h2_one.clk,(SLAVE)harmful_one.clk,(SLAVE)sysid_qsys.clk,(SLAVE)RAM.clk1,(SLAVE)ain_ch4.clk) 1 1 2 310 1770 790
 levelinfo -pg 1 0 100 1000
 levelinfo -hier qsys_system 110 140 470 840 990

@@ -37,7 +37,7 @@ DHT11_cmd   DHT11_cmd_inst(
 									.Tx_start(Tx_start),                              
 									.TxD_data(TxD_data)                                 
                           );                                                 
-                                                                             
+/*                                                                             
 async_send  async_send_inst(                                                 
                             .clk(clk),                                       
 																									 
@@ -46,7 +46,7 @@ async_send  async_send_inst(
                             .TxD(TxD),                                       
                             .TxD_busy(TxD_busy)                              
 								   );
-									
+*/									
 
 bintobcd bintobcd_3(
 

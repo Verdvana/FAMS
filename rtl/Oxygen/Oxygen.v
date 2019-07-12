@@ -29,7 +29,7 @@ always @(posedge clk or negedge rst_n)
 				count	<= 8'd0;
 			end
 		else
-			if (count < 121)	//分频成为近200kHz的时钟
+			if (count < 241)	//分频成为近100kHz的时钟
 				count <= count + 1; 
 			else
 				begin
@@ -48,7 +48,7 @@ always @(negedge clk_sys or negedge rst_n)
 			end
 		else
 			begin
-				if (state > 0)	//当总线忙时，scl为近100kHz的时钟
+				if (state > 0)	//当总线忙时，scl为近50kHz的时钟
 					scl <= ~scl;
 				else
 					scl <= 1'b1;//空闲时，scl为高
@@ -334,14 +334,14 @@ always @(*)
 				4'd1:
 					begin
 					 	key_data   = 2'b01;	//写
-						slave_addr = 8'h11;	//REFCN--Reference Control Register
-						word_data  = 8'hB0;
+						slave_addr = 8'h11;	//REFCN--Reference Control Register  
+						word_data  = 8'hB0;  //不变
 					 end
 				4'd3:
 					begin
 						key_data   = 2'b01;	//写
 						slave_addr = 8'h10;	//TIACN--TIA Control Register
-						word_data  = 8'h03; 
+						word_data  = 8'h17;  //17
 					end
 				4'd4:
 					begin

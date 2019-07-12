@@ -1,0 +1,87 @@
+module mark(
+    input           clk,
+    input           rst_n,
+    input   [11:0]  lcd_xpos,
+    input   [11:0]  lcd_ypos,
+    input   [7:0]   sys_data_out1,
+    input   [7:0]   sys_data_out2,
+
+    oputput [23:0]  lcd_data_in
+);
+
+
+reg [7:0]	frame_cnt;
+always@(posedge clk_vga or negedge sys_rst_n)
+begin 
+	if(!sys_rst_n)
+		frame_cnt <= 8'b0;
+	else if(lcd_xpos ==1'b1 && lcd_ypos == 1'b1)
+			frame_cnt <= frame_cnt + 1'b1;
+	else if(frame_cnt == 8'd10)
+		frame_cnt <= 8'b0;
+	else 
+		frame_cnt <= frame_cnt;
+end 
+
+reg [11:0]	xpos_max;
+reg [11:0]	xpos_min;
+reg [11:0]	ypos_max;
+reg [11:0]	ypos_min;
+reg [11:0]	r_xpos_max;
+reg [11:0]	r_xpos_min;
+reg [11:0]	r_ypos_max;
+reg [11:0]	r_ypos_min;
+always@(posedge clk_vga or negedge sys_rst_n)
+begin 	
+	if(!sys_rst_n)
+		begin 
+		xpos_max <= 11'd0;
+		xpos_min <= 11'd640;
+		ypos_max <= 11'd0;
+		ypos_min <= 11'd480;
+		end 
+	else if(frame_cnt == 8'd10)
+		begin 
+		xpos_max <= 11'd0;
+		xpos_min <= 11'd640;
+		ypos_max <= 11'd0;
+		ypos_min <= 11'd480;
+		
+		r_xpos_max <= xpos_max;
+		r_xpos_min <= xpos_min;
+		r_ypos_max <= ypos_max;
+		r_ypos_min <= ypos_min;
+		end
+	else 
+		begin 
+		if(lcd_data)
+			begin 
+			if(xpos_max < lcd_xpos)
+				xpos_max <= lcd_xpos;
+			if(xpos_min >lcd_xpos)
+				xpos_min <= lcd_xpos;
+			if(ypos_max < lcd_ypos)
+				ypos_max <= lcd_ypos;
+			if(ypos_min >lcd_ypos)
+				ypos_min <= lcd_ypos;
+			end 
+		end 
+end 
+
+always@(posedge clk_vga or negedge sys_rst_n)		
+begin
+	if(!sys_rst_n)
+		lcd_data_in <= 0;
+	else if(lcd_clken == 1'b1)
+		begin 
+		if((lcd_xpos == xpos_min && lcd_ypos > ypos_min && lcd_ypos < ypos_max)  || 
+			(lcd_xpos == xpos_max && lcd_ypos > ypos_min && lcd_ypos < ypos_max)  || 
+			(lcd_ypos == ypos_min && lcd_xpos > xpos_min && lcd_xpos < xpos_max)  || 
+			(lcd_ypos == ypos_max && lcd_xpos > xpos_min && lcd_xpos < xpos_max) )
+			lcd_data_in <= {8'd255,8'b0,8'b0};
+		else 
+			lcd_data_in <= {sys_data_out1,sys_data_out1,sys_data_out1};
+		end 
+	else
+		lcd_data_in <= 24'd0;	
+end
