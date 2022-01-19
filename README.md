@@ -2,6 +2,8 @@
 #### 代码介绍
 消防员辅助监测系统
 
+![消防员辅助监测系统](https://raw.githubusercontent.com/Verdvana/FAMS/master/%E6%B6%88%E9%98%B2%E5%91%98%E8%BE%85%E5%8A%A9%E7%9B%91%E6%B5%8B%E7%B3%BB%E7%BB%9F.jpg)
+
 * V1.0   2019.06.06
     * 红外摄像运动检测。
 
